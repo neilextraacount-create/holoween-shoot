@@ -126,7 +126,7 @@ def write_3mf(path, plate, meshes):
     res = []
     for n in names:
         m = meshes[n]
-        v = "".join(f'<vertex x="{a:.4f}" y="{b:.4f}" z="{c:.4f}"/>' for a, b, c in m.vertices)
+        v = "".join(f'<vertex x="{a:.6f}" y="{b:.6f}" z="{c:.6f}"/>' for a, b, c in m.vertices)   # keeps the STL's float32 values
         t = "".join(f'<triangle v1="{a}" v2="{b}" v3="{c}"/>' for a, b, c in m.faces)
         res.append(f'<object id="{ids[n]}" name="{n}" type="model"><mesh><vertices>{v}</vertices>'
                    f'<triangles>{t}</triangles></mesh></object>')
@@ -257,7 +257,7 @@ def main():
             if not info.get("ok"):
                 failed.append(fname)
         contents = ", ".join(f"{c} x `{n}`" if c > 1 else f"`{n}`" for n, c in sorted(counts.items(), key=lambda kv: MODULE[kv[0]]))
-        mods = ", ".join(MODULE_NAME[m] for m in sorted({MODULE[n] for n in counts}))
+        mods = "test" if p.group == "coupon" else ", ".join(MODULE_NAME[m] for m in sorted({MODULE[n] for n in counts}))
         g_txt, t_txt = (f"{float(info.get('grams', 0)):.0f}", info.get("time", "-")) if not a.no_slice else ("not sliced", "not sliced")
         rows.append(f"| {i} | `{fname}` | {contents} | {mods} | {walls} walls, {infill} %{', 0.16 mm layers' if layer < 0.2 else ''}{', 5 mm brim' if brim else ''} "
                     f"| {g_txt} | {t_txt} |")

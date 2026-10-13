@@ -13,12 +13,14 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 | Specs (from the listing) | 3 in (76 mm) wide, about 1.7 mm (0.067 in) thick, 2,100 lb break strength, black |
 | Price | about $35-45 (the same roll was seen at $34.50 on Country Brook's own site and $38.50 on eBay; not visible on Amazon in search) |
 | How much you use | one loop of **41 ft**. Cut 43 ft and sew it in place (build guide, section 7). |
-| Why the 50 yd roll | Country Brook says its rolls *may contain factory splices*. You need one unbroken 43 ft piece, and 150 ft guarantees that. The rest is a spare belt. Before ordering, message the seller through Amazon and ask for a roll with no splices. |
-| Does it fit the printed parts? | Yes. Every belt-dependent part is sized from `belt_w = 76.2` and `belt_t = 1.7` in `cad/params.scad`. When the belt arrives, measure its width in 3 places and its thickness. If either is off by more than 0.5 mm, change the number and run `python3 cad/check_parts.py` to regenerate and re-check every part. |
+| Why the 50 yd roll | Country Brook says its rolls *may contain factory splices*. You need one unbroken 43 ft piece, and 150 ft makes that very likely. The rest is a spare belt. Before ordering, message the seller through Amazon and ask for a roll with no splices. |
+| Does it fit the printed parts? | Yes. Every belt-dependent part is sized from `belt_w = 76.2` and `belt_t = 1.7` in `cad/params.scad`. When the belt arrives, measure its width in 3 places and its thickness. The defaults match the listing (3.0 x 0.067 in), so you can start printing before it arrives. If either is off by more than 0.5 mm, change the number, run `python3 cad/check_parts.py` and then `python3 cad/make_plates.py` to regenerate the parts and the plates, and reprint the plates with rollers, wheels and frames (plates 4-11). |
 
 **Backup:** MECCANIXITY 3 in black polypropylene webbing, 25 yd
-(<https://www.amazon.com/dp/B0CSDKQ2Y6>, about $23 seen). It is thinner (1.1 mm), so set
-`belt_t = 1.1`. 25 yd = 75 ft, enough for one loop if there's no splice in the middle.
+(<https://www.amazon.com/dp/B0CSDKQ2Y6>, about $23 seen). It is lighter webbing: thinner
+(1.1 mm) and listed as 75 mm wide. Set `belt_t = 1.1` and `belt_w` to its measured width, then
+regenerate the parts and plates before printing. 25 yd = 75 ft, enough for one loop if there's
+no splice in the middle.
 
 **Do not buy:**
 - rubber or neoprene strip (stretches)
@@ -30,7 +32,7 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 
 | Item | Amount |
 |---|---|
-| PLA, any brand, 1.75 mm | about **2.6 kg** for all 18 plates, test coupon included (the slicer's figure, see `plates/plates.md`). A failed big plate can cost 0.3-0.5 kg, so **buy 4 x 1 kg spools if you have none**. Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
+| PLA, any brand, 1.75 mm | about **2.6 kg** for all 18 plates, test coupon included (the slicer's figure, see `plates/plates.md`). A failed big plate can cost up to about 0.35 kg, so **buy 4 x 1 kg spools if you have none**. Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
 
 ## 3. Things you probably already have (not bought for this)
 
@@ -52,7 +54,7 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 |---|---|
 | Belt | about $35-45 |
 | Filament (if you have none) | about $48-80 for 4 spools |
-| **Total** | **about $35-45 if you already have filament; $85-125 if not** |
+| **Total** | **about $35-45 if you already have filament; $83-125 if not** |
 
 The previous version needed $180-230 of wood, bearings, chain and bolts. All of that is now
 printed.

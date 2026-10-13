@@ -294,18 +294,34 @@ def islands(mf, step=0.2, reach=0.6):
     return found
 
 
+def canonical_export(m, path):
+    """write the STL with its triangles in a canonical order (each triangle starts at its smallest
+    vertex, winding kept; triangles sorted by coordinates), so the same part always gives the same
+    bytes, whatever order OpenSCAD emitted the facets in"""
+    v = np.asarray(m.vertices)
+    f = np.asarray(m.faces).copy()
+    tri = v[f]                                                  # (n, 3, 3)
+    first = np.array([min(range(3), key=lambda k: tuple(t[k])) for t in tri])
+    f = np.stack([f[np.arange(len(f)), (first + k) % 3] for k in range(3)], axis=1)
+    tri = v[f].reshape(len(f), 9)
+    order = np.lexsort(tri.T[::-1])
+    c = trimesh.Trimesh(v, f[order], process=False)
+    c.export(path)
+
+
 def clean_export(t, path):
-    """export, then re-read the file as the slicer will; only if float32 rounding broke it,
-    drop the faces that collapsed (zero-area slivers that close a seam must stay)"""
-    t.export(path)
+    """export (canonical triangle order), then re-read the file as the slicer will; only if float32
+    rounding broke it, drop the faces that collapsed (zero-area slivers that close a seam must stay)"""
+    canonical_export(t, path)
     e = trimesh.load(str(path), force="mesh")
     e.merge_vertices()
     if e.is_watertight:
-        return e
+        canonical_export(e, path)
+        return trimesh.load(str(path), force="mesh")
     e.update_faces(e.nondegenerate_faces(height=1e-6))
     e.remove_unreferenced_vertices()
     e.merge_vertices()
-    e.export(path)
+    canonical_export(e, path)
     e = trimesh.load(str(path), force="mesh")
     e.merge_vertices()
     return e

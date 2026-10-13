@@ -66,7 +66,7 @@ the first chute segments (purple), feet (brown), belt (black).*
 Parts:
 - `head_side_a`, `head_side_b`, `drive_roller`, `drive_pin`, `gearbox`, 2 x `foot`
 - 7 x `bolt8_28` + 7 x `nut8` (4 for the feet, 3 for the gearbox)
-- 2 ground screws with 2 `washer50`, and optionally 2 spikes
+- 2 ground screws with 2 `washer50` and 2 `bolt8_28`, and optionally 2 spikes
 
 1. Bolt each foot crossbar between the frames: each frame's tab drops between a pair of cheeks.
    Frame B (the one with the open slot and the 3 extra holes) goes on the **left** when you look
@@ -120,7 +120,7 @@ Parts:
 - `tail_side_l`, `tail_side_r`, `tail_roller`, 2 x `takeup_block`, 2 x `takeup_nut`,
   2 x `takeup_screw`, `skid_l`, `skid_r`, 1 x `foot`
 - 6 x `bolt8_28` + 6 x `nut8`
-- 2 ground screws with 2 `washer50`, and 2 spikes
+- 2 ground screws with 2 `washer50` and 2 `bolt8_28`, and 2 spikes
 
 1. Bolt each tail frame into its skid's two cheek pairs (2 bolts each). Then bolt the foot
    crossbar across the two frames' rear tabs (the end over the sidewalk).
