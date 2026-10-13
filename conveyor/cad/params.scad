@@ -1,94 +1,96 @@
 // =====================================================================
-// Candy conveyor - shared parameters (millimetres unless noted)
-// conveyor.scad includes this file; calc/conveyor_calc.py parses it,
-// so keep every line in the form   name = <number or simple expression>;
+// Candy conveyor v4 (all printed except the belt): shared parameters, mm
+// conveyor.scad includes this file; calc/conveyor_calc.py and the Python
+// checkers parse it, so keep each line as   name = <number or expression>;
 // =====================================================================
 IN = 25.4;
 
-// ---------------------------------------------------------------- belt
-belt_w        = 76.2;    // 3" webbing (Country Brook heavy polypro: 3")
-belt_t        = 1.7;     // 0.067" stated by seller; measure yours
-belt_clear    = 2.0;     // belt-to-flange clearance each side
+// ---------------------------------------------------------------- belt (the only bought part)
+belt_w        = 76.2;    // 3 in heavy polypropylene webbing (Country Brook): measure yours
+belt_t        = 1.7;     // 0.067 in per the listing: measure yours
+face          = belt_w + 10;   // roller / wheel width between flanges (5 mm each side)
+flange_lip    = 2.5;     // flange height above the rolling surface
+flange_t      = 2.0;
 
-// ---------------------------------------------------------------- wooden rails (1x3 furring strip)
-rail_h        = 60.3;    // 2.375" actual
-rail_t        = 16.7;    // 0.656" actual
-rail_gap      = belt_w + 18.8;  // inside face to inside face (= slider length); 95.0 for 3" webbing
-rail_piece    = 96*IN;   // 8 ft
-rail_pieces   = 3;       // per side
-rail_above_belt = 20.0;  // rail top edge stands this far above the belt surface (side wall)
-splice_len    = 16*IN;   // splice block on the outside face, centred on each joint
+// ---------------------------------------------------------------- printing fits
+pip_gap       = 0.45;    // print-in-place running gap (tune with test_coupon: 0.35 / 0.45 / 0.55)
+fit_gap       = 0.20;    // slip fit between separate parts (pegs into sockets)
+pin_d         = 3.0;     // printed cross pins
+pin_hole      = 3.5;
 
-// ---------------------------------------------------------------- fasteners
-bolt_d        = 6.35;    // 1/4"-20 structural bolts
-bolt_hole     = 6.9;     // printed clearance hole for 1/4"
-nut14_af      = 11.11;   // 7/16" across flats (1/4"-20 hex nut)
-nut14_h       = 5.6;
-axle_d        = 7.94;    // 5/16" bolt shank = the three fixed axles
-axle_hole     = 8.4;     // printed clearance hole for 5/16"
-nut516_af     = 12.7;    // 1/2" across flats (5/16"-18 hex nut)
-nut516_h      = 6.8;
-woodscrew_hole = 4.6;    // #8 wood screw clearance
+// ---------------------------------------------------------------- station wheel unit (cantilever, print-in-place)
+wu_r          = 15.0;    // rolling radius (crown added on top)
+wu_crown      = 0.3;
+wu_axle_r     = 6.0;     // axle core radius
+wu_ridge_r    = 8.0;     // V-ridge peak radius (the two V-ridges carry load and hold the wheel on)
+wu_peg        = 12.0;    // square peg that plugs into the station bracket
+bracket_t     = 8.0;
 
-// ---------------------------------------------------------------- 608 bearing
-brg_od        = 22.0;
-brg_w         = 7.0;
-brg_id        = 8.0;
-brg_race_od   = 12.0;    // inner-race land: spacers must stay inside this
-brg_fit       = 0.15;    // pocket = brg_od + brg_fit (tune with test coupon)
-spacer_od     = 11.5;
-spacer_id     = 8.4;
+// ---------------------------------------------------------------- double-supported print-in-place rollers (tail, snub)
+tail_r        = 20.0;    // tail roller radius (small = candy drops off cleanly)
+snub_r        = 15.0;    // (not used in v4: no snub roller)
+roll_crown    = 0.3;
+dr_axle_r     = 6.0;
+dr_ridge_r    = 8.0;     // smaller V-ridge = less bearing friction
+dr_cb_r       = 10.5;    // counterbore at each roller end (the side-frame boss goes in here)
+dr_cb_d       = 9.0;
+dr_end_sq     = 8.0;     // square end of the fixed axle (gripped by the boss)
+boss_r        = 9.6;     // boss radius (must clear dr_cb_r by >= 0.8)
 
-// ---------------------------------------------------------------- sliders (fixed, belt slides over them; also rail spacers)
-slider_od     = 10.0;    // thin sleeve over the 1/4" bolt
-slider_flange_od = slider_od + 2 * (belt_t + 0.3); // lip ends 0.3 mm above the belt surface
-slider_flange_t  = 1.6;
-station_first = 12*IN;   // first stake station from the tail end of the rails
-station_pitch = 54.5*IN; // stake stations (each carries one carry slider + one return slider)
-stations      = 5;       // last one lands >= 24 in before the first riser (see calc)
-stake_t       = 38.1;    // 2x2 stakes (1.5" actual); stations are threaded-rod rungs, any stake size works
+// ---------------------------------------------------------------- drive roller
+drive_r       = 30.0;    // core radius
+drive_crown   = 0.3;
+rib_h         = 0.5;     // grip ribs on the drive surface
+ribs          = 64;
+journal_r     = 8.0;     // Ø16 journals run in the side frames
+journal_gap   = 0.30;
 
-// ---------------------------------------------------------------- rollers
-drive_core_d  = 77.0;    // printed diameter under the lagging
-lagging_t     = 1.5;     // bicycle inner tube, approx (measure)
-tail_d        = 50.0;
-crown_drive   = 0.4;     // radial crown at belt centre, drive roller (measured over the lagging)
-crown_tail    = 0.3;     // radial crown, tail roller
-flange_lip    = 2.5;     // flange radius above the roller surface (last-resort edge catch)
-flange_t      = 3.0;
-roller_face   = belt_w + 10;  // between flanges: 5 mm each side (crown does the steering)
+// ---------------------------------------------------------------- gears: spur pinion on the drive roller, crown gear on the line shaft
+gear_m        = 2.5;
+pinion_z      = 17;
+crown_z       = 34;      // ratio 2:1 step-up (crank 1 turn -> roller 2 turns)
+gear_pa       = 20;
+gear_face     = 10;
+backlash      = 0.15;    // per flank
 
-// ---------------------------------------------------------------- chain drive (1/2" x 1/8" bicycle chain)
-chain_p       = 12.7;
-chain_roller_d = 7.75;
-chain_tooth_t = 2.8;     // tooth thickness (chain inner width 3.18)
-chain_half_w  = 4.9;     // half the overall chain width (rivet ends) incl. margin
-sprocket_drive_t = 16;   // on drive roller
-sprocket_crank_t = 24;   // on crank wheel
-chain_links   = 114;     // as bought (OugeWood kit = 114); must be even
+// ---------------------------------------------------------------- frames
+side_t        = 8.0;     // side frame thickness
+frame_gap     = 1.0;     // roller end to side frame
+web           = 7.0;     // lattice member width in the side frames
 
-// ---------------------------------------------------------------- crank
-crank_r       = 100.0;   // crank arm radius
-grip_len      = 80.0;
-grip_od       = 22.0;
+// ---------------------------------------------------------------- line (shaft + candy chute down the steps)
+line_deg      = 36;      // line angle to the belt, at the head (about 40 deg to level on a 5 deg lawn)
+seg_len       = 210;     // structural length of one chute/shaft segment
+shaft_or      = 7.0;     // shaft tube outer radius (Ø14)
+shaft_ir      = 3.5;
+shaft_ridge   = 9.5;     // V-ridge peak radius at each bearing ring
+ring_or       = 14.0;
+hex_af        = 10.0;    // shaft coupler hex across flats
+trough_w      = 80;      // inside width of the candy chute
+trough_h      = 30;      // inside wall height
+trough_wall   = 1.2;
+trough_floor  = 1.6;
+trough_n      = 82;      // chute floor offset from the shaft axis (perpendicular to the line)
+crank_r       = 110;     // crank arm radius
 
-// ---------------------------------------------------------------- end plates
-plate_t       = 6.0;
-head_axis_out = 80.0;    // drive axle centre beyond the rail end (gives chain clearance over the rail end)
-tail_slot_len = 90.0;    // take-up travel (absorbs 180 mm = 1.2 % belt growth)
-tail_axis_min = 45.0;    // tail axle centre beyond rail end at minimum take-up
+// ---------------------------------------------------------------- stakes
+spike_leg     = 30;      // L-profile stake
+spike_t       = 3.2;
+spike_head    = 36;      // square head block (also the station socket)
+spike_sock    = 16.0;    // square socket for the station bracket spigot
+spike_embed   = 170;     // depth driven into the lawn
 
-// ---------------------------------------------------------------- print tolerances
-fit           = 0.25;    // general clearance for sliding/loose fits
-$fn           = 72;
+// ---------------------------------------------------------------- take-up
+takeup_travel = 60;      // tail take-up travel (fully in = +20 mm, fully out = -40 mm)
+screw_r       = 7.0;     // printed take-up screw, Ø14
+screw_pitch   = 3.0;
 
-// ---------------------------------------------------------------- added for v2 layout
-flange_w      = 4.0;     // flange thickness at each roller end
-spr_body      = 7.3;     // sprocket part thickness (teeth flush with the outer face)
-post_setback  = 110.0;   // crank post centre, measured back from the head end of the rails
-slope_deg     = 7.2;     // belt slope (site dependent; only tilts the post in the checks)
-chain_plate_h = 12.0;    // chain side-plate height (KMC Z410 ~11.7)
-clamp_t       = 6.0;     // crank clamp wall
-clamp_slot    = 25.0;    // chain-tension travel of the crank clamp
-hood_r        = 50.0;    // inner radius of the drive-roller hood
-hood_t        = 2.4;
+$fn           = 64;
+
+// ---------------------------------------------------------------- layout along the line (distance s from the drive axle line, along the line)
+gb_top_s      = 110;     // top of the gearbox stub (male hex) = start of the first chute segment shaft
+crank_head_len = 150;    // crank head unit above the last segment
+head_h        = 6 * IN;  // belt top above the lawn at the drive roller
+tail_h        = 9 * IN;  // belt top above the sidewalk at the tail roller (basket rim must be <= tail_h - 3 in)
+stations      = 4;       // stake stations between head and tail
+T0            = 20;      // belt pretension per run, N (set with the can test)

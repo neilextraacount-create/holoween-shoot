@@ -1,65 +1,50 @@
 ==============================================================================
-CANDY CONVEYOR v2 - 3 risers x 7.00 in (riser height ASSUMED unless measured)
+CANDY CONVEYOR v4 (all printed except the belt) - 3 risers x 7.00 in (riser height ASSUMED)
 ==============================================================================
-Porch floor 42.9 in above the lawn edge (lawn rise 21.9 + 3 x 7.00)
-Axle-to-axle 7463 mm (24.48 ft) with the take-up at 25 % travel
-Slope 8.09 deg (tan 0.142); horizontal span 290.9 in
-Drive axle 12 in back from the porch edge; belt top there 9.0 in above the porch floor
-Tail axle at x = -8.9 in (over the sidewalk), belt top 10.5 in -> basket rim 7.5 in; slide the basket under the tail so its back rim is 1-2 in behind the tail axle
+Porch floor 42.9 in above the sidewalk; lawn rises 21.9 in over 250 in
+Belt: drive roller at x=236 in (14 in before the first riser), belt top 6.0 in above the lawn
+      tail roller at x=-2 in (over the sidewalk), belt top 9.0 in -> basket rim <= 6.0 in
+      slope 4.24 deg; axle to axle 6062 mm (19.89 ft)
 
-STAKE STATIONS (heights in inches above the ground at that stake)
-   # rail X mm    x in  ground  belt top  upper rung  lower rung  stake (cut)
-   1       305     5.6     0.5      12.1        11.8         9.7    25.3 in (12 in deep)
-   2      1689    59.6     5.2      15.0        14.8        12.7    32.3 in (16 in deep)
-   3      3073   113.5     9.9      18.0        17.7        15.6    35.2 in (16 in deep)
-   4      4458   167.5    14.7      20.9        20.7        18.6    38.2 in (16 in deep)
-   5      5842   221.5    19.4      23.9        23.6        21.5    41.1 in (16 in deep)
-  -> 2x2 stakes (1.5 in actual); drive plumb; the rung heights are where you drill the 5/16 in holes
-  -> every station is on the lawn and >= 24 in from the first riser
-  + one rails-only rung (carry slider, no stakes) at rail X 6619 mm (x = 251.7 in)
+STAKE STATIONS (4, every 47.6 in)
+   #    x in  ground  belt top  stake head  stake length
+   1    45.6     4.0       8.5       5.4 in       308 mm (STL: stake_1)
+   2    93.2     8.2       7.9       4.8 in       291 mm (STL: stake_2)
+   3   140.8    12.3       7.3       4.1 in       275 mm (STL: stake_3)
+   4   188.4    16.5       6.6       3.5 in       259 mm (STL: stake_4)
 
-CLEARANCE OVER THE STEPS / PORCH EDGE (inches)
-  porch edge     x= 270.0  ground  42.9  rail bottom +  5.7  return run +  4.2
-  riser 1 top    x= 250.0  ground  28.9  rail bottom + 16.9  return run + 15.7
-  riser 2 top    x= 260.0  ground  35.9  rail bottom + 11.3  return run + 10.0
-  -> minimum 4.2 in OK
-  crank post at x = 274.7 in (+4.7 in from the porch edge; must be > +1)
+DRIVE LINE (chute + shaft) at 40.2 deg to level, from the drive axle up to the porch
+  4 segments: crank at x=268.0 in (-2.0 in behind the porch edge), 9.5 in above the porch floor
+  5 segments: crank at x=274.3 in (+4.3 in behind the porch edge), 14.8 in above the porch floor
+  6 segments: crank at x=280.6 in (+10.6 in behind the porch edge), 20.2 in above the porch floor  <- use
+  7 segments: crank at x=286.9 in (+16.9 in behind the porch edge), 25.5 in above the porch floor
+  8 segments: crank at x=293.2 in (+23.2 in behind the porch edge), 30.8 in above the porch floor
+  9 segments: crank at x=299.5 in (+29.5 in behind the porch edge), 36.2 in above the porch floor
+  underside over riser 1 top (x=250): 7.5 in
+  underside over riser 2 top (x=260): 9.0 in
+  underside over riser 3 top (x=270): 10.5 in
+  -> minimum clearance 7.5 in OK
+  crank head stand leg: 443 mm (17.4 in) to the porch floor at x=279.8 in
 
-BELT (3 in heavy polypropylene webbing)
-  Loop length on the belt centre line: 15122 mm = 49.61 ft (take-up 15 mm out)
-  Cut length incl. 125 mm sewn lap: 15247 mm = 600.3 in = 50.02 ft
-  Take-up travel 90 mm absorbs 150 mm of growth (1.0 % of the loop)
-  MEASURE axle-to-axle C on the assembled frame first: loop = 2 C + 212 mm
+BELT (3 in heavy polypropylene webbing, Country Brook 50 yd)
+  Loop about 12289 mm = 40.3 ft; cut 42 ft and sew in place with a 75 mm lap
 
-LOADS (estimates, not measurements)
-  Pretension 60 N per run; design running resistance 25 N
-  Carrying-run sag over 1.38 m between sliders: 10.4 mm; return-run sag 2.0 mm
-  Tension check: a full 12 oz can hung mid-span between two stations sags the belt 33 mm (1.29 in) at 40 N
-  Tension check: a full 12 oz can hung mid-span between two stations sags the belt 22 mm (0.86 in) at 60 N
-  Tension check: a full 12 oz can hung mid-span between two stations sags the belt 16 mm (0.64 in) at 80 N
-  Belt sliding on 11 PLA sliders (mu 0.3): 10.4 N; + bending 2 N + edge rub 5 N + bearings/chain 1 N - candy downhill 1.5 N = 16.9 N  (design 25 N)
-  Drive grip, inner-tube lagging mu=0.5: capstan limit 4.81, needed 1.53 -> OK
-  Drive grip, bare PLA, wet      mu=0.2: capstan limit 1.87, needed 1.53 -> MARGINAL - use lagging
-  Crank 45 rpm x 1.50 -> belt 0.29 m/s; candy reaches the basket in 26 s = 19 turns
-  Crank torque 1.72 N.m -> hand force 17 N (3.9 lbf) at 100 mm
+LOADS (estimates; PLA-on-PLA plain bearings)
+  dry PLA  : tail bearing  6.6 N + 8 wheels 1.8 N + bending 2 N = 10.3 N belt drag; slack side 14.8 N; drive needs mu >= 0.17; crank 1.26 N.m = 11 N (2.6 lbf)
+  waxed PLA: tail bearing  3.7 N + 8 wheels 1.0 N + bending 2 N =  6.7 N belt drag; slack side 16.6 N; drive needs mu >= 0.11; crank 0.96 N.m = 9 N (2.0 lbf)
+  Ribbed PLA on dry webbing is roughly mu 0.3, wet roughly 0.2: grip is adequate; wax the bearings.
+  Carrying-run sag between stations (1.21 m, 15 N): light candy 13 mm
+  Carrying-run sag between stations (1.21 m, 15 N): dense candy 25 mm
+  Crank 45 rpm x 2 -> belt 0.30 m/s; candy rides the belt in 20 s (15 turns)
+  Candy leaves a 1.36 m chute at 3.3 m/s (wrapper friction 0.3); the drop trap at the bottom stops it
+  Candy leaves a 1.36 m chute at 2.8 m/s (wrapper friction 0.45); the drop trap at the bottom stops it
 
-CHAIN AND CRANK
-  114 links -> sprocket centres 596.7 mm; crank axle 29.6 in above the porch floor (handle sweeps 26-34 in)
-  Crank post (1x3): porch floor to post top = 29.1 in (cut it 1/2 in long; trim to fit)
-  Other head leg (1x3): porch floor to rail top = 8.7 in
-  Ratio is a step-UP: the belt moves 1.50 x faster than a direct crank, with 1.50 x the effort
-  16T pitch diameter 65.10 mm
-  24T pitch diameter 97.30 mm
+ANCHORING (belt tension must go into the ground at both ends)
+  tail: 40 N pull at 207 mm -> 8.3 N.m; with feet 200 mm apart the rear foot lifts with 41 N -> 2 stakes must hold 21 N each in pull-out, or add 4.2 kg of ballast
+  head: 40 N pull at 120 mm -> 4.8 N.m; with feet 200 mm apart the rear foot lifts with 24 N -> 2 stakes must hold 12 N each in pull-out, or add 2.4 kg of ballast
 
-BOLT STACKS (grip = everything clamped under the head; the nut must sit on threads)
-  rail-end plates (x8)                     1.50": grip   25.9 mm, threads from   19.0, nut ends   33.0 of   38.1 -> OK
-  crank post / head leg to rail (x4)       2.00": grip   36.6 mm, threads from   31.8, nut ends   43.7 of   50.8 -> OK
-  crank clamp to post (x2)                 1.50": grip   25.9 mm, threads from   19.0, nut ends   33.0 of   38.1 -> OK
-  grip on crank arm (x1)                   4.00": grip   91.2 mm, threads from   82.5, nut ends   98.3 of  101.6 -> OK
-  -> all bolt stacks OK  (thread lengths per ASME B18.2.1: 2D+1/4 in up to 6 in long, 2D+1/2 in over 6 in)
-  1/4"-20 threaded rod rungs: 10 station rungs x 245 mm (9.7 in) + 1 steps rung x 153 mm = 2607 mm -> 3 x 36 in rods (4 nuts + 4 washers per station rung, 2 + 2 on the steps rung)
-  5/16"-18 threaded rod cut list: drive axle 173 mm, tail axle 195 mm, crank axle 89 mm = 457 mm of a 914 mm (36 in) rod
-
-STRUCTURE
-  Each rail is compressed ~60 N by the belt tension; buckling between stations 997 N -> factor 17
-  Wind 20 mph on 4.8 ft2: 6.0 lbf total, 1.2 lbf per station
+PLA STRESS CHECKS (parts printed with layers across the load are the weak case)
+  tail axle Ø12 (layers across): 5.3 MPa bending  (PLA interlayer ~20-30 MPa)
+  line shaft Ø14/7 at 2x the dry crank torque (2.5 N.m): 5.0 MPa shear across layers
+  gear teeth at 2x dry torque: 45 N tooth force -> 6.0 MPa (Lewis); crown teeth are printed with layers across
+  station wheel axles: < 3 MPa
