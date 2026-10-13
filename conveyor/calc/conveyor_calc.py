@@ -56,12 +56,12 @@ ratio = g("crown_z") / g("pinion_z")
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--risers", type=int, default=2)
-    ap.add_argument("--rise", type=float, default=7.0, help="riser height in (ASSUMED until measured)")
+    ap.add_argument("--risers", type=int, default=int(g("site_risers")))
+    ap.add_argument("--rise", type=float, default=g("site_rise"), help="riser height in (ASSUMED until measured)")
     ap.add_argument("--lawn", type=float, default=250.0)
     ap.add_argument("--lawn-deg", type=float, default=5.0)
-    ap.add_argument("--steps-run", type=float, default=20.0)
-    ap.add_argument("--head-gap", type=float, default=10.0, help="drive axle distance before the first riser, in")
+    ap.add_argument("--steps-run", type=float, default=g("site_run"))
+    ap.add_argument("--head-gap", type=float, default=g("site_head_gap"), help="drive axle distance before the first riser, in")
     ap.add_argument("--tail-x", type=float, default=-2.0, help="tail axle x (negative = over the sidewalk), in")
     ap.add_argument("--crank-min", type=float, default=22.0, help="lowest acceptable crank height above the porch, in")
     ap.add_argument("--svg", default=None)
@@ -103,7 +103,7 @@ def main():
     n = int(g("stations"))
     span = (xh - xt) / (n + 1)
     p(f"\nSTAKE STATIONS ({n}, every {span:.1f} in)")
-    p(f"  {'#':>2} {'x in':>7} {'ground':>7} {'belt top':>9} {'stake head':>11} {'stake length':>13}")
+    p(f"  {'#':>2} {'x in':>7} {'ground':>7} {'belt top':>9} {'stake head':>11} {'stake length':>13} {'stake_len (leg)':>16}")
     stake_lens = []
     for i in range(1, n + 1):
         x = xt + i * span
@@ -112,7 +112,8 @@ def main():
         head_top = h + st_bot                       # stake head top above the grass, mm
         total = head_top + g("spike_embed")
         stake_lens.append(round(total - 32))          # leg length; the socket head adds 32 mm
-        p(f"  {i:2d} {x:7.1f} {ground(x):7.1f} {h/IN:9.1f} {head_top/IN:9.1f} in {total:9.0f} mm (STL: stake_{i})")
+        p(f"  {i:2d} {x:7.1f} {ground(x):7.1f} {h/IN:9.1f} {head_top/IN:9.1f} in {total:9.0f} mm {stake_lens[-1]:12d} mm  (STL: stake_{i})")
+    p(f"  -> stake_len = [{', '.join(str(v) for v in stake_lens)}] in params.scad (leg lengths; each stake is 32 mm longer overall)")
 
     # ------------------------------------------------------------ drive line (shaft + chute) to the porch
     alpha = math.radians(g("line_deg")) + tb
@@ -202,6 +203,24 @@ def main():
     T_c = T0 - rows[0][3] / 2
     for nm, w in (("light candy", w_belt + w_light), ("dense candy", w_belt + w_dense)):
         p(f"  Carrying-run sag between stations ({span_m:.2f} m, {T_c:.0f} N): {nm} {w*span_m**2/(8*T_c)*1000:.0f} mm")
+    # tension test: 100 g hung from the top run midway between two stations. The belt barely stretches
+    # (EA guessed 10-55 kN), so the dip is computed with tension rising as the span lengthens.
+    loop_m = (2 * C + math.pi * (r_dp + r_tp)) / 1000
+
+    def dip(T0_, EA, P=0.981, w=w_belt, L=span_m):
+        d0 = w * L * L / (8 * T0_)
+        T = T0_
+        for _ in range(60):
+            dt = (w * L * L / 8 + P * L / 4) / T
+            T = T0_ + EA * 2.4 * (dt * dt - d0 * d0) / L / loop_m
+        return (dt - d0) * 1000
+    lo = [dip(t, 55e3) for t in (15, 20, 25)]
+    hi = [dip(t, 10e3) for t in (15, 20, 25)]
+    p(f"  Tension test, 100 g hung midway between stations: extra dip {lo[2]:.0f}-{hi[2]:.0f} mm at 25 N, {lo[1]:.0f}-{hi[1]:.0f} mm at 20 N,"
+      f" {lo[0]:.0f}-{hi[0]:.0f} mm at 15 N per run -> target {round(lo[2])}-{round(hi[0])} mm")
+    gap_runs = -g("belt_t") - (st_ret_z + g("wu_r") + g("wu_crown") + g("belt_t"))
+    p(f"  Gap between the top and return runs at a station: {gap_runs:.1f} mm; with dense candy at mid-span about"
+      f" {gap_runs - (w_belt + w_dense) * span_m**2 / (8 * T_c) * 1000 + w_belt * span_m**2 / (8 * T0) * 1000:.0f} mm")
     v = math.pi * 2 * r_dp / 1000 * 45 * ratio / 60
     p(f"  Crank 45 rpm x {ratio:.0f} -> belt {v:.2f} m/s; candy rides the belt in {C/1000/v:.0f} s ({C/1000/(2*math.pi*r_dp/1000*ratio):.0f} turns)")
     for mu in (0.3, 0.45):
@@ -226,13 +245,22 @@ def main():
     M = (2 * T0) * (L_w / 1000) / 4
     s_ax = M / (math.pi * (d / 1000) ** 3 / 32) / 1e6
     p(f"  tail axle Ø{d:.0f} (layers across): {s_ax:.1f} MPa bending  (PLA interlayer ~20-30 MPa)")
-    tc = rows[0][6] * 2
+    t1 = rows[0][6]
+    tc = t1 * 2
+    ty = 30 * g("crank_r") / 1000                                   # hard yank: 30 N on the handle
     J = math.pi / 32 * ((2 * g("shaft_or")) ** 4 - (2 * g("shaft_ir")) ** 4)
-    p(f"  line shaft Ø{2*g('shaft_or'):.0f}/{2*g('shaft_ir'):.0f} at 2x the dry crank torque ({tc:.1f} N.m): "
-      f"{tc*1000*g('shaft_or')/J:.1f} MPa shear across layers")
+    zt_hex = 0.217 * (math.sqrt(3) / 2 * g("hex_af") ** 2) * g("hex_af")
+    sq = 12.4
+    zt_sq = 0.208 * sq ** 3
+    p(f"  torque path, shear in MPa at the dry crank torque {t1:.2f} / 2x {tc:.2f} / a 30 N yank {ty:.2f} N.m (PLA across layers ~20-30):")
+    for nm, z in ((f"line shaft tube Ø{2*g('shaft_or'):.0f}/{2*g('shaft_ir'):.0f}", J / g("shaft_or")),
+                  (f"hex coupler {g('hex_af'):.0f} mm across flats", zt_hex), (f"square drive {sq} mm", zt_sq)):
+        p(f"    {nm:32s} {t1*1000/z:5.1f} / {tc*1000/z:5.1f} / {ty*1000/z:5.1f}")
     Ft = rows[0][6] * 0.85 * 0.9 / (g("gear_m") * g("crown_z") / 2000) * 2
     sl = Ft / (g("gear_face") * g("gear_m") * 0.3)
     p(f"  gear teeth at 2x dry torque: {Ft:.0f} N tooth force -> {sl:.1f} MPa (Lewis); crown teeth are printed with layers across")
+    p(f"  porch stand: about {11.6 * 0.6:.0f} N.m tips the stand sideways when cranking hard -> tie the post to a railing,"
+      f" or about 8 kg on the tray (two 1-gallon water jugs), or hold the funnel rim")
     p("  station wheel axles: < 3 MPa")
     Mg = 30 * 0.035
     p(f"  crank grip axle Ø13 with a 30 N hand load at mid-grip: {32*Mg/(math.pi*0.013**3)/1e6:.1f} MPa bending across layers")

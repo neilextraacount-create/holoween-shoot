@@ -46,7 +46,7 @@ IN = 25.4
 
 # name, qty, walls, infill %, expected bodies, turn 45 deg for the bed, what it is
 PARTS = [
-    ("test_coupon",     1, 3, 15, 4, False, "PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut)"),
+    ("test_coupon",     1, 3, 15, 7, False, "PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut)"),
     ("wheel_unit",      8, 2, 15, 2, False, "station wheel, print-in-place (2 per station)"),
     ("station_bracket", 4, 4, 30, 1, False, "station bracket (holds 2 wheels on the stake)"),
     ("stake_1",         1, 4, 30, 1, True,  "station 1 stake (nearest the sidewalk)"),
@@ -71,7 +71,7 @@ PARTS = [
     ("chute_segment",   5, 2, 15, 2, False, "chute segment with print-in-place drive shaft"),
     ("crank_head",      1, 3, 15, 2, False, "crank head: funnel + crank shaft, print-in-place"),
     ("crank_arm",       1, 3, 25, 2, False, "crank arm with spinning grip, print-in-place"),
-    ("pin3",           12, 3, 100, 1, False, "3 mm pin: wheel pegs (8), crank arm (1), spares (3)"),
+    ("pin3",           14, 3, 100, 1, False, "3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray (4), spares (2)"),
     ("splice_template", 1, 3, 20, 1, False, "belt sewing template (box-and-X hole pattern)"),
     ("stand_shim",      4, 3, 100, 1, False, "shims to level the porch stand foot"),
     ("hex_coupler",     6, 3, 100, 1, False, "hex coupler between shafts"),
@@ -80,7 +80,7 @@ PARTS = [
     ("post_upper",      1, 4, 30, 1, True,  "porch stand post, upper"),
     ("stand_tray",      1, 4, 20, 1, False, "porch stand foot (put the candy bowl on it)"),
     ("ground_screw",    4, 3, 30, 1, False, "ground screw (head front foot, tail skid rear anchors)"),
-    ("spike",           2, 3, 30, 1, False, "OPTIONAL L spike with nail head (head rear foot)"),
+    ("spike",           4, 3, 30, 1, False, "L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot"),
     ("stake_cap",       1, 3, 30, 1, False, "push the stakes in through this cap"),
     ("gs_wrench",       1, 3, 30, 1, False, "T-wrench for the ground screws"),
     ("bolt8_28",       17, 4, 100, 1, False, "printed M8 bolt (13 frame joints + 4 ground screws)"),
@@ -229,12 +229,58 @@ def overhangs(t):
     return sorted(out, reverse=True)
 
 
+def islands(mf, step=0.2, reach=0.6):
+    """Slice components that rest on nothing (any body) in the slices up to `reach` mm below: material
+    that would start printing in mid-air. A print-in-place z gap of up to ~0.6 mm above another body
+    (2-3 layers of air, like a support interface) counts as resting on it."""
+    bb = mf.bounding_box()
+    hist = [mf.slice(bb[2] + 0.05)]
+    z, found = bb[2] + 0.15, []
+    nback = int(round(reach / step))
+    while z < bb[5] - 0.05:
+        cs = mf.slice(z)
+        below = hist[0]
+        for h in hist[1:]:
+            below = below + h
+        for comp in cs.decompose():
+            if comp.area() > 0.05 and (comp ^ below).area() < 1e-3:
+                found.append((round(z, 2), round(comp.area(), 1)))
+        hist = (hist + [cs])[-nback:]
+        z += step
+    return found
+
+
+def clean_export(t, path):
+    """export, then re-read the file as the slicer will; only if float32 rounding broke it,
+    drop the faces that collapsed (zero-area slivers that close a seam must stay)"""
+    t.export(path)
+    e = trimesh.load(str(path), force="mesh")
+    e.merge_vertices()
+    if e.is_watertight:
+        return e
+    e.update_faces(e.nondegenerate_faces(height=1e-6))
+    e.remove_unreferenced_vertices()
+    e.merge_vertices()
+    e.export(path)
+    e = trimesh.load(str(path), force="mesh")
+    e.merge_vertices()
+    return e
+
+
 # ----------------------------------------------------------------------------- per-part checks
-def check_parts(rep, rendered):
-    rep.head("PARTS (render, watertight, bodies, print-in-place gap, bed fit, filament)")
+def part_qty(V):
+    """quantities that follow the parameters"""
+    n = int(V["seg_count"])
+    return {"chute_segment": n, "hex_coupler": n + 2, "ring_sleeve": n + 1, "post_lower": int(V["post_n"])}
+
+
+def check_parts(rep, rendered, V):
+    rep.head("PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed fit, filament)")
     total = 0.0
     rows = []
+    qmap = part_qty(V)
     for name, qty, walls, infill, nbodies, turn, desc in PARTS:
+        qty = qmap.get(name, qty)
         path = RAW / f"{name}.stl"
         ok_r, warn = rendered.get(name, (path.exists(), []))
         if not path.exists():
@@ -257,10 +303,15 @@ def check_parts(rep, rendered):
             gap_txt = f", body gap {g:.2f}"
             if g < 0.30:
                 problems.append(f"print-in-place gap {g:.2f} < 0.30")
+        isl = islands(to_mf(t))
+        if isl:
+            problems.append(f"{len(isl)} slice(s) start in mid-air, first at z {isl[0][0]} ({isl[0][1]} mm2)")
         if turn:
             t.apply_transform(Rz(45))
         t.apply_translation([-(t.bounds[0][0] + t.bounds[1][0]) / 2, -(t.bounds[0][1] + t.bounds[1][1]) / 2, -t.bounds[0][2]])
-        t.export(OUT / f"{name}.stl")
+        e = clean_export(t, OUT / f"{name}.stl")
+        if not e.is_watertight or len(e.split(only_watertight=False)) != nbodies:
+            problems.append(f"exported file: watertight {e.is_watertight}, {len(e.split(only_watertight=False))} bodies")
         ext = t.bounds[1] - t.bounds[0]
         if max(ext[0], ext[1]) > BED or ext[2] > BED:
             problems.append(f"bbox {ext.round(1).tolist()} exceeds {BED}")
@@ -335,7 +386,7 @@ def head_assembly(A, V):
     P["A"] = xf(A.mf("head_side_a"), Mx([[1, 0, 0], [0, 0, -1], [0, 1, 0]], (0, -V["side_in"], 0)))
     P["B"] = xf(A.mf("head_side_b"), Mx([[1, 0, 0], [0, 0, 1], [0, -1, 0]], (0, V["side_in"], 0)))
     P["roller"] = xf(A.mf("drive_roller"), Mx([[-s, c, 0], [0, 0, 1], [c, s, 0]], (0, -V["half_w"], 0)))
-    P["pin"] = xf(A.mf("drive_pin"), Mx([[1, 0, 0], [0, 0, 1], [0, -1, 0]], (0, -V["half_w"] - V["drv_jlen"], 0)))
+    P["pin"] = xf(A.mf("drive_pin"), Mx([[1, 0, 0], [0, 0, 1], [0, -1, 0]], (0, -V["half_w"] - V["drv_jlen"] - 2, 0)))
     gb = A.bodies("gearbox")                       # [rotor, body]
     Mg = Mx([[-s, 0, -c], [0, 1, 0], [c, 0, -s]], (V["gb_top_s"] * c, V["Y_c"], V["gb_top_s"] * s))
     P["rotor"], P["gbody"] = xf(gb[0], Mg), xf(gb[1], Mg)
@@ -361,6 +412,32 @@ def head_assembly(A, V):
     return P
 
 
+def socket_lock(A, V, lo_name, lo, lo_u0, up_name, up, up_u0):
+    """the plain end of the lower piece must sit deep in the upper piece's socket and stop it turning"""
+    if not isinstance(lo, m3d.Manifold) or lo_u0 is None:
+        return
+    lo_h = lo if lo_name == "trap" else xf(lo, line_M(V, lo_u0))
+    zone = xf(box(-V["tr_in"] - 3, V["tr_in"] + 3, V["fl_bot"] - 3, V["wl_top"] + 1, 0, V["sock_len"]), line_M(V, up_u0))
+    vol = (lo_h ^ zone).volume()
+    A.rep(vol >= 1000, f"{lo_name} plain end inside the {up_name} socket: {vol:.0f} mm3 (need >= 1000)")
+    turned = []
+    for deg in (-0.5, 0.5):
+        Rt = T(V["Y_c"], 0, 0) @ Rz(deg) @ T(-V["Y_c"], 0, 0)
+        turned.append((xf(up, line_M(V, up_u0) @ Rt) ^ lo_h).volume())
+    A.rep(min(turned) > 0.2, f"{up_name} cannot turn on the shaft: turning it 0.5 deg either way collides ({min(turned):.1f} mm3)")
+
+
+def coupler_bite(A, V):
+    """a hex coupler must grip: turned 15 deg inside a shaft socket it has to collide hard"""
+    cp = A.mf("hex_coupler")
+    shaft = A.bodies("chute_segment")[1]
+    rotor = A.bodies("gearbox")[0]
+    for nm, body, axis in (("segment shaft", shaft, (V["Y_c"], 0)), ("crown rotor", rotor, (0, 0))):
+        base = (xf(cp, T(axis[0], axis[1], 0.5)) ^ body).volume()
+        bite = (xf(cp, T(axis[0], axis[1], 0.5) @ Rz(15)) ^ body).volume() - base
+        A.rep(bite >= 20, f"hex coupler bites in the {nm} socket: turned 15 deg it overlaps {bite:.0f} mm3 (need >= 20)")
+
+
 def check_head(rep, A, V):
     rep.head("HEAD MODULE (drive roller, frames, gearbox, trap, first chute segment), assembled")
     P = head_assembly(A, V)
@@ -377,6 +454,13 @@ def check_head(rep, A, V):
     k("trap vs drive roller", P["trap"], P["roller"], "clear", 5.0)
     k("gearbox bolts + nuts vs drive roller, belt, crown gear, trap", P["gbolts"], P["roller"] + P["belt"] + P["rotor"] + P["trap"], "clear", 1.0)
     k("gearbox bolt nuts seat on frame B", P["gbolts"], P["B"], "touch")
+    k("gearbox bolts pass through the gearbox slab (heads seat on it)", P["gbolts"], P["gbody"], "touch")
+    socket_lock(A, V, "trap", P["trap"], V["tp_u0"], "segment 1", A.bodies("chute_segment")[0], V["gb_top_s"])
+    socket_lock(A, V, "segment 1", A.bodies("chute_segment")[0], V["gb_top_s"], "segment 2", A.bodies("chute_segment")[0], V["gb_top_s"] + V["seg_len"])
+    # candy path through the trap: a 30 mm tall, 60 mm wide piece sliding along the floor must not hit anything
+    lane = xf(box(-V["tr_in"] + 3, V["tr_in"] - 3, V["fl_top"] + 0.3, V["fl_top"] + 30, 2.5, 160), line_M(V, V["tp_u0"]))
+    k("30 mm candy passes under the trap lid and into the slot", lane, P["trap"], "clear", 0.2)
+    coupler_bite(A, V)
     k("trap vs gearbox", P["trap"], P["gbody"] + P["rotor"], "clear", 3.0)
     k("trap plain end in segment 1 socket", P["trap"], P["seg1"], "fit", 0.30)
     k("segment 1 ring on the gearbox housing", P["seg1"], P["gbody"], "touch")
@@ -455,7 +539,7 @@ def check_station(rep, A, V):
         box(-300, 300, -V["belt_w"] / 2, V["belt_w"] / 2, V["st_ret_top"], V["st_ret_top"] + V["belt_t"])
     for z, nm in ((V["st_carry_z"], "carry"), (V["st_ret_z"], "return")):
         wheel, axle = xf(wu[0], Mw(z)), xf(wu[1], Mw(z))
-        k(f"{nm} wheel peg in the bracket (collar stop 0.15 from the bracket face)", axle, br, "fit", 0.15)
+        k(f"{nm} wheel peg in the bracket (0.1 per side; collar 0.15 from the face)", axle, br, "fit", 0.10)
         k(f"{nm} wheel (spinning part) vs bracket", wheel, br, "clear", 0.4)
         k(f"{nm} wheel vs stake", wheel, st, "clear", 2.0)
     k("bracket sits on the stake head", br, st, "touch")
@@ -475,6 +559,11 @@ def check_line(rep, A, V):
     ch = A.bodies("crank_head")                   # [static, shaft]
     chs, chf = xf(ch[0], line_M(V, u_ch)), xf(ch[1], line_M(V, u_ch))
     k("segment N plain end in the crank head socket", clip(sN, y0=-50, y1=50), clip(chs, y0=-50, y1=50), "fit", 0.30)
+    socket_lock(A, V, f"segment {N}", seg[0], u_ch - V["seg_len"], "crank head", ch[0], u_ch)
+    lane = xf(box(-V["tr_in"] + 3, V["tr_in"] - 3, V["fl_top"] + 0.3, V["fl_top"] + 18, 2.5, V["crank_head_len"] - 60), line_M(V, u_ch))
+    k("candy channel through the crank head is clear (stand socket, web plate)", lane, chs, "clear", 0.2)
+    lane2 = xf(box(-V["tr_in"] + 3, V["tr_in"] - 3, V["fl_top"] + 0.3, V["fl_top"] + 18, 2.5, V["seg_len"] + V["plain_ext"] - 3), line_M(V, u_ch - V["seg_len"]))
+    k("candy channel through a chute segment and its joint is clear", lane2, sN + chs, "clear", 0.2)
     k("segment N ring on the crank head ring", sN, chs, "touch")
     k("segment N shaft end on the crank shaft end", sN_shaft, chf, "touch")
     # hex coupler in a shaft socket (same frame as the shaft)
@@ -490,23 +579,19 @@ def check_line(rep, A, V):
         g = xf(arm_all, line_M(V, u_ch) @ T(V["Y_c"], 0, z_hub) @ Rz(deg)).min_gap(chs, 50)
         worst = min(worst, g)
     rep(worst >= 3.0, f"crank arm swept a full turn (15 deg steps) vs crank head and funnel: closest {worst:.1f} mm (need >= 3)")
-    # porch stand: tray -> lower post -> upper post -> crank head socket
-    aw, sl = V["aw"], V["st_len"]
+    # porch stand: tray -> lower post -> adjustable upper post -> crank head socket
+    aw = V["aw"]
     S = line_M(V, u_ch) @ T(*V["st_q"]) @ Rx(90 + aw)            # socket frame: +z straight down
-    hd, c0 = V["sk_hd"], V["sk_c"]
-    L_top = V["post_b"] + hd + V["spig_len"]                     # upper post: top spigot end (x)
-    # post frame: x along the post (up), spigots on the axis (spig/2, spig/2), head sockets on (sk_c, sk_c);
-    # socket frame: +z straight down
-    sp = V["spig"] / 2
+    hd, c0, sp = V["sk_hd"], V["sk_c"], V["spig"] / 2
+    L_top = V["post_ub"] + V["spig_len"]                         # upper post: top spigot end (x)
+    # post frame: x along the post (up), spigots on the axis (spig/2, spig/2), head sockets on (sk_c, sk_c)
     up_to_sock = Mx([[0, 0, 1], [0, 1, 0], [-1, 0, 0]], (0, 0, 12 + L_top)) @ T(0, -sp, -sp)
     Mu = S @ Rz(45) @ up_to_sock
-    pu = A.mf("post_upper")
+    pu, pl = A.mf("post_upper"), A.mf("post_lower")
     k("upper post top spigot in the crank head socket", xf(clip(pu, x0=L_top - V["spig_len"] + 0.5), Mu), chs, "fit", 0.20)
-    k("upper post body vs crank head", xf(clip(pu, x1=L_top - V["spig_len"] - 0.5), Mu), chs, "clear", 0.3)
-    Ml = Mu @ T(-(V["post_b"] + hd), sp - c0, sp - c0)       # lower post frame (its head socket holds the upper spigot)
-    pl = A.mf("post_lower")
-    k("upper post bottom spigot in the lower post head", xf(clip(pu, x1=-0.5), Mu), xf(pl, Ml), "fit", 0.20)
-    k("upper post rests on the lower post head", xf(pu, Mu), xf(pl, Ml), "touch")
+    k("upper post shoulder bears on the crank head socket", xf(pu, Mu), chs, "touch")
+    Ml = Mu @ T(-(V["post_b"] + V["ph_len"] + V["pu_gap"]), sp - c0, sp - c0)   # lower post frame, nominal height
+    k("upper post long spigot in the lower post's deep socket", xf(clip(pu, x1=-0.5), Mu), xf(pl, Ml), "fit", 0.20)
     socket_from_lo = Mx([[0, 1, 0], [0, 0, 1], [1, 0, 0]], (0, 0, hd)) @ T(0, -sp, -sp)   # lower post -> tray socket axes
     best = None
     for kq in range(4):                                         # the tray can sit 4 ways round; use the one that keeps it on the porch
@@ -518,21 +603,38 @@ def check_line(rep, A, V):
     k("lower post spigot in the tray socket", xf(clip(pl, x1=-0.5), Ml), tray, "fit", 0.20)
     k("lower post rests on the tray socket", xf(pl, Ml), tray, "touch")
     post_u, post_l = xf(pu, Mu), xf(pl, Ml)
-    k("stand posts vs crank arm sweep zone and line", post_u + post_l, sN + chf, "clear", 3.0)
+    # the three locking pins go straight through their holes (pin modelled as a 3 mm rod along the post's z)
+    rod = m3d.Manifold.cylinder(40, V["pin_d"] / 2, V["pin_d"] / 2, 24).translate([0, 0, -20])
+    for nm, M, x, y, others in (("crank head pin", Mu, L_top - 13, sp, post_u + chs),
+                                ("height pin (nominal hole)", Ml, V["post_b"] + V["ph_len"] - 15, c0, post_u + post_l),
+                                ("tray pin", Ml, -16, sp, post_l + tray)):
+        pin = xf(rod, M @ T(x, y, 0))
+        k(f"{nm} passes through its holes", pin, others, "clear", 0.1)
+    # static neighbours: the posts hang off the crank head socket (0.2 mm slip fit), so they move < 1 mm
+    k("stand posts vs segment N and the crank shaft (static; socket play < 1 mm)", post_u + post_l, sN + chf, "clear", 2.0)
+    worst = 1e9
+    for deg in range(0, 360, 15):
+        g = xf(arm_all, line_M(V, u_ch) @ T(V["Y_c"], 0, z_hub) @ Rz(deg)).min_gap(post_u + post_l, 50)
+        worst = min(worst, g)
+    rep(worst >= 3.0, f"crank arm swept a full turn (15 deg steps) vs the stand posts: closest {'over 50' if worst >= 50 else f'{worst:.1f}'} mm (need >= 3)")
     return tray
 
 
 def check_site(rep, A, V, P_head, tray):
     """Line, head and porch stand against the steps (riser height ASSUMED 7 in until measured)."""
-    rep.head(f"SITE: 2 risers x {V['site_rise']} in (ASSUMED), {V['site_run']} in run to the porch; drive axle {V['site_head_gap']} in before riser 1")
+    rep.head(f"SITE: {V['site_risers']} risers x {V['site_rise']} in (ASSUMED), {V['site_run']} in run to the porch; drive axle {V['site_head_gap']} in before riser 1")
     b = math.radians(V["belt_deg"])
     axle_h = V["head_h"] - V["belt_t"] - V["drv_rs"]
     # world: origin on the lawn under the drive axle, x toward the porch, z up
     W = Mx([[math.cos(b), 0, -math.sin(b)], [0, 1, 0], [math.sin(b), 0, math.cos(b)]], (0, 0, axle_h))
-    gap_x, run, rise = V["site_head_gap"] * IN, V["site_run"] * IN, V["site_rise"] * IN
+    gap_x, run, rise, nr = V["site_head_gap"] * IN, V["site_run"] * IN, V["site_rise"] * IN, int(V["site_risers"])
     lawn_at = gap_x * math.tan(math.radians(5))
-    porch_z = lawn_at + 2 * rise
-    steps = box(gap_x, gap_x + run, -600, 600, -50, lawn_at + rise) + box(gap_x + run, gap_x + run + 900, -600, 600, -50, porch_z)
+    porch_z = lawn_at + nr * rise
+    treads = nr - 1                                         # same step model as the calculator
+    steps = box(gap_x + run, gap_x + run + 900, -600, 600, -50, porch_z)
+    for i in range(treads):
+        x0 = gap_x + i * run / max(treads, 1)
+        steps = steps + box(x0, gap_x + run, -600, 600, -50, lawn_at + (i + 1) * rise)
     N = int(V["seg_count"])
     seg = A.bodies("chute_segment")
     line = P_head["trap"] + P_head["seg1"]
@@ -569,7 +671,7 @@ def main():
     CACHE.write_text(json.dumps(cache, indent=1))
     V = scad_values()
     if a.only in (None, "parts"):
-        check_parts(rep, rendered)
+        check_parts(rep, rendered, V)
     A = Asm(rep, V)
     P_head = None
     if a.only in (None, "head", "site"):

@@ -61,11 +61,11 @@ web           = 7.0;     // lattice member width in the side frames
 // ---------------------------------------------------------------- line (shaft + candy chute down the steps)
 line_deg      = 36;      // line angle to the belt, at the head (about 40 deg to level on a 5 deg lawn)
 seg_len       = 210;     // structural length of one chute/shaft segment
-shaft_or      = 7.0;     // shaft tube outer radius (Ø14)
-shaft_ir      = 4.5;
-shaft_ridge   = 9.5;     // V-ridge peak radius at each bearing ring
-ring_or       = 13.0;    // bearing ring outer radius
-hex_af        = 8.0;     // hex coupler across flats (separate printed coupler joins female sockets)
+shaft_or      = 9.0;     // shaft tube outer radius (Ø18): carries the crank torque through 11 mm hex couplers
+shaft_ir      = 5.0;     // bore stays inside the hex socket flats (5.7)
+shaft_ridge   = 11.5;    // V-ridge peak radius at each bearing ring
+ring_or       = 15.5;    // bearing ring outer radius
+hex_af        = 11.0;    // hex coupler across flats (separate printed coupler joins female sockets)
 trough_w      = 66;      // inside width of the candy chute
 trough_h      = 20;      // inside wall height
 trough_wall   = 0.9;     // 2 perimeters
@@ -93,7 +93,7 @@ crank_head_len = 150;    // crank head unit above the last segment
 head_h        = 6 * IN;  // belt top above the lawn at the drive roller
 tail_h        = 9 * IN;  // belt top above the sidewalk at the tail roller (basket rim must be <= tail_h - 3 in)
 stations      = 4;       // stake stations between head and tail
-T0            = 20;      // belt pretension per run, N (set with the can test)
+T0            = 20;      // belt pretension per run, N (set with the 100 g dip test, build guide)
 belt_deg      = 4.25;    // belt slope to level (calc: lawn 250 in at 5 deg, head 6 in, tail 9 in); sets the porch stand angle
 seg_count     = 5;       // chute segments (calc picks the count; 5 for 2 risers of 7 in)
 stand_h       = 552;     // porch floor to the crank head's stand socket mouth (calc prints this)
@@ -102,3 +102,5 @@ stake_len     = [252, 236, 220, 204];   // station stake leg lengths (calc: stak
 site_head_gap = 10;      // in: drive axle to the first riser, horizontally
 site_rise     = 7;       // in: riser height, ASSUMED until measured
 site_run      = 20;      // in: total run of the steps to the porch edge
+site_risers   = 2;       // number of risers (porch = site_risers x site_rise above the lawn top)
+thread_gap    = 0.32;    // M8 nut thread clearance (raise to 0.4 if printed bolts won't go in)

@@ -62,7 +62,7 @@ module stake(len, leg, t, sock, sock_depth, wall = 3) {
             hull() { cube([len - tip, t, leg]); translate([len - 0.5, 0, 0]) cube([0.5, t, t]); }
             translate([-hd, 0, 0]) cube([hd + 0.01, w, w]);
         }
-        translate([-hd - 1, wall, wall]) cube([sock_depth + 1, sock, sock]);
+        translate([-hd - 1, wall, wall]) cube([sock_depth + 1, sock, sock + 0.3]);     // +0.3: the bridged ceiling sags
     }
 }
 // L spike with a square nail head (holds a foot down through its anchor hole)

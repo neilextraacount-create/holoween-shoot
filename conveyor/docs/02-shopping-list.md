@@ -30,7 +30,7 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 
 | Item | Amount |
 |---|---|
-| PLA, any brand, 1.75 mm | about **2.2 kg** for the machine (the checker's estimate, see `cad/parts-table.md`) plus about 0.3 kg for the test coupon, test prints and mistakes: **buy 3 x 1 kg spools if you have none.** Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
+| PLA, any brand, 1.75 mm | about **2.5 kg** for the machine (the checker's estimate, see `cad/parts-table.md`) plus about 0.3 kg for the test coupon, test prints and mistakes: **buy 3 x 1 kg spools if you have none** (a 4th gives room for reprints). Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
 
 ## 3. Things you probably already have (not bought for this)
 
@@ -41,8 +41,10 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 | A candle (wax) | rub on the print-in-place bearings before first use: cuts the crank effort about 25 % |
 | Tape measure, string, marker | laying out the line on the lawn |
 | Screwdriver or a long nail | making pilot holes for the stakes and ground screws in hard soil |
-| Candy bowl | goes on the porch stand's foot as ballast (and holds the candy right by the funnel) |
-| Optional: 2 water jugs or bricks | ballast if your soil is too soft or too hard for the ground screws (about 5 kg at the tail, 3 kg at the head) |
+| A strap, rope or 2 long zip ties | ties the porch stand post to a railing or column, so cranking can't tip it |
+| 2 full 1-gallon water jugs (about 8 kg) | ballast on the stand's foot if there is nothing to tie it to |
+| Candy bowl | sits on the stand's foot, right by the funnel |
+| Optional: water jugs or bricks | ground ballast if your soil is too soft or too hard for the ground screws (about 5 kg at the tail, 3 kg at the head) |
 
 ## 4. Totals
 

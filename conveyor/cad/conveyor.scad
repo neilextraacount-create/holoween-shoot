@@ -27,7 +27,8 @@ pin_od     = 2 * (pin_r + gear_m);
 wu_ridges   = [14, L_w - 14];
 wu_collar0  = L_w + 0.6;
 wu_peg0     = wu_collar0 + 2.4;
-wu_peg_len  = bracket_t + 7;
+bk_boss     = 9;                                    // boss around each peg hole (longer hole = less wheel tilt)
+wu_peg_len  = bracket_t + bk_boss + 7;
 wu_rim      = 16;                                   // rim width at each end (the belt rides on its edges)
 module wheel_unit() {
     R = wu_r + wu_crown; Rf = wu_r + flange_lip; rh = wu_axle_r + 4.5; ft = flange_t;
@@ -42,7 +43,7 @@ module wheel_unit() {
     translate([0, 0, wu_collar0]) cylinder(r1 = wu_axle_r, r2 = wu_axle_r + 2.4, h = 2.4 + 0.3, $fn = 64);   // 45 deg collar
     difference() {
         translate([-wu_peg / 2, -wu_peg / 2, wu_peg0]) cube([wu_peg, wu_peg, wu_peg_len]);
-        translate([-wu_peg, 0, wu_peg0 + bracket_t + 3.5]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 2 * wu_peg, $fn = 24);
+        translate([-wu_peg, 0, wu_peg0 + 0.45 + bracket_t + bk_boss + 1.2]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 2 * wu_peg, $fn = 24);   // pin pulls the collar against the bracket
     }
 }
 
@@ -61,13 +62,15 @@ module station_bracket2d() {
             translate([0, st_ret_z]) circle(r = 13);
             translate([-spig / 2 - 6, st_bot]) square([spig + 12, 1]);
         }
-        for (z = [st_carry_z, st_ret_z]) translate([-(wu_peg + 2 * fit_gap) / 2, z - (wu_peg + 2 * fit_gap) / 2])
-            square(wu_peg + 2 * fit_gap);
+        for (z = [st_carry_z, st_ret_z]) translate([-(wu_peg + 0.2) / 2, z - (wu_peg + 0.2) / 2])
+            square(wu_peg + 0.2);
     }
 }
 // print frame: plate lying flat (z = Y - st_y0), spigot block on the bed next to it
 module station_bracket() {
     linear_extrude(bracket_t) station_bracket2d();
+    for (z = [st_carry_z, st_ret_z]) translate([0, z, bracket_t - 0.01]) linear_extrude(bk_boss + 0.01) difference() {
+        square(wu_peg + 8, center = true); square(wu_peg + 0.2, center = true); }
     translate([-spig / 2, st_bot - 28, 0]) cube([spig, 28 + 0.01, spig]);   // spigot (Y from st_y0 to st_y0+spig)
 }
 
@@ -80,15 +83,15 @@ module stake_part(len) { stake(len, spike_leg, spike_t, spike_sock, sock_depth);
 // ---------------------------------------------------------------- double-supported print-in-place roller (tail, snub)
 // Print frame: axis = Z, roller z 0..L_w. Fixed axle with square ends sits inside
 // counterbores; frame bosses enter the counterbores and grip the square ends.
-dr_ridges = [dr_cb_d + 6, L_w - dr_cb_d - 6];
+dr_ridges = [dr_cb_d + 8, L_w - dr_cb_d - 8];
 module dr_roller(r) {
     difference() {
         rotate_extrude($fn = 96) polygon(concat(
             [[dr_cb_r, 0], [r + flange_lip, 0], [r + flange_lip, flange_t]],
-            [for (i = [0 : 12]) let(z = flange_t + face * i / 12, y = (z - L_w / 2) / (face / 2))
-                [r + roll_crown * (1 - y * y), z]],
-            [[r + roll_crown, L_w - flange_t - flange_lip + roll_crown], [r + flange_lip, L_w - flange_t], [r + flange_lip, L_w], [dr_cb_r, L_w], [dr_cb_r, L_w - dr_cb_d],
-             [dr_axle_r + pip_gap, L_w - dr_cb_d], [dr_axle_r + pip_gap, dr_cb_d], [dr_cb_r, dr_cb_d]]));
+            [for (i = [0 : 12]) let(z = flange_t + (face - flange_lip) * i / 12, y = (z - L_w / 2) / (face / 2))
+                [r + roll_crown * (1 - y * y), z]],                                  // crowned face up to the cone
+            [[r + flange_lip, L_w - flange_t], [r + flange_lip, L_w], [dr_cb_r, L_w], [dr_cb_r, L_w - dr_cb_d],   // 45 deg cone under the top flange
+             [dr_axle_r + pip_gap, L_w - dr_cb_d], [dr_axle_r + pip_gap, dr_cb_d + dr_cb_r - dr_axle_r - pip_gap], [dr_cb_r, dr_cb_d]]));   // 45 deg ceiling
         vbore(dr_axle_r, dr_ridge_r, dr_ridges, dr_cb_d - 0.5, L_w - dr_cb_d + 0.5, pip_gap);
     }
     // axle
@@ -140,9 +143,10 @@ module drive_roller() {
         translate([0, 0, -1]) cylinder(r = pin_shank_r + 0.12, h = 26);          // bore for the A-side journal pin
     }
 }
-module drive_pin() {     // A-side journal: journal + shank with 4 crush ribs (press fit in the roller bore), printed standing
-    cylinder(r = journal_r, h = drv_jlen);
-    translate([0, 0, drv_jlen - 0.01]) {
+module drive_pin() {     // A-side journal: pull flange + journal + shank with 4 crush ribs (press fit in the roller bore), printed standing
+    cylinder(r = 10, h = 2);                                                   // flange to pull it out by (sits 1 mm off frame A)
+    translate([0, 0, 1.99]) cylinder(r = journal_r, h = drv_jlen + 0.01);
+    translate([0, 0, drv_jlen + 2 - 0.01]) {
         cylinder(r = pin_shank_r, h = 24);
         for (k = [0 : 3]) rotate(k * 90) translate([pin_shank_r - 0.5, -0.4, 2]) cube([0.85, 0.8, 22]);   // ribs to r 5.35 (bore 5.12)
         translate([0, 0, 24]) cylinder(r1 = pin_shank_r, r2 = pin_shank_r - 1, h = 1);                    // lead-in
@@ -160,7 +164,7 @@ module bolt8(len) {                 // print: head on the bed
         union() { cylinder(r = b8_r + 1, h = len - 1.5); translate([0, 0, len - 1.51]) cylinder(r1 = b8_r + 1, r2 = b8_r - 1.2, h = 1.51); }
     }
 }
-module nut8() { difference() { rotate(30) hexagon(13, 7); translate([0, 0, -1]) rthread(b8_r, b8_p, 9, b8_d, 0.32); } }
+module nut8() { difference() { rotate(30) hexagon(13, 7); translate([0, 0, -1]) rthread(b8_r, b8_p, 9, b8_d, thread_gap); } }
 module washer50() { tube(50, hole8, 3); }
 
 // =====================================================================
@@ -196,7 +200,7 @@ h_feet   = [-110, 60];                        // rear and front foot centres
 gb_c     = [0, 0];
 ua = line_deg;                                 // line angle in this frame
 function uv(u, n) = [u * cos(ua) - n * sin(ua), u * sin(ua) + n * cos(ua)];
-gb_holes = [uv(50, -8), uv(100, -10), uv(75, 22)];   // >= 46 mm from the axle: nuts clear the roller flange
+gb_holes = [uv(50, -8), uv(100, -20), uv(75, 22)];   // >= 46 mm from the axle: nuts clear the roller flange
 Y_p      = half_w + drv_jlen + drv_cone_h + gear_face / 2;    // pinion mid-plane
 Y_c      = Y_p + crown_R;                                    // crown axis offset
 
@@ -264,7 +268,7 @@ module gb_rotor_blank() {      // print frame, includes a plain crown disk; teet
 }
 // ring sleeve: a short printed tube that plugs into counterbores at the ends of the
 // bearing rings (gearbox, chute segments, crank head) and keeps the shaft line coaxial
-slv_ri   = shaft_or + 0.9; slv_ro = 10.5; slv_len = 8;
+slv_ri   = shaft_or + 0.9; slv_ro = shaft_or + 3.5; slv_len = 8;
 cb_r     = slv_ro + fit_gap; cb_d = slv_len / 2 + 0.3;
 module ring_sleeve() { difference() { cylinder(r = slv_ro, h = slv_len); translate([0, 0, -1]) cylinder(r = slv_ri, h = slv_len + 2); } }
 module hex_coupler() {   // joins the hex sockets of two shafts (12 mm into each); printed standing
@@ -281,20 +285,21 @@ module gb_body() {
             gb_slab();
         }
         vbore(shaft_or, shaft_ridge, [pz(gb_ridges[0]), pz(gb_ridges[1])], -5, pz(gb_h0) + 5, pip_gap);
-        translate([0, 0, -1]) cylinder(r = cb_r, h = cb_d + 1);                                                       // sleeve counterbore
+        cb_bottom();                                                                                                   // sleeve counterbore
     }
 }
 module gb_slab() {
-    // slab in the (n, z) plane at y' = slab_y; holes at the bolt positions; clear the drive cone (r 26 around u=0,n=0)
+    // slab in the (n, z) plane at y' = slab_y, web down to the bed; the bolt holes and the cone clearance cut both
     difference() {
-        hull() for (h = gb_holes) let(u = h[0] * cos(ua) + h[1] * sin(ua), nn = -h[0] * sin(ua) + h[1] * cos(ua))
-            for (dz = [-12, 12]) for (dn = [-12, 12]) for (zz = [max(0, pz(u) + dz), 0]) translate([nn + dn, slab_y[0], zz]) cube([0.01, 8, 0.01]);   // reaches the bed: no overhang
+        union() {
+            hull() for (h = gb_holes) let(u = h[0] * cos(ua) + h[1] * sin(ua), nn = -h[0] * sin(ua) + h[1] * cos(ua))
+                for (dz = [-12, 12]) for (dn = [-12, 12]) for (zz = [max(0, pz(u) + dz), 0]) translate([nn + dn, slab_y[0], zz]) cube([0.01, 8, 0.01]);   // reaches the bed: no overhang
+            translate([-8, slab_y[0], 0]) cube([16, 8, max([for (h = gb_holes) pz(h[0] * cos(ua) + h[1] * sin(ua))]) ]);
+        }
         for (h = gb_holes) let(u = h[0] * cos(ua) + h[1] * sin(ua), nn = -h[0] * sin(ua) + h[1] * cos(ua))
             translate([nn, slab_y[0] - 1, pz(u)]) rotate([-90, 0, 0]) cylinder(d = hole8, h = 10, $fn = 32);
         translate([0, slab_y[0] - 1, pz(0)]) rotate([-90, 0, 0]) cylinder(r = pin_r + gear_m + 3, h = 10);
     }
-    // web from the slab bottom to the arm
-    translate([-8, slab_y[0], 0]) cube([16, 8, max([for (h = gb_holes) pz(h[0] * cos(ua) + h[1] * sin(ua))]) ]);
 }
 
 // =====================================================================
@@ -410,7 +415,7 @@ fl_top   = trough_n;      fl_bot = fl_top - trough_floor;
 sf_top   = fl_bot - 0.3;  sf_bot = sf_top - trough_floor;
 wl_top   = trough_n + trough_h;
 sock_len = 20; sock_tr = 2.0;               // socket length, 45 deg transition into the trough
-rg_len   = 15; rg_ridge = 8;                // bearing ring length; V-ridge position from the ring end
+rg_len   = 18; rg_ridge = 11;               // bearing ring length; V-ridge position from the ring end
 lw_ang   = 52;                              // slope of the inclined webs (print overhang limit 45)
 module sect(z0, z1, w, f, top) { translate([-w, f, z0]) cube([2 * w, top - f, z1 - z0]); }
 module trough_body(L, socket = true, top = wl_top) {
@@ -454,30 +459,41 @@ module bearing_ring(z0, cone) {
         [[0, z0], [rb, z0], [ring_or, z0 + ring_or - rb], [ring_or, z0 + rg_len], [0, z0 + rg_len]] :
         [[0, z0], [ring_or, z0], [ring_or, z0 + rg_len], [0, z0 + rg_len]]);
 }
+module cb_bottom() {                        // sleeve counterbore open at the bed, 45 deg ceiling (no flat ledge)
+    translate([0, 0, -1]) cylinder(r = cb_r, h = cb_d + 1);
+    translate([0, 0, cb_d - 0.01]) cylinder(r1 = cb_r, r2 = shaft_or + pip_gap, h = cb_r - shaft_or - pip_gap);
+}
 module line_bore(L, top_cb = true) {       // shaft bore with V-grooves + sleeve counterbores
     translate([Y_c, 0, 0]) {
         vbore(shaft_or, shaft_ridge, [rg_ridge, L - rg_ridge], -1, L + 1, pip_gap);
-        translate([0, 0, -1]) cylinder(r = cb_r, h = cb_d + 1);
+        cb_bottom();
         if (top_cb) translate([0, 0, L - cb_d]) cylinder(r = cb_r, h = cb_d + 1);
     }
 }
-module line_shaft(L, top_hex = true, extra = 0) {
+module line_shaft(L, top_hex = true, extra = 0, bore_top = undef) {
     translate([Y_c, 0, 0]) difference() {
         vaxle(shaft_or, shaft_ridge, [rg_ridge, L - rg_ridge], 0, L + extra);
-        translate([0, 0, -1]) cylinder(r = shaft_ir, h = L + extra + 2);
+        translate([0, 0, -1]) cylinder(r = shaft_ir, h = (bore_top == undef ? L + extra + 2 : bore_top + 1));
         translate([0, 0, -0.01]) hexagon(hex_af + 2 * fit_gap, 12);
         if (top_hex) translate([0, 0, L - 12]) hexagon(hex_af + 2 * fit_gap, 12.01);
     }
 }
+plain_ext = sock_len - 0.5;                 // each chute's upper end reaches this far into the next piece's socket
+module floor_bevel(ztop) {                  // bevel the top edge of a plain end so candy meets a ramp, not a step
+    rotate([90, 0, 90]) linear_extrude(height = 2 * tr_in, center = true)
+        polygon([[fl_top, ztop - 2.5], [fl_top + 5, ztop - 2.5], [fl_top + 5, ztop + 1], [fl_bot - 0.01, ztop + 1], [fl_bot - 0.01, ztop]]);
+}
 module chute_static(L) {
     difference() {
         union() {
-            trough_body(L, true);
+            trough_body(L + plain_ext, true);
             bearing_ring(0, false); bearing_ring(L - rg_len, true);
+            translate([Y_c, 0, rg_len - 0.01]) tube(2 * (shaft_or + pip_gap + 0.9), 2 * shaft_or + 0.4, L - 2 * rg_len + 0.02);   // carries the top ring
             web_bottom(sf_bot + 0.5);
             web_top(L, fl_bot + 0.5, tr_out);
         }
         line_bore(L);
+        floor_bevel(L + plain_ext);
     }
 }
 module chute_segment() { chute_static(seg_len); line_shaft(seg_len); }
@@ -486,9 +502,10 @@ module chute_segment() { chute_static(seg_len); line_shaft(seg_len); }
 // Candy arrives at about 3 m/s, hits the end wall under the lid and falls through the floor slot onto the belt.
 // Line position: u = tp_u0 (end wall) .. tp_u0 + tp_len (plain end inside segment 1's socket).
 tp_u0    = -22;
-tp_len   = gb_top_s + sock_len - 2 - tp_u0;
-tp_slot  = [2, 42];                         // floor slot, z range (u = -20 .. 20)
+tp_len   = gb_top_s + plain_ext - tp_u0;       // plain upper end reaches into segment 1's socket
+tp_slot  = [2, 62];                         // floor slot, z range (u = -20 .. 40): passes 110 mm candy bars
 tp_lid   = 72;                              // lid length from the end wall
+tp_top   = trough_n + 34;                   // inside height under the lid: 34 mm (candy up to about 30 mm thick)
 gtop     = belt_t + drv_rs + 36;            // guard bar centre line on the head frames (bar is 8 wide)
 lg_z0    = gtop + 4 + 0.3;                  // ledge underside: 0.3 above the guard bar
 lg_x     = [(tp_u0 + 1 - (lg_z0 + 2) * sin(ua)) / cos(ua),         // ledge X range (head frame) where it overlaps the trap walls
@@ -499,18 +516,22 @@ module trap() {
     intersection() { translate([-500, -500, 0]) cube(1000); trap_raw(); }
 }
 module trap_raw() {
+    zr = tp_lid + 4; hr = tp_top + 1.2 - wl_top;                                   // raised zone, then a 45 deg ramp down
     difference() {
         union() {
             trough_body(tp_len, false);
-            sect(0, 2, tr_out, fl_bot, wl_top + 1.2);                                    // end wall
-            translate([-tr_out, wl_top - 0.01, 0]) cube([2 * tr_out, 1.21, tp_lid]);       // lid
+            sect(0, zr, tr_out, fl_bot, tp_top + 1.2);                                 // taller walls under the lid
+            hull() { sect(zr - 0.01, zr, tr_out, fl_bot, tp_top + 1.2); sect(zr + hr, zr + hr + 0.01, tr_out, fl_bot, wl_top); }
+            translate([-tr_out, tp_top - 0.01, 0]) cube([2 * tr_out, 1.21, tp_lid]);     // lid
             // ledges over the guard bars (modelled in head coordinates, then mapped to this print frame)
             for (sg = [-1, 1]) multmatrix([[0, 1, 0, 0], [-sin(ua), 0, cos(ua), 0], [cos(ua), 0, sin(ua), -tp_u0], [0, 0, 0, 1]])
                 translate([lg_x[0], sg > 0 ? tr_out - 0.5 : -(side_in + side_t - 0.5), lg_z0])
                     cube([lg_x[1] - lg_x[0], side_in + side_t - 0.5 - tr_out + 0.5, 4]);
         }
-        translate([-tr_in, fl_bot - 1, tp_slot[0]]) cube([2 * tr_in, trough_floor + 1.01, tp_slot[1] - tp_slot[0]]);   // slot
-        translate([-tr_in, fl_top, 2]) cube([2 * tr_in, wl_top - fl_top - 0.01, tp_len]);                              // keep the inside clear
+        translate([-tr_in, fl_bot - 1, tp_slot[0]]) cube([2 * tr_in, trough_floor + 1.01, tp_slot[1] - tp_slot[0]]);   // drop slot
+        translate([-tr_in, fl_top, 2]) cube([2 * tr_in, tp_top - fl_top - 0.01, tp_lid - 2]);                           // under the lid
+        translate([-tr_in, fl_top, tp_lid]) cube([2 * tr_in, 300, tp_len]);                                             // open above
+        floor_bevel(tp_len);
     }
 }
 
@@ -520,9 +541,10 @@ module trap_raw() {
 ch_len   = crank_head_len;
 fn_z     = [60, 80];                         // funnel flare (45 deg) z range
 fn_w     = 20;                               // funnel flare per side (and extra wall height)
-sq_drv   = 9.6; sq_z = [4, 30];              // square drive above the top ring (z relative to ch_len)
+sq_drv   = 12.4; sq_z = [4, 30];             // square drive above the top ring (z relative to ch_len)
 aw       = line_deg + belt_deg;              // line angle to level
 st_len   = 40;
+st_pin   = st_len - 15;                     // locking pin, 15 mm inside the socket mouth
 st_q     = [22, fl_bot, 12 + st_len * sin(aw)];   // stand socket axis meets the floor here; mouth corner rests on the bed
 // The funnel's upper end is closed by a back wall that leans at 50 deg from the print bed
 // (nearly vertical in use) instead of a flat roof, so it prints without support.
@@ -559,18 +581,22 @@ module crank_head_static() {
         union() {
             funnel_body(ch_len);
             bearing_ring(0, false); bearing_ring(ch_len - rg_len, true);
+            translate([Y_c, 0, rg_len - 0.01]) tube(2 * (shaft_or + pip_gap + 0.9), 2 * shaft_or + 0.4, ch_len - 2 * rg_len + 0.02);
             web_bottom(sf_bot + 0.5);
             web_plate(ch_len, [tr_out - 2, fl_bot + 0.3], [Y_c - ring_or + 1, 0], [[62, 76, 50]]);
             stand_frame() rotate(45) translate([-(spike_sock + 7) / 2, -(spike_sock + 7) / 2, -6]) cube([spike_sock + 7, spike_sock + 7, st_len + 6]);
         }
         line_bore(ch_len, false);
         sect(-1, sock_len, so_in, sf_top, wl_top + 1);                                     // socket stays clear of the web plate
+        hull() { sect(sock_len - 0.01, sock_len, so_in, sf_top, wl_top + 1); sect(sock_len + sock_tr, sock_len + sock_tr + 0.01, tr_in, fl_top, wl_top + 1); }
+        sect(sock_len + sock_tr, fn_z[0] + 1, tr_in, fl_top, wl_top + 1);                  // candy channel stays clear of the stand block
         stand_frame() rotate(45) translate([-spike_sock / 2, -spike_sock / 2, st_len - 30]) cube([spike_sock, spike_sock, 31]);
+        stand_frame() rotate(45) translate([-20, 0, st_pin]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 40, $fn = 16);   // locking pin
         intersection() { translate([-tr_in - fn_w, fl_top, fn_z[0]]) cube([2 * (tr_in + fn_w), 100, ch_len + 1 - fn_z[0]]); below_plane(ch_len, 0); }   // funnel stays clear
     }
 }
 module crank_head_shaft() {
-    line_shaft(ch_len, false, sq_z[0]);
+    line_shaft(ch_len, false, sq_z[0], ch_len + sq_z[0] - 10);      // solid under the square drive
     translate([Y_c, 0, 0]) difference() {
         translate([-sq_drv / 2, -sq_drv / 2, ch_len + sq_z[0] - 0.01]) cube([sq_drv, sq_drv, sq_z[1] - sq_z[0] + 0.01]);
         translate([-10, 0, ch_len + 22]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 20, $fn = 16);
@@ -584,17 +610,18 @@ gr_r     = 6.5; gr_peak = 8.5; gr_out = 14; gr_len = 70;
 module crank_arm() {
     difference() {
         union() {
-            cylinder(r = 12, h = ca_hub);
+            cylinder(r = 14, h = ca_hub);
             hull() { cylinder(r = ca_w / 2, h = ca_t); translate([crank_r, 0, 0]) cylinder(r = gr_out, h = ca_t); }
             translate([crank_r, 0, 0]) vaxle(gr_r, gr_peak, [ca_t + 10, ca_t + gr_len - 10], 0, ca_t + gr_len);
         }
         translate([-(sq_drv + 0.4) / 2, -(sq_drv + 0.4) / 2, -1]) cube([sq_drv + 0.4, sq_drv + 0.4, ca_hub + 2]);
         translate([-15, 0, 18]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 30, $fn = 16);
     }
-    // grip sleeve (separate body): 45 deg underside so it prints without support
+    // grip sleeve (separate body): a 3 mm flat ring prints pip_gap above the arm top (2 layers of air,
+    // like a support interface), then a 45 deg flare out to the full grip
     translate([crank_r, 0, 0]) difference() {
-        rb = gr_r + pip_gap;
-        rotate_extrude($fn = 64) polygon([[rb, ca_t + 0.6], [gr_out, ca_t + 0.6 + gr_out - rb], [gr_out, ca_t + gr_len], [rb, ca_t + gr_len]]);
+        rb = gr_r + pip_gap; z0 = ca_t + pip_gap;
+        rotate_extrude($fn = 64) polygon([[rb, z0], [rb + 3, z0], [gr_out, z0 + gr_out - rb - 3], [gr_out, ca_t + gr_len], [rb, ca_t + gr_len]]);
         vbore(gr_r, gr_peak, [ca_t + 10, ca_t + gr_len - 10], 0, ca_t + gr_len + 1, pip_gap);
     }
 }
@@ -616,19 +643,37 @@ module stand_shim() { difference() { cube([40, 22, 3]); translate([20, 11, -1]) 
 
 // ---------------------------------------------------------------- porch stand: tray + two L posts (spigot/socket joints)
 spig_len = 28;
-post_b   = (stand_h - 3 * sk_hd) / 2;       // L body length of each post (tray socket + lower body + head + upper body = stand_h)
-module spigot_x(x0) { translate([x0, 0, 0]) cube([spig_len + 0.01, spig, spig]); }   // corner-aligned (prints on the bed); axis at (spig/2, spig/2)
+// The upper post's long bottom spigot slides into the lower post's deep head socket; a pin through one
+// of 6 holes sets the height (+/-15 mm, 6 mm steps). Pins at the crank head and the tray carry uplift.
+ph_len   = 60;                               // lower post head tube (58 mm deep socket)
+pu_spig  = 56;                               // upper post bottom spigot (adjustable)
+pu_gap   = 20;                               // nominal spigot showing between the lower head and the upper post
+post_n   = (stand_h - 112) / 2 <= 227 ? 1 : 2;   // lower posts (stack two for tall stands)
+post_b   = post_n == 1 ? (stand_h - sk_hd - pu_gap - ph_len) / 2 : (stand_h - sk_hd - pu_gap - 2 * ph_len) / 3;
+post_ub  = stand_h - sk_hd - pu_gap - post_n * (post_b + ph_len);    // upper post body
+module spigot_x(x0, len = spig_len) { translate([x0, 0, 0]) cube([len + 0.01, spig, spig]); }   // corner-aligned (prints on the bed); axis at (spig/2, spig/2)
 pst_leg = 20; pst_t = 2.4;                    // porch post L profile
 module post_l(len) { cube([len, pst_leg, pst_t]); cube([len, pst_t, pst_leg]); }
-module post_lower() {       // spigot (into the tray) at x < 0, socket head at the top
-    spigot_x(-spig_len);
-    post_l(post_b);
-    translate([post_b + sk_hd, 0, 0]) mirror([1, 0, 0]) difference() {
-        translate([0, 0, 0]) cube([sk_hd, spike_sock + 6, spike_sock + 6]);
-        translate([-1, 3, 3]) cube([sock_depth + 1, spike_sock, spike_sock]);
+module zpin(x, y) { translate([x, y, -1]) cylinder(d = pin_hole, h = 40, $fn = 16); }   // vertical pin hole (print frame)
+module post_lower() {       // spigot (into the tray, pinned) at x < 0, deep socket head at the top
+    difference() {
+        union() {
+            spigot_x(-spig_len);
+            post_l(post_b);
+            translate([post_b, 0, 0]) cube([ph_len, spike_sock + 6, spike_sock + 6]);
+        }
+        translate([post_b + 2, 3, 3]) cube([ph_len, spike_sock, spike_sock + 0.3]);       // +0.3: the bridged ceiling sags
+        zpin(-16, spig / 2);                                                             // tray pin
+        zpin(post_b + ph_len - 15, 3 + spike_sock / 2);                                  // height pin
     }
 }
-module post_upper() { spigot_x(-spig_len); post_l(post_b + sk_hd); spigot_x(post_b + sk_hd - 0.01); }
+module post_upper() {
+    difference() {
+        union() { spigot_x(-pu_spig, pu_spig); post_l(post_ub); spigot_x(post_ub - 0.01); }
+        for (d = [24 : 6 : 54]) zpin(-pu_spig + d - 15, spig / 2);                        // height holes (nominal: 36 mm in)
+        zpin(post_ub + spig_len - 13, spig / 2);                                         // crank head pin
+    }
+}
 // tray: diamond socket so the arms line up with the line; long arm toward the porch, short arm
 // toward the porch edge, side arms for stability. Put the candy bowl on it.
 st_arms  = [150, 40, 118];                  // toward the porch, toward the edge, each side
@@ -641,6 +686,7 @@ module stand_tray() {
             rotate(45) translate([-(spike_sock + 6) / 2, -(spike_sock + 6) / 2, 0]) cube([spike_sock + 6, spike_sock + 6, sk_hd]);
         }
         rotate(45) translate([-spike_sock / 2, -spike_sock / 2, sk_hd - sock_depth]) cube([spike_sock, spike_sock, sock_depth + 1]);
+        for (a = [45, 135]) rotate(a) translate([-20, 0, sk_hd - 16]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 40, $fn = 16);   // tray pin (either way round)
     }
 }
 // ---------------------------------------------------------------- anchors
@@ -671,7 +717,7 @@ module ground_screw() {
                           translate([0, 0, z1 - 0.02]) cylinder(r1 = gs_r + gs_ridge, r2 = 1.5, h = (gs_len - z1) * 0.8); }
             }
         }
-        translate([0, 0, -1]) rthread(b8_r, b8_p, 30, b8_d, 0.32);        // 29 mm deep: a 28 mm bolt through washer + foot never bottoms out
+        translate([0, 0, -1]) rthread(b8_r, b8_p, 30, b8_d, thread_gap);  // 29 mm deep: a 28 mm bolt through washer + foot never bottoms out
         translate([0, 0, -0.01]) cylinder(r1 = b8_r + 0.9, r2 = b8_r - 0.3, h = 1.2);
     }
 }
@@ -695,10 +741,11 @@ module stake_cap() {     // push the stakes in through this, not on the socket r
 // ---------------------------------------------------------------- test coupon: print this first
 // three print-in-place spinners (gap 0.35 / 0.45 / 0.55), the slip fits used on the machine
 // (square socket, hex coupler socket, ring-sleeve counterbore, journal hole) and an M8 nut.
-module tc_spinner(gap) {
-    vaxle(4.5, 6.5, [6], 0, 12.3);
+module tc_spinner(gap) {      // sleeve and axle both on the bed (as in the wheels, rollers and shafts)
+    vaxle(4.5, 6.5, [6], 0, 17);
+    translate([-2, -7, 16.99]) cube([4, 14, 3]);                                  // grip bar on the axle
     difference() {
-        rotate_extrude($fn = 48) polygon([[4.5 + gap, 0.6], [11, 0.6 + 11 - 4.5 - gap], [11, 12], [4.5 + gap, 12]]);
+        cylinder(r = 11, h = 12, $fn = 48);
         vbore(4.5, 6.5, [6], -1, 13, gap);
     }
 }
@@ -708,14 +755,14 @@ module test_coupon() {
         translate([-14, -14, 0]) cube([150, 64, 3]);
         for (i = [0 : 2]) for (k = [0 : i]) translate([i * 26 - 4 + k * 3, -11, 2]) cylinder(d = 1.6, h = 2, $fn = 8);   // 1/2/3 dots
     }
-    for (i = [0 : 2]) translate([i * 26, 0, 2.99]) tc_spinner(gaps[i]);
+    for (i = [0 : 2]) translate([i * 26, -32, 0]) tc_spinner(gaps[i]);                    // beside the plate, on the bed
     translate([0, 24, 2.99]) difference() {
         translate([-12, -12, 0]) cube([136, 24, 12]);
         translate([-spike_sock / 2, -spike_sock / 2, 2]) cube([spike_sock, spike_sock, 11]);                 // stake / tray socket (spigot 15.6)
         translate([28, 0, 2]) hexagon(hex_af + 2 * fit_gap, 11);                                          // shaft hex socket (coupler)
         translate([56, 0, 2]) cylinder(r = cb_r, h = 11);                                                 // ring-sleeve counterbore
         translate([84, 0, -1]) cylinder(r = journal_r + journal_gap, h = 14);                             // drive journal hole
-        translate([110, 0, -1]) rthread(b8_r, b8_p, 14, b8_d, 0.32);                                      // M8 nut thread
+        translate([110, 0, -1]) rthread(b8_r, b8_p, 14, b8_d, thread_gap);                                // M8 nut thread
     }
 }
 

@@ -27,18 +27,18 @@ Sewing the belt into a loop takes a needle and strong thread you probably alread
 | Physical prototype | ❌ **not built**. Friction, print fits and grip on the belt are estimates until you print the test coupon and the first module. |
 
 **One measurement is still missing: the height of each porch step (riser).** The design
-assumes 2 risers of 7 in. Measure from the top of one step to the top of the next, then run
-`python3 calc/conveyor_calc.py --rise <inches>` before printing the chute.
+assumes 2 risers of 7 in. Measure from the top of one step to the top of the next before you
+print the chute, the stakes and the stand (Quick start, step 3).
 
 ## How it works
 
 | Part of the machine | What it does |
 |---|---|
-| **Crank + funnel** (porch) | Crank 110 mm long with a spinning grip, about 23 in above the porch floor. One turn = 2 turns of the drive roller. Stands on a printed post. Put your candy bowl on the post's foot to keep it steady. |
+| **Crank + funnel** (porch) | Crank 110 mm long with a spinning grip, about 24 in above the porch floor. One turn = 2 turns of the drive roller. Stands on a printed 2-piece post with pinned height adjustment. **Tie the post to a railing, or put about 8 kg (two water jugs) on its foot**: cranking hard tips the stand sideways otherwise. |
 | **Chute + drive shaft** (over the steps) | 5 printed segments. Each one is a candy chute with a print-in-place shaft running beside it. The segments stack together and hex couplers join the shafts. |
 | **Drop trap** | Candy reaches about 3 m/s in the chute. It hits a wall under a lid and drops through a slot onto the belt. |
 | **Head** (foot of the steps) | A 34-tooth crown gear (print-in-place in its housing) turns a 17-tooth pinion on the ribbed drive roller. |
-| **4 stilt stations** (lawn) | Each one is a stake pushed into the grass with a bracket and two print-in-place wheels: the belt rides **over** the top wheel and comes back **under** the bottom wheel, as you asked. |
+| **4 stilt stations** (lawn) | Each one is a stake pushed into the grass with a bracket and two print-in-place wheels: the belt rides **over** the top wheel and comes back **underneath**, resting on the bottom wheel, as you asked. |
 | **Tail** (over the sidewalk) | Print-in-place roller. Two screw take-ups set the belt tension and steer the belt straight. Candy drops off into the basket (rim at most 6 in high). |
 | **Anchors** | Belt tension (about 40 N) has to go into the ground at both ends. Printed ground screws and L-spikes hold the head and tail feet. |
 
@@ -51,8 +51,10 @@ At 45 rpm the belt moves 0.3 m/s, so candy reaches the basket in about 20 s (15 
 2. **Print `test_coupon.stl` first** (1 h). It tells you whether the print-in-place gap
    (0.45 mm) and the slip fits work on your printer.
    See [docs/03-printing.md](docs/03-printing.md).
-3. **Measure your riser heights**, run the calculator, and change `seg_count`, `stand_h` and
-   `stake_len` in `cad/params.scad` if it says so.
+3. **Measure your riser heights.** Put the height (inches) and the number of risers in
+   `site_rise` and `site_risers` in `cad/params.scad`, run `python3 calc/conveyor_calc.py`,
+   and copy the `seg_count`, `stand_h` and `stake_len` values it prints into the same file.
+   Then run `python3 cad/check_parts.py` to regenerate and re-check every STL.
 4. Print the parts ([docs/03-printing.md](docs/03-printing.md)) and build
    ([docs/04-build-and-setup.md](docs/04-build-and-setup.md)).
 
@@ -69,8 +71,9 @@ At 45 rpm the belt moves 0.3 m/s, so candy reaches the basket in about 20 s (15 
 cd cad
 python3 check_parts.py          # renders every part to stl/, runs all checks, writes check-report.txt
 python3 make_crown.py           # (run by check_parts) crown gear + gearbox mesh check
+python3 render_pictures.py      # assembly pictures in docs/img/ (needs xvfb-run)
 cd ../calc
-python3 conveyor_calc.py --rise 7 --risers 2 --svg side-profile-2-risers.svg
+python3 conveyor_calc.py        # site values come from cad/params.scad; --svg <file> draws the side profile
 ```
 
-Needs OpenSCAD 2021+ and Python 3 with `trimesh`, `manifold3d` and `numpy`.
+Needs OpenSCAD 2021+ and Python 3 with `pip install trimesh manifold3d numpy networkx`.
