@@ -9,7 +9,8 @@ Checks per part:
   * OpenSCAD renders it without errors or warnings
   * the mesh is watertight (a valid solid the slicer will accept)
   * it fits the Bambu Lab P2S build volume (256 x 256 x 256 mm) with a 10 mm margin
-  * volume -> approximate filament mass (PLA 1.24 g/cm3; walls+infill factor per part)
+  * filament estimate for each part's slicer profile (walls x 0.42 mm shell over the whole
+    surface, the rest at the listed infill %). An estimate, not a slicer result.
 
 Then assembly interference checks: pairs of solids exported from conveyor.scad with
 part="chk_<name>" that must NOT overlap (e.g. belt envelope vs rails) or MUST overlap
@@ -32,12 +33,12 @@ MARGIN = 10.0
 
 
 def parts_from_scad():
-    """PARTS table in conveyor.scad: lines like  // PART: name | qty | fill_factor | description"""
+    """PARTS table in conveyor.scad:  // PART: name | qty | walls | infill % | description"""
     rows = []
     for line in SCAD.read_text().splitlines():
-        m = re.match(r"\s*//\s*PART:\s*(\w+)\s*\|\s*(\d+)\s*\|\s*([\d.]+)\s*\|\s*(.*)", line)
+        m = re.match(r"\s*//\s*PART:\s*(\w+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(.*)", line)
         if m:
-            rows.append((m.group(1), int(m.group(2)), float(m.group(3)), m.group(4).strip()))
+            rows.append((m.group(1), int(m.group(2)), int(m.group(3)), int(m.group(4)), m.group(5).strip()))
     return rows
 
 
@@ -49,6 +50,16 @@ def checks_from_scad():
         if m:
             rows.append(m.groups())
     return rows
+
+
+def min_gap(a, b, n=40000):
+    """Smallest distance between two meshes (surface sampling both ways), mm."""
+    best = 1e9
+    for x, y in ((a, b), (b, a)):
+        pts = x.sample(n)
+        _, d, _ = trimesh.proximity.closest_point(y, pts)
+        best = min(best, float(d.min()))
+    return best
 
 
 def render(part, out):
@@ -68,7 +79,7 @@ def main():
     failures = 0
     total_g = 0.0
     print(f"{'part':22s} {'qty':>3} {'bbox mm':>22} {'vol cm3':>8} {'g each':>7} {'g total':>8}  status")
-    for name, qty, fill, desc in parts_from_scad():
+    for name, qty, walls, infill, desc in parts_from_scad():
         if a.only and a.only != name:
             continue
         stl = OUT / f"{name}.stl"
@@ -87,7 +98,8 @@ def main():
         if warn:
             status.append("warnings: " + "; ".join(warn)[:120])
         vol = abs(m.volume) / 1000.0
-        g = vol * PLA_DENSITY * fill
+        shell = min(vol, m.area * walls * 0.42 / 1000.0)
+        g = (shell + (vol - shell) * infill / 100.0) * PLA_DENSITY
         total_g += g * qty
         failures += bool(status)
         bbox = "x".join(f"{e:.0f}" for e in ext)
@@ -118,7 +130,9 @@ def main():
                 continue
             good = (v < 1.0) if mode == "disjoint" else (v > 1.0)
             failures += not good
-            print(f"  {'PASS' if good else 'FAIL'}  {p1} vs {p2} [{mode}] overlap {v:.1f} mm3 - {desc}")
+            gap = min_gap(meshes[0], meshes[1]) if mode == "disjoint" else 0.0
+            print(f"  {'PASS' if good else 'FAIL'}  {p1:13s} vs {p2:13s} [{mode:8s}] overlap {v:7.1f} mm3"
+                  f"  min gap {gap:6.1f} mm - {desc}")
     print("\nRESULT:", "ALL CHECKS PASSED" if failures == 0 else f"{failures} PROBLEM(S)")
     sys.exit(1 if failures else 0)
 

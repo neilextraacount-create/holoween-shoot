@@ -1,26 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1413 884" font-family="sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 783" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#fff"/>
-<polygon points="20.0,843.7 20.0,843.7 104.0,843.7 1154.0,660.0 1154.0,660.0 1154.0,601.2 1196.0,601.2 1196.0,542.4 1238.0,542.4 1238.0,483.6 1393.4,483.6 1393.4,868.9 20.0,868.9" fill="#cfe3c2" stroke="#4a6b3a"/>
-<text x="20" y="22" font-size="15" font-weight="bold">Side profile (vertical scale x2) - provisional site data</text>
-<polygon points="87.2,761.5 1288.4,401.4 1288.4,421.5 87.2,781.6" fill="#d9b98a" opacity="0.7"/>
-<polyline points="87.2,768.1 1288.4,408.0" stroke="#111" stroke-width="3" fill="none"/>
-<polyline points="87.2,786.2 1288.4,436.1" stroke="#111" stroke-width="2" stroke-dasharray="8 4" fill="none"/>
-<ellipse cx="87.2" cy="777.1" rx="4.1" ry="8.3" fill="#888" stroke="#000"/>
-<text x="47" y="803">tail Ø50 + take-up</text>
-<ellipse cx="1288.4" cy="421.9" rx="6.6" ry="13.2" fill="#888" stroke="#000"/>
-<text x="1248" y="453">drive Ø80</text>
-<polyline points="137.6,863.0 137.6,745.5" stroke="#7a5a2a" stroke-width="4"/>
-<polyline points="339.2,827.8 339.2,685.1" stroke="#7a5a2a" stroke-width="4"/>
-<polyline points="540.8,792.5 540.8,624.6" stroke="#7a5a2a" stroke-width="4"/>
-<polyline points="742.4,757.2 742.4,564.2" stroke="#7a5a2a" stroke-width="4"/>
-<polyline points="944.0,721.9 944.0,503.7" stroke="#7a5a2a" stroke-width="4"/>
-<polyline points="1137.2,688.1 1137.2,445.8" stroke="#7a5a2a" stroke-width="4"/>
-<polyline points="1263.2,483.6 1263.2,429.0" stroke="#7a5a2a" stroke-width="4"/>
-<polyline points="1288.4,421.2 1288.4,228.0" stroke="#555" stroke-width="2" stroke-dasharray="3 3"/>
-<circle cx="1288.4" cy="228.0" r="9" fill="#c60"/>
-<text x="1138" y="222">crank (chain 1:1.5)</text>
-<rect x="58" y="781" width="50" height="63" fill="none" stroke="#e67e22" stroke-width="2"/>
-<text x="58" y="872">basket</text>
-<text x="588" y="872">lawn 250 in @ 5°  —  belt line 8.5°, centres 24.1 ft</text>
-<text x="882" y="248">3 risers (belt bridges over)</text>
+<polygon points="20.0,757.0 20.0,733.0 140.0,733.0 1140.0,558.0 1140.0,558.0 1140.0,502.0 1180.0,502.0 1180.0,446.0 1220.0,446.0 1220.0,390.0 1380.0,390.0 1380.0,757.0" fill="#d5e8c8" stroke="#4a6b3a"/>
+<text x="20" y="24" font-size="16" font-weight="bold">Side profile, 3 risers x 7.0 in (vertical scale x2) - belt slope 8.1 deg</text>
+<line x1="114.6" y1="639.7" x2="1255.1" y2="315.3" stroke="#b08a5a" stroke-width="2"/>
+<line x1="115.9" y1="658.6" x2="1256.4" y2="334.1" stroke="#b08a5a" stroke-width="2"/>
+<line x1="104.5" y1="649.0" x2="1268.0" y2="318.0" stroke="#111" stroke-width="3"/>
+<line x1="105.6" y1="665.3" x2="163.8" y2="649.7" stroke="#111" stroke-width="2" stroke-dasharray="7 4"/>
+<line x1="163.8" y1="649.7" x2="379.6" y2="588.3" stroke="#111" stroke-width="2" stroke-dasharray="7 4"/>
+<line x1="379.6" y1="588.3" x2="595.4" y2="526.9" stroke="#111" stroke-width="2" stroke-dasharray="7 4"/>
+<line x1="595.4" y1="526.9" x2="811.2" y2="465.5" stroke="#111" stroke-width="2" stroke-dasharray="7 4"/>
+<line x1="811.2" y1="465.5" x2="1027.1" y2="404.1" stroke="#111" stroke-width="2" stroke-dasharray="7 4"/>
+<line x1="1027.1" y1="404.1" x2="1269.8" y2="343.7" stroke="#111" stroke-width="2" stroke-dasharray="7 4"/>
+<line x1="162.5" y1="753.0" x2="162.5" y2="622.6" stroke="#7a5a2a" stroke-width="4"/>
+<line x1="378.4" y1="715.3" x2="378.4" y2="561.2" stroke="#7a5a2a" stroke-width="4"/>
+<line x1="594.2" y1="677.5" x2="594.2" y2="499.8" stroke="#7a5a2a" stroke-width="4"/>
+<line x1="810.0" y1="639.7" x2="810.0" y2="438.4" stroke="#7a5a2a" stroke-width="4"/>
+<line x1="1025.8" y1="602.0" x2="1025.8" y2="377.0" stroke="#7a5a2a" stroke-width="4"/>
+<ellipse cx="1268.9" cy="331.1" rx="6.4" ry="12.7" fill="#f0a020" stroke="#000"/>
+<text x="1229" y="362">drive roller</text>
+<ellipse cx="105.1" cy="657.4" rx="4.0" ry="8.0" fill="#f0a020" stroke="#000"/>
+<text x="65" y="683">tail + take-up</text>
+<line x1="1238.6" y1="390.0" x2="1238.6" y2="153.3" stroke="#7a5a2a" stroke-width="5"/>
+<circle cx="1238.6" cy="153.3" r="10" fill="#c60"/><text x="1029" y="139">crank, 30 in above the porch</text>
+<line x1="1238.6" y1="153.3" x2="1268.9" y2="331.1" stroke="#555" stroke-dasharray="3 3"/>
+<rect x="84" y="673" width="40" height="60" fill="none" stroke="#e67e22" stroke-width="2"/><text x="84" y="755">basket</text>
+<text x="520" y="755">lawn 250 in at 5 deg; 5 stake stations every 48 in; dashed = return run</text>
 </svg>
