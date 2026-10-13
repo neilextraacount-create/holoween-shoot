@@ -118,7 +118,7 @@ drv_pin_z0  = L_w + drv_jlen + drv_cone_h;           // pinion bottom
 pin_shank_r = 5.0;
 module drive_body2d() {
     difference() {
-        circle(r = drive_r + rib_h, $fn = ribs * 2);
+        circle(r = drive_r + rib_h + drive_crown, $fn = ribs * 2);                    // the crown intersection below trims this to 30.5 at the ends
         for (k = [0 : ribs - 1]) rotate(k * 360 / ribs + 180 / ribs) translate([drive_r + rib_h, 0]) circle(r = 1.0, $fn = 12);
     }
 }
@@ -488,7 +488,7 @@ module chute_static(L) {
         union() {
             trough_body(L + plain_ext, true);
             bearing_ring(0, false); bearing_ring(L - rg_len, true);
-            translate([Y_c, 0, rg_len - 0.01]) tube(2 * (shaft_or + pip_gap + 0.9), 2 * shaft_or + 0.4, L - 2 * rg_len + 0.02);   // carries the top ring
+            translate([Y_c, 0, rg_len - 0.01]) tube(2 * (shaft_or + pip_gap + 0.9), 2 * shaft_or + 0.4, L - 2 * rg_len + 1.0);    // carries the top ring (1 mm into its cone)
             web_bottom(sf_bot + 0.5);
             web_top(L, fl_bot + 0.5, tr_out);
         }
@@ -581,10 +581,20 @@ module crank_head_static() {
         union() {
             funnel_body(ch_len);
             bearing_ring(0, false); bearing_ring(ch_len - rg_len, true);
-            translate([Y_c, 0, rg_len - 0.01]) tube(2 * (shaft_or + pip_gap + 0.9), 2 * shaft_or + 0.4, ch_len - 2 * rg_len + 0.02);
+            translate([Y_c, 0, rg_len - 0.01]) tube(2 * (shaft_or + pip_gap + 0.9), 2 * shaft_or + 0.4, ch_len - 2 * rg_len + 1.0);
             web_bottom(sf_bot + 0.5);
             web_plate(ch_len, [tr_out - 2, fl_bot + 0.3], [Y_c - ring_or + 1, 0], [[62, 76, 50]]);
             stand_frame() rotate(45) translate([-(spike_sock + 7) / 2, -(spike_sock + 7) / 2, -6]) cube([spike_sock + 7, spike_sock + 7, st_len + 6]);
+            // foot: a 4 mm fin from the block's lowest ridge down to the bed, so the block does not
+            // start from a point on the plate; never in front of the mouth face, never above the socket floor
+            intersection() {
+                hull() {
+                    stand_frame() rotate(45) translate([-(spike_sock + 7) / 2, -(spike_sock + 7) / 2, -6]) cube([4, 4, st_len + 6]);
+                    translate([st_q[0] - 2, 60, 0]) cube([4, sf_bot + 0.5 - 60, 0.01]);
+                }
+                stand_frame() rotate(45) translate([-50, -50, -6]) cube([100, 100, st_len + 6]);
+                translate([-500, -500, 0]) cube([1000, sf_bot + 0.5 + 500, 1000]);
+            }
         }
         line_bore(ch_len, false);
         sect(-1, sock_len, so_in, sf_top, wl_top + 1);                                     // socket stays clear of the web plate
@@ -626,7 +636,7 @@ module crank_arm() {
     }
 }
 module pin3() { cylinder(d = pin_d, h = 26, $fn = 16); cylinder(d = 7, h = 1.6, $fn = 24); }   // wheel pegs (8) and crank arm (1)
-// belt splice: lay this on the 75 mm overlap and pierce every hole (hot nail or awl), then sew box-and-X
+// belt splice: lay this on the 75 mm overlap, mark every hole, lift it off, pierce the marks, then sew box-and-X
 module splice_template() {
     w = belt_w; lap = 75; e = 4;
     a = [e, e]; b = [lap - e, e]; c = [lap - e, w - e]; d = [e, w - e];
@@ -644,11 +654,13 @@ module stand_shim() { difference() { cube([40, 22, 3]); translate([20, 11, -1]) 
 // ---------------------------------------------------------------- porch stand: tray + two L posts (spigot/socket joints)
 spig_len = 28;
 // The upper post's long bottom spigot slides into the lower post's deep head socket; a pin through one
-// of 6 holes sets the height (+/-15 mm, 6 mm steps). Pins at the crank head and the tray carry uplift.
-ph_len   = 60;                               // lower post head tube (58 mm deep socket)
-pu_spig  = 56;                               // upper post bottom spigot (adjustable)
-pu_gap   = 20;                               // nominal spigot showing between the lower head and the upper post
-post_n   = (stand_h - 112) / 2 <= 227 ? 1 : 2;   // lower posts (stack two for tall stands)
+// of 6 holes sets the height (+12 / -18 mm, 6 mm steps). Pins at the crank head and the tray carry uplift.
+// The joint can collapse 35 mm, more than the 28 mm end spigots, so the stand goes in under (and comes
+// out from under) a crank head that is already seated on the line. Every pin is 15 mm from its shoulder.
+ph_len   = 75;                               // lower post head tube (73 mm deep socket)
+pu_spig  = 71;                               // upper post bottom spigot (adjustable; 36 mm in at nominal)
+pu_gap   = 35;                               // nominal spigot showing between the lower head and the upper post
+post_n   = spig_len + ph_len + (stand_h - sk_hd - pu_gap - ph_len) / 2 <= 315 ? 1 : 2;   // lower posts (two stacked for tall stands; 315 fits the bed diagonal)
 post_b   = post_n == 1 ? (stand_h - sk_hd - pu_gap - ph_len) / 2 : (stand_h - sk_hd - pu_gap - 2 * ph_len) / 3;
 post_ub  = stand_h - sk_hd - pu_gap - post_n * (post_b + ph_len);    // upper post body
 module spigot_x(x0, len = spig_len) { translate([x0, 0, 0]) cube([len + 0.01, spig, spig]); }   // corner-aligned (prints on the bed); axis at (spig/2, spig/2)
@@ -663,7 +675,7 @@ module post_lower() {       // spigot (into the tray, pinned) at x < 0, deep soc
             translate([post_b, 0, 0]) cube([ph_len, spike_sock + 6, spike_sock + 6]);
         }
         translate([post_b + 2, 3, 3]) cube([ph_len, spike_sock, spike_sock + 0.3]);       // +0.3: the bridged ceiling sags
-        zpin(-16, spig / 2);                                                             // tray pin
+        zpin(-15, spig / 2);                                                             // tray pin (or the joint pin into another lower post)
         zpin(post_b + ph_len - 15, 3 + spike_sock / 2);                                  // height pin
     }
 }
@@ -686,7 +698,7 @@ module stand_tray() {
             rotate(45) translate([-(spike_sock + 6) / 2, -(spike_sock + 6) / 2, 0]) cube([spike_sock + 6, spike_sock + 6, sk_hd]);
         }
         rotate(45) translate([-spike_sock / 2, -spike_sock / 2, sk_hd - sock_depth]) cube([spike_sock, spike_sock, sock_depth + 1]);
-        for (a = [45, 135]) rotate(a) translate([-20, 0, sk_hd - 16]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 40, $fn = 16);   // tray pin (either way round)
+        for (a = [45, 135]) rotate(a) translate([-20, 0, sk_hd - 15]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 40, $fn = 16);   // tray pin (either way round)
     }
 }
 // ---------------------------------------------------------------- anchors

@@ -7,7 +7,7 @@ PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed f
   [ok] stake_2 x1: 205x191x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~43 g each
   [ok] stake_3 x1: 194x180x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~40 g each
   [ok] stake_4 x1: 182x169x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~38 g each
-  [ok] drive_roller x1: 67x67x124 mm, overhangs ok (widest 5.1 mm), ~90 g each
+  [ok] drive_roller x1: 67x67x124 mm, overhangs ok (widest 5.1 mm), ~94 g each
   [ok] drive_pin x1: 20x20x35 mm, overhangs ok (widest 0.0 mm), ~5 g each
   [ok] head_side_a x1: 206x196x6 mm, overhangs ok (widest 0.0 mm), ~73 g each
   [ok] head_side_b x1: 237x196x6 mm, overhangs ok (widest 0.0 mm), ~88 g each
@@ -23,15 +23,15 @@ PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed f
   [ok] skid_l x1: 239x59x24 mm, overhangs ok (widest 2.7 mm), ~46 g each
   [ok] skid_r x1: 239x59x24 mm, overhangs ok (widest 2.7 mm), ~46 g each
   [ok] chute_segment x5: 167x136x230 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~114 g each
-  [ok] crank_head x1: 186x156x180 mm, body gap 0.45, overhangs ok (widest 5.0 mm), ~132 g each
+  [ok] crank_head x1: 186x156x180 mm, body gap 0.45, overhangs ok (widest 5.0 mm), ~134 g each
   [ok] crank_arm x1: 138x28x78 mm, body gap 0.45, overhangs ok (widest 3.0 mm), ~50 g each
   [ok] pin3 x14: 7x7x26 mm, overhangs ok (widest 0.0 mm), ~0 g each
   [ok] splice_template x1: 78x82x6 mm, overhangs ok (widest 0.0 mm), ~13 g each
   [ok] stand_shim x4: 40x22x3 mm, overhangs ok (widest 0.0 mm), ~3 g each
   [ok] hex_coupler x7: 13x11x23 mm, overhangs ok (widest 0.0 mm), ~3 g each
   [ok] ring_sleeve x6: 25x25x8 mm, overhangs ok (widest 0.0 mm), ~2 g each
-  [ok] post_lower x1: 229x233x22 mm, turned 45, overhangs ok (widest 11.6 mm), ~50 g each
-  [ok] post_upper x1: 226x226x20 mm, turned 45, overhangs ok (widest 0.0 mm), ~49 g each
+  [ok] post_lower x1: 229x233x22 mm, turned 45, overhangs ok (widest 0.0 mm), flat bridges up to 16 mm span, ~53 g each
+  [ok] post_upper x1: 226x226x20 mm, turned 45, overhangs ok (widest 0.0 mm), ~51 g each
   [ok] stand_tray x1: 190x236x32 mm, overhangs ok (widest 1.4 mm), ~40 g each
   [ok] ground_screw x4: 26x26x150 mm, overhangs ok (widest 3.9 mm), ~27 g each
   [ok] spike x4: 134x30x30 mm, overhangs ok (widest 0.0 mm), ~20 g each
@@ -41,7 +41,7 @@ PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed f
   [ok] nut8 x13: 13x15x7 mm, overhangs ok (widest 0.0 mm), ~1 g each
   [ok] washer50 x4: 50x50x3 mm, overhangs ok (widest 0.0 mm), ~7 g each
 
-FILAMENT ESTIMATE: about 2.48 kg for one machine with the listed walls/infill (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)
+FILAMENT ESTIMATE: about 2.49 kg for one machine with the listed walls/infill (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)
 
 HEAD MODULE (drive roller, frames, gearbox, trap, first chute segment), assembled
   [ok] drive roller journal in frame B slot: slip fit gap 0.29 mm (designed 0.30), overlap 0.00 mm3
@@ -78,7 +78,7 @@ HEAD MODULE (drive roller, frames, gearbox, trap, first chute segment), assemble
   [ok] foot 1 cheeks around frame A tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
   [ok] foot 1 cheeks around frame B tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
   [ok] belt vs frames, trap, gearbox, feet: clearance 8.00 mm (need >= 1.0)
-  [ok] candy space above the belt vs everything: clearance 2.52 mm (need >= 1.0)
+  [ok] candy space above the belt vs everything: clearance 2.22 mm (need >= 1.0)
   [ok] nothing but the feet reaches the ground: lowest part 4 mm above the lawn
 
 TAIL MODULE, assembled, take-up fully in (axle X = 20)
@@ -170,11 +170,13 @@ LINE (chute segments, crank head, crank arm, porch stand), assembled
   [ok] upper post top spigot in the crank head socket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
   [ok] upper post shoulder bears on the crank head socket: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
   [ok] upper post long spigot in the lower post's deep socket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
-  [ok] lower post spigot in the tray socket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
-  [ok] lower post rests on the tray socket: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] lowest post spigot in the tray socket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] lowest post rests on the tray socket: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
   [ok] crank head pin passes through its holes: clearance 0.22 mm (need >= 0.1)
   [ok] height pin (nominal hole) passes through its holes: clearance 0.22 mm (need >= 0.1)
   [ok] tray pin passes through its holes: clearance 0.22 mm (need >= 0.1)
+  [ok] stand collapsed (height pin out): upper post clears the crank head socket: clearance 6.50 mm (need >= 3.0)
+  [ok] stand collapsed: upper post's long spigot still runs free in the lower post: clearance 0.20 mm (need >= 0.1)
   [ok] stand posts vs segment N and the crank shaft (static; socket play < 1 mm): clearance 2.99 mm (need >= 2.0)
   [ok] crank arm swept a full turn (15 deg steps) vs the stand posts: closest over 50 mm (need >= 3)
 

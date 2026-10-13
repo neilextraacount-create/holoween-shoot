@@ -237,7 +237,13 @@ def main():
                                  ("head", head_axle_h, 0.170, "the 2 anchors of the foot nearest the steps (ground screws)")):
         M = H * hgt
         p(f"  {nm}: {H:.0f} N pull at {hgt*1000:.0f} mm -> {M:.1f} N.m; tipping arm {base*1000:.0f} mm -> {M/base:.0f} N uplift on"
-          f" {where}: {M/base/2:.0f} N each, or {M/base/G:.1f} kg of ballast")
+          f" {where}: {M/base/2:.0f} N each, or {M/base/G:.1f} kg of ballast against tipping")
+    # ballast alone must also stop the module SLIDING: the head is pulled downhill (toward the tail), the tail uphill
+    mu_g, sl = 0.4, math.radians(a.lawn_deg)
+    m_head = H / (G * (mu_g * math.cos(sl) - math.sin(sl)))
+    m_tail = H / (G * (mu_g * math.cos(sl) + math.sin(sl)))
+    p(f"  sliding with ballast only (nothing in the ground; wet grass mu {mu_g}): head needs {m_head:.0f} kg, tail {m_tail:.0f} kg in total"
+      f" -> the ground screws (or spikes) must hold the {H:.0f} N; ballast only helps against tipping")
 
     # ------------------------------------------------------------ PLA stress checks
     p("\nPLA STRESS CHECKS (parts printed with layers across the load are the weak case)")

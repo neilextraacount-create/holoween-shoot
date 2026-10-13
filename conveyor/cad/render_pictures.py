@@ -54,19 +54,12 @@ render('station', items, (260, -330, 60), (0, 20, -90))
 # porch end: last segment, crank head, arm, posts, tray
 N = int(V["seg_count"]); u_ch = V["gb_top_s"] + N * V["seg_len"]
 seg = A.bodies("chute_segment"); ch = A.bodies("crank_head"); arm = A.bodies("crank_arm")
-S = cp.line_M(V, u_ch) @ cp.T(*V["st_q"]) @ cp.Rx(90 + V["aw"])
-hd = V["sk_hd"]; sp = V["spig"] / 2; L_top = V["post_b"] + hd + V["spig_len"]
-Mu = S @ cp.Rz(45) @ cp.Mx([[0, 0, 1], [0, 1, 0], [-1, 0, 0]], (0, 0, 12 + L_top)) @ cp.T(0, -sp, -sp)
-Ml = Mu @ cp.T(-(V["post_b"] + hd), sp - c0, sp - c0)
-socket_from_lo = cp.Mx([[0, 1, 0], [0, 0, 1], [1, 0, 0]], (0, 0, hd)) @ cp.T(0, -sp, -sp)
-best = None
-for kq in range(4):
-    tr = cp.xf(A.mf("stand_tray"), Ml @ np.linalg.inv(cp.Rz(45 + 90 * kq) @ socket_from_lo))
-    if best is None or tr.bounding_box()[0] > best.bounding_box()[0]: best = tr
+Mu, Mls, best, _ = cp.stand_place(A, V, u_ch)                 # same placement the checker verifies
 z_hub = V["crank_head_len"] + V["sq_z"][0]
 items = [(save('p_seg', cp.xf(seg[0], cp.line_M(V, u_ch - V["seg_len"]))), 'mediumpurple'), (save('p_segs', cp.xf(seg[1], cp.line_M(V, u_ch - V["seg_len"]))), 'gold'),
          (save('p_ch', cp.xf(ch[0], cp.line_M(V, u_ch))), 'mediumpurple'), (save('p_chs', cp.xf(ch[1], cp.line_M(V, u_ch))), 'gold'),
          (save('p_arm', cp.xf(arm[0] + arm[1], cp.line_M(V, u_ch) @ cp.T(V["Y_c"], 0, z_hub) @ cp.Rz(200))), 'orange'),
-         (save('p_pu', cp.xf(A.mf("post_upper"), Mu)), 'saddlebrown'), (save('p_pl', cp.xf(A.mf("post_lower"), Ml)), 'saddlebrown'), (save('p_tray', best), 'saddlebrown')]
+         (save('p_pu', cp.xf(A.mf("post_upper"), Mu)), 'saddlebrown'), (save('p_tray', best), 'saddlebrown')]
+items += [(save(f'p_pl{i}', cp.xf(A.mf("post_lower"), M)), 'saddlebrown') for i, M in enumerate(Mls)]
 cx, cy, cz = [float(v) for v in cp.xf(ch[0], cp.line_M(V, u_ch)).bounding_box()[:3]]
 render('porch', items, None, None, auto=(-50, 20, 2.0))

@@ -54,7 +54,9 @@ At 45 rpm the belt moves 0.3 m/s, so candy reaches the basket in about 20 s (15 
 3. **Measure your riser heights.** Put the height (inches) and the number of risers in
    `site_rise` and `site_risers` in `cad/params.scad`, run `python3 calc/conveyor_calc.py`,
    and copy the `seg_count`, `stand_h` and `stake_len` values it prints into the same file.
-   Then run `python3 cad/check_parts.py` to regenerate and re-check every STL.
+   Then run `python3 cad/check_parts.py` to regenerate and re-check every STL. It also
+   rewrites `cad/parts-table.md`, which then lists how many of each part to print for your
+   steps.
 4. Print the parts ([docs/03-printing.md](docs/03-printing.md)) and build
    ([docs/04-build-and-setup.md](docs/04-build-and-setup.md)).
 

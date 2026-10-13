@@ -43,7 +43,10 @@ names match the STL files in `cad/stl/`.
   still use them, and keep the crank, stand and funnel out of the walking path.
 - Stretch a string from the sidewalk edge to the foot of the steps where the head goes, 10 in
   in front of the first riser. Mark the spots for the tail, the 4 stations (every 48.4 in from
-  the tail, see the calculator) and the head.
+  the tail, see the calculator) and the head. The string is the **belt centreline**.
+- The station stakes stand **beside** the belt, not under it: each one goes **2 1/4 in (56 mm)
+  to one side of the string**, all on the same side (away from where people walk). The wheels
+  then hang out over the string.
 - The tail roller sits **2 in out over the sidewalk**. The basket goes on the sidewalk under
   it. Its rim must be **no higher than 6 in**.
 
@@ -86,8 +89,9 @@ Parts:
 Parts per station: `stake_N`, `station_bracket`, 2 x `wheel_unit`, 2 x `pin3`. Plus one
 `stake_cap` for pushing.
 
-1. Stake 1 is the longest and goes nearest the sidewalk. Push each stake straight down at its
-   mark: put the `stake_cap` in the stake's socket and push on the cap. Stop when the socket top
+1. Stake 1 is the longest and goes nearest the sidewalk. Push each stake straight down
+   **2 1/4 in (56 mm) beside its mark**, with the flat faces of its square socket parallel to
+   the string: put the `stake_cap` in the stake's socket and push on the cap. Stop when the socket top
    is at the height the calculator lists ("stake head", e.g. 5.3 in above the grass at
    station 1). In hard soil, make a pilot hole with a long screwdriver first, or water the lawn
    the day before.
@@ -97,6 +101,8 @@ Parts per station: `stake_N`, `station_bracket`, 2 x `wheel_unit`, 2 x `pin3`. P
    tight against the bracket so the wheel can't droop. The wheels should spin freely.
 4. Sight along the string: the tops of all the upper wheels should make a straight line from
    the head roller to the tail roller. Push a stake deeper or pull it up a little to adjust.
+   Each wheel's centre should be over the string, with its axle square to it; twist or move
+   the stake if not.
 
 ## 4. Tail module (sidewalk end)
 
@@ -133,12 +139,17 @@ Parts:
      grass.
   3. Put the foot's anchor hole over it, then a `washer50`, and screw a `bolt8_28` down into
      the head. Snug only.
-- If a screw spins without biting (sand, mulch) or won't go in (roots, clay), use ballast
-  instead:
-  - **Tail:** about **5 kg on the rear skid pads or the rear foot crossbar** (the sidewalk
-    end). Never on the far pads: weight there does nothing.
-  - **Head:** about **3 kg on the front foot**.
-  - Water jugs or bricks work.
+- **If a screw spins without biting (sand, mulch) or won't go in (roots, clay)**, weight alone
+  is not enough. The belt pulls each end toward the other with about 40 N, and on wet grass it
+  would take about 13 kg at the head and 8 kg at the tail to stop it sliding. So:
+  1. Something must still go into the ground to take the sideways pull. Push the screw into
+     its pilot hole anyway, as a peg, even if it won't bite. At the head, also push 2 spikes
+     into the rear foot's anchor holes, or tie the head frames back to a step railing post
+     with a rope.
+  2. Then add weight against lifting (water jugs or bricks):
+     - **Tail:** about **5 kg on the rear skid pads or the rear foot crossbar** (the sidewalk
+       end). Weight on the far pads doesn't stop the tail tipping.
+     - **Head:** about **3 kg on the front foot**.
 
 ## 6. Chute line, crank and porch stand
 
@@ -146,11 +157,12 @@ Parts:
 
 *Porch end: last chute segment, crank head with funnel, crank arm, and the stand.*
 
-Parts:
-- `trap`, 5 x `chute_segment`, `crank_head`, `crank_arm`
-- 7 x `hex_coupler` (1 spare), 6 x `ring_sleeve`
-- `post_lower`, `post_upper`, `stand_tray`, `stand_shim` (as needed)
-- 4 x `pin3`: crank arm, crank-head socket, stand height, tray
+Parts (the counts are for 2 risers of 7 in; `cad/parts-table.md` has them for your steps):
+- `trap`, 5 x `chute_segment` (`seg_count`), `crank_head`, `crank_arm`
+- 7 x `hex_coupler` (`seg_count` + 2, 1 spare), 6 x `ring_sleeve` (`seg_count` + 1)
+- `post_lower` (2 for a tall stand), `post_upper`, `stand_tray`, `stand_shim` (as needed)
+- 4 x `pin3`: crank arm, crank-head socket, stand height, tray (one more between two lower
+  posts)
 
 Have a helper, or a stool or box on the steps, to hold the line up while you stack it. **Never
 leave the line hanging from the gearbox.**
@@ -165,19 +177,22 @@ leave the line hanging from the gearbox.**
    - its shaft's hex socket onto the coupler (turn the shaft slightly until it drops)
    - its chute socket over the trap's upper end, which slides about 20 mm in
    - the trap is now locked: it can't turn or slip
-4. Repeat with a sleeve and a coupler for segments 2-5, then the crank head. Prop the top end
-   as you go.
-5. **Porch stand**:
-   1. Plug the lower post's short spigot into the tray, pin it, and stand it on the porch under
-      the funnel. Turn the tray so its long arm points onto the porch and its short arm toward
-      the edge.
-   2. Push the upper post's **short** spigot up into the socket under the crank-head funnel and
-      pin it. The upper post now hangs from the crank head.
-   3. Slide the lower post (with the tray) up over the upper post's long spigot until the tray
-      sits flat on the porch floor.
-   4. Push a `pin3` through the lower post's head and whichever of the 6 spigot holes lines up.
-      The holes are 6 mm apart, so the height adjusts ±15 mm. Put `stand_shim`s under the tray
-      arms if it rocks.
+4. Repeat with a sleeve and a coupler for each segment up to the last one, then the crank
+   head. Prop the top end as you go.
+5. **Porch stand.** It goes in under the crank head once the line is complete:
+   1. On the bench, plug the lower post's short spigot into the tray socket and pin it. With 2
+      lower posts, first plug one's short spigot into the other's head socket and pin that
+      joint too.
+   2. Slide the upper post's long spigot **all the way** into the lower post's head (no pin
+      yet). The stand is now 35 mm shorter than its working height.
+   3. Stand it on the porch with the upper post's short spigot just under the socket beneath
+      the crank-head funnel. Turn the tray so its long arm points onto the porch and its short
+      arm toward the edge.
+   4. Lift the upper post straight up into that socket until its shoulder seats, and push a
+      `pin3` through the socket's pin hole.
+   5. Push a `pin3` through the lower post's head and whichever of the 6 spigot holes lines up.
+      The holes are 6 mm apart, so the height adjusts from 12 mm up to 18 mm down. Put
+      `stand_shim`s under the tray arms if it rocks.
 6. **Steady the stand.** Cranking pushes sideways on the top of the line, hard enough to tip
    the stand over. Do one of these:
    - tie the post to a porch railing or column with a strap or rope (best)
@@ -203,8 +218,10 @@ the other way.
 3. Pull it snug by hand. Mark where it overlaps by 75 mm, cut, and seal that end too.
 4. Do the joint on the **bottom run** near the middle, where you can reach it.
    1. Lay the `splice_template` on the overlap with its lip against the top end.
-   2. Pierce every hole with a hot nail (or an awl).
-   3. Sew through the holes: round the box and both diagonals of the X, twice, pulling each
+   2. Mark every hole through the template with a fine-tip marker, then lift the template off.
+   3. Pierce each mark with a hot nail or soldering iron, or an awl. Never push a hot tool
+      through the template: PLA melts.
+   4. Sew through the holes: round the box and both diagonals of the X, twice, pulling each
       stitch tight.
 
    The joint must be flat, or it will thump over every wheel.
@@ -213,13 +230,15 @@ the other way.
 
 **Tension: the 100 g test.**
 
-1. Tie a 100 g weight (about 20 coins, or a small bag of candy weighed on a kitchen scale) to a
-   thin string loop.
-2. Hang the loop over the top run midway between stations 2 and 3, so the weight hangs beside
-   the belt.
-3. Measure how far the belt dips **compared with no weight**. **Target: 11-18 mm.** The dip is
-   about 15 mm at the design tension of 20 N per run.
-4. Tighten both knobs **1/8 turn at a time**, the same on each side, until the dip is in range.
+1. Put 100 g in a small flat bag: 20 US nickels, or candy weighed on a kitchen scale.
+2. Pull a string taut along the top run between stations 2 and 3, resting on the belt over
+   both upper wheels, along the belt's centreline.
+3. Lay the bag **across the middle of the belt**, midway between the two stations. Don't hang
+   it off one edge: that twists the belt and the reading comes out far too big.
+4. Measure from the string down to the belt's centreline, right beside the bag, with and
+   without the bag. The difference is the dip. **Target: 11-18 mm.** It is about 13-14 mm at
+   the design tension of 20 N per run.
+5. Tighten both knobs **1/8 turn at a time**, the same on each side, until the dip is in range.
    - Polypropylene hardly stretches, so 1/8 turn (0.4 mm) is already a noticeable change.
    - **Don't over-tighten**: a tight belt makes the crank harder to turn and pulls up on the tail
      anchors.
@@ -258,7 +277,11 @@ roller:
 
 The belt can stay sewn. Take things down in this order:
 
-1. Crank arm, porch stand, crank head and chute segments (top first), then the trap.
+1. **Line**:
+   1. Take off the crank arm.
+   2. Pull the height pin and the crank-head socket pin. Lower the upper post into the lower
+      post (the stand drops 35 mm) and lift the stand out.
+   3. Lift off the crank head and the chute segments (top first), then the trap.
 2. **Tail**: unscrew the knobs and pull both take-up blocks out through their windows. Lift the
    roller out of the belt loop.
 3. **Head**:

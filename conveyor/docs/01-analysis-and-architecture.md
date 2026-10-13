@@ -38,9 +38,9 @@ version:
 | Drive roller (head) | 10 in before the first riser | |
 | Tail roller | 2 in out over the sidewalk; the basket (rim no higher than 6 in) goes under it | |
 | Stilt stations | 4, every 48.4 in; stakes pushed 150 mm into the lawn | |
-| Chute | 40.3° to level, 5 segments; its underside clears the first step by 4.6 in | |
+| Chute | 40.3° to level, 5 segments; its underside clears the first step by 4.4 in | |
 | Crank | 23.6 in above the porch floor, 9.9 in behind the porch edge (comfortable sitting on a porch chair) | |
-| Porch stand | post 3.6 in behind the porch edge; socket 552 mm above the floor (adjustable ±15 mm) | |
+| Porch stand | post 3.6 in behind the porch edge; socket 552 mm above the floor (adjustable +12 / -18 mm) | |
 | Belt loop | 41.0 ft; cut 43 ft and sew it in place | |
 
 For a higher crank, raise `--crank-min` in the calculator: it adds chute segments (5.3 in each)
@@ -153,7 +153,12 @@ The porch stand:
 - A world-vertical socket under the funnel takes the upper post, **pinned** so the crank head
   can't lift off when you crank.
 - The upper post's long spigot slides into the lower post's deep socket. A pin through one of 6
-  holes sets the height (±15 mm); the lower post is pinned into a cross-shaped tray.
+  holes sets the height (+12 / -18 mm, 6 mm steps); the lower post is pinned into a
+  cross-shaped tray. With the pin out, this joint collapses 35 mm, more than the 28 mm end
+  spigots, so the stand goes in under (and comes out from under) a crank head that is already
+  on the line.
+- A porch high enough to need a stand over about 566 mm gets two lower posts, pinned end to end
+  (every pin hole is 15 mm from its shoulder, so any lower post fits any other).
 - The stand alone cannot resist the sideways push of cranking (about 7 N·m): tie it to a
   railing, add about 8 kg (two gallon jugs) on the tray, or hold the funnel rim while cranking.
 
@@ -179,7 +184,10 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
   - A printed bolt and 50 mm washer clamp a foot onto the head.
   - Driven with a printed T-wrench.
 - **L-spikes** with nail heads, for the pads that are only pushed down.
-- **Ballast instead of anchors**: if your soil won't hold screws, use water jugs or bricks:
+- **Ballast**: the screws (or spikes) take the 40 N pull along the line. Weight can't do that
+  on its own: on wet grass (friction about 0.4) it would take about 13 kg at the head and 8 kg
+  at the tail. If your soil won't hold screws, push them in as pegs anyway (and spikes at the
+  head's rear foot, or tie the head back to a step railing), then add weight against lifting:
   - about 5 kg on the tail's rear skid pads or rear foot crossbar
   - about 3 kg on the head's front foot
 
@@ -193,7 +201,9 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
   0.30 mm.
 - No layer starts in mid-air (island check every 0.2 mm). A print-in-place part may start
   up to 0.6 mm above another part, the same way a support interface does.
-- No downward face flatter than 45° is wider than 12 mm.
+- No downward face flatter than 45° is wider than 12 mm, except flat bridges held by a wall on
+  each side: those may span up to 20 mm (socket ceilings). No flat bridge is longer than 25 mm,
+  except the trap's documented 66 mm one.
 - It fits a 246 mm square on the P2S bed. Long stakes and posts are exported turned 45° to lie
   across the diagonal.
 
@@ -243,8 +253,7 @@ confirmed 41 issues, overlapping, and all of them are fixed in this version. The
   hex flats they grip.
 - **Tension test**: the original test could not work, because the target dip was deeper than
   the gap between the belt runs.
-- **Porch stand**: it could not hold the crank head down, and its documented assembly order was
-  impossible.
+- **Porch stand**: it could not hold the crank head down.
 - **Printing**: the top bearing rings started printing in mid-air, and the stand socket
   intruded into the candy channel.
 - **Drop trap**: it had only 20 mm of headroom.
@@ -254,3 +263,19 @@ after the fixes caught three more problems, now fixed too:
 - the tail roller's top flange cone was a loose sliver
 - the crank grip started as a knife edge in mid-air (it now starts as a 3 mm flat ring)
 - two exported STLs had a crack from float rounding
+
+A second independent review (docs, build steps, printability, physics; each finding
+re-checked by a skeptic) confirmed 18 more issues, all fixed:
+- **Porch stand**: it still could not be fitted under a crank head already on the line. Its
+  height joint now collapses 35 mm. The 2-lower-post stand for tall porches now has matching
+  pin holes and is modelled by the checker.
+- **Crank head**: the stand socket started printing from a 1 mm² point on the plate; it now
+  has a foot.
+- **Ballast**: the fallback was sized only against tipping, not against the belt pulling the
+  ends together. The guide now keeps pegs in the ground.
+- **Drive roller**: the crown was not actually there; it is now 0.3 mm.
+- **Tension test**: hanging the weight off one edge twisted the belt and over-read; the bag now
+  lies across the middle.
+- **Smaller fixes**: the top bearing ring's neck, the stake offset beside the string, the splice
+  template (mark the holes, don't push a hot nail through PLA), and several numbers and
+  quantities in the docs.

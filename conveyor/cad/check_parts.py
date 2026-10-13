@@ -225,8 +225,42 @@ def overhangs(t):
         rim = uniq[cnt == 1]
         perim = float(np.linalg.norm(t.vertices[rim[:, 0]] - t.vertices[rim[:, 1]], axis=1).sum()) or 1.0
         area = float(t.area_faces[idx].sum())
-        out.append((area, 2 * area / perim, float(max(span)), float(pts[:, 2].min())))
-    return sorted(out, reverse=True)
+        out.append((area, 2 * area / perim, float(max(span)), float(pts[:, 2].min()), bridge_halfspan(t, idx, comp)))
+    return sorted(out, key=lambda o: o[0], reverse=True)
+
+
+def bridge_halfspan(t, idx, comp):
+    """For a flat downward patch: the largest distance (in plan) from any point of it to an edge
+    that has a wall going DOWN from it (an anchor the slicer can bridge from). A flat patch held
+    by walls on both sides of a 16 mm gap gives 8. None if the patch is not flat or has no anchor."""
+    if (t.face_normals[idx][:, 2] > -0.99).any():
+        return None
+    fa, fe = t.face_adjacency, t.face_adjacency_edges
+    inside = np.isin(fa, idx)
+    rim = inside[:, 0] ^ inside[:, 1]
+    anchors = []
+    for (a, b), e in zip(fa[rim], fe[rim]):
+        other = b if a in comp else a
+        p0, p1 = t.vertices[e[0]], t.vertices[e[1]]
+        if t.triangles_center[other][2] < min(p0[2], p1[2]) - 0.05:      # the neighbour face hangs below the edge: a wall
+            anchors.append((p0[:2], p1[:2]))
+    if not anchors:
+        return None
+    A0 = np.array([a for a, _ in anchors]); A1 = np.array([b for _, b in anchors])
+    d = A1 - A0
+    dd = np.maximum((d * d).sum(1), 1e-12)
+    k = 8
+    w = np.array([(i / k, j / k) for i in range(k + 1) for j in range(k + 1 - i)])
+    tri = t.triangles[idx][:, :, :2]
+    pts = (tri[:, 0, None] * (1 - w[:, 0] - w[:, 1])[None, :, None] + tri[:, 1, None] * w[None, :, 0, None]
+           + tri[:, 2, None] * w[None, :, 1, None]).reshape(-1, 2)
+    worst = 0.0
+    for i in range(0, len(pts), 2000):
+        q = pts[i:i + 2000]
+        u = np.clip(((q[:, None, :] - A0[None]) * d[None]).sum(2) / dd[None], 0, 1)
+        dist = np.linalg.norm(A0[None] + u[..., None] * d[None] - q[:, None, :], axis=2).min(1)
+        worst = max(worst, float(dist.max()))
+    return worst
 
 
 def islands(mf, step=0.2, reach=0.6):
@@ -274,6 +308,9 @@ def part_qty(V):
     return {"chute_segment": n, "hex_coupler": n + 2, "ring_sleeve": n + 1, "post_lower": int(V["post_n"])}
 
 
+BRIDGE_OK = {"trap": 70.0}      # documented exception (docs/03): the 66 mm bridge over the top of the drop slot
+
+
 def check_parts(rep, rendered, V):
     rep.head("PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed fit, filament)")
     total = 0.0
@@ -318,10 +355,16 @@ def check_parts(rep, rendered, V):
         if t.bounds[0][2] < -0.01:
             problems.append("below the bed")
         oh = [o for o in overhangs(load_tm(RAW / f"{name}.stl")) if o[0] > 4.0]
-        wide = [o for o in oh if o[1] > 12.0]
+        bridges = [o for o in oh if o[1] > 12.0 and o[4] is not None and o[4] <= 10.0]   # flat, walls on both sides, span <= 20 mm
+        wide = [o for o in oh if o[1] > 12.0 and o not in bridges]
+        longest = max((2 * o[4] for o in oh if o[4] is not None), default=0.0)
+        if longest > BRIDGE_OK.get(name, 25.0):
+            problems.append(f"flat bridge {longest:.0f} mm long (allowed {BRIDGE_OK.get(name, 25.0):.0f})")
         if wide:
-            problems.append("needs support: " + "; ".join(f"{a:.0f} mm2 {s0:.0f}x{s1:.0f} mm at z {z:.0f}" for a, s0, s1, z in wide[:3]))
-        oh_txt = f", overhangs ok (widest {max((o[1] for o in oh), default=0):.1f} mm)" if not wide else ""
+            problems.append("needs support: " + "; ".join(f"{a:.0f} mm2 {s0:.0f}x{s1:.0f} mm at z {z:.0f}" for a, s0, s1, z, _ in wide[:3]))
+        oh_txt = f", overhangs ok (widest {max((o[1] for o in oh if o not in bridges), default=0):.1f} mm)" if not wide else ""
+        if bridges and not wide:
+            oh_txt += f", flat bridges up to {2 * max(o[4] for o in bridges):.0f} mm span"
         shell = min(t.area * walls * 0.42, t.volume)            # every surface gets `walls` perimeters / skins
         grams = (shell + max(0.0, t.volume - shell) * infill / 100) / 1000 * PLA
         if name != "test_coupon":
@@ -548,6 +591,27 @@ def check_station(rep, A, V):
     rep(True, f"carry run rides on the wheel top at belt-top Z=0; return run at Z={V['st_ret_top']:.0f} mm")
 
 
+def stand_place(A, V, u_ch):
+    """porch stand transforms: upper post (Mu), lower posts top to bottom (Mls), the tray placed the way
+    round that keeps it on the porch, and the upper post's top spigot end (x)"""
+    S = line_M(V, u_ch) @ T(*V["st_q"]) @ Rx(90 + V["aw"])         # socket frame: +z straight down
+    hd, c0, sp = V["sk_hd"], V["sk_c"], V["spig"] / 2
+    L_top = V["post_ub"] + V["spig_len"]
+    # post frame: x along the post (up), spigots on the axis (spig/2, spig/2), head sockets on (sk_c, sk_c)
+    up_to_sock = Mx([[0, 0, 1], [0, 1, 0], [-1, 0, 0]], (0, 0, V["st_len"] - V["spig_len"] + L_top)) @ T(0, -sp, -sp)
+    Mu = S @ Rz(45) @ up_to_sock
+    Mls = [Mu @ T(-(V["post_b"] + V["ph_len"] + V["pu_gap"]), sp - c0, sp - c0)]   # nominal height
+    for _ in range(int(V["post_n"]) - 1):
+        Mls.append(Mls[-1] @ T(-(V["post_b"] + V["ph_len"]), sp - c0, sp - c0))
+    socket_from_lo = Mx([[0, 1, 0], [0, 0, 1], [1, 0, 0]], (0, 0, hd)) @ T(0, -sp, -sp)   # lower post -> tray socket axes
+    best = None
+    for kq in range(4):                                         # the tray can sit 4 ways round; use the one that keeps it on the porch
+        tr = xf(A.mf("stand_tray"), Mls[-1] @ np.linalg.inv(Rz(45 + 90 * kq) @ socket_from_lo))
+        if best is None or tr.bounding_box()[0] > best.bounding_box()[0]:
+            best = tr
+    return Mu, Mls, best, L_top
+
+
 def check_line(rep, A, V):
     rep.head("LINE (chute segments, crank head, crank arm, porch stand), assembled")
     N = int(V["seg_count"])
@@ -579,37 +643,38 @@ def check_line(rep, A, V):
         g = xf(arm_all, line_M(V, u_ch) @ T(V["Y_c"], 0, z_hub) @ Rz(deg)).min_gap(chs, 50)
         worst = min(worst, g)
     rep(worst >= 3.0, f"crank arm swept a full turn (15 deg steps) vs crank head and funnel: closest {worst:.1f} mm (need >= 3)")
-    # porch stand: tray -> lower post -> adjustable upper post -> crank head socket
-    aw = V["aw"]
-    S = line_M(V, u_ch) @ T(*V["st_q"]) @ Rx(90 + aw)            # socket frame: +z straight down
+    # porch stand: tray -> lower post(s) -> adjustable upper post -> crank head socket
+    Mu, Mls, tray, L_top = stand_place(A, V, u_ch)
     hd, c0, sp = V["sk_hd"], V["sk_c"], V["spig"] / 2
-    L_top = V["post_ub"] + V["spig_len"]                         # upper post: top spigot end (x)
-    # post frame: x along the post (up), spigots on the axis (spig/2, spig/2), head sockets on (sk_c, sk_c)
-    up_to_sock = Mx([[0, 0, 1], [0, 1, 0], [-1, 0, 0]], (0, 0, 12 + L_top)) @ T(0, -sp, -sp)
-    Mu = S @ Rz(45) @ up_to_sock
     pu, pl = A.mf("post_upper"), A.mf("post_lower")
     k("upper post top spigot in the crank head socket", xf(clip(pu, x0=L_top - V["spig_len"] + 0.5), Mu), chs, "fit", 0.20)
     k("upper post shoulder bears on the crank head socket", xf(pu, Mu), chs, "touch")
-    Ml = Mu @ T(-(V["post_b"] + V["ph_len"] + V["pu_gap"]), sp - c0, sp - c0)   # lower post frame, nominal height
-    k("upper post long spigot in the lower post's deep socket", xf(clip(pu, x1=-0.5), Mu), xf(pl, Ml), "fit", 0.20)
-    socket_from_lo = Mx([[0, 1, 0], [0, 0, 1], [1, 0, 0]], (0, 0, hd)) @ T(0, -sp, -sp)   # lower post -> tray socket axes
-    best = None
-    for kq in range(4):                                         # the tray can sit 4 ways round; use the one that keeps it on the porch
-        Mt = Ml @ np.linalg.inv(Rz(45 + 90 * kq) @ socket_from_lo)
-        tr = xf(A.mf("stand_tray"), Mt)
-        if best is None or tr.bounding_box()[0] > best[0].bounding_box()[0]:
-            best = (tr, kq)
-    tray = best[0]
-    k("lower post spigot in the tray socket", xf(clip(pl, x1=-0.5), Ml), tray, "fit", 0.20)
-    k("lower post rests on the tray socket", xf(pl, Ml), tray, "touch")
-    post_u, post_l = xf(pu, Mu), xf(pl, Ml)
-    # the three locking pins go straight through their holes (pin modelled as a 3 mm rod along the post's z)
+    post_u = xf(pu, Mu)
+    lows = [xf(pl, M) for M in Mls]
+    k("upper post long spigot in the lower post's deep socket", xf(clip(pu, x1=-0.5), Mu), lows[0], "fit", 0.20)
+    for i in range(1, len(Mls)):
+        k(f"lower post {i} spigot in lower post {i + 1}'s head socket", xf(clip(pl, x1=-0.5), Mls[i - 1]), lows[i], "fit", 0.20)
+        k(f"lower post {i} rests on lower post {i + 1}'s head", lows[i - 1], lows[i], "touch")
+    k("lowest post spigot in the tray socket", xf(clip(pl, x1=-0.5), Mls[-1]), tray, "fit", 0.20)
+    k("lowest post rests on the tray socket", lows[-1], tray, "touch")
+    post_l = lows[0]
+    for lw in lows[1:]:
+        post_l = post_l + lw
+    # the locking pins go straight through their holes (pin modelled as a 3 mm rod along the post's z)
     rod = m3d.Manifold.cylinder(40, V["pin_d"] / 2, V["pin_d"] / 2, 24).translate([0, 0, -20])
-    for nm, M, x, y, others in (("crank head pin", Mu, L_top - 13, sp, post_u + chs),
-                                ("height pin (nominal hole)", Ml, V["post_b"] + V["ph_len"] - 15, c0, post_u + post_l),
-                                ("tray pin", Ml, -16, sp, post_l + tray)):
+    pins = [("crank head pin", Mu, L_top - 13, sp, post_u + chs),
+            ("height pin (nominal hole)", Mls[0], V["post_b"] + V["ph_len"] - 15, c0, post_u + lows[0])]
+    for i in range(1, len(Mls)):
+        pins.append((f"pin between lower posts {i} and {i + 1}", Mls[i], V["post_b"] + V["ph_len"] - 15, c0, lows[i - 1] + lows[i]))
+    pins.append(("tray pin", Mls[-1], -15, sp, lows[-1] + tray))
+    for nm, M, x, y, others in pins:
         pin = xf(rod, M @ T(x, y, 0))
         k(f"{nm} passes through its holes", pin, others, "clear", 0.1)
+    # with the height pin out the joint collapses pu_gap: the top spigot must drop clear of the crank head
+    # socket, so the stand goes in under (and comes out from under) a crank head already on the line
+    Mu_c = Mu @ T(-(V["pu_gap"] - 0.5), 0, 0)
+    k("stand collapsed (height pin out): upper post clears the crank head socket", xf(pu, Mu_c), chs, "clear", 3.0)
+    k("stand collapsed: upper post's long spigot still runs free in the lower post", xf(pu, Mu_c), lows[0], "clear", 0.15)
     # static neighbours: the posts hang off the crank head socket (0.2 mm slip fit), so they move < 1 mm
     k("stand posts vs segment N and the crank shaft (static; socket play < 1 mm)", post_u + post_l, sN + chf, "clear", 2.0)
     worst = 1e9
@@ -645,7 +710,7 @@ def check_site(rep, A, V, P_head, tray):
     A.check("head module vs the first riser", xf(P_head["A"] + P_head["B"] + P_head["foot0"] + P_head["foot1"], W), steps, "clear", 20.0)
     tb = xf(tray, W).bounding_box()
     dz = tb[2] - porch_z
-    rep(abs(dz) <= 5.0, f"porch stand tray bottom {dz:+.0f} mm from the porch floor (set stand_h = {V['stand_h'] - dz:.0f} to correct)")
+    rep(abs(dz) <= 5.0, f"porch stand tray bottom {dz:+.0f} mm from the porch floor (set stand_h = {V['stand_h'] + dz:.0f} to correct)")
     rep(tb[0] >= gap_x + run + 20, f"porch stand tray starts {(tb[0] - gap_x - run) / IN:.1f} in behind the porch edge (need >= 0.8 in)")
 
 

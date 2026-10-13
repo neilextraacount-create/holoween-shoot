@@ -43,8 +43,9 @@ LOADS (estimates; PLA-on-PLA plain bearings)
   Candy leaves a 1.58 m chute at 3.1 m/s (wrapper friction 0.45); the drop trap at the bottom stops it
 
 ANCHORING (belt tension must go into the ground at both ends)
-  tail: 40 N pull at 207 mm -> 8.3 N.m; tipping arm 172 mm -> 48 N uplift on the 2 skid anchors nearest the sidewalk (ground screws): 24 N each, or 4.9 kg of ballast
-  head: 40 N pull at 120 mm -> 4.8 N.m; tipping arm 170 mm -> 28 N uplift on the 2 anchors of the foot nearest the steps (ground screws): 14 N each, or 2.9 kg of ballast
+  tail: 40 N pull at 207 mm -> 8.3 N.m; tipping arm 172 mm -> 48 N uplift on the 2 skid anchors nearest the sidewalk (ground screws): 24 N each, or 4.9 kg of ballast against tipping
+  head: 40 N pull at 120 mm -> 4.8 N.m; tipping arm 170 mm -> 28 N uplift on the 2 anchors of the foot nearest the steps (ground screws): 14 N each, or 2.9 kg of ballast against tipping
+  sliding with ballast only (nothing in the ground; wet grass mu 0.4): head needs 13 kg, tail 8 kg in total -> the ground screws (or spikes) must hold the 40 N; ballast only helps against tipping
 
 PLA STRESS CHECKS (parts printed with layers across the load are the weak case)
   tail axle Ø12 (layers across): 5.3 MPa bending  (PLA interlayer ~20-30 MPa)
