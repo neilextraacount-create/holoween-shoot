@@ -62,18 +62,20 @@ and the stand grows to match. Two lower posts stack for stands taller than about
 | Porch stand | about 7 N·m sideways from the hand on the crank | | 12 N at about 0.6 m: tie it down, add 8 kg, or hold the funnel |
 
 **Torque path** (shear in MPa at the dry crank torque / twice it / a hard 30 N yank on the
-handle; PLA across layers is roughly 20-30 MPa):
+handle; PLA across layers is roughly 20-30 MPa). Only the printed walls count: 4 walls make a
+1.68 mm solid shell on every surface, and the 15 % sparse infill inside is ignored.
 
 | Part | MPa |
 |---|---|
-| Line shaft tube Ø18/10 | 1.2 / 2.5 / 3.2 |
-| Hex coupler, 11 mm across flats | 5.1 / 10.2 / 13.2 |
-| Square drive, 12.4 mm | 3.2 / 6.4 / 8.3 |
+| Line shaft tube Ø18/10 (4 walls) | 1.4 / 2.9 / 3.7 |
+| Hex coupler, 11 mm across flats (solid) | 5.1 / 10.2 / 13.2 |
+| Square drive, 12.4 mm (4 walls) | 3.3 / 6.6 / 8.5 |
 | Gear teeth (Lewis, 2x) | 6.1 |
-| Tail axle Ø12 (bending) | 5.3 |
+| Tail axle Ø12 (bending, 4-wall shell only) | 7.3 |
 
 The weakest link is the hex coupler: about 4-6 times its strength at normal cranking, about 2
-at a hard yank. One spare is printed.
+at a hard yank. It prints lying on a flat face, so no single layer runs right across it, and
+one spare is printed.
 
 ## 4. Architecture
 
@@ -207,6 +209,15 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
 - It fits a 246 mm square on the P2S bed. Long stakes and posts are exported turned 45° to lie
   across the diagonal.
 
+**Every part and every plate, in a real slicer** (`cad/slice_all.py`, `cad/gcode_gaps.py`,
+`cad/make_plates.py`)
+- Sliced with PrusaSlicer, the engine Bambu Studio is built on, using a P2S-like profile. Its
+  stability alerts were traced to their spot in the G-code (`cad/gcode_support.py`). The real
+  ones were fixed (section 7); the rest are explained in the printing guide.
+- Print-in-place gaps measured in the sliced G-code: at least 0.43 mm between the plastic of
+  the moving body and its housing, and no body printed onto another.
+- Each of the 18 plates sliced as a whole: everything on the bed.
+
 **Every mating pair, in its assembled position, with exact mesh booleans**
 - **Slip fits**: journals, sockets and spigots, chute sockets, sleeves, hex couplers.
 - **Bolts and pins**: gearbox bolts through the slab and frame; every stand pin through its
@@ -221,6 +232,8 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
   - basket space under the tail roller
 - **Tail positions**: the take-up blocks and screws are checked fully in, middle and fully out.
 - **Full crank turn**: the crank arm is swept around the funnel and past the stand posts.
+- **Candy space**: the chute trough and the crank head's funnel have solid side walls and floor
+  all along (sampled every 2.5 mm).
 - **Site**: the chute line is checked against a model of your steps, and the stand foot against
   the porch edge and floor.
 
@@ -279,3 +292,19 @@ re-checked by a skeptic) confirmed 18 more issues, all fixed:
 - **Smaller fixes**: the top bearing ring's neck, the stake offset beside the string, the splice
   template (mark the holes, don't push a hot nail through PLA), and several numbers and
   quantities in the docs.
+
+A third, focused review of those fixes confirmed 10 more (mostly wording). The main one: the
+stand's height joint now collapses at least 35 mm from every height hole, not only the middle
+one.
+
+Then every part was put through a real slicer (section 5). That found:
+- **Crank head funnel**: an earlier fix that kept the candy channel clear also cut away the
+  funnel's flared side walls. That left a 20 mm open gap on each side, and walls above it
+  starting in mid-air. Fixed, and the new candy-space check would catch it again.
+- **Crank head web plate**: its lightening hole left thin, fragile strips. The plate is now
+  solid (7 g more).
+- **Wheel axles**: each stood 115 mm tall on 88 mm² of bed. It now has a foot giving 254 mm².
+- **Pins and hex couplers**: they printed standing, so a single layer ran right across them.
+  They now print lying down (the pins on a 0.3 mm flat), which is stronger and sticks better.
+- **Shafts**: the chute, crank head and roller parts now print with 4 walls, so their shafts
+  are close to solid.

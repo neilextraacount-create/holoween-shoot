@@ -1,47 +1,47 @@
 
 PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed fit, filament)
   [ok] test_coupon x1: 150x93x20 mm, body gap 0.35, overhangs ok (widest 1.5 mm), ~60 g each
-  [ok] wheel_unit x8: 30x30x115 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~22 g each
+  [ok] wheel_unit x8: 30x30x115 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~37 g each
   [ok] station_bracket x4: 28x109x16 mm, overhangs ok (widest 0.0 mm), ~22 g each
   [ok] stake_1 x1: 216x203x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~45 g each
   [ok] stake_2 x1: 205x191x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~43 g each
   [ok] stake_3 x1: 194x180x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~40 g each
   [ok] stake_4 x1: 182x169x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~38 g each
-  [ok] drive_roller x1: 67x67x124 mm, overhangs ok (widest 5.1 mm), ~94 g each
+  [ok] drive_roller x1: 67x67x124 mm, overhangs ok (widest 5.1 mm), ~127 g each
   [ok] drive_pin x1: 20x20x35 mm, overhangs ok (widest 0.0 mm), ~5 g each
   [ok] head_side_a x1: 206x196x6 mm, overhangs ok (widest 0.0 mm), ~73 g each
   [ok] head_side_b x1: 237x196x6 mm, overhangs ok (widest 0.0 mm), ~88 g each
-  [ok] gearbox x1: 94x111x91 mm, body gap 0.44, overhangs ok (widest 5.7 mm), ~99 g each
+  [ok] gearbox x1: 94x111x91 mm, body gap 0.44, overhangs ok (widest 5.7 mm), ~132 g each
   [ok] trap x1: 103x37x152 mm, overhangs ok (widest 3.1 mm), ~32 g each
   [ok] foot x3: 36x196x24 mm, overhangs ok (widest 2.7 mm), ~30 g each
   [ok] tail_side_l x1: 227x218x28 mm, overhangs ok (widest 0.0 mm), ~70 g each
   [ok] tail_side_r x1: 227x218x28 mm, overhangs ok (widest 0.0 mm), ~70 g each
-  [ok] tail_roller x1: 45x45x90 mm, body gap 0.45, overhangs ok (widest 1.4 mm), ~46 g each
-  [ok] takeup_block x2: 22x24x36 mm, overhangs ok (widest 5.6 mm), ~12 g each
+  [ok] tail_roller x1: 45x45x90 mm, body gap 0.45, overhangs ok (widest 1.4 mm), ~61 g each
+  [ok] takeup_block x2: 22x24x36 mm, overhangs ok (widest 5.6 mm), ~13 g each
   [ok] takeup_nut x2: 16x16x8 mm, overhangs ok (widest 0.0 mm), ~2 g each
   [ok] takeup_screw x2: 21x22x108 mm, overhangs ok (widest 0.0 mm), ~11 g each
   [ok] skid_l x1: 239x59x24 mm, overhangs ok (widest 2.7 mm), ~46 g each
   [ok] skid_r x1: 239x59x24 mm, overhangs ok (widest 2.7 mm), ~46 g each
-  [ok] chute_segment x5: 167x136x230 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~114 g each
-  [ok] crank_head x1: 186x156x180 mm, body gap 0.45, overhangs ok (widest 5.0 mm), ~134 g each
-  [ok] crank_arm x1: 138x28x78 mm, body gap 0.45, overhangs ok (widest 3.0 mm), ~50 g each
-  [ok] pin3 x14: 7x7x26 mm, overhangs ok (widest 0.0 mm), ~0 g each
+  [ok] chute_segment x5: 167x136x230 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~122 g each
+  [ok] crank_head x1: 186x156x180 mm, body gap 0.45, overhangs ok (widest 5.0 mm), ~142 g each
+  [ok] crank_arm x1: 138x28x78 mm, body gap 0.45, overhangs ok (widest 3.0 mm), ~61 g each
+  [ok] pin3 x14: 28x7x5 mm, overhangs ok (widest 0.0 mm), ~0 g each
   [ok] splice_template x1: 78x82x6 mm, overhangs ok (widest 0.0 mm), ~13 g each
   [ok] stand_shim x4: 40x22x3 mm, overhangs ok (widest 0.0 mm), ~3 g each
-  [ok] hex_coupler x7: 13x11x23 mm, overhangs ok (widest 0.0 mm), ~3 g each
+  [ok] hex_coupler x7: 23x13x11 mm, overhangs ok (widest 0.0 mm), ~3 g each
   [ok] ring_sleeve x6: 25x25x8 mm, overhangs ok (widest 0.0 mm), ~2 g each
   [ok] post_lower x1: 229x233x22 mm, turned 45, overhangs ok (widest 0.0 mm), flat bridges up to 16 mm span, ~56 g each
   [ok] post_upper x1: 226x226x20 mm, turned 45, overhangs ok (widest 0.0 mm), ~52 g each
   [ok] stand_tray x1: 190x236x32 mm, overhangs ok (widest 1.4 mm), ~40 g each
-  [ok] ground_screw x4: 26x26x150 mm, overhangs ok (widest 3.9 mm), ~27 g each
-  [ok] spike x4: 134x30x30 mm, overhangs ok (widest 0.0 mm), ~20 g each
-  [ok] stake_cap x1: 22x22x28 mm, overhangs ok (widest 0.0 mm), ~6 g each
-  [ok] gs_wrench x1: 160x33x24 mm, overhangs ok (widest 0.0 mm), ~27 g each
+  [ok] ground_screw x4: 26x26x150 mm, overhangs ok (widest 3.9 mm), ~32 g each
+  [ok] spike x4: 134x30x30 mm, overhangs ok (widest 0.0 mm), ~21 g each
+  [ok] stake_cap x1: 22x22x28 mm, overhangs ok (widest 0.0 mm), ~8 g each
+  [ok] gs_wrench x1: 160x33x24 mm, overhangs ok (widest 0.0 mm), ~31 g each
   [ok] bolt8_28 x17: 13x15x33 mm, overhangs ok (widest 0.0 mm), ~2 g each
   [ok] nut8 x13: 13x15x7 mm, overhangs ok (widest 0.0 mm), ~1 g each
   [ok] washer50 x4: 50x50x3 mm, overhangs ok (widest 0.0 mm), ~7 g each
 
-FILAMENT ESTIMATE: about 2.50 kg for one machine with the listed walls/infill (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)
+FILAMENT ESTIMATE: about 2.79 kg for one machine with the listed walls/infill (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)
 
 HEAD MODULE (drive roller, frames, gearbox, trap, first chute segment), assembled
   [ok] drive roller journal in frame B slot: slip fit gap 0.29 mm (designed 0.30), overlap 0.00 mm3
@@ -157,6 +157,8 @@ STATION (stake + bracket + 2 wheels), assembled
   [ok] carry run rides on the wheel top at belt-top Z=0; return run at Z=-48 mm
 
 LINE (chute segments, crank head, crank arm, porch stand), assembled
+  [ok] crank head funnel (chute, 45 deg flare, mouth): side walls and floor solid all along (no gaps)
+  [ok] chute segment trough: side walls and floor solid all along (no gaps)
   [ok] segment N plain end in the crank head socket: slip fit gap 0.30 mm (designed 0.30), overlap 0.00 mm3
   [ok] segment 5 plain end inside the crank head socket: 1817 mm3 (need >= 1000)
   [ok] crank head cannot turn on the shaft: turning it 0.5 deg either way collides (258.2 mm3)

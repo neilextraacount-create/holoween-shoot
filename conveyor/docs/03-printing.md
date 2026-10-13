@@ -1,28 +1,63 @@
 # Printing guide (Bambu Lab P2S, PLA)
 
-Every STL in `cad/stl/` is already in its print orientation: load it and slice it as it is.
-**No part needs supports.** Overhangs are 45° or steeper, and the print-in-place gaps are
-open to the side. One exception: the `trap` has a 66 mm bridge across the top of its drop slot
-(at print height 62 mm). Expect a little sag there and trim any strands.
+Everything is laid out on ready-made build plates in [`plates/`](../plates). Each plate holds
+parts that print with the same settings, so you load a plate, set two or three things, and
+print. The single STLs are in `cad/stl/` (already in print orientation) if you would rather
+arrange things yourself.
 
-## Settings for every part
+**About 2.6 kg of PLA and roughly 85 hours of printing** (slicer estimate, see below). You have
+about 18 days to Halloween, so start today.
 
-| Setting | Value |
-|---|---|
-| Filament | PLA (Bambu PLA Basic, eSUN PLA+ or similar), 1.75 mm, dry |
-| Nozzle | 0.4 mm |
-| Plate | textured PEI, glue stick not needed |
-| Layer height | **0.20 mm**; use **0.16 mm** for `gearbox` and `drive_roller` (smoother gear teeth) |
-| Walls, infill | as in the part table below (gyroid infill) |
-| Top / bottom shells | 5 / 4 layers |
-| Supports | **off** |
-| Brim | 5 mm on `chute_segment`, `crank_head`, `trap`, `wheel_unit`, `ground_screw`, `takeup_screw` (tall, small footprint) |
-| Elephant-foot compensation | **0.15 mm** (Bambu default is 0.15). It matters for print-in-place parts: a squashed first layer can glue a spinning part to its housing. |
-| Seam | aligned |
+## How the plates were checked
 
-## Step 1: print the test coupon first (about 1 hour, 60 g)
+The STLs were not just exported; they were put through a real slicer:
 
-`test_coupon.stl` has:
+- **Every part** was sliced with PrusaSlicer, the engine Bambu Studio is built on, using a
+  P2S-like profile. That run gives the grams, times and stability alerts in
+  [`cad/slice-report.md`](../cad/slice-report.md). Every alert was traced to its spot in the
+  part, and the real ones were fixed in the design (see "Expected slicer warnings" for the rest).
+- **Every print-in-place part** was checked in the sliced G-code, layer by layer, in
+  [`cad/gcode-gaps.md`](../cad/gcode-gaps.md):
+  - the moving body and its housing stay at least 0.43 mm apart once the slicer has laid down
+    its lines (0.34 mm on the test coupon's tightest spinner)
+  - no body is ever printed directly onto another one
+- **Every plate** was sliced as a whole: everything is on the bed, and the grams and times in
+  the plate table come from that slice.
+
+## Settings (Bambu Studio)
+
+Choose **Bambu Lab P2S 0.4 nozzle**, your PLA (Bambu PLA Basic or similar) and the **Textured
+PEI Plate**. Most settings stay at Bambu's defaults:
+
+| Setting | Bambu Studio tab | Value |
+|---|---|---|
+| Layer height | Quality | **0.20 mm**; **0.16 mm** on the rollers-and-gearbox plate |
+| Wall generator | Quality | Classic (the default) |
+| Elephant foot compensation | Quality | 0.15 mm (the default). It keeps a squashed first layer from gluing a spinning part to its housing. |
+| Wall loops | Strength | as the plate table says (3 or 4) |
+| Sparse infill density | Strength | as the plate table says (15 %, 30 % or 100 %) |
+| Sparse infill pattern | Strength | Gyroid; **Rectilinear** on the 100 % plates |
+| Top / bottom shell layers | Strength | 5 / 4 |
+| Supports | Support | **off**. No part needs any. |
+| Brim | Others | **Outer brim only, 5 mm** on the plates that say so, otherwise **No brim**. Never use an inner brim: it would fill the print-in-place gaps. |
+
+## Loading a plate
+
+1. **File > Import > Import 3MF/STL** and pick a file from `plates/`. Bambu Studio may say the
+   file is not from Bambu Lab and load the geometry only. That is expected: click OK.
+2. The parts arrive already arranged. Don't re-arrange them; if you do, keep at least 6 mm
+   between parts (16 mm on brim plates).
+3. Set the plate's walls, infill, layer height and brim from the table. These are process
+   settings for the whole plate.
+4. Slice. Any warning on the list in "Expected slicer warnings" is fine.
+5. Print. Then free the print-in-place parts (see "Freeing print-in-place parts").
+
+## Step 1: plate 1, the test coupon (about 2 hours)
+
+Plate 1 has the `test_coupon` and test copies of a `hex_coupler`, a `ring_sleeve`, a
+`bolt8_28` and the `stake_cap`. The real ones come on later plates.
+
+The coupon has:
 
 - **3 print-in-place spinners** standing on the bed beside the plate, each next to 1, 2 or 3
   dots on the plate edge: gaps 0.35, 0.45 and 0.55 mm
@@ -33,104 +68,135 @@ open to the side. One exception: the `trap` has a 66 mm bridge across the top of
   - the drive journal hole
   - an M8 nut thread
 
-Also print one `hex_coupler`, one `ring_sleeve`, one `bolt8_28` and the `stake_cap`, and try
-them in the coupon.
+Try the test pieces in the coupon:
 
 | Result | Do this |
 |---|---|
 | Spinner 2 (0.45, two dots) turns freely after a firm first twist | ✅ keep `pip_gap = 0.45` |
-| Spinner 2 is stuck, spinner 3 turns | set `pip_gap = 0.55` in `cad/params.scad`, run `python3 cad/check_parts.py` |
+| Spinner 2 is stuck, spinner 3 turns | set `pip_gap = 0.55` in `cad/params.scad`, then regenerate (see below) |
 | Spinner 1 already turns freely | your printer is precise; 0.45 still works (0.35 only if you want less wobble) |
 | The coupler, sleeve or spigot won't go in | set `fit_gap = 0.25` (default 0.20) and regenerate |
 | They rattle | set `fit_gap = 0.15` and regenerate |
 | The bolt won't screw into the coupon's nut thread | set `thread_gap = 0.40` (default 0.32) and regenerate |
 | The bolt wobbles in the thread | set `thread_gap = 0.25` and regenerate |
 
-**Freeing print-in-place parts:** let them cool, then twist firmly in both directions. If one
-won't move, put it in hot tap water (about 60 °C) for a minute and twist again. Never use
-pliers on the rolling surfaces.
+**Regenerate** after any change to `cad/params.scad`. From the `cad` folder, run
+`python3 check_parts.py`, then `python3 make_plates.py`; that rewrites the STLs and the plates.
 
-## Step 2: print in this order
+## Step 2: print the plates in this order
 
-Print each module completely and test it before starting the next, so a problem only costs
-one module.
+The plates are in build order. Each module can be tested as soon as all of its parts are
+printed, so a problem shows up early and only costs one plate:
 
-| # | Module | Parts | Test before moving on |
-|---|---|---|---|
-| 1 | Head | `drive_roller`, `drive_pin`, `head_side_a`, `head_side_b`, `gearbox`, 2 x `foot`, 7 x `bolt8_28`, 7 x `nut8` | assemble it on the table; turn the gearbox shaft socket by hand: the roller turns 2x, smoothly, with no tight spots |
-| 2 | One station | `stake_1`, `station_bracket`, 2 x `wheel_unit`, 2 x `pin3`, `stake_cap` | wheels spin freely after the first twist |
-| 3 | Tail | `tail_side_l`, `tail_side_r`, `tail_roller`, 2 x `takeup_block`, 2 x `takeup_nut`, 2 x `takeup_screw`, `skid_l`, `skid_r`, 1 x `foot`, 6 x `bolt8_28`, 6 x `nut8`, 2 x `spike` | the knobs move the blocks along the full window; the roller spins |
-| 4 | Anchors | 4 x `ground_screw`, `gs_wrench`, 4 x `washer50`, 4 x `bolt8_28` | screw one into your lawn and pull on it |
-| 5 | Other stations | `stake_2` to `stake_4`, 3 x `station_bracket`, 6 x `wheel_unit`, 6 x `pin3` | |
-| 6 | Line | `trap`, 5 x `chute_segment`, `crank_head`, `crank_arm`, 7 x `hex_coupler`, 6 x `ring_sleeve`, 1 x `pin3` (counts for 2 x 7 in risers; see `cad/parts-table.md`) | stack two segments on the table: both shafts turn together |
-| 7 | Porch stand | `post_lower` (2 if `cad/parts-table.md` says so), `post_upper`, `stand_tray`, 4 x `stand_shim`, 3 x `pin3` (4 with two lower posts) | slide the upper post fully into the lower one, then out to a pin hole |
-| 8 | Belt joint | `splice_template` | |
+- **Head**: assemble it on the table (build guide, section 2). Turn the gearbox's shaft socket
+  by hand: the roller turns twice per turn, smoothly, with no tight spots.
+- **Station 1**: the wheels spin freely after the first twist.
+- **Tail**: the knobs move the take-up blocks along the full window, and the roller spins.
+- **Anchors**: screw one ground screw into your lawn and pull on it.
+- **Chute line**: stack two segments on the table; both shafts turn together.
+- **Porch stand**: slide the upper post fully into the lower one, then out to a pin hole.
 
-Optional: 2 more `spike` (for the head's rear foot in soft turf).
+Counts are for 2 risers of 7 in. If the calculator changes `seg_count` or `stand_h` for your
+steps, regenerate: `cad/parts-table.md` and the plates then match your steps.
+
+<!-- plate-table: written by cad/make_plates.py -->
+| # | File | Parts | For | Settings | g | Time |
+|---|---|---|---|---|---|---|
+| 1 | `01_test_coupon_etc.3mf` | `test_coupon`, `hex_coupler`, `ring_sleeve`, `bolt8_28`, `stake_cap` | test, head, station 1 | 3 walls, 15 % | 63 | 1h 56m 37s |
+| 2 | `02_bolt8_28_etc.3mf` | 7 x `hex_coupler`, 17 x `bolt8_28`, 14 x `pin3`, 2 x `takeup_screw` | head, tail | 3 walls, 100 %, 5 mm brim | 91 | 3h 28m 10s |
+| 3 | `03_washer50_etc.3mf` | `drive_pin`, 6 x `ring_sleeve`, 13 x `nut8`, 2 x `takeup_block`, 2 x `takeup_nut`, 4 x `washer50`, 4 x `stand_shim`, `splice_template` | head, tail, anchors, porch stand, belt joint | 3 walls, 100 % | 111 | 3h 16m 46s |
+| 4 | `04_head_side_b_etc.3mf` | `head_side_b`, `foot`, `stake_cap`, `crank_arm` | head, station 1, chute line | 4 walls, 30 % | 150 | 5h 0m 32s |
+| 5 | `05_head_side_a_etc.3mf` | `head_side_a`, 2 x `foot`, `station_bracket` | head, station 1 | 4 walls, 30 % | 122 | 3h 36m 15s |
+| 6 | `06_gearbox_etc.3mf` | `gearbox`, `drive_roller`, `tail_roller` | head, tail | 4 walls, 15 %, 0.16 mm layers | 286 | 14h 7m 11s |
+| 7 | `07_wheel_unit.3mf` | 8 x `wheel_unit` | station 1 | 4 walls, 15 %, 5 mm brim | 323 | 9h 28m 12s |
+| 8 | `08_tail_side_l_etc.3mf` | 3 x `station_bracket`, `tail_side_l` | station 1, tail | 4 walls, 30 % | 111 | 3h 25m 47s |
+| 9 | `09_stake_1_etc.3mf` | `stake_1`, `stake_2`, `stake_3` | station 1, stations 2-4 | 4 walls, 30 % | 115 | 2h 15m 51s |
+| 10 | `10_spike_etc.3mf` | `tail_side_r`, 4 x `spike` | tail | 4 walls, 30 % | 131 | 3h 15m 40s |
+| 11 | `11_skid_l_etc.3mf` | `skid_l`, `skid_r` | tail | 4 walls, 30 % | 71 | 2h 2m 35s |
+| 12 | `12_gs_wrench_etc.3mf` | `gs_wrench`, 4 x `ground_screw` | anchors | 4 walls, 30 %, 5 mm brim | 140 | 6h 21m 13s |
+| 13 | `13_post_lower_etc.3mf` | `stake_4`, `post_lower` | stations 2-4, porch stand | 4 walls, 30 % | 82 | 1h 44m 23s |
+| 14 | `14_crank_head_etc.3mf` | `crank_head`, `trap`, `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 279 | 8h 11m 37s |
+| 15 | `15_chute_segment.3mf` | 3 x `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 353 | 11h 30m 7s |
+| 16 | `16_chute_segment.3mf` | `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 118 | 3h 54m 46s |
+| 17 | `17_stand_tray.3mf` | `stand_tray` | porch stand | 4 walls, 30 % | 31 | 53m 57s |
+| 18 | `18_post_upper.3mf` | `post_upper` | porch stand | 4 walls, 30 % | 40 | 1h 12m 13s |
+
+All plates: **2.62 kg** of filament (test coupon plate included).
+<!-- /plate-table -->
+
+Times are PrusaSlicer's estimate with Bambu-like speeds and accelerations. Bambu Studio's
+numbers will differ, probably shorter. Filament grams are reliable.
+
+**Big plates.** If one part fails mid-print on a multi-part plate, use Bambu's **Skip
+objects** (on the printer screen or in Bambu Handy) to stop just that part. Reprint it alone
+later from `cad/stl/`.
+
+## Expected slicer warnings
+
+Bambu Studio may warn about some of these. PrusaSlicer's stability check flagged them too. Each
+one was traced to its spot in the G-code and is intended:
+
+| Part | Warning | Why it's fine |
+|---|---|---|
+| `crank_arm` | floating region, overhang | The spinning grip's first layer prints 0.4 mm (2 layers of air) above the arm on purpose. That is the print-in-place gap. The first twist breaks it free; if it ever stays stuck, the handle still works as a fixed grip. |
+| `gearbox`, `tail_roller` | low bed adhesion | The rotor and the axle inside stand on a small base, but their bearings hold them within 0.45 mm all the way up, so they can't tip over. |
+| `stake_*`, `post_lower` | long bridging extrusions, floating bridge anchors | Internal bridges: the first solid layer laid over the part's own infill. Some ends land between infill lines, which is normal. The socket ceilings are 16 mm bridges held on both sides. |
+| `trap` | 66 mm bridge | Across the top of the drop slot at print height 62 mm. Expect a little sag; trim any strands. |
+| `test_coupon` | loose extrusions | Small overhangs on the test spinners. It is only a test piece. |
+
+## Freeing print-in-place parts
+
+Let them cool, then twist firmly in both directions. If one won't move, put it in hot tap
+water (about 60 °C) for a minute and twist again. Never use pliers on the rolling surfaces.
 
 ## All parts
 
-A copy of `cad/parts-table.md` for the default site (2 risers of 7 in). `cad/check_parts.py`
-rewrites `cad/parts-table.md` whenever you change `cad/params.scad`. After you measure your
-steps and re-run the calculator, take the quantities from that file: the number of chute
-segments, couplers, sleeves and lower posts depends on your steps. Sizes are as the part sits
-on the bed. "(diagonal)" parts are exported turned 45° so they fit across the 256 mm bed.
-Grams are estimates from the meshes with the listed walls and infill.
+A copy of `cad/parts-table.md` for the default site (2 risers of 7 in). The plate files already
+contain every copy. Sizes are as the part sits on the bed. "(diagonal)" parts are exported
+turned 45° so they fit across the 256 mm bed. Grams are the checker's estimate from the meshes;
+the slicer's figures are in the plate table and in `cad/slice-report.md`.
 
-| Part (STL) | Qty | Size on the bed, mm | Walls | Infill | ~g each | What it is |
+<!-- parts-table: written by cad/check_parts.py -->
+| Part (STL) | Qty | Size on the bed, mm | Walls | Infill | ~g each (mesh estimate) | What it is |
 |---|---|---|---|---|---|---|
 | `test_coupon` | 1 | 150 x 93 x 20 | 3 | 15 % | 60 | PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut) |
-| `wheel_unit` | 8 | 30 x 30 x 115 | 2 | 15 % | 22 | station wheel, print-in-place (2 per station) |
+| `wheel_unit` | 8 | 30 x 30 x 115 | 4 | 15 % | 37 | station wheel, print-in-place (2 per station) |
 | `station_bracket` | 4 | 28 x 109 x 16 | 4 | 30 % | 22 | station bracket (holds 2 wheels on the stake) |
 | `stake_1` | 1 | 216 x 203 x 24 (diagonal) | 4 | 30 % | 45 | station 1 stake (nearest the sidewalk) |
 | `stake_2` | 1 | 205 x 191 x 24 (diagonal) | 4 | 30 % | 43 | station 2 stake |
 | `stake_3` | 1 | 194 x 180 x 24 (diagonal) | 4 | 30 % | 40 | station 3 stake |
 | `stake_4` | 1 | 182 x 169 x 24 (diagonal) | 4 | 30 % | 38 | station 4 stake (nearest the steps) |
-| `drive_roller` | 1 | 67 x 67 x 124 | 3 | 10 % | 94 | drive roller with 17T pinion |
-| `drive_pin` | 1 | 20 x 20 x 35 | 4 | 100 % | 5 | drive roller A-side journal pin (press in) |
+| `drive_roller` | 1 | 67 x 67 x 124 | 4 | 15 % | 127 | drive roller with 17T pinion |
+| `drive_pin` | 1 | 20 x 20 x 35 | 3 | 100 % | 5 | drive roller A-side journal pin (press in) |
 | `head_side_a` | 1 | 206 x 196 x 6 | 4 | 30 % | 73 | head side frame A (round journal hole) |
 | `head_side_b` | 1 | 237 x 196 x 6 | 4 | 30 % | 88 | head side frame B (open journal slot, gearbox mount) |
-| `gearbox` | 1 | 94 x 111 x 91 | 3 | 10 % | 99 | gearbox: 34T crown gear rotor in its housing, print-in-place |
-| `trap` | 1 | 103 x 37 x 152 | 3 | 15 % | 32 | drop trap (bottom of the chute, rests on the head frames) |
+| `gearbox` | 1 | 94 x 111 x 91 | 4 | 15 % | 132 | gearbox: 34T crown gear rotor in its housing, print-in-place |
+| `trap` | 1 | 103 x 37 x 152 | 4 | 15 % | 32 | drop trap (bottom of the chute, rests on the head frames) |
 | `foot` | 3 | 36 x 196 x 24 | 4 | 30 % | 30 | foot crossbar (2 head, 1 tail rear) |
 | `tail_side_l` | 1 | 227 x 218 x 28 | 4 | 30 % | 70 | tail side frame, left (-Y) |
 | `tail_side_r` | 1 | 227 x 218 x 28 | 4 | 30 % | 70 | tail side frame, right (+Y) |
-| `tail_roller` | 1 | 45 x 45 x 90 | 3 | 10 % | 46 | tail roller, print-in-place |
-| `takeup_block` | 2 | 22 x 24 x 36 | 4 | 40 % | 12 | take-up block (one per side) |
-| `takeup_nut` | 2 | 16 x 16 x 8 | 4 | 100 % | 2 | take-up square nut |
-| `takeup_screw` | 2 | 21 x 22 x 108 | 4 | 100 % | 11 | take-up screw with knob |
+| `tail_roller` | 1 | 45 x 45 x 90 | 4 | 15 % | 61 | tail roller, print-in-place |
+| `takeup_block` | 2 | 22 x 24 x 36 | 3 | 100 % | 13 | take-up block (one per side) |
+| `takeup_nut` | 2 | 16 x 16 x 8 | 3 | 100 % | 2 | take-up square nut |
+| `takeup_screw` | 2 | 21 x 22 x 108 | 3 | 100 % | 11 | take-up screw with knob |
 | `skid_l` | 1 | 239 x 59 x 24 | 4 | 30 % | 46 | tail skid, left |
 | `skid_r` | 1 | 239 x 59 x 24 | 4 | 30 % | 46 | tail skid, right |
-| `chute_segment` | 5 | 167 x 136 x 230 | 2 | 15 % | 114 | chute segment with print-in-place drive shaft |
-| `crank_head` | 1 | 186 x 156 x 180 | 3 | 15 % | 134 | crank head: funnel + crank shaft, print-in-place |
-| `crank_arm` | 1 | 138 x 28 x 78 | 3 | 25 % | 50 | crank arm with spinning grip, print-in-place |
-| `pin3` | 14 | 7 x 7 x 26 | 3 | 100 % | 0 | 3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2) |
-| `splice_template` | 1 | 78 x 82 x 6 | 3 | 20 % | 13 | belt sewing template (box-and-X hole pattern) |
+| `chute_segment` | 5 | 167 x 136 x 230 | 4 | 15 % | 122 | chute segment with print-in-place drive shaft |
+| `crank_head` | 1 | 186 x 156 x 180 | 4 | 15 % | 142 | crank head: funnel + crank shaft, print-in-place |
+| `crank_arm` | 1 | 138 x 28 x 78 | 4 | 30 % | 61 | crank arm with spinning grip, print-in-place |
+| `pin3` | 14 | 28 x 7 x 5 | 3 | 100 % | 0 | 3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2) |
+| `splice_template` | 1 | 78 x 82 x 6 | 3 | 100 % | 13 | belt sewing template (box-and-X hole pattern) |
 | `stand_shim` | 4 | 40 x 22 x 3 | 3 | 100 % | 3 | shims to level the porch stand foot |
-| `hex_coupler` | 7 | 13 x 11 x 23 | 3 | 100 % | 3 | hex coupler between shafts |
+| `hex_coupler` | 7 | 23 x 13 x 11 | 3 | 100 % | 3 | hex coupler between shafts |
 | `ring_sleeve` | 6 | 25 x 25 x 8 | 3 | 100 % | 2 | sleeve between bearing rings |
 | `post_lower` | 1 | 229 x 233 x 22 (diagonal) | 4 | 30 % | 56 | porch stand post, lower |
 | `post_upper` | 1 | 226 x 226 x 20 (diagonal) | 4 | 30 % | 52 | porch stand post, upper |
-| `stand_tray` | 1 | 190 x 236 x 32 | 4 | 20 % | 40 | porch stand foot (put the candy bowl on it) |
-| `ground_screw` | 4 | 26 x 26 x 150 | 3 | 30 % | 27 | ground screw (head front foot, tail skid rear anchors) |
-| `spike` | 4 | 134 x 30 x 30 | 3 | 30 % | 20 | L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot |
-| `stake_cap` | 1 | 22 x 22 x 28 | 3 | 30 % | 6 | push the stakes in through this cap |
-| `gs_wrench` | 1 | 160 x 33 x 24 | 3 | 30 % | 27 | T-wrench for the ground screws |
-| `bolt8_28` | 17 | 13 x 15 x 33 | 4 | 100 % | 2 | printed M8 bolt (13 frame joints + 4 ground screws) |
-| `nut8` | 13 | 13 x 15 x 7 | 4 | 100 % | 1 | printed M8 nut |
+| `stand_tray` | 1 | 190 x 236 x 32 | 4 | 30 % | 40 | porch stand foot (put the candy bowl on it) |
+| `ground_screw` | 4 | 26 x 26 x 150 | 4 | 30 % | 32 | ground screw (head front foot, tail skid rear anchors) |
+| `spike` | 4 | 134 x 30 x 30 | 4 | 30 % | 21 | L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot |
+| `stake_cap` | 1 | 22 x 22 x 28 | 4 | 30 % | 8 | push the stakes in through this cap |
+| `gs_wrench` | 1 | 160 x 33 x 24 | 4 | 30 % | 31 | T-wrench for the ground screws |
+| `bolt8_28` | 17 | 13 x 15 x 33 | 3 | 100 % | 2 | printed M8 bolt (13 frame joints + 4 ground screws) |
+| `nut8` | 13 | 13 x 15 x 7 | 3 | 100 % | 1 | printed M8 nut |
 | `washer50` | 4 | 50 x 50 x 3 | 3 | 100 % | 7 | 50 mm washer over a ground screw |
-
-Filament for one machine (test coupon excluded): **about 2.50 kg** (estimate from the meshes; your slicer gives the real number).
-
-## Plates (suggested groupings)
-
-| Plate | Parts |
-|---|---|
-| Small parts 1 | 17 x `bolt8_28`, 13 x `nut8`, 14 x `pin3`, 7 x `hex_coupler`, 6 x `ring_sleeve`, 2 x `takeup_nut`, `drive_pin` |
-| Small parts 2 | 4 x `washer50`, 4 x `stand_shim`, `stake_cap`, `splice_template`, 2 x `takeup_block` |
-| Wheels | 4 x `wheel_unit` per plate (2 plates) |
-| Each frame, skid, stake, post | one per plate (they fill the bed) |
-| Chute segments | 1 per plate (230 mm tall; brim on) |
-
-**Printing time** (P2S, PLA, 0.2 mm): roughly 50-70 h in total. Start with the test coupon and
-the head module now; you have about 18 days to Halloween.
+<!-- /parts-table -->

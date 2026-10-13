@@ -47,12 +47,13 @@ ANCHORING (belt tension must go into the ground at both ends)
   head: 40 N pull at 120 mm -> 4.8 N.m; tipping arm 170 mm -> 28 N uplift on the 2 anchors of the foot nearest the steps (ground screws): 14 N each, or 2.9 kg of ballast against tipping
   sliding with ballast only (nothing in the ground; wet grass mu 0.4): head needs 13 kg, tail 8 kg in total -> the ground screws (or spikes) must hold the 40 N; ballast only helps against tipping
 
-PLA STRESS CHECKS (parts printed with layers across the load are the weak case)
-  tail axle Ø12 (layers across): 5.3 MPa bending  (PLA interlayer ~20-30 MPa)
+PLA STRESS CHECKS (parts printed with layers across the load are the weak case; only the printed walls
+  count: 4 walls = a 1.68 mm solid shell on every surface, the 15 % sparse infill inside is ignored)
+  tail axle Ø12 (layers across, shell only): 7.3 MPa bending  (PLA interlayer ~20-30 MPa)
   torque path, shear in MPa at the dry crank torque 1.27 / 2x 2.54 / a 30 N yank 3.30 N.m (PLA across layers ~20-30):
-    line shaft tube Ø18/10             1.2 /   2.5 /   3.2
+    line shaft tube Ø18/10             1.4 /   2.9 /   3.7
     hex coupler 11 mm across flats     5.1 /  10.2 /  13.2
-    square drive 12.4 mm               3.2 /   6.4 /   8.3
+    square drive 12.4 mm               3.3 /   6.6 /   8.5
   gear teeth at 2x dry torque: 46 N tooth force -> 6.1 MPa (Lewis); crown teeth are printed with layers across
   porch stand: about 7 N.m tips the stand sideways when cranking hard -> tie the post to a railing, or about 8 kg on the tray (two 1-gallon water jugs), or hold the funnel rim
   station wheel axles: < 3 MPa

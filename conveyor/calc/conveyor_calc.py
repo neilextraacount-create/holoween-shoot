@@ -246,18 +246,25 @@ def main():
       f" -> the ground screws (or spikes) must hold the {H:.0f} N; ballast only helps against tipping")
 
     # ------------------------------------------------------------ PLA stress checks
-    p("\nPLA STRESS CHECKS (parts printed with layers across the load are the weak case)")
-    d = 2 * g("dr_axle_r")
-    M = (2 * T0) * (L_w / 1000) / 4
-    s_ax = M / (math.pi * (d / 1000) ** 3 / 32) / 1e6
-    p(f"  tail axle Ø{d:.0f} (layers across): {s_ax:.1f} MPa bending  (PLA interlayer ~20-30 MPa)")
+    p("\nPLA STRESS CHECKS (parts printed with layers across the load are the weak case; only the printed walls")
+    p("  count: 4 walls = a 1.68 mm solid shell on every surface, the 15 % sparse infill inside is ignored)")
+    shell = 4 * 0.42
+    ro = g("dr_axle_r")
+    ri = max(ro - shell, 0.0)
+    M = (2 * T0) * (L_w / 1000) / 4                                 # conservative: whole load at mid-span
+    s_ax = M * 1000 * ro / (math.pi / 4 * (ro ** 4 - ri ** 4))
+    p(f"  tail axle Ø{2*ro:.0f} (layers across, shell only): {s_ax:.1f} MPa bending  (PLA interlayer ~20-30 MPa)")
     t1 = rows[0][6]
     tc = t1 * 2
     ty = 30 * g("crank_r") / 1000                                   # hard yank: 30 N on the handle
-    J = math.pi / 32 * ((2 * g("shaft_or")) ** 4 - (2 * g("shaft_ir")) ** 4)
-    zt_hex = 0.217 * (math.sqrt(3) / 2 * g("hex_af") ** 2) * g("hex_af")
+    so, si = g("shaft_or"), g("shaft_ir")
+    if so - shell <= si + shell:                                    # outer and bore shells meet: the tube prints solid
+        J = math.pi / 2 * (so ** 4 - si ** 4)
+    else:
+        J = math.pi / 2 * (so ** 4 - (so - shell) ** 4 + (si + shell) ** 4 - si ** 4)
+    zt_hex = 0.217 * (math.sqrt(3) / 2 * g("hex_af") ** 2) * g("hex_af")    # 100 % infill: solid
     sq = 12.4
-    zt_sq = 0.208 * sq ** 3
+    zt_sq = min(0.208 * sq ** 3, 2 * (sq - shell) ** 2 * shell)     # thin-walled square tube (Bredt) if not solid
     p(f"  torque path, shear in MPa at the dry crank torque {t1:.2f} / 2x {tc:.2f} / a 30 N yank {ty:.2f} N.m (PLA across layers ~20-30):")
     for nm, z in ((f"line shaft tube Ø{2*g('shaft_or'):.0f}/{2*g('shaft_ir'):.0f}", J / g("shaft_or")),
                   (f"hex coupler {g('hex_af'):.0f} mm across flats", zt_hex), (f"square drive {sq} mm", zt_sq)):

@@ -1,0 +1,489 @@
+[
+ {
+  "name": "test_coupon",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [
+   "Low bed adhesion",
+   "Loose extrusions"
+  ],
+  "other": [],
+  "grams": "52.23",
+  "time": "1h 33m 13s",
+  "layers": 100
+ },
+ {
+  "name": "wheel_unit",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "40.36",
+  "time": "1h 16m 14s",
+  "layers": 576
+ },
+ {
+  "name": "station_bracket",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "19.21",
+  "time": "35m 4s",
+  "layers": 78
+ },
+ {
+  "name": "stake_1",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [
+   "Long bridging extrusions"
+  ],
+  "other": [],
+  "grams": "40.71",
+  "time": "48m 5s",
+  "layers": 120
+ },
+ {
+  "name": "stake_2",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [
+   "Long bridging extrusions"
+  ],
+  "other": [],
+  "grams": "38.46",
+  "time": "45m 44s",
+  "layers": 120
+ },
+ {
+  "name": "stake_3",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [
+   "Long bridging extrusions"
+  ],
+  "other": [],
+  "grams": "36.21",
+  "time": "43m 15s",
+  "layers": 120
+ },
+ {
+  "name": "stake_4",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [
+   "Long bridging extrusions"
+  ],
+  "other": [],
+  "grams": "33.97",
+  "time": "40m 45s",
+  "layers": 120
+ },
+ {
+  "name": "drive_roller",
+  "ok": true,
+  "layer": 0.16,
+  "brim": false,
+  "alerts": [],
+  "other": [
+   "[2026-10-13 12:45:33.087327] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.090467] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.119722] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.121723] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.190616] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.346702] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.408459] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.534222] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.578870] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.781952] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.927155] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:33.977352] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.022991] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.032195] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.038840] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.144735] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.191726] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.248492] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.280392] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:34.312197] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:38.507028] [0x00007fbe0fbfb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:38.537665] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:38.551916] [0x00007fbe0f3f96c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:38.564022] [0x00007fbe0fbfb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
+   "[2026-10-13 12:45:38.567127] [0x00007fbe0fbfb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input."
+  ],
+  "grams": "106.46",
+  "time": "7h 15m 41s",
+  "layers": 774
+ },
+ {
+  "name": "drive_pin",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "5.30",
+  "time": "16m 39s",
+  "layers": 175
+ },
+ {
+  "name": "head_side_a",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "53.35",
+  "time": "1h 34m 49s",
+  "layers": 30
+ },
+ {
+  "name": "head_side_b",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "64.46",
+  "time": "1h 58m 40s",
+  "layers": 30
+ },
+ {
+  "name": "gearbox",
+  "ok": true,
+  "layer": 0.16,
+  "brim": false,
+  "alerts": [
+   "Low bed adhesion"
+  ],
+  "other": [],
+  "grams": "118.17",
+  "time": "4h 30m 31s",
+  "layers": 570
+ },
+ {
+  "name": "trap",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "31.08",
+  "time": "1h 17m 27s",
+  "layers": 758
+ },
+ {
+  "name": "foot",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "24.63",
+  "time": "43m 6s",
+  "layers": 120
+ },
+ {
+  "name": "tail_side_l",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "53.25",
+  "time": "1h 40m 52s",
+  "layers": 140
+ },
+ {
+  "name": "tail_side_r",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "53.24",
+  "time": "1h 40m 1s",
+  "layers": 140
+ },
+ {
+  "name": "tail_roller",
+  "ok": true,
+  "layer": 0.16,
+  "brim": false,
+  "alerts": [
+   "Low bed adhesion"
+  ],
+  "other": [],
+  "grams": "60.85",
+  "time": "2h 14m 41s",
+  "layers": 563
+ },
+ {
+  "name": "takeup_block",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "12.85",
+  "time": "25m 57s",
+  "layers": 183
+ },
+ {
+  "name": "takeup_nut",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "1.83",
+  "time": "5m 8s",
+  "layers": 40
+ },
+ {
+  "name": "takeup_screw",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "11.75",
+  "time": "50m 55s",
+  "layers": 540
+ },
+ {
+  "name": "skid_l",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "35.30",
+  "time": "1h 1m 25s",
+  "layers": 120
+ },
+ {
+  "name": "skid_r",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "35.30",
+  "time": "1h 1m 18s",
+  "layers": 120
+ },
+ {
+  "name": "chute_segment",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "117.73",
+  "time": "3h 55m 3s",
+  "layers": 1148
+ },
+ {
+  "name": "crank_head",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "130.33",
+  "time": "3h 35m 1s",
+  "layers": 900
+ },
+ {
+  "name": "crank_arm",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [
+   "Floating object part",
+   "Collapsing overhang"
+  ],
+  "other": [],
+  "grams": "55.07",
+  "time": "2h 2m 53s",
+  "layers": 390
+ },
+ {
+  "name": "pin3",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "0.35",
+  "time": "1m 50s",
+  "layers": 23
+ },
+ {
+  "name": "splice_template",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "12.99",
+  "time": "28m 26s",
+  "layers": 30
+ },
+ {
+  "name": "stand_shim",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "3.20",
+  "time": "4m 29s",
+  "layers": 15
+ },
+ {
+  "name": "hex_coupler",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "3.09",
+  "time": "6m 15s",
+  "layers": 55
+ },
+ {
+  "name": "ring_sleeve",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "1.78",
+  "time": "3m 41s",
+  "layers": 40
+ },
+ {
+  "name": "post_lower",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [
+   "Floating bridge anchors",
+   "Long bridging extrusions"
+  ],
+  "other": [],
+  "grams": "48.36",
+  "time": "1h 3m 39s",
+  "layers": 110
+ },
+ {
+  "name": "post_upper",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "40.21",
+  "time": "1h 12m 24s",
+  "layers": 100
+ },
+ {
+  "name": "stand_tray",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "31.11",
+  "time": "53m 55s",
+  "layers": 160
+ },
+ {
+  "name": "ground_screw",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "28.30",
+  "time": "1h 30m 4s",
+  "layers": 750
+ },
+ {
+  "name": "spike",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "19.51",
+  "time": "26m 1s",
+  "layers": 150
+ },
+ {
+  "name": "stake_cap",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "6.39",
+  "time": "17m 2s",
+  "layers": 140
+ },
+ {
+  "name": "gs_wrench",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "27.00",
+  "time": "54m 44s",
+  "layers": 120
+ },
+ {
+  "name": "bolt8_28",
+  "ok": true,
+  "layer": 0.2,
+  "brim": true,
+  "alerts": [],
+  "other": [],
+  "grams": "2.38",
+  "time": "14m 53s",
+  "layers": 165
+ },
+ {
+  "name": "nut8",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "0.87",
+  "time": "3m 31s",
+  "layers": 35
+ },
+ {
+  "name": "washer50",
+  "ok": true,
+  "layer": 0.2,
+  "brim": false,
+  "alerts": [],
+  "other": [],
+  "grams": "7.10",
+  "time": "8m 15s",
+  "layers": 15
+ }
+]

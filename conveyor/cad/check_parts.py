@@ -47,44 +47,44 @@ IN = 25.4
 # name, qty, walls, infill %, expected bodies, turn 45 deg for the bed, what it is
 PARTS = [
     ("test_coupon",     1, 3, 15, 7, False, "PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut)"),
-    ("wheel_unit",      8, 2, 15, 2, False, "station wheel, print-in-place (2 per station)"),
+    ("wheel_unit",      8, 4, 15, 2, False, "station wheel, print-in-place (2 per station)"),
     ("station_bracket", 4, 4, 30, 1, False, "station bracket (holds 2 wheels on the stake)"),
     ("stake_1",         1, 4, 30, 1, True,  "station 1 stake (nearest the sidewalk)"),
     ("stake_2",         1, 4, 30, 1, True,  "station 2 stake"),
     ("stake_3",         1, 4, 30, 1, True,  "station 3 stake"),
     ("stake_4",         1, 4, 30, 1, True,  "station 4 stake (nearest the steps)"),
-    ("drive_roller",    1, 3, 10, 1, False, "drive roller with 17T pinion"),
-    ("drive_pin",       1, 4, 100, 1, False, "drive roller A-side journal pin (press in)"),
+    ("drive_roller",    1, 4, 15, 1, False, "drive roller with 17T pinion"),
+    ("drive_pin",       1, 3, 100, 1, False, "drive roller A-side journal pin (press in)"),
     ("head_side_a",     1, 4, 30, 1, False, "head side frame A (round journal hole)"),
     ("head_side_b",     1, 4, 30, 1, False, "head side frame B (open journal slot, gearbox mount)"),
-    ("gearbox",         1, 3, 10, 2, False, "gearbox: 34T crown gear rotor in its housing, print-in-place"),
-    ("trap",            1, 3, 15, 1, False, "drop trap (bottom of the chute, rests on the head frames)"),
+    ("gearbox",         1, 4, 15, 2, False, "gearbox: 34T crown gear rotor in its housing, print-in-place"),
+    ("trap",            1, 4, 15, 1, False, "drop trap (bottom of the chute, rests on the head frames)"),
     ("foot",            3, 4, 30, 1, False, "foot crossbar (2 head, 1 tail rear)"),
     ("tail_side_l",     1, 4, 30, 1, False, "tail side frame, left (-Y)"),
     ("tail_side_r",     1, 4, 30, 1, False, "tail side frame, right (+Y)"),
-    ("tail_roller",     1, 3, 10, 2, False, "tail roller, print-in-place"),
-    ("takeup_block",    2, 4, 40, 1, False, "take-up block (one per side)"),
-    ("takeup_nut",      2, 4, 100, 1, False, "take-up square nut"),
-    ("takeup_screw",    2, 4, 100, 1, False, "take-up screw with knob"),
+    ("tail_roller",     1, 4, 15, 2, False, "tail roller, print-in-place"),
+    ("takeup_block",    2, 3, 100, 1, False, "take-up block (one per side)"),
+    ("takeup_nut",      2, 3, 100, 1, False, "take-up square nut"),
+    ("takeup_screw",    2, 3, 100, 1, False, "take-up screw with knob"),
     ("skid_l",          1, 4, 30, 1, False, "tail skid, left"),
     ("skid_r",          1, 4, 30, 1, False, "tail skid, right"),
-    ("chute_segment",   5, 2, 15, 2, False, "chute segment with print-in-place drive shaft"),
-    ("crank_head",      1, 3, 15, 2, False, "crank head: funnel + crank shaft, print-in-place"),
-    ("crank_arm",       1, 3, 25, 2, False, "crank arm with spinning grip, print-in-place"),
+    ("chute_segment",   5, 4, 15, 2, False, "chute segment with print-in-place drive shaft"),
+    ("crank_head",      1, 4, 15, 2, False, "crank head: funnel + crank shaft, print-in-place"),
+    ("crank_arm",       1, 4, 30, 2, False, "crank arm with spinning grip, print-in-place"),
     ("pin3",           14, 3, 100, 1, False, "3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2)"),
-    ("splice_template", 1, 3, 20, 1, False, "belt sewing template (box-and-X hole pattern)"),
+    ("splice_template", 1, 3, 100, 1, False, "belt sewing template (box-and-X hole pattern)"),
     ("stand_shim",      4, 3, 100, 1, False, "shims to level the porch stand foot"),
     ("hex_coupler",     6, 3, 100, 1, False, "hex coupler between shafts"),
     ("ring_sleeve",     6, 3, 100, 1, False, "sleeve between bearing rings"),
     ("post_lower",      1, 4, 30, 1, True,  "porch stand post, lower"),
     ("post_upper",      1, 4, 30, 1, True,  "porch stand post, upper"),
-    ("stand_tray",      1, 4, 20, 1, False, "porch stand foot (put the candy bowl on it)"),
-    ("ground_screw",    4, 3, 30, 1, False, "ground screw (head front foot, tail skid rear anchors)"),
-    ("spike",           4, 3, 30, 1, False, "L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot"),
-    ("stake_cap",       1, 3, 30, 1, False, "push the stakes in through this cap"),
-    ("gs_wrench",       1, 3, 30, 1, False, "T-wrench for the ground screws"),
-    ("bolt8_28",       17, 4, 100, 1, False, "printed M8 bolt (13 frame joints + 4 ground screws)"),
-    ("nut8",           13, 4, 100, 1, False, "printed M8 nut"),
+    ("stand_tray",      1, 4, 30, 1, False, "porch stand foot (put the candy bowl on it)"),
+    ("ground_screw",    4, 4, 30, 1, False, "ground screw (head front foot, tail skid rear anchors)"),
+    ("spike",           4, 4, 30, 1, False, "L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot"),
+    ("stake_cap",       1, 4, 30, 1, False, "push the stakes in through this cap"),
+    ("gs_wrench",       1, 4, 30, 1, False, "T-wrench for the ground screws"),
+    ("bolt8_28",       17, 3, 100, 1, False, "printed M8 bolt (13 frame joints + 4 ground screws)"),
+    ("nut8",           13, 3, 100, 1, False, "printed M8 nut"),
     ("washer50",        4, 3, 100, 1, False, "50 mm washer over a ground screw"),
 ]
 
@@ -158,6 +158,11 @@ def T(x, y, z):
 def Rz(deg):
     a = math.radians(deg)
     return Mx([[math.cos(a), -math.sin(a), 0], [math.sin(a), math.cos(a), 0], [0, 0, 1]])
+
+
+def Ry(deg):
+    a = math.radians(deg)
+    return Mx([[math.cos(a), 0, math.sin(a)], [0, 1, 0], [-math.sin(a), 0, math.cos(a)]])
 
 
 def Rx(deg):
@@ -301,6 +306,16 @@ def clean_export(t, path):
     return e
 
 
+def fill_doc(tag, body, doc=HERE.parent / "docs" / "03-printing.md"):
+    """replace the text between <!-- tag... --> and <!-- /tag --> in the printing guide"""
+    if not doc.exists():
+        return
+    s = doc.read_text()
+    m = re.search(rf"(<!-- {tag}[^>]*-->\n)(.*?)(<!-- /{tag} -->)", s, re.S)
+    if m:
+        doc.write_text(s[:m.end(1)] + body.rstrip() + "\n" + s[m.start(3):])
+
+
 # ----------------------------------------------------------------------------- per-part checks
 def part_qty(V):
     """quantities that follow the parameters"""
@@ -375,24 +390,32 @@ def check_parts(rep, rendered, V):
                           f" ~{grams:.0f} g each{'; ' + '; '.join(problems) if problems else ''}")
     rep.head(f"FILAMENT ESTIMATE: about {total/1000:.2f} kg for one machine with the listed walls/infill"
              f" (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)")
-    md = ["| Part (STL) | Qty | Size on the bed, mm | Walls | Infill | ~g each | What it is |", "|---|---|---|---|---|---|---|"]
+    md = ["| Part (STL) | Qty | Size on the bed, mm | Walls | Infill | ~g each (mesh estimate) | What it is |", "|---|---|---|---|---|---|---|"]
     for name, qty, grams, ext, walls, infill, desc, turn in rows:
         md.append(f"| `{name}` | {qty} | {ext[0]:.0f} x {ext[1]:.0f} x {ext[2]:.0f}{' (diagonal)' if turn else ''} | {walls} |"
                   f" {infill} % | {grams:.0f} | {desc} |")
     md.append(f"\nFilament for one machine (test coupon excluded): **about {total/1000:.2f} kg** (estimate from the meshes;"
               f" your slicer gives the real number).")
     (HERE / "parts-table.md").write_text("\n".join(md) + "\n")
+    fill_doc("parts-table", "\n".join(md[:-1]))          # the guide quotes the slicer's total instead
     return rows
 
 
 # ----------------------------------------------------------------------------- assembly
+# parts whose STL is turned for printing: print pose = this matrix x the CAD (assembly) geometry
+PRINT_POSE = {"hex_coupler": lambda V: T(0, 0, V["hex_af"] / 2) @ Ry(90) @ Rz(30)}
+
+
 class Asm:
     def __init__(self, rep, V):
         self.rep, self.V, self.cache = rep, V, {}
 
     def mf(self, name):
         if name not in self.cache:
-            self.cache[name] = to_mf(load_tm(RAW / f"{name}.stl"))
+            m = to_mf(load_tm(RAW / f"{name}.stl"))
+            if name in PRINT_POSE:                       # parts exported lying down: back to the CAD frame
+                m = xf(m, np.linalg.inv(PRINT_POSE[name](self.V)))
+            self.cache[name] = m
         return self.cache[name]
 
     def bodies(self, name):
@@ -613,6 +636,26 @@ def stand_place(A, V, u_ch):
     return Mu, Mls, best, L_top
 
 
+def walls_closed(rep, label, mf, z0, z1, hw_top, V):
+    """the candy space must be closed: sample the middle of both side walls (floor to wall top) and
+    the floor across, every 2.5 mm along the piece, and require solid material at every sample"""
+    from shapely.geometry import Point, Polygon
+    wt = V["tr_out"] - V["tr_in"]
+    miss = []
+    z = z0
+    while z <= z1:
+        geom = Polygon()
+        for ring in mf.slice(z).to_polygons():
+            if len(ring) >= 3:
+                geom = geom.symmetric_difference(Polygon(ring).buffer(0))
+        hw, top = hw_top(z)
+        pts = [(sx * (hw + wt / 2), y) for sx in (-1, 1) for y in np.linspace(V["fl_top"] + 1, top - 1, 7)]
+        pts += [(x, V["fl_top"] - 0.45) for x in np.linspace(-hw + 1, hw - 1, 9)]
+        miss += [(round(z, 1), round(x, 1), round(y, 1)) for x, y in pts if not geom.contains(Point(x, y))]
+        z += 2.5
+    rep(not miss, f"{label}: side walls and floor solid all along ({'no gaps' if not miss else f'{len(miss)} open spots, first at z/x/y {miss[0]}'})")
+
+
 def check_line(rep, A, V):
     rep.head("LINE (chute segments, crank head, crank arm, porch stand), assembled")
     N = int(V["seg_count"])
@@ -623,6 +666,15 @@ def check_line(rep, A, V):
     sN_shaft = xf(seg[1], line_M(V, u_ch - V["seg_len"]))
     ch = A.bodies("crank_head")                   # [static, shaft]
     chs, chf = xf(ch[0], line_M(V, u_ch)), xf(ch[1], line_M(V, u_ch))
+    zt = V["sock_len"] + V["sock_tr"]
+    fz, fw = V["fn_z"], V["fn_w"]
+    def ch_profile(z):                      # inner half-width and wall top of the crank head's candy space at z
+        g = min(max((z - fz[0]) / (fz[1] - fz[0]), 0.0), 1.0) * fw
+        return V["tr_in"] + g, V["wl_top"] + g
+    za = V["ch_len"] - 2 - V["fn_k"] * (V["wl_top"] + fw - V["fl_top"])   # back wall starts closing the funnel here
+    walls_closed(rep, "crank head funnel (chute, 45 deg flare, mouth)", ch[0], zt + 1, za - 5, ch_profile, V)
+    walls_closed(rep, "chute segment trough", seg[0], zt + 1, V["seg_len"] + V["plain_ext"] - 3,
+                 lambda z: (V["tr_in"], V["wl_top"]), V)
     k("segment N plain end in the crank head socket", clip(sN, y0=-50, y1=50), clip(chs, y0=-50, y1=50), "fit", 0.30)
     socket_lock(A, V, f"segment {N}", seg[0], u_ch - V["seg_len"], "crank head", ch[0], u_ch)
     lane = xf(box(-V["tr_in"] + 3, V["tr_in"] - 3, V["fl_top"] + 0.3, V["fl_top"] + 18, 2.5, V["crank_head_len"] - 60), line_M(V, u_ch))

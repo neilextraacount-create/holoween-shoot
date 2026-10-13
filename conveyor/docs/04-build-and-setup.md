@@ -8,16 +8,20 @@ names match the STL files in `cad/stl/`.
 
 | When | What |
 |---|---|
-| Day 1 | order the belt; print the **test coupon**; measure the risers; re-run the calculator |
-| Days 1-4 | print the head module (drive roller, gearbox, frames, feet, bolts). Turn the gearbox by hand: it should spin freely and mesh smoothly with the roller's pinion. |
-| Days 3-8 | print one station and the tail module; dry-fit them in the yard |
-| Days 6-12 | print the chute segments, trap, crank head, crank arm and porch stand |
+| Day 1 | order the belt; print **plate 1** (test coupon); measure the risers; re-run the calculator |
+| Days 1-4 | **plates 2-6**: small parts, head frames, rollers and gearbox. Assemble the head on the table and turn the gearbox by hand: it should spin freely and mesh smoothly with the roller's pinion. |
+| Days 4-8 | **plates 7-13**: wheels, tail frames, stakes, spikes, skids, ground screws. Dry-fit one station and the tail in the yard. |
+| Days 8-12 | **plates 14-18**: chute segments, trap, crank head and porch stand |
 | When the belt arrives | sew the belt in place, tension it, track it, run candy tests |
-| Final week | the rest of the stations and spares; full rehearsal at dusk |
+| Final week | spares and reprints; full rehearsal at dusk |
+
+The plates and their settings are in [03-printing.md](03-printing.md); roughly 85 hours of
+printing in all.
 
 ## 0. Before printing the big parts
 
-1. **Print `test_coupon.stl`** (see [03-printing.md](03-printing.md)) and check the fits.
+1. **Print plate 1, `plates/01_test_coupon_etc.3mf`** (see [03-printing.md](03-printing.md)),
+   and check the fits.
 2. **Measure your steps**:
    - the number of risers
    - the height of each riser (top of one step to the top of the next)
@@ -34,7 +38,8 @@ names match the STL files in `cad/stl/`.
    Copy that `stake_len` line as it is: these are leg lengths, and each stake is 32 mm longer
    overall.
 4. Run `python3 cad/check_parts.py`. It re-exports every STL into `cad/stl/` and re-checks
-   everything, including the chute against your steps.
+   everything, including the chute against your steps. Then run `python3 cad/make_plates.py`
+   to rebuild the plates in `plates/` for your steps.
 
 ## 1. Choose the line
 

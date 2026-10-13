@@ -30,7 +30,7 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 
 | Item | Amount |
 |---|---|
-| PLA, any brand, 1.75 mm | about **2.5 kg** for the machine (the checker's estimate, see `cad/parts-table.md`) plus about 0.3 kg for the test coupon, test prints and mistakes: **buy 3 x 1 kg spools if you have none** (a 4th gives room for reprints). Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
+| PLA, any brand, 1.75 mm | about **2.6 kg** for all 18 plates, test coupon included (the slicer's figure, see `plates/plates.md`). A failed big plate can cost 0.3-0.5 kg, so **buy 4 x 1 kg spools if you have none**. Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
 
 ## 3. Things you probably already have (not bought for this)
 
@@ -51,8 +51,8 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 | | |
 |---|---|
 | Belt | about $35-45 |
-| Filament (if you have none) | about $36-60 for 3 spools |
-| **Total** | **about $35-45 if you already have filament; $70-105 if not** |
+| Filament (if you have none) | about $48-80 for 4 spools |
+| **Total** | **about $35-45 if you already have filament; $85-125 if not** |
 
 The previous version needed $180-230 of wood, bearings, chain and bolts. All of that is now
 printed.
