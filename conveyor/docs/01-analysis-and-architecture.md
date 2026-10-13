@@ -239,6 +239,15 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
 
 **Gear mesh**: checked in `make_crown.py`.
 
+**The whole machine on the site** (`cad/full_assembly.py`, `cad/full-assembly-report.txt`):
+every module is placed with the checker's transforms on the lawn, sidewalk and step model.
+- The head feet and the tail skids and foot sit within 2 mm of the ground.
+- Every stake goes 149-150 mm into the soil, as designed.
+- The carry run touches every carry wheel and the return run every return wheel, and the belt
+  clears everything else by at least 8 mm.
+- The return run stays 87 mm above the lawn.
+- The belt loop along this path is 41.0 ft, the same as the calculator's.
+
 ## 6. Risks, and what will tell you early
 
 | Risk | How likely | Early warning / fix |

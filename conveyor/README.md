@@ -9,7 +9,9 @@ underneath, like the moving walkway at an airport.
 <https://www.amazon.com/dp/B0BJ7X4THD>. Everything else is printed in PLA on a Bambu Lab P2S.
 Sewing the belt into a loop takes a needle and strong thread you probably already have.
 
-![Side profile, 2 risers](docs/side-profile-2-risers.svg)
+![The whole machine on your lawn and steps](docs/img/full-machine.png)
+
+![Side view](docs/img/full-machine-side.png)
 
 | Head (foot of the steps) | Station | Tail (sidewalk) | Porch end |
 |---|---|---|---|
@@ -24,6 +26,7 @@ Sewing the belt into a loop takes a needle and strong thread you probably alread
 | STL files | ✅ `cad/stl/` (40 part files, already in print orientation) |
 | Print plates | ✅ `plates/`: 18 ready-arranged P2S build plates (3MF) with their settings, in build order ([list](plates/plates.md)) |
 | Automated checks | ✅ every part renders, is watertight, fits the bed and prints without support (overhang scan); print-in-place gaps; every mating pair checked for overlap and clearance in its assembled position, including the chute over a model of your steps (`cad/check-report.txt`: all checks pass) |
+| Whole machine assembled | ✅ every module placed on the site model (`cad/full_assembly.py` → `cad/full-assembly-report.txt`): feet and skids sit on the lawn and sidewalk within 2 mm, every stake goes 150 mm into the soil, the belt rides on every wheel and clears everything else by at least 8 mm, the return run stays 87 mm off the lawn, the loop measures 41.0 ft |
 | Real slicer check | ✅ every part and every plate sliced with PrusaSlicer (the engine Bambu Studio is built on) on a P2S-like profile; every stability alert traced and fixed or explained; print-in-place gaps confirmed in the sliced G-code ([`cad/slice-report.md`](cad/slice-report.md), [`cad/gcode-gaps.md`](cad/gcode-gaps.md)) |
 | Loads, belt length, stake lengths, crank effort | ✅ `calc/conveyor_calc.py` → `calc/report-2-risers.txt` |
 | Physical prototype | ❌ **not built**. Friction, print fits and grip on the belt are estimates until you print the test coupon and the first module. |
@@ -77,6 +80,7 @@ cd cad
 python3 check_parts.py          # renders every part to stl/, runs all checks, writes check-report.txt
 python3 make_crown.py           # (run by check_parts) crown gear + gearbox mesh check
 python3 render_pictures.py      # assembly pictures in docs/img/ (needs xvfb-run)
+python3 full_assembly.py        # the whole machine on the site: ground contact, belt path, overview pictures
 python3 slice_all.py            # slices every part with PrusaSlicer, writes slice-report.md
 python3 gcode_gaps.py           # print-in-place gaps in the sliced G-code, writes gcode-gaps.md
 python3 make_plates.py          # lays the parts out on P2S plates, writes ../plates/ and the guide's plate table
