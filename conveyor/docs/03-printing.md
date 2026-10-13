@@ -63,7 +63,7 @@ one module.
 | 4 | Anchors | 4 x `ground_screw`, `gs_wrench`, 4 x `washer50`, 4 x `bolt8_28` | screw one into your lawn and pull on it |
 | 5 | Other stations | `stake_2` to `stake_4`, 3 x `station_bracket`, 6 x `wheel_unit`, 6 x `pin3` | |
 | 6 | Line | `trap`, 5 x `chute_segment`, `crank_head`, `crank_arm`, 7 x `hex_coupler`, 6 x `ring_sleeve`, 1 x `pin3` (counts for 2 x 7 in risers; see `cad/parts-table.md`) | stack two segments on the table: both shafts turn together |
-| 7 | Porch stand | `post_lower` (2 if `cad/parts-table.md` says so), `post_upper`, `stand_tray`, 4 x `stand_shim`, 3 x `pin3` | slide the upper post fully into the lower one, then out to a pin hole |
+| 7 | Porch stand | `post_lower` (2 if `cad/parts-table.md` says so), `post_upper`, `stand_tray`, 4 x `stand_shim`, 3 x `pin3` (4 with two lower posts) | slide the upper post fully into the lower one, then out to a pin hole |
 | 8 | Belt joint | `splice_template` | |
 
 Optional: 2 more `spike` (for the head's rear foot in soft turf).
@@ -104,13 +104,13 @@ Grams are estimates from the meshes with the listed walls and infill.
 | `chute_segment` | 5 | 167 x 136 x 230 | 2 | 15 % | 114 | chute segment with print-in-place drive shaft |
 | `crank_head` | 1 | 186 x 156 x 180 | 3 | 15 % | 134 | crank head: funnel + crank shaft, print-in-place |
 | `crank_arm` | 1 | 138 x 28 x 78 | 3 | 25 % | 50 | crank arm with spinning grip, print-in-place |
-| `pin3` | 14 | 7 x 7 x 26 | 3 | 100 % | 0 | 3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray (4), spares (2) |
+| `pin3` | 14 | 7 x 7 x 26 | 3 | 100 % | 0 | 3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2) |
 | `splice_template` | 1 | 78 x 82 x 6 | 3 | 20 % | 13 | belt sewing template (box-and-X hole pattern) |
 | `stand_shim` | 4 | 40 x 22 x 3 | 3 | 100 % | 3 | shims to level the porch stand foot |
 | `hex_coupler` | 7 | 13 x 11 x 23 | 3 | 100 % | 3 | hex coupler between shafts |
 | `ring_sleeve` | 6 | 25 x 25 x 8 | 3 | 100 % | 2 | sleeve between bearing rings |
-| `post_lower` | 1 | 229 x 233 x 22 (diagonal) | 4 | 30 % | 53 | porch stand post, lower |
-| `post_upper` | 1 | 226 x 226 x 20 (diagonal) | 4 | 30 % | 51 | porch stand post, upper |
+| `post_lower` | 1 | 229 x 233 x 22 (diagonal) | 4 | 30 % | 56 | porch stand post, lower |
+| `post_upper` | 1 | 226 x 226 x 20 (diagonal) | 4 | 30 % | 52 | porch stand post, upper |
 | `stand_tray` | 1 | 190 x 236 x 32 | 4 | 20 % | 40 | porch stand foot (put the candy bowl on it) |
 | `ground_screw` | 4 | 26 x 26 x 150 | 3 | 30 % | 27 | ground screw (head front foot, tail skid rear anchors) |
 | `spike` | 4 | 134 x 30 x 30 | 3 | 30 % | 20 | L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot |
@@ -120,7 +120,7 @@ Grams are estimates from the meshes with the listed walls and infill.
 | `nut8` | 13 | 13 x 15 x 7 | 4 | 100 % | 1 | printed M8 nut |
 | `washer50` | 4 | 50 x 50 x 3 | 3 | 100 % | 7 | 50 mm washer over a ground screw |
 
-Filament for one machine (test coupon excluded): **about 2.49 kg** (estimate from the meshes; your slicer gives the real number).
+Filament for one machine (test coupon excluded): **about 2.50 kg** (estimate from the meshes; your slicer gives the real number).
 
 ## Plates (suggested groupings)
 

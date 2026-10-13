@@ -139,17 +139,21 @@ Parts:
      grass.
   3. Put the foot's anchor hole over it, then a `washer50`, and screw a `bolt8_28` down into
      the head. Snug only.
-- **If a screw spins without biting (sand, mulch) or won't go in (roots, clay)**, weight alone
-  is not enough. The belt pulls each end toward the other with about 40 N, and on wet grass it
-  would take about 13 kg at the head and 8 kg at the tail to stop it sliding. So:
-  1. Something must still go into the ground to take the sideways pull. Push the screw into
-     its pilot hole anyway, as a peg, even if it won't bite. At the head, also push 2 spikes
-     into the rear foot's anchor holes, or tie the head frames back to a step railing post
-     with a rope.
-  2. Then add weight against lifting (water jugs or bricks):
-     - **Tail:** about **5 kg on the rear skid pads or the rear foot crossbar** (the sidewalk
-       end). Weight on the far pads doesn't stop the tail tipping.
-     - **Head:** about **3 kg on the front foot**.
+- The belt pulls each end toward the other with about 40 N. Weight on its own only holds
+  that with a lot of it: on wet grass about 13 kg at the head and 8 kg at the tail. So
+  something should still go into the ground:
+  - **A screw won't go in** (a root or a stone): move the pilot hole a few cm and try again.
+    For hard clay, water the spot the day before.
+  - **A screw spins without biting** (sand, mulch): leave it in its hole as a peg; it still
+    takes the sideways pull. At the head, also push 2 spikes into the rear foot's anchor
+    holes, or tie the head frames back to a step railing post with a rope. Then add weight
+    against lifting (water jugs or bricks):
+    - **Tail:** about **5 kg on the rear skid pads or the rear foot crossbar** (the sidewalk
+      end). Weight on the far pads doesn't stop the tail tipping.
+    - **Head:** about **3 kg on the front foot**.
+  - **Nothing can go into the ground at all** (paving, for example): put at least **13 kg on
+    the head's front foot** and **8 kg on the tail's rear pads or crossbar**, or tie the head
+    back to a railing.
 
 ## 6. Chute line, crank and porch stand
 
@@ -180,11 +184,11 @@ leave the line hanging from the gearbox.**
 4. Repeat with a sleeve and a coupler for each segment up to the last one, then the crank
    head. Prop the top end as you go.
 5. **Porch stand.** It goes in under the crank head once the line is complete:
-   1. On the bench, plug the lower post's short spigot into the tray socket and pin it. With 2
-      lower posts, first plug one's short spigot into the other's head socket and pin that
-      joint too.
+   1. On the bench, plug the lower post's short spigot into the tray socket. **Don't pin the
+      tray yet.** With 2 lower posts, first plug one's short spigot into the other's head
+      socket and pin that joint.
    2. Slide the upper post's long spigot **all the way** into the lower post's head (no pin
-      yet). The stand is now 35 mm shorter than its working height.
+      yet). The stand is now at least 35 mm shorter than its working height.
    3. Stand it on the porch with the upper post's short spigot just under the socket beneath
       the crank-head funnel. Turn the tray so its long arm points onto the porch and its short
       arm toward the edge.
@@ -193,7 +197,9 @@ leave the line hanging from the gearbox.**
    5. Push a `pin3` through the lower post's head and whichever of the 6 spigot holes lines up.
       The holes are 6 mm apart, so the height adjusts from 12 mm up to 18 mm down. Put
       `stand_shim`s under the tray arms if it rocks.
-6. **Steady the stand.** Cranking pushes sideways on the top of the line, hard enough to tip
+   6. Check the tray's long arm still points onto the porch, then push a `pin3` through
+      whichever of the tray's two crossing holes lines up with the lower post.
+6. **Steady the stand**, then take the prop away. Cranking pushes sideways on the top of the line, hard enough to tip
    the stand over. Do one of these:
    - tie the post to a porch railing or column with a strap or rope (best)
    - put about **8 kg on the tray**: two full 1-gallon water jugs on the side arms, plus your
@@ -279,9 +285,14 @@ The belt can stay sewn. Take things down in this order:
 
 1. **Line**:
    1. Take off the crank arm.
-   2. Pull the height pin and the crank-head socket pin. Lower the upper post into the lower
-      post (the stand drops 35 mm) and lift the stand out.
-   3. Lift off the crank head and the chute segments (top first), then the trap.
+   2. Have a helper hold the funnel, or set the stool or box under the crank head, at its
+      working height. Keep the top of the line held or propped until it is all off: never
+      leave it hanging from the gearbox.
+   3. Pull the height pin and the crank-head socket pin. Push the upper post down
+      into the lower post (the stand drops at least 35 mm while the line stays held) and lift
+      the stand out.
+   4. Lift off the crank head, then the chute segments (top first, moving the prop down as you
+      go), then the trap.
 2. **Tail**: unscrew the knobs and pull both take-up blocks out through their windows. Lift the
    roller out of the belt loop.
 3. **Head**:

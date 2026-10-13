@@ -44,7 +44,7 @@ are from search-result snapshots or marked **est.** Check the live listing befor
 | A strap, rope or 2 long zip ties | ties the porch stand post to a railing or column, so cranking can't tip it |
 | 2 full 1-gallon water jugs (about 8 kg) | ballast on the stand's foot if there is nothing to tie it to |
 | Candy bowl | sits on the stand's foot, right by the funnel |
-| Optional: water jugs or bricks | extra weight if your soil is too soft or too hard for the ground screws (about 5 kg at the tail, 3 kg at the head). It only stops lifting: the screws or spikes still go in as pegs (build guide, section 5). |
+| Optional: water jugs or bricks | extra weight if the ground screws won't bite (about 5 kg at the tail, 3 kg at the head, with the screws left in as pegs), or 13 kg and 8 kg if nothing can go into the ground (build guide, section 5) |
 
 ## 4. Totals
 

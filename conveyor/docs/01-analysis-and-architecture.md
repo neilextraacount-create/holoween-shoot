@@ -54,7 +54,7 @@ and the stand grows to match. Two lower posts stack for stands taller than about
 | Crank effort | **1.27 N·m = 12 N (2.6 lbf)** | 0.97 N·m = 9 N | drag x roller radius x 2 + journal friction, 85 % gear and 90 % shaft-line efficiency |
 | Grip needed on the drive roller | μ ≥ 0.17 | μ ≥ 0.11 | capstan equation, 180° wrap, 20 N pretension per run; ribbed PLA on webbing is roughly 0.3 dry, 0.2 wet |
 | Belt sag between stations | 14 mm light candy, 27 mm dense | | w·L²/8T over 1.23 m; the two runs are 44.6 mm apart at a station, so they never touch |
-| Tension test | 100 g hung midway between stations: extra dip 11-12 mm at 25 N, 13-14 mm at 20 N, 15-18 mm at 15 N per run | | includes belt stretch (EA 10-55 kN, guessed) against the screw take-up |
+| Tension test | 100 g laid across the belt midway between stations: extra dip 11-12 mm at 25 N, 13-14 mm at 20 N, 15-18 mm at 15 N per run | | includes belt stretch (EA 10-55 kN, guessed) against the screw take-up |
 | Speed | crank 45 rpm → belt 0.30 m/s; about 21 s from chute to basket | | |
 | Candy speed at the bottom of the chute | 2.6-3.1 m/s | | sliding friction 0.3-0.45; the drop trap stops it |
 | Tail tipping | 48 N uplift on the two rear skid ground screws (24 N each) | | 40 N belt pull acting 207 mm above the ground, 172 mm tipping arm |
@@ -154,7 +154,7 @@ The porch stand:
   can't lift off when you crank.
 - The upper post's long spigot slides into the lower post's deep socket. A pin through one of 6
   holes sets the height (+12 / -18 mm, 6 mm steps); the lower post is pinned into a
-  cross-shaped tray. With the pin out, this joint collapses 35 mm, more than the 28 mm end
+  cross-shaped tray. With the pin out, this joint collapses at least 35 mm from any hole, more than the 28 mm end
   spigots, so the stand goes in under (and comes out from under) a crank head that is already
   on the line.
 - A porch high enough to need a stand over about 566 mm gets two lower posts, pinned end to end
@@ -235,7 +235,7 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
 | Belt walks off to one side | medium | crowned rollers centre it; steer with the two tail knobs (build guide) |
 | Stand tips while cranking | high if left free | tie it to a railing, 8 kg on the tray, or hold the funnel |
 | Stakes lean in soft lawn | medium | pre-soak, push straight; the belt load on each stake is under 10 N |
-| Ground screws pull out | low-medium | 24 N each is needed; if they spin freely, use ballast |
+| Ground screws pull out | low-medium | 24 N each is needed; if they spin freely, leave them in as pegs and add weight against lifting (build guide, section 5) |
 | A hex coupler breaks on a hard yank | low | crank smoothly; a spare is printed |
 | Candy jams | low with fun-size candy | limits: about 30 mm thick, 110 mm long |
 | Riser height different from 7 in | **certain to need checking** | measure and re-run the calculator **before printing the chute and stand** |
@@ -267,7 +267,7 @@ after the fixes caught three more problems, now fixed too:
 A second independent review (docs, build steps, printability, physics; each finding
 re-checked by a skeptic) confirmed 18 more issues, all fixed:
 - **Porch stand**: it still could not be fitted under a crank head already on the line. Its
-  height joint now collapses 35 mm. The 2-lower-post stand for tall porches now has matching
+  height joint now collapses at least 35 mm from any height hole. The 2-lower-post stand for tall porches now has matching
   pin holes and is modelled by the checker.
 - **Crank head**: the stand socket started printing from a 1 mm² point on the plate; it now
   has a foot.

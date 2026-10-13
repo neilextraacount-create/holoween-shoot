@@ -655,11 +655,13 @@ module stand_shim() { difference() { cube([40, 22, 3]); translate([20, 11, -1]) 
 spig_len = 28;
 // The upper post's long bottom spigot slides into the lower post's deep head socket; a pin through one
 // of 6 holes sets the height (+12 / -18 mm, 6 mm steps). Pins at the crank head and the tray carry uplift.
-// The joint can collapse 35 mm, more than the 28 mm end spigots, so the stand goes in under (and comes
-// out from under) a crank head that is already seated on the line. Every pin is 15 mm from its shoulder.
-ph_len   = 75;                               // lower post head tube (73 mm deep socket)
-pu_spig  = 71;                               // upper post bottom spigot (adjustable; 36 mm in at nominal)
-pu_gap   = 35;                               // nominal spigot showing between the lower head and the upper post
+// From any hole the joint can collapse at least 35 mm, more than the 28 mm end spigots, so the stand goes
+// in under (and comes out from under) a crank head that is already seated on the line. Every pin is
+// 15 mm from its shoulder.
+pu_dmin  = 24; pu_dmax = 54;                 // spigot insertion at the highest / lowest height hole (nominal 36)
+ph_len   = 93;                               // lower post head tube (91 mm deep socket)
+pu_spig  = pu_dmax + 35;                     // upper post bottom spigot: 35 mm of collapse left at the lowest hole
+pu_gap   = pu_spig - 36;                     // nominal spigot showing between the lower head and the upper post
 post_n   = spig_len + ph_len + (stand_h - sk_hd - pu_gap - ph_len) / 2 <= 315 ? 1 : 2;   // lower posts (two stacked for tall stands; 315 fits the bed diagonal)
 post_b   = post_n == 1 ? (stand_h - sk_hd - pu_gap - ph_len) / 2 : (stand_h - sk_hd - pu_gap - 2 * ph_len) / 3;
 post_ub  = stand_h - sk_hd - pu_gap - post_n * (post_b + ph_len);    // upper post body
@@ -682,7 +684,7 @@ module post_lower() {       // spigot (into the tray, pinned) at x < 0, deep soc
 module post_upper() {
     difference() {
         union() { spigot_x(-pu_spig, pu_spig); post_l(post_ub); spigot_x(post_ub - 0.01); }
-        for (d = [24 : 6 : 54]) zpin(-pu_spig + d - 15, spig / 2);                        // height holes (nominal: 36 mm in)
+        for (d = [pu_dmin : 6 : pu_dmax]) zpin(-pu_spig + d - 15, spig / 2);             // height holes (nominal: 36 mm in)
         zpin(post_ub + spig_len - 13, spig / 2);                                         // crank head pin
     }
 }

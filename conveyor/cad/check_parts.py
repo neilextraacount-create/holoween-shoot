@@ -71,7 +71,7 @@ PARTS = [
     ("chute_segment",   5, 2, 15, 2, False, "chute segment with print-in-place drive shaft"),
     ("crank_head",      1, 3, 15, 2, False, "crank head: funnel + crank shaft, print-in-place"),
     ("crank_arm",       1, 3, 25, 2, False, "crank arm with spinning grip, print-in-place"),
-    ("pin3",           14, 3, 100, 1, False, "3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray (4), spares (2)"),
+    ("pin3",           14, 3, 100, 1, False, "3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2)"),
     ("splice_template", 1, 3, 20, 1, False, "belt sewing template (box-and-X hole pattern)"),
     ("stand_shim",      4, 3, 100, 1, False, "shims to level the porch stand foot"),
     ("hex_coupler",     6, 3, 100, 1, False, "hex coupler between shafts"),
@@ -305,7 +305,8 @@ def clean_export(t, path):
 def part_qty(V):
     """quantities that follow the parameters"""
     n = int(V["seg_count"])
-    return {"chute_segment": n, "hex_coupler": n + 2, "ring_sleeve": n + 1, "post_lower": int(V["post_n"])}
+    return {"chute_segment": n, "hex_coupler": n + 2, "ring_sleeve": n + 1, "post_lower": int(V["post_n"]),
+            "pin3": 13 + int(V["post_n"])}
 
 
 BRIDGE_OK = {"trap": 70.0}      # documented exception (docs/03): the 66 mm bridge over the top of the drop slot
@@ -413,7 +414,7 @@ class Asm:
             self.rep(ok, f"{label}: slip fit gap {gap:.2f} mm (designed {need:.2f}), overlap {ov:.2f} mm3")
         else:
             ok = ov < 0.01 and gap >= need
-            self.rep(ok, f"{label}: clearance {gap:.2f} mm (need >= {need:.1f}){'' if ov < 0.01 else f', OVERLAP {ov:.1f} mm3'}")
+            self.rep(ok, f"{label}: clearance {gap:.2f} mm (need >= {need:g}){'' if ov < 0.01 else f', OVERLAP {ov:.1f} mm3'}")
         return ok
 
 
@@ -672,9 +673,12 @@ def check_line(rep, A, V):
         k(f"{nm} passes through its holes", pin, others, "clear", 0.1)
     # with the height pin out the joint collapses pu_gap: the top spigot must drop clear of the crank head
     # socket, so the stand goes in under (and comes out from under) a crank head already on the line
-    Mu_c = Mu @ T(-(V["pu_gap"] - 0.5), 0, 0)
-    k("stand collapsed (height pin out): upper post clears the crank head socket", xf(pu, Mu_c), chs, "clear", 3.0)
-    k("stand collapsed: upper post's long spigot still runs free in the lower post", xf(pu, Mu_c), lows[0], "clear", 0.15)
+    # worst case: the lowest height hole (porch highest), where the least spigot is left to slide in
+    drop = V["pu_spig"] - V["pu_dmax"] - 0.5
+    Mu_c = Mu @ T(-drop, 0, 0)
+    low_hi = xf(pl, Mls[0] @ T(V["pu_dmax"] - (V["pu_spig"] - V["pu_gap"]), 0, 0))     # lower post up by 18 mm
+    k(f"stand collapsed {drop:.1f} mm from the lowest height hole: upper post clears the crank head socket", xf(pu, Mu_c), chs, "clear", 3.0)
+    k("stand collapsed: upper post's long spigot still runs free in the lower post", xf(pu, Mu_c), low_hi, "clear", 0.15)
     # static neighbours: the posts hang off the crank head socket (0.2 mm slip fit), so they move < 1 mm
     k("stand posts vs segment N and the crank shaft (static; socket play < 1 mm)", post_u + post_l, sN + chf, "clear", 2.0)
     worst = 1e9

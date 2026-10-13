@@ -35,7 +35,7 @@ LOADS (estimates; PLA-on-PLA plain bearings)
   Ribbed PLA on dry webbing is roughly mu 0.3, wet roughly 0.2: grip is adequate; wax the bearings.
   Carrying-run sag between stations (1.23 m, 15 N): light candy 14 mm
   Carrying-run sag between stations (1.23 m, 15 N): dense candy 27 mm
-  Tension test, 100 g hung midway between stations: extra dip 11-12 mm at 25 N, 13-14 mm at 20 N, 15-18 mm at 15 N per run -> target 11-18 mm
+  Tension test, 100 g laid across the belt midway between stations: extra dip 11-12 mm at 25 N, 13-14 mm at 20 N, 15-18 mm at 15 N per run -> target 11-18 mm
   Gap between the top and return runs at a station: 44.6 mm; with dense candy at mid-span about 24 mm
   Crank 45 rpm x 2 -> belt 0.30 m/s; candy rides the belt in 21 s (15 turns)
   Candy leaves a 1.16 m chute at 3.1 m/s (wrapper friction 0.3); the drop trap at the bottom stops it

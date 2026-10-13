@@ -203,7 +203,7 @@ def main():
     T_c = T0 - rows[0][3] / 2
     for nm, w in (("light candy", w_belt + w_light), ("dense candy", w_belt + w_dense)):
         p(f"  Carrying-run sag between stations ({span_m:.2f} m, {T_c:.0f} N): {nm} {w*span_m**2/(8*T_c)*1000:.0f} mm")
-    # tension test: 100 g hung from the top run midway between two stations. The belt barely stretches
+    # tension test: 100 g laid across the top run midway between two stations. The belt barely stretches
     # (EA guessed 10-55 kN), so the dip is computed with tension rising as the span lengthens.
     loop_m = (2 * C + math.pi * (r_dp + r_tp)) / 1000
 
@@ -216,7 +216,7 @@ def main():
         return (dt - d0) * 1000
     lo = [dip(t, 55e3) for t in (15, 20, 25)]
     hi = [dip(t, 10e3) for t in (15, 20, 25)]
-    p(f"  Tension test, 100 g hung midway between stations: extra dip {lo[2]:.0f}-{hi[2]:.0f} mm at 25 N, {lo[1]:.0f}-{hi[1]:.0f} mm at 20 N,"
+    p(f"  Tension test, 100 g laid across the belt midway between stations: extra dip {lo[2]:.0f}-{hi[2]:.0f} mm at 25 N, {lo[1]:.0f}-{hi[1]:.0f} mm at 20 N,"
       f" {lo[0]:.0f}-{hi[0]:.0f} mm at 15 N per run -> target {round(lo[2])}-{round(hi[0])} mm")
     gap_runs = -g("belt_t") - (st_ret_z + g("wu_r") + g("wu_crown") + g("belt_t"))
     p(f"  Gap between the top and return runs at a station: {gap_runs:.1f} mm; with dense candy at mid-span about"
