@@ -18,20 +18,28 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from check_parts import PARTS, part_qty, scad_values   # noqa: E402
+from check_parts import BRIM, FINE, PARTS, part_qty, scad_values   # noqa: E402
 
 STL = HERE / "stl"
 WORK = HERE / "stl" / ".slice"
 PROFILE = HERE / "p2s-check.ini"
-FINE = {"gearbox", "drive_roller", "tail_roller"}       # 0.16 mm layers (gear teeth, bearings)
-BRIM = {"chute_segment", "crank_head", "trap", "wheel_unit", "ground_screw", "gs_wrench", "takeup_screw", "bolt8_28", "pin3", "hex_coupler"}
+
+
+def slicer():
+    """the PrusaSlicer command line: $PRUSA_SLICER, or prusa-slicer / prusa-slicer-console on the PATH"""
+    import os
+    import shutil
+    exe = os.environ.get("PRUSA_SLICER") or shutil.which("prusa-slicer") or shutil.which("prusa-slicer-console")
+    if not exe:
+        raise SystemExit("PrusaSlicer not found: install PrusaSlicer 2.7+ or set PRUSA_SLICER to its command-line program")
+    return exe
 
 
 def slice_one(name, walls, infill, out_dir=WORK, stl=None):
     out_dir.mkdir(parents=True, exist_ok=True)
     g = out_dir / f"{name}.gcode"
     lh = 0.16 if name in FINE else 0.2
-    cmd = ["prusa-slicer", "--load", str(PROFILE), "--perimeters", str(walls), "--fill-density", f"{infill}%",
+    cmd = [slicer(), "--load", str(PROFILE), "--perimeters", str(walls), "--fill-density", f"{infill}%",
            "--layer-height", str(lh), "--brim-width", "5" if name in BRIM else "0",
            "--fill-pattern", "rectilinear" if int(infill) >= 100 else "gyroid",
            "--export-gcode", "-o", str(g), str(stl or STL / f"{name}.stl")]

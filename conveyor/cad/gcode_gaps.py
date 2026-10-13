@@ -150,13 +150,16 @@ def main():
     for n in names:
         nb, side, vert = check(n)
         fused = [v for v in vert if v[0] == 1]
+        thin = [v for v in vert if v[0] == 2]
         v_txt = ("FUSED at z " + ", ".join(str(v[1]) for v in fused[:5])) if fused else \
-            (f"{min(v[0] for v in vert) - 1} layer(s) of air at z {vert[0][1]}" if vert else "never")
-        ok = side[0] >= 0.15 and not fused
+            (f"{min(v[0] for v in vert) - 1} layer(s) of air at z {min(vert)[1]}" if vert else "never")
+        if thin and not fused:
+            v_txt += " (only 1 layer of air: may stick lightly; the first twist frees it)"
+        ok = side[0] >= 0.30 and not fused
         bad += not ok
         out.append(f"| `{n}` | {nb} | {side[0]:.2f} mm (z {side[1][0] if side[1] else '-'}) | {v_txt} |")
         print(f"{'ok  ' if ok else 'FAIL'} {n:14s} bodies {nb}  side gap {side[0]:.3f} at {side[1]}  vertical {v_txt}", flush=True)
-    out += ["", f"Result: {'all gaps open' if not bad else f'{bad} part(s) at risk'} (side gap must be >= 0.15 mm, nothing printed directly on another body)."]
+    out += ["", f"Result: {'all gaps open' if not bad else f'{bad} part(s) at risk'} (side gap must be >= 0.30 mm, nothing printed directly on another body)."]
     if not sys.argv[1:]:
         (HERE / "gcode-gaps.md").write_text("\n".join(out) + "\n")
     sys.exit(1 if bad else 0)

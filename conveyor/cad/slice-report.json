@@ -9,8 +9,8 @@
    "Loose extrusions"
   ],
   "other": [],
-  "grams": "52.23",
-  "time": "1h 33m 13s",
+  "grams": "53.19",
+  "time": "1h 30m 52s",
   "layers": 100
  },
  {
@@ -20,8 +20,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "40.36",
-  "time": "1h 16m 14s",
+  "grams": "41.06",
+  "time": "1h 13m 40s",
   "layers": 576
  },
  {
@@ -31,8 +31,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "19.21",
-  "time": "35m 4s",
+  "grams": "19.34",
+  "time": "33m 8s",
   "layers": 78
  },
  {
@@ -44,8 +44,8 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "40.71",
-  "time": "48m 5s",
+  "grams": "40.97",
+  "time": "47m 20s",
   "layers": 120
  },
  {
@@ -57,8 +57,8 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "38.46",
-  "time": "45m 44s",
+  "grams": "38.72",
+  "time": "44m 57s",
   "layers": 120
  },
  {
@@ -70,8 +70,8 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "36.21",
-  "time": "43m 15s",
+  "grams": "36.48",
+  "time": "42m 31s",
   "layers": 120
  },
  {
@@ -83,8 +83,8 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "33.97",
-  "time": "40m 45s",
+  "grams": "34.24",
+  "time": "40m 8s",
   "layers": 120
  },
  {
@@ -93,35 +93,9 @@
   "layer": 0.16,
   "brim": false,
   "alerts": [],
-  "other": [
-   "[2026-10-13 12:45:33.087327] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.090467] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.119722] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.121723] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.190616] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.346702] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.408459] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.534222] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.578870] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.781952] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.927155] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:33.977352] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.022991] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.032195] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.038840] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.144735] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.191726] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.248492] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.280392] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:34.312197] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:38.507028] [0x00007fbe0fbfb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:38.537665] [0x00007fbe12354180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:38.551916] [0x00007fbe0f3f96c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:38.564022] [0x00007fbe0fbfb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:45:38.567127] [0x00007fbe0fbfb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input."
-  ],
-  "grams": "106.46",
-  "time": "7h 15m 41s",
+  "other": [],
+  "grams": "109.18",
+  "time": "6h 38m 10s",
   "layers": 774
  },
  {
@@ -131,8 +105,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "5.30",
-  "time": "16m 39s",
+  "grams": "5.28",
+  "time": "16m 34s",
   "layers": 175
  },
  {
@@ -142,8 +116,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "53.35",
-  "time": "1h 34m 49s",
+  "grams": "54.02",
+  "time": "1h 30m 42s",
   "layers": 30
  },
  {
@@ -153,8 +127,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "64.46",
-  "time": "1h 58m 40s",
+  "grams": "65.31",
+  "time": "1h 53m 29s",
   "layers": 30
  },
  {
@@ -166,8 +140,8 @@
    "Low bed adhesion"
   ],
   "other": [],
-  "grams": "118.17",
-  "time": "4h 30m 31s",
+  "grams": "120.66",
+  "time": "4h 16m 29s",
   "layers": 570
  },
  {
@@ -177,8 +151,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "31.08",
-  "time": "1h 17m 27s",
+  "grams": "32.90",
+  "time": "1h 18m 10s",
   "layers": 758
  },
  {
@@ -188,8 +162,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "24.63",
-  "time": "43m 6s",
+  "grams": "24.77",
+  "time": "42m 4s",
   "layers": 120
  },
  {
@@ -199,8 +173,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "53.25",
-  "time": "1h 40m 52s",
+  "grams": "54.33",
+  "time": "1h 37m 22s",
   "layers": 140
  },
  {
@@ -210,8 +184,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "53.24",
-  "time": "1h 40m 1s",
+  "grams": "54.34",
+  "time": "1h 36m 25s",
   "layers": 140
  },
  {
@@ -223,8 +197,8 @@
    "Low bed adhesion"
   ],
   "other": [],
-  "grams": "60.85",
-  "time": "2h 14m 41s",
+  "grams": "62.92",
+  "time": "2h 8m 55s",
   "layers": 563
  },
  {
@@ -235,7 +209,7 @@
   "alerts": [],
   "other": [],
   "grams": "12.85",
-  "time": "25m 57s",
+  "time": "25m 19s",
   "layers": 183
  },
  {
@@ -246,7 +220,7 @@
   "alerts": [],
   "other": [],
   "grams": "1.83",
-  "time": "5m 8s",
+  "time": "5m 1s",
   "layers": 40
  },
  {
@@ -256,8 +230,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "11.75",
-  "time": "50m 55s",
+  "grams": "11.71",
+  "time": "50m 32s",
   "layers": 540
  },
  {
@@ -267,8 +241,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "35.30",
-  "time": "1h 1m 25s",
+  "grams": "35.35",
+  "time": "59m 13s",
   "layers": 120
  },
  {
@@ -278,8 +252,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "35.30",
-  "time": "1h 1m 18s",
+  "grams": "35.35",
+  "time": "59m 14s",
   "layers": 120
  },
  {
@@ -289,8 +263,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "117.73",
-  "time": "3h 55m 3s",
+  "grams": "117.61",
+  "time": "3h 47m 46s",
   "layers": 1148
  },
  {
@@ -300,8 +274,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "130.33",
-  "time": "3h 35m 1s",
+  "grams": "130.60",
+  "time": "3h 29m 50s",
   "layers": 900
  },
  {
@@ -314,8 +288,8 @@
    "Collapsing overhang"
   ],
   "other": [],
-  "grams": "55.07",
-  "time": "2h 2m 53s",
+  "grams": "56.71",
+  "time": "1h 56m 1s",
   "layers": 390
  },
  {
@@ -325,7 +299,7 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "0.35",
+  "grams": "0.36",
   "time": "1m 50s",
   "layers": 23
  },
@@ -336,8 +310,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "12.99",
-  "time": "28m 26s",
+  "grams": "13.00",
+  "time": "27m 25s",
   "layers": 30
  },
  {
@@ -348,7 +322,7 @@
   "alerts": [],
   "other": [],
   "grams": "3.20",
-  "time": "4m 29s",
+  "time": "4m 25s",
   "layers": 15
  },
  {
@@ -359,7 +333,7 @@
   "alerts": [],
   "other": [],
   "grams": "3.09",
-  "time": "6m 15s",
+  "time": "6m 8s",
   "layers": 55
  },
  {
@@ -383,8 +357,8 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "48.36",
-  "time": "1h 3m 39s",
+  "grams": "49.24",
+  "time": "1h 1m 33s",
   "layers": 110
  },
  {
@@ -394,8 +368,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "40.21",
-  "time": "1h 12m 24s",
+  "grams": "41.04",
+  "time": "1h 10m 56s",
   "layers": 100
  },
  {
@@ -405,8 +379,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "31.11",
-  "time": "53m 55s",
+  "grams": "31.75",
+  "time": "52m 33s",
   "layers": 160
  },
  {
@@ -416,8 +390,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "28.30",
-  "time": "1h 30m 4s",
+  "grams": "28.85",
+  "time": "1h 27m 43s",
   "layers": 750
  },
  {
@@ -427,8 +401,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "19.51",
-  "time": "26m 1s",
+  "grams": "19.50",
+  "time": "25m 20s",
   "layers": 150
  },
  {
@@ -438,8 +412,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "6.39",
-  "time": "17m 2s",
+  "grams": "6.48",
+  "time": "16m 24s",
   "layers": 140
  },
  {
@@ -449,8 +423,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "27.00",
-  "time": "54m 44s",
+  "grams": "27.81",
+  "time": "52m 23s",
   "layers": 120
  },
  {
@@ -460,8 +434,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "2.38",
-  "time": "14m 53s",
+  "grams": "2.40",
+  "time": "14m 51s",
   "layers": 165
  },
  {
@@ -471,8 +445,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "0.87",
-  "time": "3m 31s",
+  "grams": "0.88",
+  "time": "3m 30s",
   "layers": 35
  },
  {
@@ -482,8 +456,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "7.10",
-  "time": "8m 15s",
+  "grams": "7.12",
+  "time": "8m 9s",
   "layers": 15
  }
 ]

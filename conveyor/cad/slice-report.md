@@ -5,45 +5,45 @@ brim 5 mm where the printing guide says. Alerts are the slicer's own stability a
 
 | Part | Qty | Layer | g each | Time each | Slicer alerts |
 |---|---|---|---|---|---|
-| `test_coupon` | 1 | 0.2 | 52 | 1h 33m 13s | Low bed adhesion, Loose extrusions |
-| `wheel_unit` | 8 | 0.2 | 40 | 1h 16m 14s | none |
-| `station_bracket` | 4 | 0.2 | 19 | 35m 4s | none |
-| `stake_1` | 1 | 0.2 | 41 | 48m 5s | Long bridging extrusions |
-| `stake_2` | 1 | 0.2 | 38 | 45m 44s | Long bridging extrusions |
-| `stake_3` | 1 | 0.2 | 36 | 43m 15s | Long bridging extrusions |
-| `stake_4` | 1 | 0.2 | 34 | 40m 45s | Long bridging extrusions |
-| `drive_roller` | 1 | 0.16 | 106 | 7h 15m 41s | none |
-| `drive_pin` | 1 | 0.2 | 5 | 16m 39s | none |
-| `head_side_a` | 1 | 0.2 | 53 | 1h 34m 49s | none |
-| `head_side_b` | 1 | 0.2 | 64 | 1h 58m 40s | none |
-| `gearbox` | 1 | 0.16 | 118 | 4h 30m 31s | Low bed adhesion |
-| `trap` | 1 | 0.2 | 31 | 1h 17m 27s | none |
-| `foot` | 3 | 0.2 | 25 | 43m 6s | none |
-| `tail_side_l` | 1 | 0.2 | 53 | 1h 40m 52s | none |
-| `tail_side_r` | 1 | 0.2 | 53 | 1h 40m 1s | none |
-| `tail_roller` | 1 | 0.16 | 61 | 2h 14m 41s | Low bed adhesion |
-| `takeup_block` | 2 | 0.2 | 13 | 25m 57s | none |
-| `takeup_nut` | 2 | 0.2 | 2 | 5m 8s | none |
-| `takeup_screw` | 2 | 0.2 | 12 | 50m 55s | none |
-| `skid_l` | 1 | 0.2 | 35 | 1h 1m 25s | none |
-| `skid_r` | 1 | 0.2 | 35 | 1h 1m 18s | none |
-| `chute_segment` | 5 | 0.2 | 118 | 3h 55m 3s | none |
-| `crank_head` | 1 | 0.2 | 130 | 3h 35m 1s | none |
-| `crank_arm` | 1 | 0.2 | 55 | 2h 2m 53s | Floating object part, Collapsing overhang |
+| `test_coupon` | 1 | 0.2 | 53 | 1h 30m 52s | Low bed adhesion, Loose extrusions |
+| `wheel_unit` | 8 | 0.2 | 41 | 1h 13m 40s | none |
+| `station_bracket` | 4 | 0.2 | 19 | 33m 8s | none |
+| `stake_1` | 1 | 0.2 | 41 | 47m 20s | Long bridging extrusions |
+| `stake_2` | 1 | 0.2 | 39 | 44m 57s | Long bridging extrusions |
+| `stake_3` | 1 | 0.2 | 36 | 42m 31s | Long bridging extrusions |
+| `stake_4` | 1 | 0.2 | 34 | 40m 8s | Long bridging extrusions |
+| `drive_roller` | 1 | 0.16 | 109 | 6h 38m 10s | none |
+| `drive_pin` | 1 | 0.2 | 5 | 16m 34s | none |
+| `head_side_a` | 1 | 0.2 | 54 | 1h 30m 42s | none |
+| `head_side_b` | 1 | 0.2 | 65 | 1h 53m 29s | none |
+| `gearbox` | 1 | 0.16 | 121 | 4h 16m 29s | Low bed adhesion |
+| `trap` | 1 | 0.2 | 33 | 1h 18m 10s | none |
+| `foot` | 3 | 0.2 | 25 | 42m 4s | none |
+| `tail_side_l` | 1 | 0.2 | 54 | 1h 37m 22s | none |
+| `tail_side_r` | 1 | 0.2 | 54 | 1h 36m 25s | none |
+| `tail_roller` | 1 | 0.16 | 63 | 2h 8m 55s | Low bed adhesion |
+| `takeup_block` | 2 | 0.2 | 13 | 25m 19s | none |
+| `takeup_nut` | 2 | 0.2 | 2 | 5m 1s | none |
+| `takeup_screw` | 2 | 0.2 | 12 | 50m 32s | none |
+| `skid_l` | 1 | 0.2 | 35 | 59m 13s | none |
+| `skid_r` | 1 | 0.2 | 35 | 59m 14s | none |
+| `chute_segment` | 5 | 0.2 | 118 | 3h 47m 46s | none |
+| `crank_head` | 1 | 0.2 | 131 | 3h 29m 50s | none |
+| `crank_arm` | 1 | 0.2 | 57 | 1h 56m 1s | Floating object part, Collapsing overhang |
 | `pin3` | 14 | 0.2 | 0 | 1m 50s | none |
-| `splice_template` | 1 | 0.2 | 13 | 28m 26s | none |
-| `stand_shim` | 4 | 0.2 | 3 | 4m 29s | none |
-| `hex_coupler` | 7 | 0.2 | 3 | 6m 15s | none |
+| `splice_template` | 1 | 0.2 | 13 | 27m 25s | none |
+| `stand_shim` | 4 | 0.2 | 3 | 4m 25s | none |
+| `hex_coupler` | 7 | 0.2 | 3 | 6m 8s | none |
 | `ring_sleeve` | 6 | 0.2 | 2 | 3m 41s | none |
-| `post_lower` | 1 | 0.2 | 48 | 1h 3m 39s | Floating bridge anchors, Long bridging extrusions |
-| `post_upper` | 1 | 0.2 | 40 | 1h 12m 24s | none |
-| `stand_tray` | 1 | 0.2 | 31 | 53m 55s | none |
-| `ground_screw` | 4 | 0.2 | 28 | 1h 30m 4s | none |
-| `spike` | 4 | 0.2 | 20 | 26m 1s | none |
-| `stake_cap` | 1 | 0.2 | 6 | 17m 2s | none |
-| `gs_wrench` | 1 | 0.2 | 27 | 54m 44s | none |
-| `bolt8_28` | 17 | 0.2 | 2 | 14m 53s | none |
-| `nut8` | 13 | 0.2 | 1 | 3m 31s | none |
-| `washer50` | 4 | 0.2 | 7 | 8m 15s | none |
+| `post_lower` | 1 | 0.2 | 49 | 1h 1m 33s | Floating bridge anchors, Long bridging extrusions |
+| `post_upper` | 1 | 0.2 | 41 | 1h 10m 56s | none |
+| `stand_tray` | 1 | 0.2 | 32 | 52m 33s | none |
+| `ground_screw` | 4 | 0.2 | 29 | 1h 27m 43s | none |
+| `spike` | 4 | 0.2 | 20 | 25m 20s | none |
+| `stake_cap` | 1 | 0.2 | 6 | 16m 24s | none |
+| `gs_wrench` | 1 | 0.2 | 28 | 52m 23s | none |
+| `bolt8_28` | 17 | 0.2 | 2 | 14m 51s | none |
+| `nut8` | 13 | 0.2 | 1 | 3m 30s | none |
+| `washer50` | 4 | 0.2 | 7 | 8m 9s | none |
 
-Machine total (test coupon excluded): **2.55 kg**, about **90 h** of printing (PrusaSlicer's estimate with Bambu-like speeds; parts sliced one at a time, so plates of several parts save some time).
+Machine total (test coupon excluded): **2.58 kg**, about **87 h** of printing (PrusaSlicer's estimate with Bambu-like speeds; parts sliced one at a time, so plates of several parts save some time).

@@ -157,8 +157,8 @@ STATION (stake + bracket + 2 wheels), assembled
   [ok] carry run rides on the wheel top at belt-top Z=0; return run at Z=-48 mm
 
 LINE (chute segments, crank head, crank arm, porch stand), assembled
-  [ok] crank head funnel (chute, 45 deg flare, mouth): side walls and floor solid all along (no gaps)
-  [ok] chute segment trough: side walls and floor solid all along (no gaps)
+  [ok] crank head funnel (chute, 45 deg flare, mouth up to the back wall): side walls and floor solid all along (2675 samples, no gaps)
+  [ok] chute segment trough: side walls and floor solid all along (3854 samples, no gaps)
   [ok] segment N plain end in the crank head socket: slip fit gap 0.30 mm (designed 0.30), overlap 0.00 mm3
   [ok] segment 5 plain end inside the crank head socket: 1817 mm3 (need >= 1000)
   [ok] crank head cannot turn on the shaft: turning it 0.5 deg either way collides (258.2 mm3)
@@ -187,5 +187,7 @@ SITE: 2 risers x 7 in (ASSUMED), 20 in run to the porch; drive axle 10 in before
   [ok] head module vs the first riser: clearance 40.00 mm (need >= 20)
   [ok] porch stand tray bottom -0 mm from the porch floor (set stand_h = 552 to correct)
   [ok] porch stand tray starts 1.7 in behind the porch edge (need >= 0.8 in)
+
+NOTE: the STLs changed since the plates in ../plates were made: run python3 make_plates.py
 
 RESULT: ALL CHECKS PASSED

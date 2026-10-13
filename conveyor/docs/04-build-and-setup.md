@@ -39,7 +39,8 @@ printing in all.
    overall.
 4. Run `python3 cad/check_parts.py`. It re-exports every STL into `cad/stl/` and re-checks
    everything, including the chute against your steps. Then run `python3 cad/make_plates.py`
-   to rebuild the plates in `plates/` for your steps.
+   to rebuild the plates in `plates/` for your steps (add `--no-slice` if PrusaSlicer isn't
+   installed).
 
 ## 1. Choose the line
 
@@ -313,7 +314,7 @@ Store everything out of direct sun: PLA softens around 55 °C, for example in a 
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| Crank stiff even without the belt | a print-in-place part not fully freed, or elephant's foot on the first layer | turn it back and forth by hand (in hot tap water if needed); check the test coupon results |
+| Crank stiff even without the belt | a print-in-place part not fully freed, or elephant's foot on the first layer | turn it back and forth by hand; if needed, warm it in 45-50 °C water, let it cool, then twist again (printing guide, "Freeing print-in-place parts"); check the test coupon results |
 | Belt slips on the drive roller | tension too low, or the belt is wet | tighten 1/8 turn each side (100 g dip 11-18 mm); rub wax on the **bearings**, never on the roller |
 | Clicking once per turn of the belt | the splice is lumpy | re-sew it flatter |
 | Wheel droops or wobbles | its pin is missing or loose | push the collar against the bracket and fit the pin |

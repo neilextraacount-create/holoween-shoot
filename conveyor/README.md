@@ -59,9 +59,10 @@ At 45 rpm the belt moves 0.3 m/s, so candy reaches the basket in about 20 s (15 
 3. **Measure your riser heights.** Put the height (inches) and the number of risers in
    `site_rise` and `site_risers` in `cad/params.scad`, run `python3 calc/conveyor_calc.py`,
    and copy the `seg_count`, `stand_h` and `stake_len` values it prints into the same file.
-   Then run `python3 cad/check_parts.py` to regenerate and re-check every STL. It also
-   rewrites `cad/parts-table.md`, which then lists how many of each part to print for your
-   steps.
+   Then run `python3 cad/check_parts.py` to regenerate and re-check every STL, and
+   `python3 cad/make_plates.py` to rebuild the plates in `plates/` for your steps. The plate
+   files carry their own copies of the parts, so without this step you would print the old
+   ones. Without PrusaSlicer installed, use `python3 cad/make_plates.py --no-slice`.
 4. Print the plates in order ([docs/03-printing.md](docs/03-printing.md): about 2.6 kg of PLA
    and roughly 85 h of printing) and build
    ([docs/04-build-and-setup.md](docs/04-build-and-setup.md)).

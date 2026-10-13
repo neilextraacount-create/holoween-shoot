@@ -45,6 +45,11 @@ BED = 256.0 - 10.0
 IN = 25.4
 
 # name, qty, walls, infill %, expected bodies, turn 45 deg for the bed, what it is
+# printing details shared by check_parts.py, slice_all.py and make_plates.py
+FINE = {"gearbox", "drive_roller", "tail_roller"}                     # 0.16 mm layers (gear teeth, bearings)
+BRIM = {"chute_segment", "crank_head", "trap", "wheel_unit", "ground_screw", "gs_wrench",
+        "takeup_screw", "bolt8_28", "pin3", "hex_coupler"}           # 5 mm outer brim (tall or small footprint)
+
 PARTS = [
     ("test_coupon",     1, 3, 15, 7, False, "PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut)"),
     ("wheel_unit",      8, 4, 15, 2, False, "station wheel, print-in-place (2 per station)"),
@@ -306,6 +311,16 @@ def clean_export(t, path):
     return e
 
 
+def stl_set_hash():
+    """fingerprint of the exported STLs; make_plates.py records it so stale plates can be spotted"""
+    import hashlib
+    h = hashlib.sha1()
+    for f in sorted(OUT.glob("*.stl")):
+        h.update(f.name.encode())
+        h.update(f.read_bytes())
+    return h.hexdigest()
+
+
 def fill_doc(tag, body, doc=HERE.parent / "docs" / "03-printing.md"):
     """replace the text between <!-- tag... --> and <!-- /tag --> in the printing guide"""
     if not doc.exists():
@@ -390,10 +405,11 @@ def check_parts(rep, rendered, V):
                           f" ~{grams:.0f} g each{'; ' + '; '.join(problems) if problems else ''}")
     rep.head(f"FILAMENT ESTIMATE: about {total/1000:.2f} kg for one machine with the listed walls/infill"
              f" (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)")
-    md = ["| Part (STL) | Qty | Size on the bed, mm | Walls | Infill | ~g each (mesh estimate) | What it is |", "|---|---|---|---|---|---|---|"]
+    md = ["| Part (STL) | Qty | Size on the bed, mm | Walls | Infill | Layer | Brim | ~g each (mesh estimate) | What it is |",
+          "|---|---|---|---|---|---|---|---|---|"]
     for name, qty, grams, ext, walls, infill, desc, turn in rows:
         md.append(f"| `{name}` | {qty} | {ext[0]:.0f} x {ext[1]:.0f} x {ext[2]:.0f}{' (diagonal)' if turn else ''} | {walls} |"
-                  f" {infill} % | {grams:.0f} | {desc} |")
+                  f" {infill} % | {0.16 if name in FINE else 0.20:.2f} | {'5 mm' if name in BRIM else 'no'} | {grams:.0f} | {desc} |")
     md.append(f"\nFilament for one machine (test coupon excluded): **about {total/1000:.2f} kg** (estimate from the meshes;"
               f" your slicer gives the real number).")
     (HERE / "parts-table.md").write_text("\n".join(md) + "\n")
@@ -636,12 +652,14 @@ def stand_place(A, V, u_ch):
     return Mu, Mls, best, L_top
 
 
-def walls_closed(rep, label, mf, z0, z1, hw_top, V):
-    """the candy space must be closed: sample the middle of both side walls (floor to wall top) and
-    the floor across, every 2.5 mm along the piece, and require solid material at every sample"""
+def walls_closed(rep, label, mf, z0, z1, hw_top, V, plane=None, min_samples=500):
+    """the candy space must be closed: sample the middle of both side walls (floor to wall top, every
+    1 mm) and the floor across, every 2.5 mm along the piece, and require solid material at every
+    sample. plane(y): where a sloping end wall closes the space (samples stop there). Too few samples
+    is a failure, so a wrong range can't pass by sampling nothing."""
     from shapely.geometry import Point, Polygon
     wt = V["tr_out"] - V["tr_in"]
-    miss = []
+    miss, n = [], 0
     z = z0
     while z <= z1:
         geom = Polygon()
@@ -649,11 +667,16 @@ def walls_closed(rep, label, mf, z0, z1, hw_top, V):
             if len(ring) >= 3:
                 geom = geom.symmetric_difference(Polygon(ring).buffer(0))
         hw, top = hw_top(z)
-        pts = [(sx * (hw + wt / 2), y) for sx in (-1, 1) for y in np.linspace(V["fl_top"] + 1, top - 1, 7)]
-        pts += [(x, V["fl_top"] - 0.45) for x in np.linspace(-hw + 1, hw - 1, 9)]
+        pts = [(sx * (hw + wt / 2), y) for sx in (-1, 1) for y in np.arange(V["fl_top"] + 1, top - 1 + 1e-6, 1.0)
+               if plane is None or z < plane(y) - 0.5]
+        if plane is None or z < plane(V["fl_top"]) - 0.5:
+            pts += [(x, V["fl_top"] - 0.45) for x in np.linspace(-hw + 1, hw - 1, 9)]
+        n += len(pts)
         miss += [(round(z, 1), round(x, 1), round(y, 1)) for x, y in pts if not geom.contains(Point(x, y))]
         z += 2.5
-    rep(not miss, f"{label}: side walls and floor solid all along ({'no gaps' if not miss else f'{len(miss)} open spots, first at z/x/y {miss[0]}'})")
+    ok = n >= min_samples and not miss
+    rep(ok, f"{label}: side walls and floor solid all along ({n} samples, "
+            f"{'no gaps' if not miss else f'{len(miss)} open spots, first at z/x/y {miss[0]}'})")
 
 
 def check_line(rep, A, V):
@@ -672,7 +695,8 @@ def check_line(rep, A, V):
         g = min(max((z - fz[0]) / (fz[1] - fz[0]), 0.0), 1.0) * fw
         return V["tr_in"] + g, V["wl_top"] + g
     za = V["ch_len"] - 2 - V["fn_k"] * (V["wl_top"] + fw - V["fl_top"])   # back wall starts closing the funnel here
-    walls_closed(rep, "crank head funnel (chute, 45 deg flare, mouth)", ch[0], zt + 1, za - 5, ch_profile, V)
+    walls_closed(rep, "crank head funnel (chute, 45 deg flare, mouth up to the back wall)", ch[0], zt + 1, V["ch_len"] - 2,
+                 ch_profile, V, plane=lambda y: za + V["fn_k"] * (y - V["fl_top"]), min_samples=2000)
     walls_closed(rep, "chute segment trough", seg[0], zt + 1, V["seg_len"] + V["plain_ext"] - 3,
                  lambda z: (V["tr_in"], V["wl_top"]), V)
     k("segment N plain end in the crank head socket", clip(sN, y0=-50, y1=50), clip(chs, y0=-50, y1=50), "fit", 0.30)
@@ -806,6 +830,14 @@ def main():
         tray = check_line(rep, A, V)
     if a.only in (None, "site"):
         check_site(rep, A, V, P_head, tray)
+    pj = HERE.parent / "plates" / "plates.json"
+    if a.only is None and pj.exists():
+        try:
+            made_from = json.loads(pj.read_text())[0].get("stl_hash")
+        except Exception:
+            made_from = None
+        if made_from != stl_set_hash():
+            rep.head("NOTE: the STLs changed since the plates in ../plates were made: run python3 make_plates.py")
     rep.head(f"RESULT: {'ALL CHECKS PASSED' if rep.fails == 0 else f'{rep.fails} CHECK(S) FAILED'}")
     (HERE / "check-report.txt").write_text("\n".join(rep.lines) + "\n")
     sys.exit(1 if rep.fails else 0)

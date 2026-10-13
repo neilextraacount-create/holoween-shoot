@@ -12,7 +12,9 @@ steps about the vertical and shifted. Footprints are the parts' real silhouettes
 """
 import argparse
 import json
+import os
 import re
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -27,7 +29,7 @@ from shapely.prepared import prep
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from check_parts import PARTS, fill_doc, part_qty, scad_values   # noqa: E402
+from check_parts import BRIM as BRIM_PARTS, FINE, PARTS, fill_doc, part_qty, scad_values, stl_set_hash   # noqa: E402
 
 STL = HERE / "stl"
 OUT = HERE.parent / "plates"
@@ -143,24 +145,33 @@ def write_3mf(path, plate, meshes):
     rels = ('<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
             '<Relationship Target="/3D/3dmodel.model" Id="rel0" '
             'Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>')
-    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("[Content_Types].xml", ct)
-        z.writestr("_rels/.rels", rels)
-        z.writestr("3D/3dmodel.model", model)
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:      # fixed timestamps: same plate, same bytes
+        for name, data in (("[Content_Types].xml", ct), ("_rels/.rels", rels), ("3D/3dmodel.model", model)):
+            info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(info, data)
 
 
-def slice_plate(path, group, gcode):
+def find_slicer():
+    return os.environ.get("PRUSA_SLICER") or shutil.which("prusa-slicer") or shutil.which("prusa-slicer-console")
+
+
+def slice_plate(exe, path, group, gcode):
+    """slice the whole plate; ok only if it sliced and every extrusion lies on the bed inside the margin"""
     _t, walls, infill, layer, brim = GROUPS[group]
-    cmd = ["prusa-slicer", "--load", str(PROFILE), "--dont-arrange", "--perimeters", str(walls),
+    cmd = [exe, "--load", str(PROFILE), "--dont-arrange", "--perimeters", str(walls),
            "--fill-density", f"{infill}%", "--fill-pattern", "rectilinear" if infill >= 100 else "gyroid",
            "--layer-height", str(layer), "--brim-width", str(BRIM if brim else 0),
            "--export-gcode", "-o", str(gcode), str(path)]
-    r = subprocess.run(cmd, capture_output=True, text=True)
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True)
+    except OSError as e:
+        return {"ok": False, "log": [str(e)]}
     log = r.stdout + r.stderr
     res = {"ok": r.returncode == 0 and gcode.exists(), "log": [l for l in log.splitlines() if re.search(r"(?i)error|outside|stability|warning", l)]}
-    m = re.search(r"Detected print stability issues:\s*\n\s*\n?(.*?)\n\s*\n", log, re.S)
-    if m:
-        res["alerts"] = " ".join(m.group(1).split())
+    m = re.search(r"Detected print stability issues:\s*\n(.*?)(?:\n\s*\n\s*(?:Consider|Also consider)|\Z)", log, re.S)
+    if m:                                  # every group of the message: "<alert>\n<objects>" separated by blank lines
+        res["alerts"] = " | ".join(" ".join(g.split()) for g in re.split(r"\n\s*\n", m.group(1)) if g.strip())
     if gcode.exists():
         txt = gcode.read_text(errors="ignore")
         for key, pat in (("grams", r"total filament used \[g\] = ([\d.]+)"),
@@ -173,13 +184,22 @@ def slice_plate(path, group, gcode):
             xs.append(float(x)); ys.append(float(y))
         if xs:
             res["extent"] = [min(xs), min(ys), max(xs), max(ys)]
+    e = res.get("extent")
+    if res["ok"] and (e is None or min(e[0], e[1]) < MARGIN - 2 or max(e[2], e[3]) > BED - MARGIN + 2):
+        res["ok"] = False
+        res["log"].append(f"plastic outside the bed margin: extent {e}")
     return res
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--no-slice", action="store_true")
+    ap.add_argument("--no-slice", action="store_true", help="lay the plates out without the PrusaSlicer check")
     a = ap.parse_args()
+    exe = None if a.no_slice else find_slicer()
+    if not a.no_slice and not exe:
+        print("PrusaSlicer not found (set PRUSA_SLICER or put prusa-slicer on the PATH): "
+              "writing the plates without the slice check", flush=True)
+        a.no_slice = True
     V = scad_values()
     qmap = part_qty(V)
     meshes, outlines = {}, {}
@@ -188,9 +208,14 @@ def main():
         m.apply_translation([-(m.bounds[0][0] + m.bounds[1][0]) / 2, -(m.bounds[0][1] + m.bounds[1][1]) / 2, -m.bounds[0][2]])
         meshes[n], outlines[n] = m, silhouette(m)
     # the work list: every copy, largest footprint first within each group
+    infill_of = {p[0]: p[3] for p in PARTS}
     work = []
     for n, q, *_ in PARTS:
-        work += [(n, GROUP_OF.get(n, "solid" if dict((p[0], p[3]) for p in PARTS)[n] >= 100 else "frames"))] * qmap.get(n, q)
+        g = GROUP_OF.get(n, "solid" if infill_of[n] >= 100 else "frames")
+        _t, _w, _i, layer, brim = GROUPS[g]
+        if g != "coupon" and ((n in FINE) != (layer < 0.2) or (n in BRIM_PARTS) != brim):
+            raise SystemExit(f"{n}: its plate group '{g}' does not give it the layer height / brim it needs")
+        work += [(n, g)] * qmap.get(n, q)
     work += [(n, "coupon") for n in TEST_PIECES]
     plates = []
     for grp in GROUPS:
@@ -208,42 +233,60 @@ def main():
                 gplates.append(p)
         plates += gplates
     plates.sort(key=lambda p: (min(MODULE[n] for n, *_ in p.items), -len(p.items)))
-    OUT.mkdir(exist_ok=True)
-    for f in OUT.glob("*.3mf"):
-        f.unlink()
-    rows, summary = [], []
+    # write the new plates next to the old ones; swap them in only when every plate is written
+    new = OUT.with_name("plates.new")
+    if new.exists():
+        shutil.rmtree(new)
+    new.mkdir(parents=True)
+    (HERE / "stl" / ".slice").mkdir(parents=True, exist_ok=True)
+    rows, summary, failed = [], [], []
     tot_g = 0.0
+    stl_hash = stl_set_hash()
     for i, p in enumerate(plates, start=1):
         counts = {}
         for n, *_ in p.items:
             counts[n] = counts.get(n, 0) + 1
         main_part = max(counts, key=lambda n: outlines[n].area * counts[n])
         fname = f"{i:02d}_{main_part}{'_etc' if len(counts) > 1 else ''}.3mf"
-        write_3mf(OUT / fname, p, meshes)
+        write_3mf(new / fname, p, meshes)
         title, walls, infill, layer, brim = GROUPS[p.group]
         info = {}
         if not a.no_slice:
-            info = slice_plate(OUT / fname, p.group, HERE / "stl" / ".slice" / f"plate{i:02d}.gcode")
+            info = slice_plate(exe, new / fname, p.group, HERE / "stl" / ".slice" / f"plate{i:02d}.gcode")
             tot_g += float(info.get("grams", 0))
+            if not info.get("ok"):
+                failed.append(fname)
         contents = ", ".join(f"{c} x `{n}`" if c > 1 else f"`{n}`" for n, c in sorted(counts.items(), key=lambda kv: MODULE[kv[0]]))
         mods = ", ".join(MODULE_NAME[m] for m in sorted({MODULE[n] for n in counts}))
+        g_txt, t_txt = (f"{float(info.get('grams', 0)):.0f}", info.get("time", "-")) if not a.no_slice else ("not sliced", "not sliced")
         rows.append(f"| {i} | `{fname}` | {contents} | {mods} | {walls} walls, {infill} %{', 0.16 mm layers' if layer < 0.2 else ''}{', 5 mm brim' if brim else ''} "
-                    f"| {float(info.get('grams', 0)):.0f} | {info.get('time', '-')} |")
-        summary.append({"plate": i, "file": fname, "group": p.group, "items": p.items, **{k: v for k, v in info.items() if k != "log"},
-                        "log": info.get("log", [])})
+                    f"| {g_txt} | {t_txt} |")
+        summary.append({"plate": i, "file": fname, "group": p.group, "items": p.items, "stl_hash": stl_hash,
+                        **{k: v for k, v in info.items() if k != "log"}, "log": info.get("log", [])})
         print(f"plate {i:2d} {fname:34s} {p.group:11s} {len(p.items):3d} parts  {info.get('grams', '?'):>7s} g  {info.get('time', '?'):>14s}"
               f"  {info.get('alerts', '')}  {'' if info.get('ok', True) else 'SLICE FAILED ' + '; '.join(info.get('log', []))[:200]}", flush=True)
+    if failed:
+        shutil.rmtree(new)
+        raise SystemExit(f"{len(failed)} plate(s) failed the slice check ({', '.join(failed)}); plates/ left unchanged")
+    total = (f"All plates: **{tot_g / 1000:.2f} kg** of filament (test coupon plate included)." if not a.no_slice else
+             "Not sliced (made with --no-slice): open a plate in Bambu Studio for its filament and time.")
     md = ["# Print plates", "",
-          "Generated by `cad/make_plates.py`. Open a plate file in Bambu Studio (File > Import, or drag it in),",
-          "choose the P2S, 0.4 mm nozzle, your PLA and the textured PEI plate, set the plate's walls and infill",
-          "(Strength tab: wall loops, sparse infill density) and the brim if listed, then slice and print.",
+          "Generated by `cad/make_plates.py`. Start each plate in a new project (File > New Project) and import",
+          "the plate file: Bambu Studio centres an imported plate on the bed and does not move it clear of parts",
+          "already there. Choose the P2S, 0.4 mm nozzle, your PLA and the textured PEI plate, set the plate's",
+          "walls, infill, layer height and brim as listed, then slice and print.",
           "Grams and times are PrusaSlicer's estimate with a P2S-like profile; Bambu Studio's numbers will differ a little.", "",
-          "| # | File | Parts | For | Settings | g | Time |", "|---|---|---|---|---|---|---|"] + rows + \
-         ["", f"All plates: **{tot_g / 1000:.2f} kg** of filament (test coupon plate included)."]
-    (OUT / "plates.md").write_text("\n".join(md) + "\n")
-    if not a.no_slice:
-        fill_doc("plate-table", "\n".join(md[md.index("| # | File | Parts | For | Settings | g | Time |"):]))
-    (OUT / "plates.json").write_text(json.dumps(summary, indent=1))
+          "| # | File | Parts | For | Settings | g | Time |", "|---|---|---|---|---|---|---|"] + rows + ["", total]
+    (new / "plates.md").write_text("\n".join(md) + "\n")
+    (new / "plates.json").write_text(json.dumps(summary, indent=1))
+    OUT.mkdir(exist_ok=True)
+    for f in list(OUT.glob("*.3mf")) + [OUT / "plates.md", OUT / "plates.json"]:
+        if f.exists():
+            f.unlink()
+    for f in new.iterdir():
+        shutil.move(str(f), str(OUT / f.name))
+    new.rmdir()
+    fill_doc("plate-table", "\n".join(md[md.index("| # | File | Parts | For | Settings | g | Time |"):]))
 
 
 if __name__ == "__main__":
