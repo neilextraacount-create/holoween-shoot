@@ -64,13 +64,13 @@ seg_len       = 210;     // structural length of one chute/shaft segment
 shaft_or      = 7.0;     // shaft tube outer radius (Ø14)
 shaft_ir      = 3.5;
 shaft_ridge   = 9.5;     // V-ridge peak radius at each bearing ring
-ring_or       = 14.0;
-hex_af        = 10.0;    // shaft coupler hex across flats
-trough_w      = 80;      // inside width of the candy chute
-trough_h      = 30;      // inside wall height
-trough_wall   = 1.2;
-trough_floor  = 1.6;
-trough_n      = 82;      // chute floor offset from the shaft axis (perpendicular to the line)
+ring_or       = 13.0;    // bearing ring outer radius
+hex_af        = 8.0;     // hex coupler across flats (separate printed coupler joins female sockets)
+trough_w      = 66;      // inside width of the candy chute
+trough_h      = 24;      // inside wall height
+trough_wall   = 0.9;     // 2 perimeters
+trough_floor  = 1.3;
+trough_n      = 100;     // chute floor offset from the shaft axis (perpendicular to the line)
 crank_r       = 110;     // crank arm radius
 
 // ---------------------------------------------------------------- stakes
@@ -82,13 +82,13 @@ spike_embed   = 170;     // depth driven into the lawn
 
 // ---------------------------------------------------------------- take-up
 takeup_travel = 60;      // tail take-up travel (fully in = +20 mm, fully out = -40 mm)
-screw_r       = 7.0;     // printed take-up screw, Ø14
+screw_r       = 5.0;     // printed take-up screw, Ø10 round thread
 screw_pitch   = 3.0;
 
 $fn           = 64;
 
 // ---------------------------------------------------------------- layout along the line (distance s from the drive axle line, along the line)
-gb_top_s      = 110;     // top of the gearbox stub (male hex) = start of the first chute segment shaft
+gb_top_s      = 110;     // top face of the gearbox (rotor end with a hex socket) = start of chute segment 1
 crank_head_len = 150;    // crank head unit above the last segment
 head_h        = 6 * IN;  // belt top above the lawn at the drive roller
 tail_h        = 9 * IN;  // belt top above the sidewalk at the tail roller (basket rim must be <= tail_h - 3 in)
