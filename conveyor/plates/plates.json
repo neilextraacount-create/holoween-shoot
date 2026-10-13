@@ -35,10 +35,11 @@
     14.524999966011741
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "alerts": "Loose extrusions test_coupon",
-  "grams": "62.53",
-  "time": "1h 56m 37s",
+  "alerts": "Loose extrusions test_coupon | Low bed adhesion bolt8_28, hex_coupler, test_coupon",
+  "grams": "63.69",
+  "time": "1h 53m 41s",
   "extent": [
    8.258,
    8.199,
@@ -295,9 +296,10 @@
     186.63305230901966
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "90.57",
-  "time": "3h 28m 10s",
+  "grams": "90.88",
+  "time": "3h 24m 38s",
   "extent": [
    8.801,
    8.818,
@@ -510,9 +512,10 @@
     176.0117490623169
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "110.84",
-  "time": "3h 16m 46s",
+  "grams": "110.98",
+  "time": "3h 12m 20s",
   "extent": [
    8.245,
    8.14,
@@ -551,10 +554,11 @@
     73.03535533905932
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
   "alerts": "crank_arm Floating object part, Collapsing overhang",
-  "grams": "150.46",
-  "time": "5h 0m 32s",
+  "grams": "153.05",
+  "time": "4h 46m 50s",
   "extent": [
    8.262,
    8.269,
@@ -595,9 +599,10 @@
     122.68997834721793
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "121.78",
-  "time": "3h 36m 15s",
+  "grams": "122.83",
+  "time": "3h 28m 0s",
   "extent": [
    8.262,
    8.258,
@@ -630,41 +635,18 @@
     30.509604846797206
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
   "alerts": "Low bed adhesion gearbox, tail_roller",
-  "grams": "285.52",
-  "time": "14h 7m 11s",
+  "grams": "292.76",
+  "time": "13h 8m 43s",
   "extent": [
-   8.208,
+   8.212,
    8.197,
    220.799,
-   119.043
+   119.04
   ],
   "log": [
-   "[2026-10-13 12:53:05.804891] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:05.861333] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:05.884322] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:05.931257] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:05.935091] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:05.984091] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.008834] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.079462] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.143804] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.335803] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.336460] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.336480] [0x00007f4bb2b5d180] [error]   MedialAxis - Invalid Voronoi diagram even after morphological closing.",
-   "[2026-10-13 12:53:06.411481] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.495802] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.496297] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.496314] [0x00007f4bb2b5d180] [error]   MedialAxis - Invalid Voronoi diagram even after morphological closing.",
-   "[2026-10-13 12:53:06.500260] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:06.501195] [0x00007f4bb2b5d180] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:10.329302] [0x00007f4bb03fb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:10.330123] [0x00007f4bb03fb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:10.331788] [0x00007f4bb03fb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:10.350190] [0x00007f4bb03fb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:10.388228] [0x00007f4bb03fb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
-   "[2026-10-13 12:53:10.389945] [0x00007f4bb03fb6c0] [error]   Detected missing Voronoi vertex even after the rotation of input.",
    "print warning: Detected print stability issues:"
   ]
  },
@@ -722,9 +704,10 @@
     70.03942545661994
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "322.87",
-  "time": "9h 28m 12s",
+  "grams": "328.48",
+  "time": "9h 1m 33s",
   "extent": [
    8.886,
    8.89,
@@ -763,9 +746,10 @@
     94.68997834721793
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "110.88",
-  "time": "3h 25m 47s",
+  "grams": "112.48",
+  "time": "3h 16m 46s",
   "extent": [
    8.256,
    8.25,
@@ -798,10 +782,11 @@
     143.36273682421808
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
   "alerts": "Long bridging extrusions stake_1, stake_2, stake_3",
-  "grams": "115.37",
-  "time": "2h 15m 51s",
+  "grams": "116.17",
+  "time": "2h 13m 56s",
   "extent": [
    9.576,
    8.811,
@@ -848,9 +833,10 @@
     113.0
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "131.21",
-  "time": "3h 15m 40s",
+  "grams": "132.41",
+  "time": "3h 9m 20s",
   "extent": [
    8.263,
    8.21,
@@ -877,9 +863,10 @@
     103.71073673820135
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "70.60",
-  "time": "2h 2m 35s",
+  "grams": "70.70",
+  "time": "1h 58m 21s",
   "extent": [
    8.245,
    8.259,
@@ -924,9 +911,10 @@
     68.0878277248052
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "140.18",
-  "time": "6h 21m 13s",
+  "grams": "143.22",
+  "time": "6h 7m 44s",
   "extent": [
    8.829,
    8.85,
@@ -953,10 +941,11 @@
     92.99241763214285
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "alerts": "post_lower Floating bridge anchors, Long bridging extrusions",
-  "grams": "82.30",
-  "time": "1h 44m 23s",
+  "alerts": "post_lower Floating bridge anchors, Long bridging extrusions | stake_4 Long bridging extrusions",
+  "grams": "83.46",
+  "time": "1h 41m 59s",
   "extent": [
    9.584,
    8.811,
@@ -991,9 +980,10 @@
     140.70169608622007
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "279.14",
-  "time": "8h 11m 37s",
+  "grams": "281.11",
+  "time": "8h 0m 11s",
   "extent": [
    8.835,
    8.797,
@@ -1026,9 +1016,10 @@
     160.70169608622007
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "353.19",
-  "time": "11h 30m 7s",
+  "grams": "352.84",
+  "time": "11h 7m 41s",
   "extent": [
    8.678,
    8.797,
@@ -1049,9 +1040,10 @@
     80.70169608622007
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "117.73",
-  "time": "3h 54m 46s",
+  "grams": "117.61",
+  "time": "3h 47m 5s",
   "extent": [
    8.678,
    8.797,
@@ -1072,9 +1064,10 @@
     126.0581498112407
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "31.11",
-  "time": "53m 57s",
+  "grams": "31.75",
+  "time": "52m 31s",
   "extent": [
    8.265,
    8.268,
@@ -1095,9 +1088,10 @@
     122.27116453750033
    ]
   ],
+  "stl_hash": "2d308ca3fe8d26167dd93d0adb907c455325c890",
   "ok": true,
-  "grams": "40.22",
-  "time": "1h 12m 13s",
+  "grams": "41.03",
+  "time": "1h 10m 52s",
   "extent": [
    9.58,
    9.572,

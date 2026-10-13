@@ -188,6 +188,4 @@ SITE: 2 risers x 7 in (ASSUMED), 20 in run to the porch; drive axle 10 in before
   [ok] porch stand tray bottom -0 mm from the porch floor (set stand_h = 552 to correct)
   [ok] porch stand tray starts 1.7 in behind the porch edge (need >= 0.8 in)
 
-NOTE: the STLs changed since the plates in ../plates were made: run python3 make_plates.py
-
 RESULT: ALL CHECKS PASSED

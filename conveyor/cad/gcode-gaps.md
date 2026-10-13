@@ -13,6 +13,6 @@ or 3 layers below (0.4 mm).
 | `tail_roller` | 2 | 0.44 mm (z 61.48) | never |
 | `chute_segment` | 2 | 0.44 mm (z 167.4) | never |
 | `crank_head` | 2 | 0.44 mm (z 117.0) | never |
-| `crank_arm` | 2 | 0.44 mm (z 55.6) | 2 layer(s) of air at z 8.6 |
+| `crank_arm` | 2 | 0.43 mm (z 8.6) | 2 layer(s) of air at z 8.6 |
 
-Result: all gaps open (side gap must be >= 0.15 mm, nothing printed directly on another body).
+Result: all gaps open (side gap must be >= 0.30 mm, nothing printed directly on another body).
