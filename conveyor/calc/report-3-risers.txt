@@ -1,0 +1,59 @@
+========================================================================
+CANDY CONVEYOR - STAGE 1 CALCULATIONS (provisional site data)
+========================================================================
+Porch floor height above lawn edge:   42.9 in (lawn rise 21.9 + 3 risers x 7.0)
+Tail roller axis x = -4.0 in, belt top 9.0 in
+Head roller axis x = 282.0 in, belt top 51.9 in (9.0 in above porch)
+Single straight belt line: slope 0.1499  =  8.53 deg
+Roller centre distance along incline: 289.2 in = 7.346 m (24.10 ft)
+
+CLEARANCE CHECK (inches)  belt-top / return-run above local ground
+  porch edge (nose)    x= 270.0  ground  42.9  belt  50.1 (  7.2)  return  46.8 (  3.9)
+  tread 2 nose         x= 260.0  ground  35.9  belt  48.6 ( 12.7)  return  45.3 (  9.4)
+  first riser top      x= 250.0  ground  28.9  belt  47.1 ( 18.2)  return  43.9 ( 15.0)
+  mid lawn             x= 125.0  ground  10.9  belt  28.3 ( 17.4)  return  25.6 ( 14.7)
+  lawn edge            x=   0.0  ground   0.0  belt   9.6 (  9.6)  return   7.4 (  7.4)
+  -> minimum return-run clearance: 3.9 in  OK
+
+SUPPORT STATIONS (stake pairs).  Heights in inches above local ground
+       x  ground  beltTop  railBot  return  stake len
+     8.0     0.7     10.1      8.5     7.9   23.0 -> 24"
+    56.0     4.9     13.1     11.5    10.7   26.0 -> 36"
+   104.0     9.1     16.1     14.5    13.5   29.0 -> 36"
+   152.0    13.3     19.1     17.5    16.3   32.0 -> 36"
+   200.0    17.5     22.1     20.5    19.1   35.0 -> 36"
+   246.0    21.5     25.0     23.3    21.8   37.8 -> 48"
+  6 lawn stations + head stand (porch) + tail at last station; span over steps = 36 in (rails only)
+
+BELT
+  Closed loop length (on pitch line): 14.90 m = 48.9 ft
+  Cut length incl. 125 mm sewn lap: 15.02 m = 49.3 ft (25 yd roll = 75 ft leaves 26 ft spare)
+  Take-up travel 150 mm absorbs 300 mm of belt growth = 2.0 % of loop
+
+SAG  (parabolic approx, sag = w L^2 / 8T)
+  Carrying run: w=2.45 N/m, span 0.62 m, T=30 N -> sag 3.9 mm
+  Return run:   w=0.98 N/m, span 1.23 m, T=50 N -> sag 3.7 mm
+
+RUNNING RESISTANCE (estimate)
+  11 carrying + 6 return idlers, PLA bushing on steel mu=0.25: 1.63 N
+  belt bending at 2 rollers ~2 N, edge rub allowance 5 N, chain/bearings ~1 N
+  full candy load running downhill: -1.6 N (helps)
+  estimated total 8.0 N  -> design value 20 N
+  Drive grip, rubber lagging  mu=0.5: allowed T1/T2 = 4.81, needed 1.67 -> OK
+  Drive grip, bare PLA        mu=0.25: allowed T1/T2 = 2.19, needed 1.67 -> OK
+
+DRIVE
+  Chain 24T crank -> 16T roller = 1:1.50 step-up
+  Crank 45 rpm -> roller 68 rpm -> belt 0.28 m/s (0.93 ft/s)
+  Candy transit 7.35 m takes 26 s = 19 crank turns
+  Roller torque 0.80 N.m, crank torque 1.33 N.m, hand force at 100 mm arm = 13 N (3.0 lbf)
+  Chain length at 23 in centres: 112.0 links -> use 114 (standard 112-116 link bike chain fits)
+  Crank axle 30.3 in above porch floor; handle sweeps 26-34 in
+  24T sprocket pitch diameter 97.3 mm
+  16T sprocket pitch diameter 65.1 mm
+
+STRUCTURE
+  Belt tension reacted inside the frame: each rail compressed ~40 N; Euler buckling (weak axis, 48 in pinned) 1286 N -> factor 32
+  Rail deflection between stations (48 in span): 0.12 mm
+  Wind 20 mph on 4.8 ft^2 side area: 5.9 lbf total (~1.0 lbf per station)
+  Head roller bearing radial load ~80 N shared by 2 x 608 (rated in kN) -> trivial

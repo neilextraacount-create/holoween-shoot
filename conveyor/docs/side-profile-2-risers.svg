@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1413 825" font-family="sans-serif" font-size="13">
+<rect width="100%" height="100%" fill="#fff"/>
+<polygon points="20.0,784.9 20.0,784.9 104.0,784.9 1154.0,601.2 1154.0,601.2 1154.0,542.4 1238.0,542.4 1238.0,483.6 1393.4,483.6 1393.4,810.1 20.0,810.1" fill="#cfe3c2" stroke="#4a6b3a"/>
+<text x="20" y="22" font-size="15" font-weight="bold">Side profile (vertical scale x2) - provisional site data</text>
+<polygon points="87.2,702.7 1288.4,401.4 1288.4,421.4 87.2,722.8" fill="#d9b98a" opacity="0.7"/>
+<polyline points="87.2,709.3 1288.4,408.0" stroke="#111" stroke-width="3" fill="none"/>
+<polyline points="87.2,727.3 1288.4,436.0" stroke="#111" stroke-width="2" stroke-dasharray="8 4" fill="none"/>
+<ellipse cx="87.2" cy="718.3" rx="4.1" ry="8.3" fill="#888" stroke="#000"/>
+<text x="47" y="745">tail Ø50 + take-up</text>
+<ellipse cx="1288.4" cy="421.9" rx="6.6" ry="13.2" fill="#888" stroke="#000"/>
+<text x="1248" y="453">drive Ø80</text>
+<polyline points="137.6,804.2 137.6,689.1" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="339.2,769.0 339.2,638.5" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="540.8,733.7 540.8,588.0" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="742.4,698.4 742.4,537.4" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="944.0,663.1 944.0,486.8" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="1137.2,629.3 1137.2,438.4" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="1263.2,483.6 1263.2,427.8" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="1288.4,421.2 1288.4,228.0" stroke="#555" stroke-width="2" stroke-dasharray="3 3"/>
+<circle cx="1288.4" cy="228.0" r="9" fill="#c60"/>
+<text x="1138" y="222">crank (chain 1:1.5)</text>
+<rect x="58" y="722" width="50" height="63" fill="none" stroke="#e67e22" stroke-width="2"/>
+<text x="58" y="813">basket</text>
+<text x="588" y="813">lawn 250 in @ 5°  —  belt line 7.1°, centres 24.0 ft</text>
+<text x="882" y="248">2 risers (belt bridges over)</text>
+</svg>

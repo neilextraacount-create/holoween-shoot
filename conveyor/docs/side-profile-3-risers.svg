@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1413 884" font-family="sans-serif" font-size="13">
+<rect width="100%" height="100%" fill="#fff"/>
+<polygon points="20.0,843.7 20.0,843.7 104.0,843.7 1154.0,660.0 1154.0,660.0 1154.0,601.2 1196.0,601.2 1196.0,542.4 1238.0,542.4 1238.0,483.6 1393.4,483.6 1393.4,868.9 20.0,868.9" fill="#cfe3c2" stroke="#4a6b3a"/>
+<text x="20" y="22" font-size="15" font-weight="bold">Side profile (vertical scale x2) - provisional site data</text>
+<polygon points="87.2,761.5 1288.4,401.4 1288.4,421.5 87.2,781.6" fill="#d9b98a" opacity="0.7"/>
+<polyline points="87.2,768.1 1288.4,408.0" stroke="#111" stroke-width="3" fill="none"/>
+<polyline points="87.2,786.2 1288.4,436.1" stroke="#111" stroke-width="2" stroke-dasharray="8 4" fill="none"/>
+<ellipse cx="87.2" cy="777.1" rx="4.1" ry="8.3" fill="#888" stroke="#000"/>
+<text x="47" y="803">tail Ø50 + take-up</text>
+<ellipse cx="1288.4" cy="421.9" rx="6.6" ry="13.2" fill="#888" stroke="#000"/>
+<text x="1248" y="453">drive Ø80</text>
+<polyline points="137.6,863.0 137.6,745.5" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="339.2,827.8 339.2,685.1" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="540.8,792.5 540.8,624.6" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="742.4,757.2 742.4,564.2" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="944.0,721.9 944.0,503.7" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="1137.2,688.1 1137.2,445.8" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="1263.2,483.6 1263.2,429.0" stroke="#7a5a2a" stroke-width="4"/>
+<polyline points="1288.4,421.2 1288.4,228.0" stroke="#555" stroke-width="2" stroke-dasharray="3 3"/>
+<circle cx="1288.4" cy="228.0" r="9" fill="#c60"/>
+<text x="1138" y="222">crank (chain 1:1.5)</text>
+<rect x="58" y="781" width="50" height="63" fill="none" stroke="#e67e22" stroke-width="2"/>
+<text x="58" y="872">basket</text>
+<text x="588" y="872">lawn 250 in @ 5°  —  belt line 8.5°, centres 24.1 ft</text>
+<text x="882" y="248">3 risers (belt bridges over)</text>
+</svg>
