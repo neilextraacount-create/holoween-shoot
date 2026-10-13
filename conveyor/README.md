@@ -11,6 +11,10 @@ Sewing the belt into a loop takes a needle and strong thread you probably alread
 
 ![Side profile, 2 risers](docs/side-profile-2-risers.svg)
 
+| Head (foot of the steps) | Station | Tail (sidewalk) | Porch end |
+|---|---|---|---|
+| ![head](docs/img/head-assembly.png) | ![station](docs/img/station-assembly.png) | ![tail](docs/img/tail-assembly.png) | ![porch](docs/img/porch-assembly.png) |
+
 ## Status: designed and computer-checked, NOT built or tested
 
 | | |

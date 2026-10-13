@@ -42,6 +42,11 @@ the STL files in `cad/stl/`.
 
 ## 2. Head module (foot of the steps)
 
+![Head module](img/head-assembly.png)
+
+*Head module: frames (orange), drive roller, gearbox on frame B (crown gear gold), drop trap and
+the first chute segments (purple), feet (brown), belt (black).*
+
 Parts: `head_side_a`, `head_side_b`, `drive_roller`, `drive_pin`, `gearbox`, 2 x `foot`,
 7 x `bolt8_28` + 7 x `nut8` (4 for the feet, 3 for the gearbox), 2 ground screws, 2 spikes.
 
@@ -65,6 +70,10 @@ Parts: `head_side_a`, `head_side_b`, `drive_roller`, `drive_pin`, `gearbox`, 2 x
 
 ## 3. Stations (stilts)
 
+![Station](img/station-assembly.png)
+
+*A station: the belt rides over the upper wheel and comes back over the lower wheel.*
+
 Parts per station: `stake_N`, `station_bracket`, 2 x `wheel_unit`, 2 x `pin3`. Plus one
 `stake_cap` for pushing.
 
@@ -80,6 +89,10 @@ Parts per station: `stake_N`, `station_bracket`, 2 x `wheel_unit`, 2 x `pin3`. P
    the head roller to the tail roller. Push a stake deeper or pull it up a little to adjust.
 
 ## 4. Tail module (sidewalk end)
+
+![Tail module](img/tail-assembly.png)
+
+*Tail: knob screws (gold) pull the take-up blocks; the skids reach back onto the lawn.*
 
 Parts: `tail_side_l`, `tail_side_r`, `tail_roller`, 2 x `takeup_block`, 2 x `takeup_nut`,
 2 x `takeup_screw`, `skid_l`, `skid_r`, 1 x `foot`, 6 x `bolt8_28` + 6 x `nut8`,
@@ -141,6 +154,10 @@ roller:
 - When it runs centred for 2 minutes, it's done. Re-check after the first evening.
 
 ## 8. Chute line, crank and porch stand
+
+![Porch end](img/porch-assembly.png)
+
+*Porch end: last chute segment, crank head with funnel, crank arm, and the stand on its foot.*
 
 Parts: `trap`, 5 x `chute_segment`, `crank_head`, `crank_arm`, 6 x `hex_coupler`,
 6 x `ring_sleeve`, `pin3`, `post_lower`, `post_upper`, `stand_tray`, `stand_shim` (as needed).
