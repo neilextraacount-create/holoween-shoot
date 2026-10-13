@@ -49,7 +49,7 @@ r_wp = g("wu_r") + g("wu_crown") + g("belt_t") / 2
 head_axle_below_top = g("belt_t") + drv_rs           # 32.5
 tail_axle_below_top = g("belt_t") + g("tail_r") + g("roll_crown")
 st_ret_z = -48 - (g("wu_r") + g("wu_crown"))
-st_bot = st_ret_z - 16                               # station bracket bottom (stake head top), belt frame
+st_bot = st_ret_z - 22                               # station bracket bottom (stake head top), belt frame
 pin_r = g("gear_m") * g("pinion_z") / 2
 ratio = g("crown_z") / g("pinion_z")
 
@@ -61,9 +61,9 @@ def main():
     ap.add_argument("--lawn", type=float, default=250.0)
     ap.add_argument("--lawn-deg", type=float, default=5.0)
     ap.add_argument("--steps-run", type=float, default=20.0)
-    ap.add_argument("--head-gap", type=float, default=14.0, help="drive axle distance before the first riser, in")
+    ap.add_argument("--head-gap", type=float, default=10.0, help="drive axle distance before the first riser, in")
     ap.add_argument("--tail-x", type=float, default=-2.0, help="tail axle x (negative = over the sidewalk), in")
-    ap.add_argument("--crank-min", type=float, default=18.0, help="lowest acceptable crank height above the porch, in")
+    ap.add_argument("--crank-min", type=float, default=22.0, help="lowest acceptable crank height above the porch, in")
     ap.add_argument("--svg", default=None)
     a = ap.parse_args()
     out = []
@@ -111,7 +111,7 @@ def main():
         h = (bt - ground(x)) * IN                   # belt top above the grass, mm
         head_top = h + st_bot                       # stake head top above the grass, mm
         total = head_top + g("spike_embed")
-        stake_lens.append(round(total - 36))
+        stake_lens.append(round(total - 32))          # leg length; the socket head adds 32 mm
         p(f"  {i:2d} {x:7.1f} {ground(x):7.1f} {h/IN:9.1f} {head_top/IN:9.1f} in {total:9.0f} mm (STL: stake_{i})")
 
     # ------------------------------------------------------------ drive line (shaft + chute) to the porch
@@ -124,21 +124,30 @@ def main():
         return (ax + (s_mm * ca - nperp_mm * sa) / IN, ay + (s_mm * sa + nperp_mm * ca) / IN)
 
     p(f"\nDRIVE LINE (chute + shaft) at {math.degrees(alpha):.1f} deg to level, from the drive axle up to the porch")
+    st_len = 40.0
+    n_m = (g("trough_n") - g("trough_floor")) - st_len * math.cos(alpha)
+
+    def stand_at(N):
+        # porch stand post: plugs into a world-vertical socket under the crank head funnel; its mouth sits
+        # 12 mm (along the line) above the crank head's lower end and st_len below the funnel floor
+        return line_pt(g("gb_top_s") + N * g("seg_len") + 12.0, n_m)
+
     best = None
     for N in range(4, 10):
-        s_crank = g("gb_top_s") + N * g("seg_len") + g("crank_head_len") - 25
+        s_crank = g("gb_top_s") + N * g("seg_len") + g("crank_head_len") + 15
         cx, cy = line_pt(s_crank)
-        over = cx - porch_x
+        sx, sy = stand_at(N)
         hc = cy - porch_y
-        ok = over >= 1.0 and hc >= a.crank_min
+        ok = sx - porch_x >= 1.0 and hc >= a.crank_min
         tag = "  <- use" if ok and best is None else ""
         if ok and best is None:
             best = (N, s_crank, cx, cy, hc)
-        p(f"  {N} segments: crank at x={cx:.1f} in ({over:+.1f} in behind the porch edge), {hc:.1f} in above the porch floor{tag}")
+        p(f"  {N} segments: crank {hc:.1f} in above the porch floor, {cx - porch_x:+.1f} in behind the edge;"
+          f" stand post {sx - porch_x:+.1f} in behind the edge{tag}")
     if best is None:
         p("  -> no segment count works: change --head-gap or line_deg")
         N = 6
-        s_crank = g("gb_top_s") + N * g("seg_len") + g("crank_head_len") - 25
+        s_crank = g("gb_top_s") + N * g("seg_len") + g("crank_head_len") + 15
     else:
         N, s_crank, cx, cy, hc = best
     worst = 1e9
@@ -155,9 +164,10 @@ def main():
         worst = min(worst, clr)
         p(f"  underside over {name} (x={xr:.0f}): {clr:.1f} in")
     p(f"  -> minimum clearance {worst:.1f} in {'OK' if worst >= 1.5 else 'TOO LOW: increase line_deg or --head-gap'}")
-    lx, ly = line_pt(s_crank - 60, -40)
-    leg = (ly - ground(lx)) * IN
-    p(f"  crank head stand leg: {leg:.0f} mm ({leg/IN:.1f} in) to the {'porch floor' if lx >= porch_x else 'step tread'} at x={lx:.1f} in")
+    lx, ly = stand_at(N)
+    leg = (ly - porch_y) * IN
+    p(f"  porch stand: post {lx - porch_x:.1f} in behind the porch edge; socket mouth {leg:.0f} mm above the porch floor"
+      f" -> stand_h = {leg:.0f} in params.scad")
     chute_len = (N * g("seg_len") + g("gb_top_s")) / 1000
 
     # ------------------------------------------------------------ belt length
@@ -204,10 +214,11 @@ def main():
     tail_axle_h = (g("tail_h") - tail_axle_below_top) / 1000
     head_axle_h = (g("head_h") - head_axle_below_top) / 1000
     p("\nANCHORING (belt tension must go into the ground at both ends)")
-    for nm, hgt, base in (("tail", tail_axle_h, 0.20), ("head", head_axle_h, 0.20)):
+    for nm, hgt, base, where in (("tail", tail_axle_h, 0.172, "the 2 skid anchors nearest the sidewalk (ground screws)"),
+                                 ("head", head_axle_h, 0.170, "the 2 anchors of the foot nearest the steps (ground screws)")):
         M = H * hgt
-        p(f"  {nm}: {H:.0f} N pull at {hgt*1000:.0f} mm -> {M:.1f} N.m; with feet {base*1000:.0f} mm apart the rear foot lifts with"
-          f" {M/base:.0f} N -> 2 stakes must hold {M/base/2:.0f} N each in pull-out, or add {M/base/G:.1f} kg of ballast")
+        p(f"  {nm}: {H:.0f} N pull at {hgt*1000:.0f} mm -> {M:.1f} N.m; tipping arm {base*1000:.0f} mm -> {M/base:.0f} N uplift on"
+          f" {where}: {M/base/2:.0f} N each, or {M/base/G:.1f} kg of ballast")
 
     # ------------------------------------------------------------ PLA stress checks
     p("\nPLA STRESS CHECKS (parts printed with layers across the load are the weak case)")
@@ -223,11 +234,13 @@ def main():
     sl = Ft / (g("gear_face") * g("gear_m") * 0.3)
     p(f"  gear teeth at 2x dry torque: {Ft:.0f} N tooth force -> {sl:.1f} MPa (Lewis); crown teeth are printed with layers across")
     p("  station wheel axles: < 3 MPa")
+    Mg = 30 * 0.035
+    p(f"  crank grip axle Ø13 with a 30 N hand load at mid-grip: {32*Mg/(math.pi*0.013**3)/1e6:.1f} MPa bending across layers")
 
     text = "\n".join(out)
     print(text)
     (HERE / f"report-{a.risers}-risers.txt").write_text(text + "\n")
-    (HERE / f"stakes-{a.risers}-risers.txt").write_text("\n".join(str(s) for s in stake_lens) + f"\nsegments {N}\nleg {leg:.0f}\n")
+    (HERE / f"stakes-{a.risers}-risers.txt").write_text("\n".join(str(s) for s in stake_lens) + f"\nsegments {N}\nstand_h {leg:.0f}\n")
     if a.svg:
         svg(a, ground, riser_xs, porch_x, porch_y, xh, xt, yh, yt, sb, line_pt, s_crank, n, span, lx, ly)
 

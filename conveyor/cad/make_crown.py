@@ -4,6 +4,7 @@ Gearbox: cut the 34T crown teeth by sweeping the 17T pinion through the real mes
 motion, build the print-in-place gearbox STL (body + rotor), and check the mesh.
 
   python3 make_crown.py            # writes stl/gearbox.stl and prints the checks
+  (check_parts.py runs it with --out stl/.raw/gearbox.stl)
 
 Frames: everything is in the gearbox PRINT frame of conveyor.scad: crown axis = +z,
 male hex on the bed, crown teeth on top. The pinion (on the drive roller) has its
@@ -86,8 +87,13 @@ def pinion_pose(phi):
 
 
 def main():
-    out_dir = HERE / "stl"
-    out_dir.mkdir(exist_ok=True)
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=str(HERE / "stl" / "gearbox.stl"))
+    ap.add_argument("--rotor", help="also write the rotor alone here")
+    args = ap.parse_args()
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as td:
         td = Path(td)
         for part in ("gb_rotor_blank", "gb_body", "pinion_cutter", "pinion_check"):
@@ -157,10 +163,10 @@ def main():
 
     gearbox = body + rotor
     tm = to_trimesh(gearbox)
-    tm.export(out_dir / "gearbox.stl")
-    if len(sys.argv) > 2 and sys.argv[1] == "--rotor":
-        to_trimesh(rotor).export(sys.argv[2])
-    print(f"wrote {out_dir/'gearbox.stl'}: watertight {tm.is_watertight}, bodies {len(tm.split(only_watertight=False))},"
+    tm.export(out)
+    if args.rotor:
+        to_trimesh(rotor).export(args.rotor)
+    print(f"wrote {out}: watertight {tm.is_watertight}, bodies {len(tm.split(only_watertight=False))},"
           f" bbox {np.round(tm.bounds, 1).tolist()}")
     print("GEARBOX OK" if ok else "GEARBOX CHECK FAILED")
     sys.exit(0 if ok else 1)

@@ -1,99 +1,129 @@
 # Printing guide (Bambu Lab P2S, PLA)
 
-All STL files are in [`../stl/`](../stl/). Each one is already oriented the way it should sit
-on the build plate. **No supports are needed on any part.** Every part fits the P2S's
-256 x 256 x 256 mm volume with at least 10 mm to spare.
+Every STL in `cad/stl/` is already in its print orientation: load it and slice it as it is.
+**No part needs supports.** Overhangs are 45° or steeper, and the print-in-place gaps are
+open to the side.
 
-## 0. Order of work: test first, then print in batches
+## Settings for every part
 
-1. **Wait for the belt** before printing the rollers, sliders, spacers or hood. Measure it
-   (width in 3 places, thickness), set `belt_w` / `belt_t` in `cad/params.scad`, and
-   re-export (see the end of this page). Plates, crank parts, sprockets and jigs don't
-   depend on the belt, so you can print them now.
-2. **Print the test set** (about 90 g, about 3 h) and check it against the criteria below.
-3. Print everything else.
+| Setting | Value |
+|---|---|
+| Filament | PLA (Bambu PLA Basic, eSUN PLA+ or similar), 1.75 mm, dry |
+| Nozzle | 0.4 mm |
+| Plate | textured PEI, glue stick not needed |
+| Layer height | **0.20 mm**; use **0.16 mm** for `gearbox` and `drive_roller` (smoother gear teeth) |
+| Walls, infill | as in the part table below (gyroid infill) |
+| Top / bottom shells | 5 / 4 layers |
+| Supports | **off** |
+| Brim | 5 mm on `chute_segment`, `crank_head`, `ground_screw`, `takeup_screw` (tall, small footprint) |
+| Elephant-foot compensation | **0.15 mm** (Bambu default is 0.15). It matters for print-in-place parts: a squashed first layer can glue a spinning part to its housing. |
+| Seam | aligned |
 
-## 1. Test prints: the smallest set that proves the risky fits
+## Step 1: print the test coupon first (about 1 hour, 56 g)
 
-| # | Part (file) | g | Proves | Pass if | If it fails |
-|---|---|---|---|---|---|
-| T1 | `test_coupon.stl` | 16 | 608 press fit, 1/4 in and 5/16 in clearance holes, both nut traps, spacer slip fit | A bearing presses in with thumb pressure or a vise, can't be pulled out by hand and doesn't rock. Both threaded rods slide through freely. Nuts press into the hex traps and stay. A printed spacer slides into the last hole. | Bearing loose: set `brg_fit` 0.05 smaller. Too tight to press: 0.05 larger. Rod binds: raise `bolt_hole` / `axle_hole` by 0.2. Re-export. |
-| T2 | `sprocket16.stl` | 20 | Tooth form against your real chain | Wrapped by hand around half the sprocket, every chain roller drops fully into its seat, nothing rides on a tooth tip, and the chain lifts off without snagging. | Rollers ride high: raise `seat_r` by 0.1 (the `+ 0.15` term in `conveyor.scad`). Chain binds sideways: set `chain_tooth_t` 0.2 thinner. |
-| T3 | `tail_half.stl` x 2 | 48 | Roller printing quality, bearings in a real part, the castellated joint, rolling on the axle | Bearings press in. One half turned over locks into the other with no rocking. On a 5/16 in rod with spacers, the roller spins freely for several turns. | Same fixes as T1 (`brg_fit`). If the joint is too tight, sand the teeth. |
-| T4 | `slider.stl` x 1 | 5 | Rung fit and belt lip height | Slides onto the 1/4 in rod. With the belt laid across it, the side lips are about level with the belt's top surface and the belt fits between them with about 2 mm on each side. | Re-measure the belt and update `belt_w` / `belt_t`. |
+`test_coupon.stl` has:
 
-The tail halves and slider are real parts, so a passing test isn't wasted filament.
+- **3 print-in-place spinners** marked with 1, 2 and 3 dots: gaps 0.35, 0.45 and 0.55 mm
+- the slip fits used on the machine:
+  - a 16 mm stake/tray socket
+  - a hex socket for the shaft couplers
+  - the ring-sleeve counterbore
+  - the drive journal hole
+  - an M8 nut thread
 
-## 2. Slicer settings
+Also print one `hex_coupler`, one `ring_sleeve`, one `bolt8_28` and the `stake_cap`, and try
+them in the coupon.
 
-Use Bambu Studio's **Generic PLA** (or your brand's) profile, 0.4 mm nozzle, **0.20 mm**
-layers, **4 top and 4 bottom layers**, gyroid infill, brim **off** except where noted.
+| Result | Do this |
+|---|---|
+| Spinner 2 (0.45, two dots) turns freely after a firm first twist | ✅ keep `pip_gap = 0.45` |
+| Spinner 2 is stuck, spinner 3 turns | set `pip_gap = 0.55` in `cad/params.scad`, run `python3 cad/check_parts.py` |
+| Spinner 1 already turns freely | your printer is precise; 0.45 still works (0.35 only if you want less wobble) |
+| The coupler, sleeve, spigot or bolt won't go in | set `fit_gap = 0.25` (default 0.20) and regenerate |
+| They rattle | set `fit_gap = 0.15` and regenerate |
 
-| Part | Qty | Walls | Infill | Notes |
-|---|---|---|---|---|
-| `drive_half` | 2 | 2 | 8 % | flange on the plate; the two halves are identical |
-| `sprocket16` | 1 | 4 | 30 % | teeth on the plate (accurate first layer matters: clean the plate) |
-| `tail_half` | 2 | 2 | 8 % | identical halves |
-| `spacer_outer` | 4 | 3 | 100 % | tiny; print together |
-| `spacer_inner` | 2 | 3 | 100 % | 3 mm brim (tall, thin) |
-| `head_plate` | 2 | 4 | 25 % | same part both sides |
-| `tail_plate_left`, `tail_plate_right` | 1 + 1 | 4 | 25 % | mirror images; lug faces up |
-| `takeup_block` | 2 | 4 | 40 % | |
-| `slider` | 6 | 3 | 15 % | 3 mm brim; print all 6 at once |
-| `return_slider` | 5 | 3 | 15 % | 3 mm brim |
-| `sprocket24` | 1 | 4 | 25 % | teeth on the plate |
-| `crank_arm` | 1 | 4 | 30 % | arm on the plate |
-| `crank_spacers` | 1 | 3 | 100 % | 3 spacers on one file |
-| `grip` | 1 | 3 | 10 % | |
-| `crank_clamp` | 1 | 4 | 30 % | |
-| `hood_right`, `hood_left` | 1 + 1 | 3 | 15 % | cheek on the plate |
-| `return_plow` | 1 | 3 | 20 % | |
-| `drill_jig` | 1 | 3 | 15 % | |
-| `test_coupon` | 1 | 3 | 15 % | |
+**Freeing print-in-place parts:** let them cool, then twist firmly in both directions. If one
+won't move, put it in hot tap water (about 60 °C) for a minute and twist again. Never use
+pliers on the rolling surfaces.
 
-Filament, estimated from the part volumes with these settings (`cad/check_parts.py`):
-see the table that script prints. Expect **about 0.6 kg**, and allow 0.7 kg for the tests
-and one reprint. Print time isn't calculated here; from the volumes, expect very roughly
-**20-25 hours** of printing on the P2S. Your slicer will give the real number.
+## Step 2: print in this order
 
-### Suggested plates
+Print each module completely and test it before starting the next, so a problem only costs
+one module.
 
-1. `test_coupon`, `sprocket16`, `slider` (test set, part 1)
-2. `tail_half` x 2 (test set, part 2)
-3. `drive_half` x 2
-4. `head_plate` x 2, `tail_plate_left`, `tail_plate_right`, `takeup_block` x 2
-5. `slider` x 5, `return_slider` x 5, `spacer_outer` x 4, `spacer_inner` x 2, `crank_spacers`
-6. `sprocket24`, `crank_arm`, `grip`, `crank_clamp`
-7. `hood_right`, `hood_left`, `return_plow`, `drill_jig`
+| # | Module | Parts | Test before moving on |
+|---|---|---|---|
+| 1 | Head | `drive_roller`, `drive_pin`, `head_side_a`, `head_side_b`, `gearbox`, 2 x `foot`, 7 x `bolt8_28`, 7 x `nut8` | assemble it on the table; turn the gearbox shaft socket by hand: the roller turns 2x, smoothly, with no tight spots |
+| 2 | One station | `stake_1`, `station_bracket`, 2 x `wheel_unit`, 2 x `pin3`, `stake_cap` | wheels spin freely after the first twist |
+| 3 | Tail | `tail_side_l`, `tail_side_r`, `tail_roller`, 2 x `takeup_block`, 2 x `takeup_nut`, 2 x `takeup_screw`, `skid_l`, `skid_r`, 1 x `foot`, 6 x `bolt8_28`, 6 x `nut8` | the knobs move the blocks along the full window; the roller spins |
+| 4 | Anchors | 4 x `ground_screw`, `gs_wrench`, 4 x `washer50`, 4 x `bolt8_28` | screw one into your lawn and pull on it |
+| 5 | Other stations | `stake_2` to `stake_4`, 3 x `station_bracket`, 6 x `wheel_unit`, 6 x `pin3` | |
+| 6 | Line | `trap`, 5 x `chute_segment`, `crank_head`, `crank_arm`, 6 x `hex_coupler`, 6 x `ring_sleeve`, `pin3` | stack two segments on the table: both shafts turn together |
+| 7 | Porch stand | `post_lower`, `post_upper`, `stand_tray`, 4 x `stand_shim` | |
+| 8 | Belt joint | `splice_template` | |
 
-## 3. PLA outdoors: what to watch
+Optional: 2 x `spike` (for the head's rear foot in soft turf).
 
-* **Heat.** PLA starts to soften around 55-60 °C. A black part in direct sun, or anything left
-  in a closed car, can get there. Print the load-carrying parts (plates, take-up blocks,
-  clamp, sprockets, crank) in a light colour, and set the conveyor up in the late afternoon.
-  On Halloween night heat is not an issue.
-* **Creep.** PLA slowly deforms under constant load. The design keeps sustained loads low:
-  the belt tension on each tail plate is about 60 N. Steel threaded rod carries all the
-  bending, and PLA only sees bearing and compression. Don't over-tension the belt (see the
-  setup guide), and loosen the take-up after Halloween.
-* **Cold brittleness.** PLA gets more brittle in the cold. Don't hammer printed parts; tap
-  bearings in with a vise or a wooden block.
-* **Sunlight (UV).** A few hours or days don't matter. Store the parts indoors between years.
+## All parts
 
-## 4. Re-exporting after a parameter change
+Generated by `cad/check_parts.py` (also in `cad/parts-table.md`). Sizes are as the part sits on
+the bed. "(diagonal)" parts are exported turned 45° so they fit across the 256 mm bed.
+Grams are estimates from the meshes with the listed walls and infill.
 
-You need [OpenSCAD](https://openscad.org) (free). From the `conveyor/cad` folder:
+| Part (STL) | Qty | Size on the bed, mm | Walls | Infill | ~g each | What it is |
+|---|---|---|---|---|---|---|
+| `test_coupon` | 1 | 150 x 64 x 15 | 3 | 15 % | 56 | PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut) |
+| `wheel_unit` | 8 | 30 x 30 x 106 | 2 | 15 % | 21 | station wheel, print-in-place (2 per station) |
+| `station_bracket` | 4 | 28 x 109 x 16 | 4 | 30 % | 17 | station bracket (holds 2 wheels on the stake) |
+| `stake_1` | 1 | 216 x 203 x 24 (diagonal) | 4 | 30 % | 46 | station 1 stake (nearest the sidewalk) |
+| `stake_2` | 1 | 205 x 191 x 24 (diagonal) | 4 | 30 % | 43 | station 2 stake |
+| `stake_3` | 1 | 194 x 180 x 24 (diagonal) | 4 | 30 % | 41 | station 3 stake |
+| `stake_4` | 1 | 182 x 169 x 24 (diagonal) | 4 | 30 % | 38 | station 4 stake (nearest the steps) |
+| `drive_roller` | 1 | 67 x 67 x 124 | 3 | 10 % | 90 | drive roller with 17T pinion |
+| `drive_pin` | 1 | 16 x 16 x 33 | 4 | 100 % | 4 | drive roller A-side journal pin (press in) |
+| `head_side_a` | 1 | 206 x 196 x 6 | 4 | 30 % | 73 | head side frame A (round journal hole) |
+| `head_side_b` | 1 | 231 x 196 x 6 | 4 | 30 % | 87 | head side frame B (open journal slot, gearbox mount) |
+| `gearbox` | 1 | 94 x 111 x 91 | 3 | 10 % | 93 | gearbox: 34T crown gear rotor in its housing, print-in-place |
+| `trap` | 1 | 103 x 23 x 150 | 3 | 15 % | 28 | drop trap (bottom of the chute, rests on the head frames) |
+| `foot` | 3 | 36 x 196 x 24 | 4 | 30 % | 30 | foot crossbar (2 head, 1 tail rear) |
+| `tail_side_l` | 1 | 227 x 218 x 28 | 4 | 30 % | 70 | tail side frame, left (-Y) |
+| `tail_side_r` | 1 | 227 x 218 x 28 | 4 | 30 % | 70 | tail side frame, right (+Y) |
+| `tail_roller` | 1 | 45 x 45 x 90 | 3 | 10 % | 47 | tail roller, print-in-place |
+| `takeup_block` | 2 | 22 x 24 x 36 | 4 | 40 % | 12 | take-up block (one per side) |
+| `takeup_nut` | 2 | 16 x 16 x 8 | 4 | 100 % | 2 | take-up square nut |
+| `takeup_screw` | 2 | 21 x 22 x 108 | 4 | 100 % | 11 | take-up screw with knob |
+| `skid_l` | 1 | 239 x 59 x 24 | 4 | 30 % | 46 | tail skid, left |
+| `skid_r` | 1 | 239 x 59 x 24 | 4 | 30 % | 46 | tail skid, right |
+| `chute_segment` | 5 | 164 x 133 x 210 | 2 | 15 % | 80 | chute segment with print-in-place drive shaft |
+| `crank_head` | 1 | 183 x 153 x 180 | 3 | 15 % | 103 | crank head: funnel + crank shaft, print-in-place |
+| `crank_arm` | 1 | 136 x 28 x 78 | 3 | 25 % | 48 | crank arm with spinning grip, print-in-place |
+| `pin3` | 12 | 7 x 7 x 26 | 3 | 100 % | 0 | 3 mm pin: wheel pegs (8), crank arm (1), spares (3) |
+| `splice_template` | 1 | 78 x 82 x 6 | 3 | 20 % | 13 | belt sewing template (box-and-X hole pattern) |
+| `stand_shim` | 4 | 40 x 22 x 3 | 3 | 100 % | 3 | shims to level the porch stand foot |
+| `hex_coupler` | 6 | 9 x 8 x 23 | 3 | 100 % | 2 | hex coupler between shafts |
+| `ring_sleeve` | 6 | 21 x 21 x 8 | 3 | 100 % | 1 | sleeve between bearing rings |
+| `post_lower` | 1 | 215 x 219 x 22 (diagonal) | 4 | 30 % | 44 | porch stand post, lower |
+| `post_upper` | 1 | 234 x 234 x 20 (diagonal) | 4 | 30 % | 46 | porch stand post, upper |
+| `stand_tray` | 1 | 190 x 236 x 32 | 4 | 20 % | 40 | porch stand foot (put the candy bowl on it) |
+| `ground_screw` | 4 | 26 x 26 x 150 | 3 | 30 % | 27 | ground screw (head front foot, tail skid rear anchors) |
+| `spike` | 2 | 134 x 30 x 30 | 3 | 30 % | 20 | OPTIONAL L spike with nail head (head rear foot) |
+| `stake_cap` | 1 | 22 x 22 x 28 | 3 | 30 % | 6 | push the stakes in through this cap |
+| `gs_wrench` | 1 | 160 x 33 x 24 | 3 | 30 % | 27 | T-wrench for the ground screws |
+| `bolt8_28` | 17 | 13 x 15 x 33 | 4 | 100 % | 2 | printed M8 bolt (13 frame joints + 4 ground screws) |
+| `nut8` | 13 | 13 x 15 x 7 | 4 | 100 % | 1 | printed M8 nut |
+| `washer50` | 4 | 50 x 50 x 3 | 3 | 100 % | 7 | 50 mm washer over a ground screw |
 
-```
-python3 check_parts.py            # renders every part to stl/, then runs every check
-```
+Filament for one machine (test coupon excluded): **about 2.18 kg** (estimate from the meshes; your slicer gives the real number).
 
-It also re-runs all the collision checks. Copy the parts you need from `cad/stl/` (not the
-`chk_*` files) to the printer. To export one part by hand:
+## Plates (suggested groupings)
 
-```
-openscad -o drive_half.stl -D 'part="drive_half"' conveyor.scad
-```
+| Plate | Parts |
+|---|---|
+| Small parts 1 | 17 x `bolt8_28`, 13 x `nut8`, 12 x `pin3`, 6 x `hex_coupler`, 6 x `ring_sleeve`, 2 x `takeup_nut`, `drive_pin` |
+| Small parts 2 | 4 x `washer50`, 4 x `stand_shim`, `stake_cap`, `splice_template`, 2 x `takeup_block` |
+| Wheels | 4 x `wheel_unit` per plate (2 plates) |
+| Each frame, skid, stake, post | one per plate (they fill the bed) |
+| Chute segments | 1 per plate (210 mm tall; brim on) |
 
-Then re-run `python3 ../calc/conveyor_calc.py`, which reads the same parameters, so the
-belt length, bolt checks and stake heights stay consistent.
+**Printing time** (P2S, PLA, 0.2 mm): roughly 50-70 h in total. Start with the test coupon and
+the head module now; you have about 18 days to Halloween.

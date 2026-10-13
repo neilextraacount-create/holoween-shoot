@@ -1,0 +1,172 @@
+
+PARTS (render, watertight, bodies, print-in-place gap, bed fit, filament)
+  [ok] test_coupon x1: 150x64x15 mm, body gap 0.35, overhangs ok (widest 0.0 mm), ~56 g each
+  [ok] wheel_unit x8: 30x30x106 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~21 g each
+  [ok] station_bracket x4: 28x109x16 mm, overhangs ok (widest 0.0 mm), ~17 g each
+  [ok] stake_1 x1: 216x203x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~46 g each
+  [ok] stake_2 x1: 205x191x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~43 g each
+  [ok] stake_3 x1: 194x180x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~41 g each
+  [ok] stake_4 x1: 182x169x24 mm, turned 45, overhangs ok (widest 10.4 mm), ~38 g each
+  [ok] drive_roller x1: 67x67x124 mm, overhangs ok (widest 5.1 mm), ~90 g each
+  [ok] drive_pin x1: 16x16x33 mm, overhangs ok (widest 0.0 mm), ~4 g each
+  [ok] head_side_a x1: 206x196x6 mm, overhangs ok (widest 0.0 mm), ~73 g each
+  [ok] head_side_b x1: 231x196x6 mm, overhangs ok (widest 0.0 mm), ~87 g each
+  [ok] gearbox x1: 94x111x91 mm, body gap 0.44, overhangs ok (widest 4.2 mm), ~93 g each
+  [ok] trap x1: 103x23x150 mm, overhangs ok (widest 3.1 mm), ~28 g each
+  [ok] foot x3: 36x196x24 mm, overhangs ok (widest 2.7 mm), ~30 g each
+  [ok] tail_side_l x1: 227x218x28 mm, overhangs ok (widest 0.0 mm), ~70 g each
+  [ok] tail_side_r x1: 227x218x28 mm, overhangs ok (widest 0.0 mm), ~70 g each
+  [ok] tail_roller x1: 45x45x90 mm, body gap 0.45, overhangs ok (widest 4.0 mm), ~47 g each
+  [ok] takeup_block x2: 22x24x36 mm, overhangs ok (widest 5.6 mm), ~12 g each
+  [ok] takeup_nut x2: 16x16x8 mm, overhangs ok (widest 0.0 mm), ~2 g each
+  [ok] takeup_screw x2: 21x22x108 mm, overhangs ok (widest 0.0 mm), ~11 g each
+  [ok] skid_l x1: 239x59x24 mm, overhangs ok (widest 2.7 mm), ~46 g each
+  [ok] skid_r x1: 239x59x24 mm, overhangs ok (widest 2.7 mm), ~46 g each
+  [ok] chute_segment x5: 164x133x210 mm, body gap 0.45, overhangs ok (widest 3.2 mm), ~80 g each
+  [ok] crank_head x1: 183x153x180 mm, body gap 0.45, overhangs ok (widest 4.5 mm), ~103 g each
+  [ok] crank_arm x1: 136x28x78 mm, body gap 0.45, overhangs ok (widest 2.0 mm), ~48 g each
+  [ok] pin3 x12: 7x7x26 mm, overhangs ok (widest 0.0 mm), ~0 g each
+  [ok] splice_template x1: 78x82x6 mm, overhangs ok (widest 0.0 mm), ~13 g each
+  [ok] stand_shim x4: 40x22x3 mm, overhangs ok (widest 0.0 mm), ~3 g each
+  [ok] hex_coupler x6: 9x8x23 mm, overhangs ok (widest 0.0 mm), ~2 g each
+  [ok] ring_sleeve x6: 21x21x8 mm, overhangs ok (widest 0.0 mm), ~1 g each
+  [ok] post_lower x1: 215x219x22 mm, turned 45, overhangs ok (widest 10.4 mm), ~44 g each
+  [ok] post_upper x1: 234x234x20 mm, turned 45, overhangs ok (widest 0.0 mm), ~46 g each
+  [ok] stand_tray x1: 190x236x32 mm, overhangs ok (widest 0.0 mm), ~40 g each
+  [ok] ground_screw x4: 26x26x150 mm, overhangs ok (widest 3.9 mm), ~27 g each
+  [ok] spike x2: 134x30x30 mm, overhangs ok (widest 0.0 mm), ~20 g each
+  [ok] stake_cap x1: 22x22x28 mm, overhangs ok (widest 0.0 mm), ~6 g each
+  [ok] gs_wrench x1: 160x33x24 mm, overhangs ok (widest 0.0 mm), ~27 g each
+  [ok] bolt8_28 x17: 13x15x33 mm, overhangs ok (widest 0.0 mm), ~2 g each
+  [ok] nut8 x13: 13x15x7 mm, overhangs ok (widest 0.0 mm), ~1 g each
+  [ok] washer50 x4: 50x50x3 mm, overhangs ok (widest 0.0 mm), ~7 g each
+
+FILAMENT ESTIMATE: about 2.18 kg for one machine with the listed walls/infill (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)
+
+HEAD MODULE (drive roller, frames, gearbox, trap, first chute segment), assembled
+  [ok] drive roller journal in frame B slot: slip fit gap 0.29 mm (designed 0.30), overlap 0.00 mm3
+  [ok] drive roller vs frame A: clearance 1.00 mm (need >= 0.9)
+  [ok] drive pin journal in frame A: slip fit gap 0.30 mm (designed 0.30), overlap 0.00 mm3
+  [ok] gearbox slab on frame B: touching faces, overlap -0.00 mm3 (must be ~0), gap 0.00
+  [ok] crown gear vs drive roller (pinion mesh, cone, flanges): clearance 0.28 mm (need >= 0.1)
+  [ok] gearbox housing vs drive roller: clearance 8.43 mm (need >= 1.0)
+  [ok] crown gear vs frame B: clearance 17.25 mm (need >= 1.0)
+  [ok] trap vs frame A (ledge over the guard bar): clearance 0.30 mm (need >= 0.2)
+  [ok] trap vs frame B (ledge over the guard bar): clearance 0.30 mm (need >= 0.2)
+  [ok] trap vs drive roller: clearance 30.00 mm (need >= 5.0)
+  [ok] gearbox bolts + nuts vs drive roller, belt, crown gear, trap: clearance 9.86 mm (need >= 1.0)
+  [ok] gearbox bolt nuts seat on frame B: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] trap vs gearbox: clearance 30.00 mm (need >= 3.0)
+  [ok] trap plain end in segment 1 socket: slip fit gap 0.30 mm (designed 0.30), overlap 0.00 mm3
+  [ok] segment 1 ring on the gearbox housing: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] segment 1 shaft end on the crown rotor end: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] ring sleeve in gearbox + segment 1 counterbores: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] ring sleeve vs shafts: clearance 0.89 mm (need >= 0.5)
+  [ok] segment 1 vs frame A: clearance 30.00 mm (need >= 2.0)
+  [ok] segment 1 vs frame B: clearance 30.00 mm (need >= 2.0)
+  [ok] segment 1 vs segment 2 (stacked): touching faces, overlap -0.00 mm3 (must be ~0), gap 0.00
+  [ok] foot 0 cheeks around frame A tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] foot 0 cheeks around frame B tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] foot 1 cheeks around frame A tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] foot 1 cheeks around frame B tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] belt vs frames, trap, gearbox, feet: clearance 8.00 mm (need >= 1.0)
+  [ok] candy space above the belt vs everything: clearance 2.52 mm (need >= 1.0)
+  [ok] nothing but the feet reaches the ground: lowest part 4 mm above the lawn
+
+TAIL MODULE, assembled, take-up fully in (axle X = 20)
+  [ok] take-up block L in its frame window: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block L boss grips the axle square end: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block L boss vs roller counterbore: clearance 0.99 mm (need >= 0.4)
+  [ok] square nut L in the block pocket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up screw L knob bears on the frame lug: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] take-up screw L thread vs frame lug hole and block holes: clearance 0.38 mm (need >= 0.3)
+  [ok] skid L cheeks around frame L tabs: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] rear foot cheeks around frame L tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R in its frame window: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R boss grips the axle square end: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R boss vs roller counterbore: clearance 0.99 mm (need >= 0.4)
+  [ok] square nut R in the block pocket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up screw R knob bears on the frame lug: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] take-up screw R thread vs frame lug hole and block holes: clearance 0.38 mm (need >= 0.3)
+  [ok] skid R cheeks around frame R tabs: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] rear foot cheeks around frame R tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] tail roller vs frames: clearance 1.00 mm (need >= 0.9)
+  [ok] belt vs frames, blocks, screws: clearance 1.00 mm (need >= 1.0)
+  [ok] basket space under the roller vs tail parts: clearance 20.25 mm (need >= 2.0)
+
+TAIL MODULE, assembled, take-up middle (axle X = 0)
+  [ok] take-up block L in its frame window: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block L boss grips the axle square end: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block L boss vs roller counterbore: clearance 0.99 mm (need >= 0.4)
+  [ok] square nut L in the block pocket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up screw L knob bears on the frame lug: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] take-up screw L thread vs frame lug hole and block holes: clearance 0.38 mm (need >= 0.3)
+  [ok] skid L cheeks around frame L tabs: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] rear foot cheeks around frame L tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R in its frame window: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R boss grips the axle square end: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R boss vs roller counterbore: clearance 0.99 mm (need >= 0.4)
+  [ok] square nut R in the block pocket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up screw R knob bears on the frame lug: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] take-up screw R thread vs frame lug hole and block holes: clearance 0.38 mm (need >= 0.3)
+  [ok] skid R cheeks around frame R tabs: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] rear foot cheeks around frame R tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] tail roller vs frames: clearance 1.00 mm (need >= 0.9)
+  [ok] belt vs frames, blocks, screws: clearance 1.00 mm (need >= 1.0)
+  [ok] basket space under the roller vs tail parts: clearance 20.25 mm (need >= 2.0)
+
+TAIL MODULE, assembled, take-up fully out (axle X = -40)
+  [ok] take-up block L in its frame window: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block L boss grips the axle square end: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block L boss vs roller counterbore: clearance 0.99 mm (need >= 0.4)
+  [ok] square nut L in the block pocket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up screw L knob bears on the frame lug: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] take-up screw L thread vs frame lug hole and block holes: clearance 0.38 mm (need >= 0.3)
+  [ok] skid L cheeks around frame L tabs: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] rear foot cheeks around frame L tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R in its frame window: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R boss grips the axle square end: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up block R boss vs roller counterbore: clearance 0.99 mm (need >= 0.4)
+  [ok] square nut R in the block pocket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] take-up screw R knob bears on the frame lug: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] take-up screw R thread vs frame lug hole and block holes: clearance 0.38 mm (need >= 0.3)
+  [ok] skid R cheeks around frame R tabs: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] rear foot cheeks around frame R tab: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] tail roller vs frames: clearance 1.00 mm (need >= 0.9)
+  [ok] belt vs frames, blocks, screws: clearance 1.00 mm (need >= 1.0)
+  [ok] basket space under the roller vs tail parts: clearance 20.25 mm (need >= 2.0)
+
+STATION (stake + bracket + 2 wheels), assembled
+  [ok] carry wheel peg in the bracket (collar stop 0.15 from the bracket face): slip fit gap 0.15 mm (designed 0.15), overlap 0.00 mm3
+  [ok] carry wheel (spinning part) vs bracket: clearance 3.45 mm (need >= 0.4)
+  [ok] carry wheel vs stake: clearance 30.00 mm (need >= 2.0)
+  [ok] return wheel peg in the bracket (collar stop 0.15 from the bracket face): slip fit gap 0.15 mm (designed 0.15), overlap 0.00 mm3
+  [ok] return wheel (spinning part) vs bracket: clearance 3.45 mm (need >= 0.4)
+  [ok] return wheel vs stake: clearance 7.00 mm (need >= 2.0)
+  [ok] bracket sits on the stake head: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] bracket spigot in the stake socket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] belt (both runs) vs bracket and stake: clearance 10.45 mm (need >= 1.0)
+  [ok] carry run rides on the wheel top at belt-top Z=0; return run at Z=-48 mm
+
+LINE (chute segments, crank head, crank arm, porch stand), assembled
+  [ok] segment N plain end in the crank head socket: slip fit gap 0.30 mm (designed 0.30), overlap 0.00 mm3
+  [ok] segment N ring on the crank head ring: touching faces, overlap -0.00 mm3 (must be ~0), gap 0.00
+  [ok] segment N shaft end on the crank shaft end: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] hex coupler in the shaft sockets: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] crank arm hub on the square drive (rests on the shaft shoulder): touching faces, overlap -0.00 mm3 (must be ~0), gap 0.00
+  [ok] crank arm swept a full turn (15 deg steps) vs crank head and funnel: closest 4.0 mm (need >= 3)
+  [ok] upper post top spigot in the crank head socket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] upper post body vs crank head: clearance 0.50 mm (need >= 0.3)
+  [ok] upper post bottom spigot in the lower post head: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] upper post rests on the lower post head: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] lower post spigot in the tray socket: slip fit gap 0.20 mm (designed 0.20), overlap 0.00 mm3
+  [ok] lower post rests on the tray socket: touching faces, overlap 0.00 mm3 (must be ~0), gap 0.00
+  [ok] stand posts vs crank arm sweep zone and line: clearance 17.85 mm (need >= 3.0)
+
+SITE: 2 risers x 7 in (ASSUMED), 20 in run to the porch; drive axle 10 in before riser 1
+  [ok] chute line vs the steps: clearance 70.00 mm (need >= 50.0)
+  [ok] head module vs the first riser: clearance 40.00 mm (need >= 20.0)
+  [ok] porch stand tray bottom -0 mm from the porch floor (set stand_h = 552 to correct)
+  [ok] porch stand tray starts 1.7 in behind the porch edge (need >= 0.8 in)
+
+RESULT: ALL CHECKS PASSED

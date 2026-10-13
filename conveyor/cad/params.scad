@@ -19,12 +19,12 @@ pin_d         = 3.0;     // printed cross pins
 pin_hole      = 3.5;
 
 // ---------------------------------------------------------------- station wheel unit (cantilever, print-in-place)
-wu_r          = 15.0;    // rolling radius (crown added on top)
+wu_r          = 12.5;    // rolling radius (crown added on top)
 wu_crown      = 0.3;
-wu_axle_r     = 6.0;     // axle core radius
-wu_ridge_r    = 8.0;     // V-ridge peak radius (the two V-ridges carry load and hold the wheel on)
+wu_axle_r     = 5.5;     // axle core radius
+wu_ridge_r    = 7.5;     // V-ridge peak radius (the two V-ridges carry load and hold the wheel on)
 wu_peg        = 12.0;    // square peg that plugs into the station bracket
-bracket_t     = 8.0;
+bracket_t     = 6.0;
 
 // ---------------------------------------------------------------- double-supported print-in-place rollers (tail, snub)
 tail_r        = 20.0;    // tail roller radius (small = candy drops off cleanly)
@@ -54,7 +54,7 @@ gear_face     = 10;
 backlash      = 0.15;    // per flank
 
 // ---------------------------------------------------------------- frames
-side_t        = 8.0;     // side frame thickness
+side_t        = 6.0;     // side frame thickness
 frame_gap     = 1.0;     // roller end to side frame
 web           = 7.0;     // lattice member width in the side frames
 
@@ -62,23 +62,23 @@ web           = 7.0;     // lattice member width in the side frames
 line_deg      = 36;      // line angle to the belt, at the head (about 40 deg to level on a 5 deg lawn)
 seg_len       = 210;     // structural length of one chute/shaft segment
 shaft_or      = 7.0;     // shaft tube outer radius (Ø14)
-shaft_ir      = 3.5;
+shaft_ir      = 4.5;
 shaft_ridge   = 9.5;     // V-ridge peak radius at each bearing ring
 ring_or       = 13.0;    // bearing ring outer radius
 hex_af        = 8.0;     // hex coupler across flats (separate printed coupler joins female sockets)
 trough_w      = 66;      // inside width of the candy chute
-trough_h      = 24;      // inside wall height
+trough_h      = 20;      // inside wall height
 trough_wall   = 0.9;     // 2 perimeters
-trough_floor  = 1.3;
+trough_floor  = 0.9;
 trough_n      = 100;     // chute floor offset from the shaft axis (perpendicular to the line)
 crank_r       = 110;     // crank arm radius
 
 // ---------------------------------------------------------------- stakes
-spike_leg     = 30;      // L-profile stake
-spike_t       = 3.2;
-spike_head    = 36;      // square head block (also the station socket)
+spike_leg     = 24;      // L-profile stake
+spike_t       = 2.8;
+spike_head    = 36;      // porch post head block
 spike_sock    = 16.0;    // square socket for the station bracket spigot
-spike_embed   = 170;     // depth driven into the lawn
+spike_embed   = 150;     // depth pushed into the lawn
 
 // ---------------------------------------------------------------- take-up
 takeup_travel = 60;      // tail take-up travel (fully in = +20 mm, fully out = -40 mm)
@@ -94,3 +94,11 @@ head_h        = 6 * IN;  // belt top above the lawn at the drive roller
 tail_h        = 9 * IN;  // belt top above the sidewalk at the tail roller (basket rim must be <= tail_h - 3 in)
 stations      = 4;       // stake stations between head and tail
 T0            = 20;      // belt pretension per run, N (set with the can test)
+belt_deg      = 4.25;    // belt slope to level (calc: lawn 250 in at 5 deg, head 6 in, tail 9 in); sets the porch stand angle
+seg_count     = 5;       // chute segments (calc picks the count; 5 for 2 risers of 7 in)
+stand_h       = 552;     // porch floor to the crank head's stand socket mouth (calc prints this)
+stake_len     = [252, 236, 220, 204];   // station stake leg lengths (calc: stakes-2-risers.txt), stake 1 nearest the sidewalk
+// site (used by the calculator defaults and the checker's step model)
+site_head_gap = 10;      // in: drive axle to the first riser, horizontally
+site_rise     = 7;       // in: riser height, ASSUMED until measured
+site_run      = 20;      // in: total run of the steps to the porch edge

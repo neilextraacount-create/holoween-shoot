@@ -1,6 +1,6 @@
-272
-255
-239
-223
-segments 6
-leg 443
+252
+236
+220
+204
+segments 7
+stand_h 645

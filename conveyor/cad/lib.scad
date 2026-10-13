@@ -52,18 +52,23 @@ module rthread(r, pitch, len, depth = 1.2, gap = 0) {
 
 // ---------------------------------------------------------------- L-profile stake (printed lying on one leg)
 // Print frame: the stake lies along +X; leg A on the bed (z 0..t), leg B vertical (y 0..t).
-// Head block at x <= 0 holds a square socket along the stake axis.
-module stake(len, leg, t, head, sock, sock_depth) {
-    tip = 60;
+// Head at x <= 0: a square socket tube, corner-aligned with the legs, socket axis at
+// (y, z) = (wall + sock/2, wall + sock/2), mouth at x = -(sock_depth + 2).
+module stake(len, leg, t, sock, sock_depth, wall = 3) {
+    tip = 50; hd = sock_depth + 2; w = sock + 2 * wall;
     difference() {
         union() {
-            // legs, tapering to a point over the last `tip` mm
-            hull() { translate([0, 0, 0]) cube([len - tip, leg, t]); translate([len - 0.5, 0, 0]) cube([0.5, t, t]); }
-            hull() { translate([0, 0, 0]) cube([len - tip, t, leg]); translate([len - 0.5, 0, 0]) cube([0.5, t, t]); }
-            // head block (square, centred on the corner diagonal so the leg corner sits inside it)
-            translate([-sock_depth - 6, -(head - leg) / 2 - t / 2, 0]) cube([sock_depth + 6, head, head]);
+            hull() { cube([len - tip, leg, t]); translate([len - 0.5, 0, 0]) cube([0.5, t, t]); }
+            hull() { cube([len - tip, t, leg]); translate([len - 0.5, 0, 0]) cube([0.5, t, t]); }
+            translate([-hd, 0, 0]) cube([hd + 0.01, w, w]);
         }
-        translate([-sock_depth - 6 - 1, -(head - leg) / 2 - t / 2 + (head - sock) / 2, (head - sock) / 2])
-            cube([sock_depth + 1, sock, sock]);
+        translate([-hd - 1, wall, wall]) cube([sock_depth + 1, sock, sock]);
     }
+}
+// L spike with a square nail head (holds a foot down through its anchor hole)
+module nail_spike(len, leg, t, head = 34) {
+    tip = 50;
+    hull() { cube([len - tip, leg, t]); translate([len - 0.5, 0, 0]) cube([0.5, t, t]); }
+    hull() { cube([len - tip, t, leg]); translate([len - 0.5, 0, 0]) cube([0.5, t, t]); }
+    translate([-4, 0, 0]) cube([4.01, head, head]);
 }

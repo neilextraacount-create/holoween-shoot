@@ -1,146 +1,178 @@
-# Candy conveyor: engineering analysis and design
+# Candy conveyor v4: analysis and design
 
-Status: **design complete and checked in CAD; not yet built or physically tested.**
-Every number on this page comes from [`../calc/conveyor_calc.py`](../calc/conveyor_calc.py)
-or [`../cad/check_parts.py`](../cad/check_parts.py), which both read the same parameter file
-([`../cad/params.scad`](../cad/params.scad)).
+Status: **designed and checked by computer; not yet built or physically tested.** The numbers
+here come from [`../calc/conveyor_calc.py`](../calc/conveyor_calc.py) (site, loads) and
+[`../cad/check_parts.py`](../cad/check_parts.py) (geometry, fits, clashes). Both read the same
+parameter file, [`../cad/params.scad`](../cad/params.scad).
 
 ![Side profile, 2 risers](side-profile-2-risers.svg)
 
-## 1. The design in one paragraph
+## 1. What you asked for, and what changed
 
-**One straight conveyor, 24.5 ft axle to axle, tilted about 7°, that bridges over the porch
-steps** instead of following them. The belt is a single loop of **3 in black polypropylene
-webbing**, sewn in place. It slides over thin printed sliders carried on threaded-rod rungs,
-between two **1x3 wooden rails** held up by **five pairs of 2x2 stakes**. All three rotating
-parts (drive roller, tail roller, crank wheel) **spin on skateboard bearings around fixed
-rods**, so no threaded joint ever carries the crank torque. A **bicycle chain** with printed
-24T/16T sprockets lifts the crank to about 30 in above the porch floor. Belt tension and
-tracking come from **two independent screw take-ups** at the tail.
+You asked for:
 
-## 2. Site and geometry
+- a handle at the top that is easy to turn and moves the candy fast
+- a belt about 6 in off the ground that drops candy into a basket and returns underneath
+- small stilts with a wheel on top, the belt going over and under them
+- gears at the top
+- everything printed in PLA except the belt, as much as possible print-in-place
+- coverage of 2 steps (20 in) plus 250 in of lawn at 5°
+
+All of that is in the design, with three changes that make it work better than a literal
+version:
+
+| Your idea | What the design does | Why |
+|---|---|---|
+| Belt starts at the top of the steps | The **belt runs only along the lawn**. A printed **chute** brings the candy down the steps, and a **drive shaft** beside the chute brings your cranking down to the belt. | The steps are about 35° steep. Candy slides on a belt that steep, and where the steep part meets the lawn the belt would have to bend through a valley. Belt tension lifts a belt out of a valley, so it would need hold-down rollers right where the candy is. A chute handles a steep drop easily. |
+| One wheel on each stilt | **Two** wheels on each stilt: the belt rides **over** the top one and comes back **under** the bottom one. | That is what keeps the return run off the grass. |
+| "A couple of gears that make it move fast" | **One gear pair (2:1 step-up)**: a 34-tooth crown gear on the shaft drives a 17-tooth pinion on the drive roller. | 2:1 gives 0.3 m/s belt speed at a relaxed 45 rpm with 11 N at the handle. More step-up would make the crank harder to turn for little gain, because the belt's friction (not its speed) is what you feel. |
+
+## 2. Site and layout (2 risers; 3 risers is in `calc/report-3-risers.txt`)
 
 | Item | Value | Status |
 |---|---|---|
 | Lawn | 250 in at 5° (21.9 in of fall) | given |
-| Steps | 20 in horizontal | given |
-| Riser height and count | 2 x 7 in (porch 35.9 in above the lawn edge); 3 risers also checked | **riser height ASSUMED: measure it and run the calculator with `--rise` and `--risers`** |
-| Basket rim | 7.5 in, so the belt top at the tail is 10.5 in | change with `--basket` |
-
-**Why the conveyor bridges over the steps instead of following them:** the steps are about 35°
-steep. At 35°, wrapped candy slides (tan 35° = 0.70 is more than the wrapper-to-webbing
-friction). Worse, where the steep part meets the lawn the belt would have to bend through a
-valley, and belt tension lifts a belt off its supports at a valley. A straight line has no
-bends at all. It costs only taller stakes near the porch.
-
-Results (2 risers; the 3-riser case is in `calc/report-3-risers.txt`):
-
-| | |
-|---|---|
-| Slope | 6.7° (8.1° with 3 risers); candy stays put up to well over 15° |
-| Tightest clearance | return run 4.5 in above the porch edge (4.2 in with 3 risers) |
-| Stakes | 5 stations, 54.5 in apart, the last one at least 24 in before the first riser. Belt top 11.8-18.4 in above the grass (12-24 in with 3 risers) |
-| Over the steps | the rails span about 4 ft between the last stake and the porch, plus one rails-only rung |
-| Tail | 9.8 in past the lawn edge, over the sidewalk; the basket slides under it |
-
-**If the conveyor goes over the steps, nobody can use the steps while it's installed.** If
-the steps must stay usable, run it beside them. The geometry is the same.
+| Steps | 20 in total run to the porch | given |
+| Riser height | 2 x 7 in, so the porch is 35.9 in above the sidewalk | **ASSUMED: measure** |
+| Belt | 20.2 ft axle to axle, 4.25° slope; belt top 6 in above the lawn at the head and 9 in above the sidewalk at the tail | |
+| Drive roller (head) | 10 in before the first riser | |
+| Tail roller | 2 in out over the sidewalk; the basket (rim no higher than 6 in) goes under it | |
+| Stilt stations | 4, every 48.4 in; stakes pushed 150 mm into the lawn | |
+| Chute | 40.3° to level, 5 segments; its underside clears the first step by 4.6 in | |
+| Crank | 23.6 in above the porch floor, 9.9 in behind the porch edge (comfortable sitting on a porch chair; for standing, use 7 segments: 34 in) | |
+| Porch stand | post 3.6 in behind the porch edge; socket 552 mm above the floor | |
+| Belt loop | 41.0 ft; cut 43 ft and sew it in place | |
 
 ## 3. Loads (estimates, not measurements)
 
-| Quantity | Value | Basis |
-|---|---|---|
-| Belt | 0.061 kg/m | 6.2 lb per 150 ft from the seller's listing |
-| Candy | 0.15 kg/m | one 15 g fun-size piece every 10 cm (dense) |
-| Pretension | 60 N per run | set with the can test |
-| Carrying-run sag between stations | 10.4 mm | w·L²/8T over 1.38 m |
-| Running resistance | 17 N estimated, **25 N design** | belt sliding on 11 PLA sliders (μ 0.3), belt bending, an allowance for edge rub, bearings; candy going downhill helps a little |
-| Drive grip | needed T₁/T₂ = 1.53; inner-tube lagging gives 4.8; **bare PLA when wet gives only 1.87, so the lagging is required** | Euler capstan, 180° wrap |
-| Crank | 1.72 N·m, **17 N (3.9 lbf) at the handle** | 25 N x roller radius x 1.5 / 0.9 efficiency |
-| Speed | crank 45 rpm, belt 0.29 m/s, **candy reaches the basket in about 26 s (19 turns)** | |
-| Rail compression | about 60 N per rail; buckling capacity about 1000 N | Euler, weak axis, 54.5 in span |
-| Wind (20 mph) | about 1.2 lbf per station | |
+| Quantity | Dry PLA bearings | Waxed | Basis |
+|---|---|---|---|
+| Belt drag | 10.5 N | 6.9 N | tail roller V-bearing (μ 0.35 dry / 0.2 waxed, V-groove factor 1/sin45°), 8 station wheels, belt bending |
+| Crank effort | **1.27 N·m = 12 N (2.6 lbf)** | 0.97 N·m = 9 N | drag x roller radius x 2 + journal friction, 85 % gear and 90 % shaft-line efficiency |
+| Grip needed on the drive roller | μ ≥ 0.17 | μ ≥ 0.11 | capstan equation, 180° wrap, 20 N pretension per run; ribbed PLA on webbing is roughly 0.3 dry, 0.2 wet |
+| Belt sag between stations | 14 mm light candy, 27 mm dense | | w·L²/8T over 1.23 m |
+| Speed | crank 45 rpm → belt 0.30 m/s; about 21 s from chute to basket | | |
+| Candy speed at the bottom of the chute | 2.6-3.1 m/s | | sliding friction 0.3-0.45; the drop trap stops it |
+| Tail tipping | 48 N uplift on the two skid ground screws (24 N each) | | 40 N belt pull acting 207 mm above the ground, 172 mm tipping arm |
+| Head tipping | 28 N uplift on the front foot's two ground screws (14 N each) | | 120 mm height, 170 mm arm |
 
-The loads are tiny. Nothing fails by breaking. The real risks are **tracking, wet slip,
-belt creep, stakes moving, and PLA creep**, and the design targets those.
+Stresses in the PLA parts are all below 7 MPa at twice the dry crank torque (calculator,
+"PLA STRESS CHECKS"), compared with roughly 20-30 MPa for PLA pulled apart across its layers.
+**Nothing should break.** The real risks are slip, tracking, print fits and anchors (section 6).
 
-## 4. Architecture decisions
+## 4. Architecture
 
-### 4.1 One continuous belt, not modules
-Modules would mean several sewn loops, several tensioners, a drive linkage across every
-joint, and candy hand-offs that jam. One straight belt has exactly one of each. The **frame**
-is modular: the rails split into three 8 ft sections for storage.
+### 4.1 Belt: 3 in heavy polypropylene webbing (the only bought part)
 
-### 4.2 Belt: 3 in heavy polypropylene webbing
 | Option | Verdict |
 |---|---|
-| Plain rubber or neoprene strip | ❌ stretches about 8 % at belt tension |
-| Reinforced PVC conveyor belt (the "tarp" kind) | ✅ technically ideal, ❌ on Amazon only 4 in wide; 50 ft pieces were unavailable; needs metal lacing |
-| **3 in heavy polypropylene webbing, Country Brook 50 yd** | ✅ **selected**: 1.7 mm, 2,100 lb; at 60 N it runs at 0.6 % of its break strength; doesn't absorb water; black; can be sewn into a loop |
+| Rubber or neoprene strip | ❌ stretches about 8 % under tension, so it would never stay tight |
+| PVC conveyor belting (the "tarp" kind) | ❌ only 4 in wide on Amazon, needs metal lacing |
+| Nylon webbing | ❌ stretches when wet |
+| **Country Brook 3 in heavy polypropylene webbing, 50 yd** | ✅ 76 x 1.7 mm, 2,100 lb, black, does not absorb water, can be sewn into a loop |
 
-It is sewn into a loop **in place on the frame** after measuring, with a 75 mm lap and a
-box-and-X stitch. The underneath end points toward the porch so its edge trails over the fixed
-sliders.
+Polypropylene webbing barely stretches (about 4.5 mm over the whole 41 ft loop at the design
+tension). That makes it easy to over-tighten, so the take-up is a fine screw (3 mm per turn)
+and you set the tension with the "can test" (build guide).
 
-### 4.3 Supports: wooden rails on 2x2 stakes, joined by threaded-rod rungs
-* PLA stilts alone can't do the job. The rails are what keep the two rollers apart against
-  120 N of belt tension, and what keep 24 ft straight enough for the belt to track.
-* Each station has two **1/4-20 threaded-rod rungs** through stake, rail, slider, rail,
-  stake. The upper rung carries the belt slider and sets the rail gap; the lower one
-  carries the return slider. Nuts on both sides of each stake hold it **wherever it was
-  driven**, so stakes need no precise spacing, and the single-rod joint pivots to any slope.
-* Height adjustment: you drill the stakes on site at the height the frame actually sits.
-  That is unlimited, exact adjustment with no printed slot.
+### 4.2 Stations: stilts with two print-in-place wheels
 
-### 4.4 Belt supports: fixed sliders, not rotating idlers
-The belt slides over **fixed PLA sliders**: thin sleeves on the rungs with low edge lips.
-They also act as the spacers that set the rail gap. Compared with rotating idlers they use
-much less filament, have no bearings, and **a slightly crooked slider doesn't steer the
-belt** (a crooked roller would). The cost is about 10 N of extra friction, which is in the
-budget above.
+Each station is an L-profile stake (printed lying flat, pushed 150 mm into the lawn) with a
+socket on top. A bracket plugs into the socket and holds two **cantilevered print-in-place
+wheel units**: the belt rides over the top one and comes back under the bottom one. Each wheel
+spins on its axle on two 45° V-ridges with a 0.45 mm gap. The V shape holds the wheel on, takes
+side loads, and prints without supports. Stakes are cut to length for each station so the belt
+runs in a straight line (stake 1 is 284 mm long, stake 4 is 236 mm).
 
-### 4.5 Drive: chain to a standing-height crank, no gearbox
-| | Crank directly on the roller | **Chain + printed sprockets** | Printed bevel gears |
-|---|---|---|---|
-| Handle height | about 7 in off the porch floor (crouching) | **about 30 in** | about 30 in |
-| Tolerates a wooden post flexing | n/a | **yes** | no (gears skip) |
+### 4.3 Head: drive roller and crown-gear gearbox
 
-A reduction gear isn't needed. Turning the crank is already easy (4 lbf); the real issue is
-the number of turns, so the chain is a 1:1.5 **step-up**.
+- **Drive roller**: Ø61.6 mm, crowned 0.3 mm (crowning centres the belt), 64 grip ribs, 2.5 mm
+  flanges. The 17-tooth pinion (module 2.5) is part of the roller on side B. Side A runs on a
+  separate pressed-in journal pin.
+- **Frames**: two flat lattice plates (8 mm). Frame B has an open slot for the roller journal,
+  because the pinion is bigger than a round hole could pass. Belt tension and the gear force
+  both push the journal into the closed end of the slot. Above the belt, guard panels keep
+  bouncing candy on the belt.
+- **Gearbox (print-in-place)**: a 34-tooth crown gear with its shaft, inside its housing,
+  printed as one piece with a 0.45 mm running gap. It bolts to frame B with 3 printed M8 bolts.
+  The crown teeth are **generated by simulating the real pinion rolling through the mesh**
+  (`make_crown.py`, 816 positions). The check finds no overlap at any position, 0.27 mm flank
+  clearance, and the teeth engage within ±4° of pinion rotation.
 
-### 4.6 Rotating parts on fixed rods
-The drive roller (two identical halves that lock together, plus a 16T sprocket that drives
-it through 3 lugs), the tail roller (two identical halves) and the crank wheel (arm with
-bearing hub plus a hex-keyed 24T sprocket) each spin on two 608 bearings around a
-**non-rotating** 5/16 in rod. Torque only ever passes through printed lugs and hex sockets.
-Nothing can unscrew.
+### 4.4 Line: chute and drive shaft over the steps
 
-## 5. Risks and what handles them
+Five identical segments, each 210 mm long and printed standing up. Each segment has:
 
-| Risk | Handled by |
-|---|---|
-| Belt walks sideways | crowned rollers (0.4 / 0.3 mm), independent left/right tail screws (tracking rule in the setup guide), slider lips as a backstop |
-| Drive slips when wet | inner-tube lagging (required); can-test tension; 180° wrap |
-| Webbing creeps | sewn in place to the measured length; 30 min run-in; 90 mm take-up (absorbs 150 mm) |
-| Candy misses the basket | the basket slides **under** the tail end, rim at least 3 in below the belt |
-| Small candy falls into the side gap | the return-run plow wipes it off before the drive roller |
-| Fingers at the drive roller and chain | printed hood over the roller and the chain at its sprocket; low tension (60 N) |
-| PLA heat and creep | light-coloured parts; nothing printed carries sustained bending; the can test caps tension at 80 N |
-| Stakes hit pipes or cables | call 811; flag sprinklers; steel-rod pilot hole |
-| Trip hazard in the dark | LED string and reflective tape |
-| Unknowns | full driveway trial by Oct 22, site trial by Oct 25 |
+- a **U-shaped candy chute**: 66 mm wide inside, 0.9 mm walls, with a socket at the lower end.
+  The next segment's plain end slides into the socket from above, like roof shingles, so candy
+  never meets a lip.
+- a **print-in-place drive shaft**: Ø14 mm hollow, with one V-ridge bearing in a ring at each
+  end, and hex sockets at both ends.
+- two struts tying the rings to the chute.
 
-## 6. What has and hasn't been verified
+Separate printed **hex couplers** join the shafts and **ring sleeves** line up the bearing rings.
+The bottom of the line is a **drop trap**: an end wall and lid stop the candy, and it drops
+33 mm through a floor slot onto the belt. The trap's upper end sits in segment 1's socket. Its
+ledges rest just above the head frames' guard bars, and a stop post on each frame stops it
+sliding downhill.
 
-Verified in software:
-* All 21 printed parts render, are closed solids, and fit the P2S.
-* 33 interference checks between the moving and fixed parts at the head, the tail (at both
-  ends of take-up travel), a stake station, the crank and the chain all pass, each with a
-  measured minimum gap.
-* The site geometry, stake heights, belt length, bolt thread engagement, chain length and
-  loads are computed from the same parameters.
+### 4.5 Crank head and porch stand
 
-Not verified (only a build can show these):
-* How the belt actually tracks over 24 ft, real friction values, how much the webbing
-  creeps, how fast the PLA sliders wear, soil holding. The test prints and the two trial
-  runs exist to catch these before Halloween night.
+The crank head has the funnel, the top bearing pair, and a square drive for the crank arm. The
+arm (110 mm) has a print-in-place spinning grip. A world-vertical socket under the funnel takes
+the porch post (two L-profile pieces) on a cross-shaped foot. The foot needs weight on it: your
+candy bowl. Hold the funnel rim with your other hand while cranking and the stand hardly feels
+the crank. Without that it sways: 11 N at the handle pushes the stand sideways.
+
+### 4.6 Tail: print-in-place roller and screw take-up
+
+The tail roller (Ø40 mm, crowned) turns on a fixed axle. The axle's square ends sit in square
+sockets in two **take-up blocks** that slide in windows in the tail frames. A knob screw
+(Ø10 mm, 3 mm pitch) on each side pulls its block toward the sidewalk through a square nut.
+That gives 60 mm of travel. Turning one knob more than the other steers the belt.
+
+The tail frames bolt to two **skids** that reach 292 mm back onto the lawn. Ground screws hold
+them down 120 mm in from the lawn edge (the uplift side) and spikes locate them at the far end.
+A foot crossbar ties the frames together at the sidewalk end.
+
+### 4.7 Fasteners and anchors (all printed)
+
+- **M8 bolts and nuts**: round 2 mm thread, printed standing, used for clamping only.
+- **Ground screws**: Ø15 mm shaft with a 45° buttress flight, so they print standing with the
+  head down. A printed bolt and 50 mm washer clamp a foot onto the head. Driven with a printed
+  T-wrench.
+- **L-spikes** with nail heads, for the feet that are only pushed down.
+- **Ballast instead of anchors**: if your soil won't hold screws, put 5 kg on the tail rear
+  foot and 3 kg on the head front foot. Water jugs or bricks work.
+
+## 5. What was checked by computer
+
+`cad/check_parts.py` writes `cad/check-report.txt`. It checks:
+
+- **Every part**: it renders without warnings, the mesh is watertight, it has the expected
+  number of bodies (print-in-place parts have 2, with a gap of at least 0.30 mm), and it fits
+  a 246 mm square on the P2S bed. Long stakes and posts are exported turned 45° so they lie
+  across the diagonal.
+- **Every mating pair, in its assembled position, with exact mesh booleans**:
+  - **Slip fits**: journals 0.30 mm, sockets and spigots 0.20 mm, chute sockets 0.30 mm,
+    sleeves 0.20 mm, hex couplers 0.20 mm.
+  - **Clearances**: belt to frames, trap and feet; candy space above the belt; crown gear to
+    roller; basket space under the tail roller; trap to the head frames.
+  - **Tail positions**: the take-up blocks and screws are checked at in, middle and out.
+  - **Full crank turn**: the crank arm is swept around the funnel.
+  - **Steps**: the chute line is checked against a model of the steps and the stand foot
+    against the porch edge.
+- **Gear mesh**: in `make_crown.py`.
+
+## 6. Risks, and what will tell you early
+
+| Risk | How likely | Early warning / fix |
+|---|---|---|
+| Print-in-place parts fused | medium (depends on the printer) | **test coupon**: if the 0.45 mm spinner is stiff but 0.55 mm turns, set `pip_gap = 0.55` and re-export |
+| Belt slips on the drive roller (wet) | medium | rub candle wax on the bearings (not on the roller); raise tension slightly; the calculator says μ 0.17 is needed and ribbed PLA gives about 0.2-0.3 |
+| Belt walks off to one side | medium | crowned rollers centre it; steer with the two tail knobs (build guide) |
+| Stakes lean in soft lawn | medium | pre-soak, push straight; the belt load on each stake is under 10 N |
+| Ground screws pull out | low-medium | 24 N each is needed; if they spin freely, use ballast |
+| Candy bounces out of the trap | low | the lid covers the impact zone; light candy is slower |
+| Crank head sways | medium | hold the funnel rim while cranking; candy bowl on the foot |
+| Riser height different from 7 in | **certain to need checking** | measure and re-run the calculator **before printing the chute and stand** |
