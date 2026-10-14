@@ -21,7 +21,7 @@
   "alerts": [],
   "other": [],
   "grams": "41.06",
-  "time": "1h 13m 40s",
+  "time": "1h 13m 48s",
   "layers": 576
  },
  {
@@ -32,7 +32,7 @@
   "alerts": [],
   "other": [],
   "grams": "19.34",
-  "time": "33m 8s",
+  "time": "33m 6s",
   "layers": 78
  },
  {
@@ -71,7 +71,7 @@
   ],
   "other": [],
   "grams": "36.48",
-  "time": "42m 31s",
+  "time": "42m 32s",
   "layers": 120
  },
  {
@@ -94,8 +94,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "109.18",
-  "time": "6h 38m 10s",
+  "grams": "109.17",
+  "time": "6h 38m 5s",
   "layers": 774
  },
  {
@@ -117,7 +117,7 @@
   "alerts": [],
   "other": [],
   "grams": "54.02",
-  "time": "1h 30m 42s",
+  "time": "1h 30m 43s",
   "layers": 30
  },
  {
@@ -128,7 +128,7 @@
   "alerts": [],
   "other": [],
   "grams": "65.31",
-  "time": "1h 53m 29s",
+  "time": "1h 53m 25s",
   "layers": 30
  },
  {
@@ -140,8 +140,8 @@
    "Low bed adhesion"
   ],
   "other": [],
-  "grams": "120.66",
-  "time": "4h 16m 29s",
+  "grams": "120.65",
+  "time": "4h 16m 31s",
   "layers": 570
  },
  {
@@ -152,7 +152,7 @@
   "alerts": [],
   "other": [],
   "grams": "32.90",
-  "time": "1h 18m 10s",
+  "time": "1h 17m 55s",
   "layers": 758
  },
  {
@@ -163,7 +163,7 @@
   "alerts": [],
   "other": [],
   "grams": "24.77",
-  "time": "42m 4s",
+  "time": "42m 1s",
   "layers": 120
  },
  {
@@ -174,7 +174,7 @@
   "alerts": [],
   "other": [],
   "grams": "54.33",
-  "time": "1h 37m 22s",
+  "time": "1h 37m 19s",
   "layers": 140
  },
  {
@@ -185,7 +185,7 @@
   "alerts": [],
   "other": [],
   "grams": "54.34",
-  "time": "1h 36m 25s",
+  "time": "1h 36m 30s",
   "layers": 140
  },
  {
@@ -197,8 +197,8 @@
    "Low bed adhesion"
   ],
   "other": [],
-  "grams": "62.92",
-  "time": "2h 8m 55s",
+  "grams": "62.91",
+  "time": "2h 9m 18s",
   "layers": 563
  },
  {
@@ -231,7 +231,7 @@
   "alerts": [],
   "other": [],
   "grams": "11.71",
-  "time": "50m 32s",
+  "time": "50m 31s",
   "layers": 540
  },
  {
@@ -253,7 +253,7 @@
   "alerts": [],
   "other": [],
   "grams": "35.35",
-  "time": "59m 14s",
+  "time": "59m 10s",
   "layers": 120
  },
  {
@@ -264,7 +264,7 @@
   "alerts": [],
   "other": [],
   "grams": "117.61",
-  "time": "3h 47m 46s",
+  "time": "3h 48m 15s",
   "layers": 1148
  },
  {
@@ -275,7 +275,7 @@
   "alerts": [],
   "other": [],
   "grams": "130.60",
-  "time": "3h 29m 50s",
+  "time": "3h 29m 56s",
   "layers": 900
  },
  {
@@ -358,7 +358,7 @@
   ],
   "other": [],
   "grams": "49.24",
-  "time": "1h 1m 33s",
+  "time": "1h 1m 34s",
   "layers": 110
  },
  {
@@ -369,7 +369,7 @@
   "alerts": [],
   "other": [],
   "grams": "41.04",
-  "time": "1h 10m 56s",
+  "time": "1h 11m 0s",
   "layers": 100
  },
  {
@@ -380,7 +380,7 @@
   "alerts": [],
   "other": [],
   "grams": "31.75",
-  "time": "52m 33s",
+  "time": "52m 34s",
   "layers": 160
  },
  {
@@ -391,7 +391,7 @@
   "alerts": [],
   "other": [],
   "grams": "28.85",
-  "time": "1h 27m 43s",
+  "time": "1h 27m 46s",
   "layers": 750
  },
  {
@@ -446,7 +446,7 @@
   "alerts": [],
   "other": [],
   "grams": "0.88",
-  "time": "3m 30s",
+  "time": "3m 31s",
   "layers": 35
  },
  {
