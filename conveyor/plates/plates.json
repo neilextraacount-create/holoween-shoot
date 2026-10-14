@@ -35,7 +35,7 @@
     14.524999966011741
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "alerts": "Loose extrusions test_coupon | Low bed adhesion bolt8_28, hex_coupler, test_coupon",
   "grams": "63.70",
@@ -282,24 +282,12 @@
     270,
     72.63305230901966,
     190.95228396909988
-   ],
-   [
-    "pin3",
-    270,
-    138.63305230901966,
-    190.95228396909988
-   ],
-   [
-    "pin3",
-    0,
-    26.894950714008672,
-    186.63305230901966
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "grams": "90.88",
-  "time": "3h 24m 9s",
+  "grams": "90.16",
+  "time": "3h 22m 27s",
   "extent": [
    8.801,
    8.818,
@@ -512,7 +500,7 @@
     176.01780357541335
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "grams": "110.98",
   "time": "3h 12m 56s",
@@ -554,7 +542,7 @@
     122.68997834721793
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "grams": "105.27",
   "time": "2h 46m 20s",
@@ -574,32 +562,32 @@
    [
     "gearbox",
     0,
-    55.001603054029914,
-    63.625
+    54.00160647880335,
+    62.625
    ],
    [
     "drive_roller",
     0,
-    137.28651033792315,
+    135.28651033792315,
     41.28651033792315
    ],
    [
     "tail_roller",
     0,
-    198.5098473476887,
+    196.5098473476887,
     30.509847347688684
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "alerts": "Low bed adhesion gearbox, tail_roller",
-  "grams": "227.70",
-  "time": "10h 4m 59s",
+  "grams": "224.18",
+  "time": "9h 58m 22s",
   "extent": [
    8.212,
    8.197,
-   220.8,
-   119.04
+   218.8,
+   117.04
   ],
   "log": [
    "print warning: Detected print stability issues:"
@@ -625,18 +613,18 @@
    [
     "spike",
     90,
-    231.06649909784502,
+    231.06962187887433,
     139.0
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "grams": "96.01",
-  "time": "2h 26m 58s",
+  "grams": "93.69",
+  "time": "2h 24m 14s",
   "extent": [
    8.262,
    8.269,
-   245.856,
+   245.86,
    247.34
   ],
   "log": []
@@ -681,24 +669,12 @@
     0,
     48.03942545661994,
     70.03942545661994
-   ],
-   [
-    "wheel_unit",
-    0,
-    94.03942545661994,
-    70.03942545661994
-   ],
-   [
-    "wheel_unit",
-    0,
-    140.03942545661994,
-    70.03942545661994
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "grams": "268.46",
-  "time": "7h 51m 53s",
+  "grams": "201.35",
+  "time": "5h 56m 2s",
   "extent": [
    8.886,
    8.89,
@@ -721,19 +697,19 @@
    [
     "spike",
     90,
-    179.06649909784502,
+    179.06962187887433,
     75.0
    ],
    [
     "spike",
     90,
-    217.06649909784502,
+    217.06962187887433,
     75.0
    ],
    [
     "spike",
     90,
-    23.066499097845035,
+    23.06962187887434,
     113.0
    ],
    [
@@ -743,10 +719,10 @@
     100.68997834721793
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "grams": "115.61",
-  "time": "2h 39m 29s",
+  "grams": "108.63",
+  "time": "2h 31m 20s",
   "extent": [
    8.263,
    8.21,
@@ -757,7 +733,46 @@
  },
  {
   "plate": 9,
-  "file": "FINAL_09_tail_side_l_etc.3mf",
+  "file": "FINAL_09_post_lower_etc.3mf",
+  "group": "frames",
+  "items": [
+   [
+    "post_lower",
+    0,
+    123.69713711607231,
+    125.96602099868475
+   ],
+   [
+    "stake_1",
+    180,
+    138.07844642191205,
+    108.44627073678863
+   ],
+   [
+    "stake_2",
+    0,
+    108.98381613824112,
+    148.05034091235876
+   ]
+  ],
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
+  "ok": true,
+  "alerts": "Long bridging extrusions post_lower, stake_1, stake_2 | Floating bridge anchors post_lower",
+  "grams": "111.79",
+  "time": "2h 6m 30s",
+  "extent": [
+   9.579,
+   8.853,
+   244.555,
+   242.342
+  ],
+  "log": [
+   "print warning: Detected print stability issues:"
+  ]
+ },
+ {
+  "plate": 10,
+  "file": "FINAL_10_tail_side_l_etc.3mf",
   "group": "frames",
   "items": [
    [
@@ -771,18 +786,12 @@
     0,
     21.843281890521485,
     62.68997834721793
-   ],
-   [
-    "station_bracket",
-    0,
-    55.84328189052148,
-    62.68997834721793
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "grams": "73.41",
-  "time": "1h 59m 13s",
+  "grams": "58.74",
+  "time": "1h 35m 50s",
   "extent": [
    8.256,
    8.25,
@@ -792,45 +801,6 @@
   "log": []
  },
  {
-  "plate": 10,
-  "file": "FINAL_10_stake_1_etc.3mf",
-  "group": "frames",
-  "items": [
-   [
-    "stake_1",
-    0,
-    117.47713646682739,
-    110.69228573183238
-   ],
-   [
-    "stake_2",
-    180,
-    137.8340409276405,
-    104.30612141702373
-   ],
-   [
-    "stake_3",
-    0,
-    106.16342216793507,
-    143.37860307196615
-   ]
-  ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
-  "ok": true,
-  "alerts": "Long bridging extrusions stake_1, stake_2, stake_3",
-  "grams": "111.66",
-  "time": "2h 3m 53s",
-  "extent": [
-   9.587,
-   8.811,
-   240.068,
-   233.217
-  ],
-  "log": [
-   "print warning: Detected print stability issues:"
-  ]
- },
- {
   "plate": 11,
   "file": "FINAL_11_crank_arm_etc.3mf",
   "group": "sturdy",
@@ -838,26 +808,26 @@
    [
     "crank_arm",
     0,
-    77.08276163828133,
-    22.064480842352307
+    75.25509755971915,
+    21.06445644250753
    ],
    [
     "stake_cap",
     0,
-    165.0519912662751,
+    161.0519912662751,
     19.03535533905933
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "alerts": "crank_arm Floating object part, Collapsing overhang",
-  "grams": "63.19",
-  "time": "2h 9m 22s",
+  "grams": "51.91",
+  "time": "1h 42m 56s",
   "extent": [
-   8.293,
+   8.215,
    8.245,
-   175.842,
-   35.854
+   171.842,
+   33.854
   ],
   "log": [
    "print warning: Detected print stability issues:"
@@ -881,10 +851,10 @@
     103.71073673820135
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "grams": "63.83",
-  "time": "1h 37m 31s",
+  "time": "1h 37m 30s",
   "extent": [
    8.245,
    8.259,
@@ -929,7 +899,7 @@
     68.0892519155058
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "grams": "143.21",
   "time": "6h 7m 36s",
@@ -943,32 +913,32 @@
  },
  {
   "plate": 14,
-  "file": "FINAL_14_post_lower_etc.3mf",
+  "file": "FINAL_14_post_upper_etc.3mf",
   "group": "frames",
   "items": [
    [
-    "post_lower",
+    "post_upper",
     0,
-    123.69713711607231,
-    125.96602099868475
+    122.27858621385076,
+    122.27116453750033
    ],
    [
-    "stake_4",
+    "stake_3",
     180,
-    122.52027465811418,
-    92.99241763214285
+    123.9362460498098,
+    94.30413511667145
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "alerts": "post_lower Floating bridge anchors, Long bridging extrusions | stake_4 Long bridging extrusions",
-  "grams": "79.13",
-  "time": "1h 30m 51s",
+  "alerts": "stake_3 Long bridging extrusions",
+  "grams": "64.26",
+  "time": "1h 24m 16s",
   "extent": [
-   9.584,
-   8.811,
-   237.81,
-   242.342
+   9.58,
+   8.853,
+   234.977,
+   234.97
   ],
   "log": [
    "print warning: Detected print stability issues:"
@@ -988,30 +958,30 @@
    [
     "chute_segment",
     0,
-    96.49485017652576,
+    95.99485017652576,
     80.70169608622007
    ],
    [
     "chute_segment",
     0,
-    122.49485017652576,
+    121.99485017652576,
     120.70169608622007
    ],
    [
     "chute_segment",
     0,
-    148.49485017652574,
+    147.99485017652574,
     160.70169608622007
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "grams": "306.20",
-  "time": "10h 3m 4s",
+  "grams": "306.07",
+  "time": "9h 58m 48s",
   "extent": [
    8.678,
    8.797,
-   236.125,
+   235.125,
    232.707
   ],
   "log": []
@@ -1024,24 +994,24 @@
    [
     "chute_segment",
     0,
-    96.49485017652576,
+    95.99485017652576,
     80.70169608622007
    ],
    [
     "chute_segment",
     0,
-    122.49485017652576,
+    121.99485017652576,
     120.70169608622007
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
-  "grams": "182.24",
-  "time": "6h 10m 33s",
+  "grams": "182.15",
+  "time": "6h 7m 40s",
   "extent": [
    8.678,
    8.797,
-   210.125,
+   209.125,
    192.707
   ],
   "log": []
@@ -1054,19 +1024,19 @@
    [
     "crank_head",
     0,
-    105.92560637178258,
+    105.42560637178258,
     90.70169608788923
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "alerts": "FINAL_17_crank_head Low bed adhesion",
-  "grams": "115.68",
-  "time": "3h 11m 30s",
+  "grams": "115.53",
+  "time": "3h 11m 21s",
   "extent": [
    13.261,
    8.797,
-   202.956,
+   201.956,
    168.242
   ],
   "log": [
@@ -1085,7 +1055,7 @@
     126.0581498112407
    ]
   ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
+  "stl_hash": "42b7ad65fbc624c38b02b496585c23a5951449fa",
   "ok": true,
   "grams": "28.90",
   "time": "45m 34s",
@@ -1094,30 +1064,6 @@
    8.268,
    197.845,
    243.848
-  ],
-  "log": []
- },
- {
-  "plate": 19,
-  "file": "FINAL_19_post_upper.3mf",
-  "group": "frames",
-  "items": [
-   [
-    "post_upper",
-    0,
-    122.27858621385076,
-    122.27116453750033
-   ]
-  ],
-  "stl_hash": "2d0487087a0d41d5644efcb9efbe4eddc59c009e",
-  "ok": true,
-  "grams": "34.88",
-  "time": "51m 50s",
-  "extent": [
-   9.58,
-   9.573,
-   234.977,
-   234.97
   ],
   "log": []
  }

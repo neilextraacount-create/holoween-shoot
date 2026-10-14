@@ -32,7 +32,7 @@ no splice in the middle.
 
 | Item | Amount |
 |---|---|
-| PLA, any brand, 1.75 mm | about **2.3 kg** for all 19 plates, test coupon included (the slicer's figure, see `plates/plates.md`). A failed big plate can cost up to about 0.35 kg, so **buy 3 x 1 kg spools if you have none**. Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
+| PLA, any brand, 1.75 mm | about **2.1 kg** for all 18 plates, test coupon included (the slicer's figure, see `plates/plates.md`). A failed big plate can cost up to about 0.35 kg, so **buy 3 x 1 kg spools if you have none**. Bambu PLA Basic or eSUN PLA+ are fine (eSUN 1 kg was seen at $11.99). Black or orange looks good for Halloween; the belt is black, so a lighter colour makes the frames easier to see in the dark. |
 
 ## 3. Things you probably already have (not bought for this)
 

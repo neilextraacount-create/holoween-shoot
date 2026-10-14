@@ -219,7 +219,7 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
   ones were fixed (section 7); the rest are explained in the printing guide.
 - Print-in-place gaps measured in the sliced G-code: at least 0.43 mm between the plastic of
   the moving body and its housing, and no body printed onto another.
-- Each of the 19 plates sliced as a whole: everything on the bed.
+- Each of the 18 plates sliced as a whole: everything on the bed.
 
 **Every mating pair, in its assembled position, with exact mesh booleans**
 - **Slip fits**: journals, sockets and spigots, chute sockets, sleeves, hex couplers.

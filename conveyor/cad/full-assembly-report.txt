@@ -5,19 +5,16 @@ WHOLE MACHINE on the site (2 risers x 7 in ASSUMED; lawn 5 deg; tail axle 2 in o
   [ok] tail skidL: lowest point -0 mm from the lawn at x +278 mm from the sidewalk edge
   [ok] tail skidR: lowest point -0 mm from the lawn at x +278 mm from the sidewalk edge
   [ok] tail foot: lowest point +2 mm from the sidewalk at x -23 mm from the sidewalk edge
-  [ok] station 1: stake goes 149 mm into the ground (designed 150)
+  [ok] station 1: stake goes 150 mm into the ground (designed 150)
   [ok] station 2: stake goes 150 mm into the ground (designed 150)
   [ok] station 3: stake goes 150 mm into the ground (designed 150)
-  [ok] station 4: stake goes 150 mm into the ground (designed 150)
   [ok] belt (both runs) vs every part it should not touch: clearance 8.00 mm (need >= 1)
   [ok] station 1: carry run rests on the carry wheel: touching faces, overlap 1.00 mm3 (must be ~0), gap 0.00
-  [ok] station 1: return run rests on the return wheel: touching faces, overlap 0.69 mm3 (must be ~0), gap 0.00
+  [ok] station 1: return run rests on the return wheel: touching faces, overlap 0.71 mm3 (must be ~0), gap 0.00
   [ok] station 2: carry run rests on the carry wheel: touching faces, overlap 1.00 mm3 (must be ~0), gap 0.00
   [ok] station 2: return run rests on the return wheel: touching faces, overlap 0.80 mm3 (must be ~0), gap 0.00
   [ok] station 3: carry run rests on the carry wheel: touching faces, overlap 1.00 mm3 (must be ~0), gap 0.00
   [ok] station 3: return run rests on the return wheel: touching faces, overlap 0.80 mm3 (must be ~0), gap 0.00
-  [ok] station 4: carry run rests on the carry wheel: touching faces, overlap 1.00 mm3 (must be ~0), gap 0.00
-  [ok] station 4: return run rests on the return wheel: touching faces, overlap 0.80 mm3 (must be ~0), gap 0.00
   [ok] return run stays 87 mm above the lawn at its lowest (need >= 30)
   [ok] carry run (belt top) 6.0 in above the ground at its lowest point
   [ok] belt loop along this path: 40.98 ft (the calculator's straight-run estimate is in calc/report-*.txt)

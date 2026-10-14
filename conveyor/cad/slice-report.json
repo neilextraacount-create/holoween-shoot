@@ -9,8 +9,8 @@
    "Loose extrusions"
   ],
   "other": [],
-  "grams": "53.19",
-  "time": "1h 30m 52s",
+  "grams": "53.18",
+  "time": "1h 30m 53s",
   "layers": 100
  },
  {
@@ -44,9 +44,9 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "39.39",
-  "time": "43m 21s",
-  "layers": 120
+  "grams": "33.91",
+  "time": "37m 8s",
+  "layers": 110
  },
  {
   "name": "stake_2",
@@ -57,9 +57,9 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "37.23",
-  "time": "41m 8s",
-  "layers": 120
+  "grams": "31.65",
+  "time": "34m 47s",
+  "layers": 110
  },
  {
   "name": "stake_3",
@@ -70,22 +70,9 @@
    "Long bridging extrusions"
   ],
   "other": [],
-  "grams": "35.06",
-  "time": "39m 0s",
-  "layers": 120
- },
- {
-  "name": "stake_4",
-  "ok": true,
-  "layer": 0.2,
-  "brim": false,
-  "alerts": [
-   "Long bridging extrusions"
-  ],
-  "other": [],
-  "grams": "32.89",
-  "time": "36m 46s",
-  "layers": 120
+  "grams": "29.38",
+  "time": "32m 37s",
+  "layers": 110
  },
  {
   "name": "drive_roller",
@@ -94,9 +81,9 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "84.82",
-  "time": "5h 6m 12s",
-  "layers": 774
+  "grams": "83.66",
+  "time": "5h 3m 1s",
+  "layers": 762
  },
  {
   "name": "drive_pin",
@@ -140,8 +127,8 @@
    "Low bed adhesion"
   ],
   "other": [],
-  "grams": "97.21",
-  "time": "3h 21m 32s",
+  "grams": "94.86",
+  "time": "3h 18m 43s",
   "layers": 570
  },
  {
@@ -242,7 +229,7 @@
   "alerts": [],
   "other": [],
   "grams": "31.91",
-  "time": "48m 40s",
+  "time": "48m 41s",
   "layers": 120
  },
  {
@@ -263,8 +250,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "91.12",
-  "time": "3h 9m 44s",
+  "grams": "91.07",
+  "time": "3h 8m 22s",
   "layers": 1148
  },
  {
@@ -276,8 +263,8 @@
    "Low bed adhesion"
   ],
   "other": [],
-  "grams": "115.68",
-  "time": "3h 11m 36s",
+  "grams": "115.53",
+  "time": "3h 11m 26s",
   "layers": 900
  },
  {
@@ -290,9 +277,9 @@
    "Collapsing overhang"
   ],
   "other": [],
-  "grams": "56.71",
-  "time": "1h 56m 1s",
-  "layers": 390
+  "grams": "45.44",
+  "time": "1h 29m 42s",
+  "layers": 385
  },
  {
   "name": "pin3",
@@ -403,8 +390,8 @@
   "brim": false,
   "alerts": [],
   "other": [],
-  "grams": "18.94",
-  "time": "23m 40s",
+  "grams": "16.63",
+  "time": "22m 3s",
   "layers": 150
  },
  {
