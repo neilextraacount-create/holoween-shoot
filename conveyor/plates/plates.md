@@ -8,23 +8,24 @@ Grams and times are PrusaSlicer's estimate with a P2S-like profile; Bambu Studio
 
 | # | File | Parts | For | Settings | g | Time |
 |---|---|---|---|---|---|---|
-| 1 | `01_test_coupon_etc.3mf` | `test_coupon`, `hex_coupler`, `ring_sleeve`, `bolt8_28`, `stake_cap` | test | 3 walls, 15 % | 64 | 1h 53m 47s |
-| 2 | `02_bolt8_28_etc.3mf` | 7 x `hex_coupler`, 17 x `bolt8_28`, 14 x `pin3`, 2 x `takeup_screw` | head, tail | 3 walls, 100 %, 5 mm brim | 91 | 3h 24m 9s |
-| 3 | `03_washer50_etc.3mf` | `drive_pin`, 6 x `ring_sleeve`, 13 x `nut8`, 2 x `takeup_block`, 2 x `takeup_nut`, 4 x `washer50`, 4 x `stand_shim`, `splice_template` | head, tail, anchors, porch stand, belt joint | 3 walls, 100 % | 111 | 3h 12m 56s |
-| 4 | `04_head_side_b_etc.3mf` | `head_side_b`, `foot`, `stake_cap`, `crank_arm` | head, station 1, chute line | 4 walls, 30 % | 153 | 4h 46m 46s |
-| 5 | `05_head_side_a_etc.3mf` | `head_side_a`, 2 x `foot`, `station_bracket` | head, station 1 | 4 walls, 30 % | 123 | 3h 28m 1s |
-| 6 | `06_gearbox_etc.3mf` | `gearbox`, `drive_roller`, `tail_roller` | head, tail | 4 walls, 15 %, 0.16 mm layers | 293 | 13h 9m 48s |
-| 7 | `07_wheel_unit.3mf` | 8 x `wheel_unit` | station 1 | 4 walls, 15 %, 5 mm brim | 328 | 9h 6m 46s |
-| 8 | `08_tail_side_l_etc.3mf` | 3 x `station_bracket`, `tail_side_l` | station 1, tail | 4 walls, 30 % | 112 | 3h 16m 22s |
-| 9 | `09_stake_1_etc.3mf` | `stake_1`, `stake_2`, `stake_3` | station 1, stations 2-4 | 4 walls, 30 % | 116 | 2h 13m 55s |
-| 10 | `10_spike_etc.3mf` | `tail_side_r`, 4 x `spike` | tail | 4 walls, 30 % | 132 | 3h 9m 26s |
-| 11 | `11_skid_l_etc.3mf` | `skid_l`, `skid_r` | tail | 4 walls, 30 % | 71 | 1h 58m 26s |
-| 12 | `12_gs_wrench_etc.3mf` | `gs_wrench`, 4 x `ground_screw` | anchors | 4 walls, 30 %, 5 mm brim | 143 | 6h 7m 36s |
-| 13 | `13_post_lower_etc.3mf` | `stake_4`, `post_lower` | stations 2-4, porch stand | 4 walls, 30 % | 83 | 1h 41m 58s |
-| 14 | `14_crank_head_etc.3mf` | `crank_head`, `trap`, `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 281 | 8h 0m 13s |
-| 15 | `15_chute_segment.3mf` | 3 x `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 353 | 11h 10m 38s |
-| 16 | `16_chute_segment.3mf` | `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 118 | 3h 48m 8s |
-| 17 | `17_stand_tray.3mf` | `stand_tray` | porch stand | 4 walls, 30 % | 32 | 52m 32s |
-| 18 | `18_post_upper.3mf` | `post_upper` | porch stand | 4 walls, 30 % | 41 | 1h 10m 59s |
+| 1 | `FINAL_01_test_coupon_etc.3mf` | `test_coupon`, `hex_coupler`, `ring_sleeve`, `bolt8_28`, `stake_cap` | test | 3 walls, 15 % | 64 | 1h 53m 47s |
+| 2 | `FINAL_02_bolt8_28_etc.3mf` | 7 x `hex_coupler`, 17 x `bolt8_28`, 14 x `pin3`, 2 x `takeup_screw` | head, tail | 3 walls, 100 %, 5 mm brim | 91 | 3h 24m 9s |
+| 3 | `FINAL_03_washer50_etc.3mf` | `drive_pin`, 6 x `ring_sleeve`, 13 x `nut8`, 2 x `takeup_block`, 2 x `takeup_nut`, 4 x `washer50`, 4 x `stand_shim`, `splice_template` | head, tail, anchors, porch stand, belt joint | 3 walls, 100 % | 111 | 3h 12m 56s |
+| 4 | `FINAL_04_head_side_a_etc.3mf` | `head_side_a`, 2 x `foot`, `station_bracket` | head, station 1 | 3 walls, 12 % | 105 | 2h 46m 20s |
+| 5 | `FINAL_05_gearbox_etc.3mf` | `gearbox`, `drive_roller`, `tail_roller` | head, tail | 3 walls, 10 %, 0.16 mm layers | 228 | 10h 4m 59s |
+| 6 | `FINAL_06_head_side_b_etc.3mf` | `head_side_b`, `foot`, `spike` | head, tail | 3 walls, 12 % | 96 | 2h 26m 58s |
+| 7 | `FINAL_07_wheel_unit.3mf` | 8 x `wheel_unit` | station 1 | 3 walls, 10 %, 5 mm brim | 268 | 7h 51m 53s |
+| 8 | `FINAL_08_tail_side_r_etc.3mf` | `station_bracket`, `tail_side_r`, 3 x `spike` | station 1, tail | 3 walls, 12 % | 116 | 2h 39m 29s |
+| 9 | `FINAL_09_tail_side_l_etc.3mf` | 2 x `station_bracket`, `tail_side_l` | station 1, tail | 3 walls, 12 % | 73 | 1h 59m 13s |
+| 10 | `FINAL_10_stake_1_etc.3mf` | `stake_1`, `stake_2`, `stake_3` | station 1, stations 2-4 | 3 walls, 12 % | 112 | 2h 3m 53s |
+| 11 | `FINAL_11_crank_arm_etc.3mf` | `stake_cap`, `crank_arm` | station 1, chute line | 4 walls, 30 % | 63 | 2h 9m 22s |
+| 12 | `FINAL_12_skid_l_etc.3mf` | `skid_l`, `skid_r` | tail | 3 walls, 12 % | 64 | 1h 37m 31s |
+| 13 | `FINAL_13_gs_wrench_etc.3mf` | `gs_wrench`, 4 x `ground_screw` | anchors | 4 walls, 30 %, 5 mm brim | 143 | 6h 7m 36s |
+| 14 | `FINAL_14_post_lower_etc.3mf` | `stake_4`, `post_lower` | stations 2-4, porch stand | 3 walls, 12 % | 79 | 1h 30m 51s |
+| 15 | `FINAL_15_chute_segment_etc.3mf` | `trap`, 3 x `chute_segment` | chute line | 2 walls, 10 %, 5 mm brim | 306 | 10h 3m 4s |
+| 16 | `FINAL_16_chute_segment.3mf` | 2 x `chute_segment` | chute line | 2 walls, 10 %, 5 mm brim | 182 | 6h 10m 33s |
+| 17 | `FINAL_17_crank_head.3mf` | `crank_head` | chute line | 3 walls, 10 %, 5 mm brim | 116 | 3h 11m 30s |
+| 18 | `FINAL_18_stand_tray.3mf` | `stand_tray` | porch stand | 3 walls, 12 % | 29 | 45m 34s |
+| 19 | `FINAL_19_post_upper.3mf` | `post_upper` | porch stand | 3 walls, 12 % | 35 | 51m 50s |
 
-All plates: **2.65 kg** of filament (test coupon plate included).
+All plates: **2.28 kg** of filament (test coupon plate included).

@@ -5,7 +5,7 @@ parts that print with the same settings, so you load a plate, set two or three t
 print. The single STLs are in `cad/stl/` (already in print orientation) if you would rather
 arrange things yourself.
 
-**About 2.6 kg of PLA and roughly 85 hours of printing** (slicer estimate, see below). You have
+**About 2.3 kg of PLA and roughly 71 hours of printing** (slicer estimate, see below). You have
 about 18 days to Halloween, so start today.
 
 ## How the plates were checked
@@ -34,8 +34,8 @@ PEI Plate**. Most settings stay at Bambu's defaults:
 | Layer height | Quality | **0.20 mm**; **0.16 mm** on the rollers-and-gearbox plate |
 | Wall generator | Quality | Classic (the default) |
 | Elephant foot compensation | Quality | 0.15 mm (the default). It keeps a squashed first layer from gluing a spinning part to its housing. |
-| Wall loops | Strength | as the plate table says (3 or 4) |
-| Sparse infill density | Strength | as the plate table says (15 %, 30 % or 100 %) |
+| Wall loops | Strength | as the plate table says (2, 3 or 4) |
+| Sparse infill density | Strength | as the plate table says (10 %, 12 %, 15 %, 30 % or 100 %) |
 | Sparse infill pattern | Strength | Gyroid; **Rectilinear** on the 100 % plates |
 | Top / bottom shell layers | Strength | 5 / 4 |
 | Supports | Support | **off**. No part needs any. |
@@ -108,26 +108,27 @@ steps, regenerate: `cad/parts-table.md` and the plates then match your steps.
 <!-- plate-table: written by cad/make_plates.py -->
 | # | File | Parts | For | Settings | g | Time |
 |---|---|---|---|---|---|---|
-| 1 | `01_test_coupon_etc.3mf` | `test_coupon`, `hex_coupler`, `ring_sleeve`, `bolt8_28`, `stake_cap` | test | 3 walls, 15 % | 64 | 1h 53m 47s |
-| 2 | `02_bolt8_28_etc.3mf` | 7 x `hex_coupler`, 17 x `bolt8_28`, 14 x `pin3`, 2 x `takeup_screw` | head, tail | 3 walls, 100 %, 5 mm brim | 91 | 3h 24m 9s |
-| 3 | `03_washer50_etc.3mf` | `drive_pin`, 6 x `ring_sleeve`, 13 x `nut8`, 2 x `takeup_block`, 2 x `takeup_nut`, 4 x `washer50`, 4 x `stand_shim`, `splice_template` | head, tail, anchors, porch stand, belt joint | 3 walls, 100 % | 111 | 3h 12m 56s |
-| 4 | `04_head_side_b_etc.3mf` | `head_side_b`, `foot`, `stake_cap`, `crank_arm` | head, station 1, chute line | 4 walls, 30 % | 153 | 4h 46m 46s |
-| 5 | `05_head_side_a_etc.3mf` | `head_side_a`, 2 x `foot`, `station_bracket` | head, station 1 | 4 walls, 30 % | 123 | 3h 28m 1s |
-| 6 | `06_gearbox_etc.3mf` | `gearbox`, `drive_roller`, `tail_roller` | head, tail | 4 walls, 15 %, 0.16 mm layers | 293 | 13h 9m 48s |
-| 7 | `07_wheel_unit.3mf` | 8 x `wheel_unit` | station 1 | 4 walls, 15 %, 5 mm brim | 328 | 9h 6m 46s |
-| 8 | `08_tail_side_l_etc.3mf` | 3 x `station_bracket`, `tail_side_l` | station 1, tail | 4 walls, 30 % | 112 | 3h 16m 22s |
-| 9 | `09_stake_1_etc.3mf` | `stake_1`, `stake_2`, `stake_3` | station 1, stations 2-4 | 4 walls, 30 % | 116 | 2h 13m 55s |
-| 10 | `10_spike_etc.3mf` | `tail_side_r`, 4 x `spike` | tail | 4 walls, 30 % | 132 | 3h 9m 26s |
-| 11 | `11_skid_l_etc.3mf` | `skid_l`, `skid_r` | tail | 4 walls, 30 % | 71 | 1h 58m 26s |
-| 12 | `12_gs_wrench_etc.3mf` | `gs_wrench`, 4 x `ground_screw` | anchors | 4 walls, 30 %, 5 mm brim | 143 | 6h 7m 36s |
-| 13 | `13_post_lower_etc.3mf` | `stake_4`, `post_lower` | stations 2-4, porch stand | 4 walls, 30 % | 83 | 1h 41m 58s |
-| 14 | `14_crank_head_etc.3mf` | `crank_head`, `trap`, `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 281 | 8h 0m 13s |
-| 15 | `15_chute_segment.3mf` | 3 x `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 353 | 11h 10m 38s |
-| 16 | `16_chute_segment.3mf` | `chute_segment` | chute line | 4 walls, 15 %, 5 mm brim | 118 | 3h 48m 8s |
-| 17 | `17_stand_tray.3mf` | `stand_tray` | porch stand | 4 walls, 30 % | 32 | 52m 32s |
-| 18 | `18_post_upper.3mf` | `post_upper` | porch stand | 4 walls, 30 % | 41 | 1h 10m 59s |
+| 1 | `FINAL_01_test_coupon_etc.3mf` | `test_coupon`, `hex_coupler`, `ring_sleeve`, `bolt8_28`, `stake_cap` | test | 3 walls, 15 % | 64 | 1h 53m 47s |
+| 2 | `FINAL_02_bolt8_28_etc.3mf` | 7 x `hex_coupler`, 17 x `bolt8_28`, 14 x `pin3`, 2 x `takeup_screw` | head, tail | 3 walls, 100 %, 5 mm brim | 91 | 3h 24m 9s |
+| 3 | `FINAL_03_washer50_etc.3mf` | `drive_pin`, 6 x `ring_sleeve`, 13 x `nut8`, 2 x `takeup_block`, 2 x `takeup_nut`, 4 x `washer50`, 4 x `stand_shim`, `splice_template` | head, tail, anchors, porch stand, belt joint | 3 walls, 100 % | 111 | 3h 12m 56s |
+| 4 | `FINAL_04_head_side_a_etc.3mf` | `head_side_a`, 2 x `foot`, `station_bracket` | head, station 1 | 3 walls, 12 % | 105 | 2h 46m 20s |
+| 5 | `FINAL_05_gearbox_etc.3mf` | `gearbox`, `drive_roller`, `tail_roller` | head, tail | 3 walls, 10 %, 0.16 mm layers | 228 | 10h 4m 59s |
+| 6 | `FINAL_06_head_side_b_etc.3mf` | `head_side_b`, `foot`, `spike` | head, tail | 3 walls, 12 % | 96 | 2h 26m 58s |
+| 7 | `FINAL_07_wheel_unit.3mf` | 8 x `wheel_unit` | station 1 | 3 walls, 10 %, 5 mm brim | 268 | 7h 51m 53s |
+| 8 | `FINAL_08_tail_side_r_etc.3mf` | `station_bracket`, `tail_side_r`, 3 x `spike` | station 1, tail | 3 walls, 12 % | 116 | 2h 39m 29s |
+| 9 | `FINAL_09_tail_side_l_etc.3mf` | 2 x `station_bracket`, `tail_side_l` | station 1, tail | 3 walls, 12 % | 73 | 1h 59m 13s |
+| 10 | `FINAL_10_stake_1_etc.3mf` | `stake_1`, `stake_2`, `stake_3` | station 1, stations 2-4 | 3 walls, 12 % | 112 | 2h 3m 53s |
+| 11 | `FINAL_11_crank_arm_etc.3mf` | `stake_cap`, `crank_arm` | station 1, chute line | 4 walls, 30 % | 63 | 2h 9m 22s |
+| 12 | `FINAL_12_skid_l_etc.3mf` | `skid_l`, `skid_r` | tail | 3 walls, 12 % | 64 | 1h 37m 31s |
+| 13 | `FINAL_13_gs_wrench_etc.3mf` | `gs_wrench`, 4 x `ground_screw` | anchors | 4 walls, 30 %, 5 mm brim | 143 | 6h 7m 36s |
+| 14 | `FINAL_14_post_lower_etc.3mf` | `stake_4`, `post_lower` | stations 2-4, porch stand | 3 walls, 12 % | 79 | 1h 30m 51s |
+| 15 | `FINAL_15_chute_segment_etc.3mf` | `trap`, 3 x `chute_segment` | chute line | 2 walls, 10 %, 5 mm brim | 306 | 10h 3m 4s |
+| 16 | `FINAL_16_chute_segment.3mf` | 2 x `chute_segment` | chute line | 2 walls, 10 %, 5 mm brim | 182 | 6h 10m 33s |
+| 17 | `FINAL_17_crank_head.3mf` | `crank_head` | chute line | 3 walls, 10 %, 5 mm brim | 116 | 3h 11m 30s |
+| 18 | `FINAL_18_stand_tray.3mf` | `stand_tray` | porch stand | 3 walls, 12 % | 29 | 45m 34s |
+| 19 | `FINAL_19_post_upper.3mf` | `post_upper` | porch stand | 3 walls, 12 % | 35 | 51m 50s |
 
-All plates: **2.65 kg** of filament (test coupon plate included).
+All plates: **2.28 kg** of filament (test coupon plate included).
 <!-- /plate-table -->
 
 Times are PrusaSlicer's estimate with Bambu-like speeds and accelerations. Bambu Studio's
@@ -147,7 +148,7 @@ spot in the G-code and is intended:
 | Part | Warning | Why it's fine |
 |---|---|---|
 | `crank_arm` | floating region, overhang | The spinning grip's first layer prints 0.4 mm (2 layers of air) above the arm on purpose. That is the print-in-place gap. The first twist breaks it free; if it ever stays stuck, the handle still works as a fixed grip. |
-| `gearbox`, `tail_roller`, `chute_segment` | low bed adhesion | The rotor, axle or drive shaft inside stands on a small base, but their bearings hold them within 0.45 mm all the way up, so they can't tip over. |
+| `gearbox`, `tail_roller`, `crank_head` | low bed adhesion | The rotor, axle or crank shaft inside stands on a small base, but their bearings hold them within 0.45 mm all the way up, so they can't tip over. |
 | `stake_*`, `post_lower` | long bridging extrusions, floating bridge anchors | Internal bridges: the first solid layer laid over the part's own infill. Some ends land between infill lines, which is normal. The socket ceilings are 16 mm bridges held on both sides. |
 | `trap` | 66 mm bridge (our own check; PrusaSlicer did not flag it) | Across the top of the drop slot at print height 62 mm. Expect a little sag; trim any strands. |
 | `test_coupon` and plate 1's test pieces | loose extrusions, low bed adhesion | Small overhangs on the test spinners, and small test copies printed without a brim. They are only test pieces. |
@@ -169,40 +170,40 @@ the slicer's figures are in the plate table and in `cad/slice-report.md`.
 | Part (STL) | Qty | Size on the bed, mm | Walls | Infill | Layer | Brim | ~g each (mesh estimate) | What it is |
 |---|---|---|---|---|---|---|---|---|
 | `test_coupon` | 1 | 150 x 93 x 20 | 3 | 15 % | 0.20 | no | 60 | PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut) |
-| `wheel_unit` | 8 | 30 x 30 x 115 | 4 | 15 % | 0.20 | 5 mm | 37 | station wheel, print-in-place (2 per station) |
-| `station_bracket` | 4 | 28 x 109 x 16 | 4 | 30 % | 0.20 | no | 22 | station bracket (holds 2 wheels on the stake) |
-| `stake_1` | 1 | 216 x 203 x 24 (diagonal) | 4 | 30 % | 0.20 | no | 45 | station 1 stake (nearest the sidewalk) |
-| `stake_2` | 1 | 205 x 191 x 24 (diagonal) | 4 | 30 % | 0.20 | no | 43 | station 2 stake |
-| `stake_3` | 1 | 194 x 180 x 24 (diagonal) | 4 | 30 % | 0.20 | no | 40 | station 3 stake |
-| `stake_4` | 1 | 182 x 169 x 24 (diagonal) | 4 | 30 % | 0.20 | no | 38 | station 4 stake (nearest the steps) |
-| `drive_roller` | 1 | 67 x 67 x 124 | 4 | 15 % | 0.16 | no | 127 | drive roller with 17T pinion |
+| `wheel_unit` | 8 | 30 x 30 x 115 | 3 | 10 % | 0.20 | 5 mm | 28 | station wheel, print-in-place (2 per station) |
+| `station_bracket` | 4 | 28 x 109 x 16 | 3 | 12 % | 0.20 | no | 17 | station bracket (holds 2 wheels on the stake) |
+| `stake_1` | 1 | 216 x 203 x 24 (diagonal) | 3 | 12 % | 0.20 | no | 44 | station 1 stake (nearest the sidewalk) |
+| `stake_2` | 1 | 205 x 191 x 24 (diagonal) | 3 | 12 % | 0.20 | no | 41 | station 2 stake |
+| `stake_3` | 1 | 194 x 180 x 24 (diagonal) | 3 | 12 % | 0.20 | no | 39 | station 3 stake |
+| `stake_4` | 1 | 182 x 169 x 24 (diagonal) | 3 | 12 % | 0.20 | no | 36 | station 4 stake (nearest the steps) |
+| `drive_roller` | 1 | 67 x 67 x 124 | 3 | 10 % | 0.16 | no | 94 | drive roller with 17T pinion |
 | `drive_pin` | 1 | 20 x 20 x 35 | 3 | 100 % | 0.20 | no | 5 | drive roller A-side journal pin (press in) |
-| `head_side_a` | 1 | 206 x 196 x 6 | 4 | 30 % | 0.20 | no | 73 | head side frame A (round journal hole) |
-| `head_side_b` | 1 | 237 x 196 x 6 | 4 | 30 % | 0.20 | no | 88 | head side frame B (open journal slot, gearbox mount) |
-| `gearbox` | 1 | 94 x 111 x 91 | 4 | 15 % | 0.16 | no | 132 | gearbox: 34T crown gear rotor in its housing, print-in-place |
-| `trap` | 1 | 103 x 37 x 152 | 4 | 15 % | 0.20 | 5 mm | 32 | drop trap (bottom of the chute, rests on the head frames) |
-| `foot` | 3 | 36 x 196 x 24 | 4 | 30 % | 0.20 | no | 30 | foot crossbar (2 head, 1 tail rear) |
-| `tail_side_l` | 1 | 227 x 218 x 28 | 4 | 30 % | 0.20 | no | 70 | tail side frame, left (-Y) |
-| `tail_side_r` | 1 | 227 x 218 x 28 | 4 | 30 % | 0.20 | no | 70 | tail side frame, right (+Y) |
-| `tail_roller` | 1 | 45 x 45 x 90 | 4 | 15 % | 0.16 | no | 61 | tail roller, print-in-place |
+| `head_side_a` | 1 | 206 x 196 x 6 | 3 | 12 % | 0.20 | no | 57 | head side frame A (round journal hole) |
+| `head_side_b` | 1 | 237 x 196 x 6 | 3 | 12 % | 0.20 | no | 68 | head side frame B (open journal slot, gearbox mount) |
+| `gearbox` | 1 | 94 x 111 x 91 | 3 | 10 % | 0.16 | no | 99 | gearbox: 34T crown gear rotor in its housing, print-in-place |
+| `trap` | 1 | 103 x 37 x 152 | 2 | 10 % | 0.20 | 5 mm | 32 | drop trap (bottom of the chute, rests on the head frames) |
+| `foot` | 3 | 36 x 196 x 24 | 3 | 12 % | 0.20 | no | 25 | foot crossbar (2 head, 1 tail rear) |
+| `tail_side_l` | 1 | 227 x 218 x 28 | 3 | 12 % | 0.20 | no | 54 | tail side frame, left (-Y) |
+| `tail_side_r` | 1 | 227 x 218 x 28 | 3 | 12 % | 0.20 | no | 54 | tail side frame, right (+Y) |
+| `tail_roller` | 1 | 45 x 45 x 90 | 3 | 10 % | 0.16 | no | 46 | tail roller, print-in-place |
 | `takeup_block` | 2 | 22 x 24 x 36 | 3 | 100 % | 0.20 | no | 13 | take-up block (one per side) |
 | `takeup_nut` | 2 | 16 x 16 x 8 | 3 | 100 % | 0.20 | no | 2 | take-up square nut |
 | `takeup_screw` | 2 | 21 x 22 x 108 | 3 | 100 % | 0.20 | 5 mm | 11 | take-up screw with knob |
-| `skid_l` | 1 | 239 x 59 x 24 | 4 | 30 % | 0.20 | no | 46 | tail skid, left |
-| `skid_r` | 1 | 239 x 59 x 24 | 4 | 30 % | 0.20 | no | 46 | tail skid, right |
-| `chute_segment` | 5 | 167 x 136 x 230 | 4 | 15 % | 0.20 | 5 mm | 122 | chute segment with print-in-place drive shaft |
-| `crank_head` | 1 | 186 x 156 x 180 | 4 | 15 % | 0.20 | 5 mm | 142 | crank head: funnel + crank shaft, print-in-place |
+| `skid_l` | 1 | 239 x 59 x 24 | 3 | 12 % | 0.20 | no | 37 | tail skid, left |
+| `skid_r` | 1 | 239 x 59 x 24 | 3 | 12 % | 0.20 | no | 37 | tail skid, right |
+| `chute_segment` | 5 | 167 x 136 x 230 | 2 | 10 % | 0.20 | 5 mm | 113 | chute segment with print-in-place drive shaft |
+| `crank_head` | 1 | 186 x 156 x 180 | 3 | 10 % | 0.20 | 5 mm | 142 | crank head: funnel + crank shaft, print-in-place |
 | `crank_arm` | 1 | 138 x 28 x 78 | 4 | 30 % | 0.20 | no | 61 | crank arm with spinning grip, print-in-place |
 | `pin3` | 14 | 28 x 7 x 5 | 3 | 100 % | 0.20 | 5 mm | 0 | 3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2) |
 | `splice_template` | 1 | 78 x 82 x 6 | 3 | 100 % | 0.20 | no | 13 | belt sewing template (box-and-X hole pattern) |
 | `stand_shim` | 4 | 40 x 22 x 3 | 3 | 100 % | 0.20 | no | 3 | shims to level the porch stand foot |
 | `hex_coupler` | 7 | 23 x 13 x 11 | 3 | 100 % | 0.20 | 5 mm | 3 | hex coupler between shafts |
 | `ring_sleeve` | 6 | 25 x 25 x 8 | 3 | 100 % | 0.20 | no | 2 | sleeve between bearing rings |
-| `post_lower` | 1 | 229 x 233 x 22 (diagonal) | 4 | 30 % | 0.20 | no | 56 | porch stand post, lower |
-| `post_upper` | 1 | 226 x 226 x 20 (diagonal) | 4 | 30 % | 0.20 | no | 52 | porch stand post, upper |
-| `stand_tray` | 1 | 190 x 236 x 32 | 4 | 30 % | 0.20 | no | 40 | porch stand foot (put the candy bowl on it) |
+| `post_lower` | 1 | 229 x 233 x 22 (diagonal) | 3 | 12 % | 0.20 | no | 51 | porch stand post, lower |
+| `post_upper` | 1 | 226 x 226 x 20 (diagonal) | 3 | 12 % | 0.20 | no | 40 | porch stand post, upper |
+| `stand_tray` | 1 | 190 x 236 x 32 | 3 | 12 % | 0.20 | no | 34 | porch stand foot (put the candy bowl on it) |
 | `ground_screw` | 4 | 26 x 26 x 150 | 4 | 30 % | 0.20 | 5 mm | 32 | ground screw (head front foot, tail skid rear anchors) |
-| `spike` | 4 | 134 x 30 x 30 | 4 | 30 % | 0.20 | no | 21 | L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot |
+| `spike` | 4 | 134 x 30 x 30 | 3 | 12 % | 0.20 | no | 20 | L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot |
 | `stake_cap` | 1 | 22 x 22 x 28 | 4 | 30 % | 0.20 | no | 8 | push the stakes in through this cap |
 | `gs_wrench` | 1 | 160 x 33 x 24 | 4 | 30 % | 0.20 | 5 mm | 31 | T-wrench for the ground screws |
 | `bolt8_28` | 17 | 13 x 15 x 33 | 3 | 100 % | 0.20 | 5 mm | 2 | printed M8 bolt (13 frame joints + 4 ground screws) |

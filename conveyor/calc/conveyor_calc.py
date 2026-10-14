@@ -247,8 +247,9 @@ def main():
 
     # ------------------------------------------------------------ PLA stress checks
     p("\nPLA STRESS CHECKS (parts printed with layers across the load are the weak case; only the printed walls")
-    p("  count: 4 walls = a 1.68 mm solid shell on every surface, the 15 % sparse infill inside is ignored)")
-    shell = 4 * 0.42
+    p("  count: 3 walls = a 1.26 mm solid shell on rollers and the gearbox, 2 walls = 0.84 mm on the chute's shaft;")
+    p("  the 10 % sparse infill inside is ignored)")
+    shell = 3 * 0.42
     ro = g("dr_axle_r")
     ri = max(ro - shell, 0.0)
     M = (2 * T0) * (L_w / 1000) / 4                                 # conservative: whole load at mid-span
@@ -258,13 +259,14 @@ def main():
     tc = t1 * 2
     ty = 30 * g("crank_r") / 1000                                   # hard yank: 30 N on the handle
     so, si = g("shaft_or"), g("shaft_ir")
+    shell = 2 * 0.42                                                # chute segments print with 2 walls
     if so - shell <= si + shell:                                    # outer and bore shells meet: the tube prints solid
         J = math.pi / 2 * (so ** 4 - si ** 4)
     else:
         J = math.pi / 2 * (so ** 4 - (so - shell) ** 4 + (si + shell) ** 4 - si ** 4)
     zt_hex = 0.217 * (math.sqrt(3) / 2 * g("hex_af") ** 2) * g("hex_af")    # 100 % infill: solid
     sq = 12.4
-    zt_sq = min(0.208 * sq ** 3, 2 * (sq - shell) ** 2 * shell)     # thin-walled square tube (Bredt) if not solid
+    zt_sq = min(0.208 * sq ** 3, 2 * (sq - 3 * 0.42) ** 2 * 3 * 0.42)   # crank head: 3 walls     # thin-walled square tube (Bredt) if not solid
     p(f"  torque path, shear in MPa at the dry crank torque {t1:.2f} / 2x {tc:.2f} / a 30 N yank {ty:.2f} N.m (PLA across layers ~20-30):")
     for nm, z in ((f"line shaft tube Ø{2*g('shaft_or'):.0f}/{2*g('shaft_ir'):.0f}", J / g("shaft_or")),
                   (f"hex coupler {g('hex_af'):.0f} mm across flats", zt_hex), (f"square drive {sq} mm", zt_sq)):

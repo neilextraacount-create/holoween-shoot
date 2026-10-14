@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Lay every printed part out on P2S build plates, by print settings, and write one 3MF per plate
-(plates/NN_name.3mf) plus plates/plates.md (contents, settings, grams and time per plate).
+(plates/FINAL_NN_name.3mf) plus plates/plates.md (contents, settings, grams and time per plate).
 
 Each plate holds parts that print with the same settings, so a plate needs one setting change in
 the slicer at most. Parts keep the print orientation of their STL; they are only turned in 90 deg
@@ -44,24 +44,21 @@ GROUPS = {
     "coupon": ("Test coupon and test pieces", 3, 15, 0.20, False),
     "solid": ("Small parts, solid", 3, 100, 0.20, False),
     "solid_brim": ("Bolts, pins, couplers, take-up screws, solid", 3, 100, 0.20, True),
-    "fine": ("Rollers and gearbox", 4, 15, 0.16, False),
-    "frames": ("Frames, stakes, posts", 4, 30, 0.20, False),
-    "frames_brim": ("Ground screws and wrench", 4, 30, 0.20, True),
-    "line": ("Chute, crank head, trap", 4, 15, 0.20, True),
-    "wheels": ("Station wheels", 4, 15, 0.20, True),
-}
-# lighter settings: gears, rollers, bolts, pins, couplers and ground screws keep their strength
-LITE = {
+    "fine": ("Rollers and gearbox", 3, 10, 0.16, False),
     "frames": ("Frames, stakes, posts", 3, 12, 0.20, False),
-    "line": ("Chute, crank head, trap", 3, 10, 0.20, True),
+    "sturdy": ("Crank arm and stake cap", 4, 30, 0.20, False),
+    "frames_brim": ("Ground screws and wrench", 4, 30, 0.20, True),
+    "line": ("Crank head", 3, 10, 0.20, True),
+    "chute": ("Chute segments and trap", 2, 10, 0.20, True),
     "wheels": ("Station wheels", 3, 10, 0.20, True),
 }
-PREFIX = ""
+PREFIX = "FINAL_"                     # file names: FINAL_NN_part.3mf
 GROUP_OF = {"test_coupon": "coupon", "bolt8_28": "solid_brim", "takeup_screw": "solid_brim",
             "pin3": "solid_brim", "hex_coupler": "solid_brim",
             "drive_roller": "fine", "gearbox": "fine", "tail_roller": "fine",
             "ground_screw": "frames_brim", "gs_wrench": "frames_brim",
-            "chute_segment": "line", "crank_head": "line", "trap": "line", "wheel_unit": "wheels"}
+            "chute_segment": "chute", "crank_head": "line", "trap": "chute", "wheel_unit": "wheels",
+            "crank_arm": "sturdy", "stake_cap": "sturdy"}
 # the build order (docs/03): plates are printed in the order of the earliest module they serve
 MODULE = {"test_coupon": 0,
           "drive_roller": 1, "drive_pin": 1, "head_side_a": 1, "head_side_b": 1, "gearbox": 1, "foot": 1,
@@ -201,12 +198,7 @@ def slice_plate(exe, path, group, gcode):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-slice", action="store_true", help="lay the plates out without the PrusaSlicer check")
-    ap.add_argument("--lite", action="store_true", help="less filament: fewer walls / less infill on lightly loaded parts -> plates-lite/")
     a = ap.parse_args()
-    global OUT, PREFIX
-    if a.lite:
-        GROUPS.update(LITE)
-        OUT, PREFIX = HERE.parent / "plates-lite", "LITE_"
     exe = None if a.no_slice else find_slicer()
     if not a.no_slice and not exe:
         print("PrusaSlicer not found (set PRUSA_SLICER or put prusa-slicer on the PATH): "
@@ -221,12 +213,16 @@ def main():
         meshes[n], outlines[n] = m, silhouette(m)
     # the work list: every copy, largest footprint first within each group
     infill_of = {p[0]: p[3] for p in PARTS}
+    walls_of = {p[0]: p[2] for p in PARTS}
     work = []
     for n, q, *_ in PARTS:
         g = GROUP_OF.get(n, "solid" if infill_of[n] >= 100 else "frames")
         _t, _w, _i, layer, brim = GROUPS[g]
         if g != "coupon" and ((n in FINE) != (layer < 0.2) or (n in BRIM_PARTS) != brim):
             raise SystemExit(f"{n}: its plate group '{g}' does not give it the layer height / brim it needs")
+        if g != "coupon" and (GROUPS[g][1], GROUPS[g][2]) != (walls_of[n], infill_of[n]):
+            raise SystemExit(f"{n}: plate group '{g}' prints {GROUPS[g][1]} walls {GROUPS[g][2]} %, the parts table says "
+                             f"{walls_of[n]} walls {infill_of[n]} %")
         work += [(n, g)] * qmap.get(n, q)
     work += [(n, "coupon") for n in TEST_PIECES]
     plates = []
@@ -298,8 +294,7 @@ def main():
     for f in new.iterdir():
         shutil.move(str(f), str(OUT / f.name))
     new.rmdir()
-    if not a.lite:
-        fill_doc("plate-table", "\n".join(md[md.index("| # | File | Parts | For | Settings | g | Time |"):]))
+    fill_doc("plate-table", "\n".join(md[md.index("| # | File | Parts | For | Settings | g | Time |"):]))
 
 
 if __name__ == "__main__":

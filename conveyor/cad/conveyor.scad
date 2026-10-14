@@ -240,7 +240,14 @@ module head_side2d(is_b) {
     }
 }
 // candy guard panel (thin, on the inner face) between the guard bar and the belt top
-module guard2d() { translate([-128, belt_t + drv_rs + 2]) square([134, 30]); }
+module guard2d() { difference() { translate([-128, belt_t + drv_rs + 2]) square([134, 30]); pumpkin2d(-60, belt_t + drv_rs + 2); } }
+// jack-o'-lantern face cut through the guard panel (openings at most 10 x 7 mm: candy can't pass)
+module pumpkin2d(c, p0) {
+    for (sg = [-1, 1]) polygon([[c + sg * 4, p0 + 19], [c + sg * 14, p0 + 19], [c + sg * 9, p0 + 26]]);   // eyes
+    polygon([[c - 3, p0 + 13], [c + 3, p0 + 13], [c, p0 + 17]]);                                        // nose
+    polygon([[c - 17, p0 + 10], [c - 11, p0 + 7], [c - 6, p0 + 10], [c, p0 + 7], [c + 6, p0 + 10], [c + 11, p0 + 7],
+             [c + 17, p0 + 10], [c + 11, p0 + 4], [c + 6, p0 + 6], [c, p0 + 4], [c - 6, p0 + 6], [c - 11, p0 + 4]]);   // grin
+}
 // print frame: inner face on the bed. A = -Y side, B = +Y side (mirror of A plus gearbox pads)
 module head_side_a() { linear_extrude(side_t) head_side2d(false); linear_extrude(3) guard2d(); }
 module head_side_b() { mirror([0, 1, 0]) { linear_extrude(side_t) head_side2d(true); linear_extrude(3) guard2d(); } }
@@ -449,6 +456,7 @@ module web_top(zr, fy, wx) {
     hull() {
         translate([Y_c - ring_or - 4, -3, zr - 6]) cube([7.5, 6, 6]);
         translate([wx - 8, fy - 3.5, zr - 6 - tan(lw_ang) * (d - 7)]) cube([8, 3.5, 6]);
+        translate([wx - 8, fy - 0.01, zr - 6 - tan(lw_ang) * (d - 7) - 3.5]) cube([8, 0.01, 6]);   // 45 deg underside off the floor
     }
 }
 // vertical (in print) web plate from p2 to p1, z 0..L, with diamond lightening holes [s, z, half-diagonal]
@@ -720,6 +728,7 @@ module stand_tray() {
         }
         rotate(45) translate([-spike_sock / 2, -spike_sock / 2, sk_hd - sock_depth]) cube([spike_sock, spike_sock, sock_depth + 1]);
         for (a = [45, 135]) rotate(a) translate([-20, 0, sk_hd - 15]) rotate([0, 90, 0]) cylinder(d = pin_hole, h = 40, $fn = 16);   // tray pin (either way round)
+        translate([86, 0, at - 0.6]) linear_extrude(1) text("TRICK OR TREAT", size = 7, font = "DejaVu Sans:style=Bold", halign = "center", valign = "center");
     }
 }
 // ---------------------------------------------------------------- anchors

@@ -62,16 +62,17 @@ and the stand grows to match. Two lower posts stack for stands taller than about
 | Porch stand | about 7 N·m sideways from the hand on the crank | | 12 N at about 0.6 m: tie it down, add 8 kg, or hold the funnel |
 
 **Torque path** (shear in MPa at the dry crank torque / twice it / a hard 30 N yank on the
-handle; PLA across layers is roughly 20-30 MPa). Only the printed walls count: 4 walls make a
-1.68 mm solid shell on every surface, and the 15 % sparse infill inside is ignored.
+handle; PLA across layers is roughly 20-30 MPa). Only the printed walls count: 3 walls make a
+1.26 mm solid shell (rollers, gearbox, crank head), 2 walls 0.84 mm (chute segments), and the
+10 % sparse infill inside is ignored.
 
 | Part | MPa |
 |---|---|
-| Line shaft tube Ø18/10 (4 walls) | 1.4 / 2.9 / 3.7 |
+| Line shaft tube Ø18/10 (2 walls) | 2.7 / 5.5 / 7.1 |
 | Hex coupler, 11 mm across flats (solid) | 5.1 / 10.2 / 13.2 |
-| Square drive, 12.4 mm (4 walls) | 3.3 / 6.6 / 8.5 |
+| Square drive, 12.4 mm (3 walls) | 4.1 / 8.1 / 10.6 |
 | Gear teeth (Lewis, 2x) | 6.1 |
-| Tail axle Ø12 (bending, 4-wall shell only) | 7.3 |
+| Tail axle Ø12 (bending, 3-wall shell only) | 8.7 |
 
 The weakest link is the hex coupler: about 4-6 times its strength at normal cranking, about 2
 at a hard yank. It prints lying on a flat face, so no single layer runs right across it, and
@@ -216,7 +217,7 @@ The tail frames bolt to two **skids** that reach about 260 mm onto the lawn:
   ones were fixed (section 7); the rest are explained in the printing guide.
 - Print-in-place gaps measured in the sliced G-code: at least 0.43 mm between the plastic of
   the moving body and its housing, and no body printed onto another.
-- Each of the 18 plates sliced as a whole: everything on the bed.
+- Each of the 19 plates sliced as a whole: everything on the bed.
 
 **Every mating pair, in its assembled position, with exact mesh booleans**
 - **Slip fits**: journals, sockets and spigots, chute sockets, sleeves, hex couplers.
@@ -315,5 +316,11 @@ Then every part was put through a real slicer (section 5). That found:
 - **Wheel axles**: each stood 115 mm tall on 88 mm² of bed. It now has a foot giving 254 mm².
 - **Pins and hex couplers**: they printed standing, so a single layer ran right across them.
   They now print lying down (the pins on a 0.3 mm flat), which is stronger and sticks better.
-- **Shafts**: the chute, crank head and roller parts now print with 4 walls, so their shafts
-  are close to solid.
+- **Shafts**: the chute shafts print with 2 walls, the crank head and rollers with 3. Even
+  the thinnest (the chute's shaft) stays at 7 MPa under a hard 30 N yank, well under PLA's
+  20-30 MPa, and the hex coupler (solid) is still the weakest link.
+- **Less filament (final version)**: walls and infill were cut on every lightly loaded part
+  (3 walls / 10-12 %, 2 walls on the chute) after checking each one against the loads above;
+  the crank arm, stake cap, ground screws, bolts, pins and couplers keep their full strength.
+  The head guards got jack-o'-lantern faces and the stand tray says TRICK OR TREAT (both are
+  cut out, so they save plastic too).

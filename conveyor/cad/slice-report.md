@@ -6,44 +6,44 @@ brim 5 mm where the printing guide says. Alerts are the slicer's own stability a
 | Part | Qty | Layer | g each | Time each | Slicer alerts |
 |---|---|---|---|---|---|
 | `test_coupon` | 1 | 0.2 | 53 | 1h 30m 52s | Low bed adhesion, Loose extrusions |
-| `wheel_unit` | 8 | 0.2 | 41 | 1h 13m 48s | none |
-| `station_bracket` | 4 | 0.2 | 19 | 33m 6s | none |
-| `stake_1` | 1 | 0.2 | 41 | 47m 20s | Long bridging extrusions |
-| `stake_2` | 1 | 0.2 | 39 | 44m 57s | Long bridging extrusions |
-| `stake_3` | 1 | 0.2 | 36 | 42m 32s | Long bridging extrusions |
-| `stake_4` | 1 | 0.2 | 34 | 40m 8s | Long bridging extrusions |
-| `drive_roller` | 1 | 0.16 | 109 | 6h 38m 5s | none |
+| `wheel_unit` | 8 | 0.2 | 34 | 1h 7m 11s | none |
+| `station_bracket` | 4 | 0.2 | 15 | 23m 28s | none |
+| `stake_1` | 1 | 0.2 | 39 | 43m 21s | Long bridging extrusions |
+| `stake_2` | 1 | 0.2 | 37 | 41m 8s | Long bridging extrusions |
+| `stake_3` | 1 | 0.2 | 35 | 39m 0s | Long bridging extrusions |
+| `stake_4` | 1 | 0.2 | 33 | 36m 46s | Long bridging extrusions |
+| `drive_roller` | 1 | 0.16 | 85 | 5h 6m 12s | none |
 | `drive_pin` | 1 | 0.2 | 5 | 16m 34s | none |
-| `head_side_a` | 1 | 0.2 | 54 | 1h 30m 43s | none |
-| `head_side_b` | 1 | 0.2 | 65 | 1h 53m 25s | none |
-| `gearbox` | 1 | 0.16 | 121 | 4h 16m 31s | Low bed adhesion |
-| `trap` | 1 | 0.2 | 33 | 1h 17m 55s | none |
-| `foot` | 3 | 0.2 | 25 | 42m 1s | none |
-| `tail_side_l` | 1 | 0.2 | 54 | 1h 37m 19s | none |
-| `tail_side_r` | 1 | 0.2 | 54 | 1h 36m 30s | none |
-| `tail_roller` | 1 | 0.16 | 63 | 2h 9m 18s | Low bed adhesion |
+| `head_side_a` | 1 | 0.2 | 45 | 1h 9m 30s | none |
+| `head_side_b` | 1 | 0.2 | 54 | 1h 26m 4s | none |
+| `gearbox` | 1 | 0.16 | 97 | 3h 21m 32s | Low bed adhesion |
+| `trap` | 1 | 0.2 | 33 | 1h 18m 48s | none |
+| `foot` | 3 | 0.2 | 23 | 36m 22s | none |
+| `tail_side_l` | 1 | 0.2 | 44 | 1h 13m 37s | none |
+| `tail_side_r` | 1 | 0.2 | 44 | 1h 12m 40s | none |
+| `tail_roller` | 1 | 0.16 | 46 | 1h 33m 46s | Low bed adhesion |
 | `takeup_block` | 2 | 0.2 | 13 | 25m 19s | none |
 | `takeup_nut` | 2 | 0.2 | 2 | 5m 1s | none |
 | `takeup_screw` | 2 | 0.2 | 12 | 50m 31s | none |
-| `skid_l` | 1 | 0.2 | 35 | 59m 13s | none |
-| `skid_r` | 1 | 0.2 | 35 | 59m 10s | none |
-| `chute_segment` | 5 | 0.2 | 118 | 3h 48m 15s | none |
-| `crank_head` | 1 | 0.2 | 131 | 3h 29m 56s | none |
+| `skid_l` | 1 | 0.2 | 32 | 48m 40s | none |
+| `skid_r` | 1 | 0.2 | 32 | 48m 40s | none |
+| `chute_segment` | 5 | 0.2 | 91 | 3h 9m 44s | none |
+| `crank_head` | 1 | 0.2 | 116 | 3h 11m 36s | Low bed adhesion |
 | `crank_arm` | 1 | 0.2 | 57 | 1h 56m 1s | Floating object part, Collapsing overhang |
 | `pin3` | 14 | 0.2 | 0 | 1m 50s | none |
 | `splice_template` | 1 | 0.2 | 13 | 27m 25s | none |
 | `stand_shim` | 4 | 0.2 | 3 | 4m 25s | none |
 | `hex_coupler` | 7 | 0.2 | 3 | 6m 8s | none |
 | `ring_sleeve` | 6 | 0.2 | 2 | 3m 41s | none |
-| `post_lower` | 1 | 0.2 | 49 | 1h 1m 34s | Floating bridge anchors, Long bridging extrusions |
-| `post_upper` | 1 | 0.2 | 41 | 1h 11m 0s | none |
-| `stand_tray` | 1 | 0.2 | 32 | 52m 34s | none |
+| `post_lower` | 1 | 0.2 | 46 | 53m 27s | Floating bridge anchors, Long bridging extrusions |
+| `post_upper` | 1 | 0.2 | 35 | 51m 50s | none |
+| `stand_tray` | 1 | 0.2 | 29 | 45m 32s | none |
 | `ground_screw` | 4 | 0.2 | 29 | 1h 27m 46s | none |
-| `spike` | 4 | 0.2 | 20 | 25m 20s | none |
+| `spike` | 4 | 0.2 | 19 | 23m 40s | none |
 | `stake_cap` | 1 | 0.2 | 6 | 16m 24s | none |
 | `gs_wrench` | 1 | 0.2 | 28 | 52m 23s | none |
 | `bolt8_28` | 17 | 0.2 | 2 | 14m 51s | none |
 | `nut8` | 13 | 0.2 | 1 | 3m 31s | none |
 | `washer50` | 4 | 0.2 | 7 | 8m 9s | none |
 
-Machine total (test coupon excluded): **2.58 kg**, about **87 h** of printing (PrusaSlicer's estimate with Bambu-like speeds; parts sliced one at a time, so plates of several parts save some time).
+Machine total (test coupon excluded): **2.22 kg**, about **76 h** of printing (PrusaSlicer's estimate with Bambu-like speeds; parts sliced one at a time, so plates of several parts save some time).
