@@ -9,8 +9,8 @@
    "Loose extrusions"
   ],
   "other": [],
-  "grams": "53.18",
-  "time": "1h 30m 53s",
+  "grams": "53.19",
+  "time": "1h 30m 52s",
   "layers": 100
  },
  {
@@ -20,8 +20,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "33.56",
-  "time": "1h 7m 11s",
+  "grams": "22.71",
+  "time": "58m 31s",
   "layers": 576
  },
  {
@@ -229,7 +229,7 @@
   "alerts": [],
   "other": [],
   "grams": "31.91",
-  "time": "48m 41s",
+  "time": "48m 40s",
   "layers": 120
  },
  {
@@ -379,8 +379,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "28.85",
-  "time": "1h 27m 46s",
+  "grams": "23.72",
+  "time": "1h 16m 40s",
   "layers": 750
  },
  {
@@ -412,8 +412,8 @@
   "brim": true,
   "alerts": [],
   "other": [],
-  "grams": "27.81",
-  "time": "52m 23s",
+  "grams": "21.28",
+  "time": "35m 32s",
   "layers": 120
  },
  {

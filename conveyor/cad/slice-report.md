@@ -5,8 +5,8 @@ brim 5 mm where the printing guide says. Alerts are the slicer's own stability a
 
 | Part | Qty | Layer | g each | Time each | Slicer alerts |
 |---|---|---|---|---|---|
-| `test_coupon` | 1 | 0.2 | 53 | 1h 30m 53s | Low bed adhesion, Loose extrusions |
-| `wheel_unit` | 6 | 0.2 | 34 | 1h 7m 11s | none |
+| `test_coupon` | 1 | 0.2 | 53 | 1h 30m 52s | Low bed adhesion, Loose extrusions |
+| `wheel_unit` | 6 | 0.2 | 23 | 58m 31s | none |
 | `station_bracket` | 3 | 0.2 | 15 | 23m 28s | none |
 | `stake_1` | 1 | 0.2 | 34 | 37m 8s | Long bridging extrusions |
 | `stake_2` | 1 | 0.2 | 32 | 34m 47s | Long bridging extrusions |
@@ -24,7 +24,7 @@ brim 5 mm where the printing guide says. Alerts are the slicer's own stability a
 | `takeup_block` | 2 | 0.2 | 13 | 25m 19s | none |
 | `takeup_nut` | 2 | 0.2 | 2 | 5m 1s | none |
 | `takeup_screw` | 2 | 0.2 | 12 | 50m 31s | none |
-| `skid_l` | 1 | 0.2 | 32 | 48m 41s | none |
+| `skid_l` | 1 | 0.2 | 32 | 48m 40s | none |
 | `skid_r` | 1 | 0.2 | 32 | 48m 40s | none |
 | `chute_segment` | 5 | 0.2 | 91 | 3h 8m 22s | none |
 | `crank_head` | 1 | 0.2 | 116 | 3h 11m 26s | Low bed adhesion |
@@ -37,12 +37,12 @@ brim 5 mm where the printing guide says. Alerts are the slicer's own stability a
 | `post_lower` | 1 | 0.2 | 46 | 53m 27s | Floating bridge anchors, Long bridging extrusions |
 | `post_upper` | 1 | 0.2 | 35 | 51m 50s | none |
 | `stand_tray` | 1 | 0.2 | 29 | 45m 32s | none |
-| `ground_screw` | 4 | 0.2 | 29 | 1h 27m 46s | none |
+| `ground_screw` | 4 | 0.2 | 24 | 1h 16m 40s | none |
 | `spike` | 4 | 0.2 | 17 | 22m 3s | none |
 | `stake_cap` | 1 | 0.2 | 6 | 16m 24s | none |
-| `gs_wrench` | 1 | 0.2 | 28 | 52m 23s | none |
+| `gs_wrench` | 1 | 0.2 | 21 | 35m 32s | none |
 | `bolt8_28` | 17 | 0.2 | 2 | 14m 51s | none |
 | `nut8` | 13 | 0.2 | 1 | 3m 31s | none |
 | `washer50` | 4 | 0.2 | 7 | 8m 9s | none |
 
-Machine total (test coupon excluded): **2.06 kg**, about **71 h** of printing (PrusaSlicer's estimate with Bambu-like speeds; parts sliced one at a time, so plates of several parts save some time).
+Machine total (test coupon excluded): **1.97 kg**, about **70 h** of printing (PrusaSlicer's estimate with Bambu-like speeds; parts sliced one at a time, so plates of several parts save some time).

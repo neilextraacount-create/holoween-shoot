@@ -15,7 +15,7 @@ names match the STL files in `cad/stl/`.
 | When the belt arrives | sew the belt in place, tension it, track it, run candy tests |
 | Final week | spares and reprints; full rehearsal at dusk |
 
-The plates and their settings are in [03-printing.md](03-printing.md); roughly 67 hours of
+The plates and their settings are in [03-printing.md](03-printing.md); roughly 64 hours of
 printing in all.
 
 ## 0. Before printing the big parts

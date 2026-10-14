@@ -1,7 +1,7 @@
 | Part (STL) | Qty | Size on the bed, mm | Walls | Infill | Layer | Brim | ~g each (mesh estimate) | What it is |
 |---|---|---|---|---|---|---|---|---|
 | `test_coupon` | 1 | 150 x 93 x 20 | 3 | 15 % | 0.20 | no | 60 | PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut) |
-| `wheel_unit` | 6 | 30 x 30 x 115 | 3 | 10 % | 0.20 | 5 mm | 28 | station wheel, print-in-place (2 per station) |
+| `wheel_unit` | 6 | 30 x 30 x 115 | 2 | 10 % | 0.20 | 5 mm | 21 | station wheel, print-in-place (2 per station) |
 | `station_bracket` | 3 | 28 x 109 x 16 | 3 | 12 % | 0.20 | no | 17 | station bracket (holds 2 wheels on the stake) |
 | `stake_1` | 1 | 214 x 200 x 22 (diagonal) | 3 | 12 % | 0.20 | no | 37 | station 1 stake (nearest the sidewalk) |
 | `stake_2` | 1 | 199 x 186 x 22 (diagonal) | 3 | 12 % | 0.20 | no | 35 | station 2 stake |
@@ -32,12 +32,12 @@
 | `post_lower` | 1 | 229 x 233 x 22 (diagonal) | 3 | 12 % | 0.20 | no | 51 | porch stand post, lower |
 | `post_upper` | 1 | 226 x 226 x 20 (diagonal) | 3 | 12 % | 0.20 | no | 40 | porch stand post, upper |
 | `stand_tray` | 1 | 190 x 236 x 32 | 3 | 12 % | 0.20 | no | 34 | porch stand foot (put the candy bowl on it) |
-| `ground_screw` | 4 | 26 x 26 x 150 | 4 | 30 % | 0.20 | 5 mm | 32 | ground screw (head front foot, tail skid rear anchors) |
+| `ground_screw` | 4 | 26 x 26 x 150 | 3 | 15 % | 0.20 | 5 mm | 24 | ground screw (head front foot, tail skid rear anchors) |
 | `spike` | 4 | 134 x 30 x 30 | 3 | 12 % | 0.20 | no | 18 | L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot |
 | `stake_cap` | 1 | 22 x 22 x 28 | 4 | 30 % | 0.20 | no | 8 | push the stakes in through this cap |
-| `gs_wrench` | 1 | 160 x 33 x 24 | 4 | 30 % | 0.20 | 5 mm | 31 | T-wrench for the ground screws |
+| `gs_wrench` | 1 | 160 x 33 x 24 | 3 | 15 % | 0.20 | 5 mm | 23 | T-wrench for the ground screws |
 | `bolt8_28` | 17 | 13 x 15 x 33 | 3 | 100 % | 0.20 | 5 mm | 2 | printed M8 bolt (13 frame joints + 4 ground screws) |
 | `nut8` | 13 | 13 x 15 x 7 | 3 | 100 % | 0.20 | no | 1 | printed M8 nut |
 | `washer50` | 4 | 50 x 50 x 3 | 3 | 100 % | 0.20 | no | 7 | 50 mm washer over a ground screw |
 
-Filament for one machine (test coupon excluded): **about 2.29 kg** (estimate from the meshes; your slicer gives the real number).
+Filament for one machine (test coupon excluded): **about 2.20 kg** (estimate from the meshes; your slicer gives the real number).

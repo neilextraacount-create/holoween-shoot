@@ -63,8 +63,8 @@ At 45 rpm the belt moves 0.3 m/s, so candy reaches the basket in about 20 s (15 
    `python3 cad/make_plates.py` to rebuild the plates in `plates/` for your steps. The plate
    files carry their own copies of the parts, so without this step you would print the old
    ones. Without PrusaSlicer installed, use `python3 cad/make_plates.py --no-slice`.
-4. Print the plates in order ([docs/03-printing.md](docs/03-printing.md): about 2.1 kg of PLA
-   and roughly 67 h of printing) and build
+4. Print the plates in order ([docs/03-printing.md](docs/03-printing.md): about 2.0 kg of PLA
+   and roughly 64 h of printing) and build
    ([docs/04-build-and-setup.md](docs/04-build-and-setup.md)).
 
 | Doc | |

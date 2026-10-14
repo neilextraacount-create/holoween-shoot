@@ -5,7 +5,7 @@ parts that print with the same settings, so you load a plate, set two or three t
 print. The single STLs are in `cad/stl/` (already in print orientation) if you would rather
 arrange things yourself.
 
-**About 2.1 kg of PLA and roughly 67 hours of printing** (slicer estimate, see below). You have
+**About 2.0 kg of PLA and roughly 64 hours of printing** (slicer estimate, see below). You have
 about 18 days to Halloween, so start today.
 
 ## How the plates were checked
@@ -113,21 +113,21 @@ steps, regenerate: `cad/parts-table.md` and the plates then match your steps.
 | 3 | `FINAL_03_washer50_etc.3mf` | `drive_pin`, 6 x `ring_sleeve`, 13 x `nut8`, 2 x `takeup_block`, 2 x `takeup_nut`, 4 x `washer50`, 4 x `stand_shim`, `splice_template` | head, tail, anchors, porch stand, belt joint | 3 walls, 100 % | 111 | 3h 12m 56s |
 | 4 | `FINAL_04_head_side_a_etc.3mf` | `head_side_a`, 2 x `foot`, `station_bracket` | head, station 1 | 3 walls, 12 % | 105 | 2h 46m 20s |
 | 5 | `FINAL_05_gearbox_etc.3mf` | `gearbox`, `drive_roller`, `tail_roller` | head, tail | 3 walls, 10 %, 0.16 mm layers | 224 | 9h 58m 22s |
-| 6 | `FINAL_06_head_side_b_etc.3mf` | `head_side_b`, `foot`, `spike` | head, tail | 3 walls, 12 % | 94 | 2h 24m 14s |
-| 7 | `FINAL_07_wheel_unit.3mf` | 6 x `wheel_unit` | station 1 | 3 walls, 10 %, 5 mm brim | 201 | 5h 56m 2s |
+| 6 | `FINAL_06_head_side_b_etc.3mf` | `head_side_b`, `foot`, `spike` | head, tail | 3 walls, 12 % | 94 | 2h 24m 13s |
+| 7 | `FINAL_07_wheel_unit.3mf` | 6 x `wheel_unit` | station 1 | 2 walls, 10 %, 5 mm brim | 136 | 4h 26m 38s |
 | 8 | `FINAL_08_tail_side_r_etc.3mf` | `station_bracket`, `tail_side_r`, 3 x `spike` | station 1, tail | 3 walls, 12 % | 109 | 2h 31m 20s |
 | 9 | `FINAL_09_post_lower_etc.3mf` | `stake_1`, `stake_2`, `post_lower` | station 1, stations 2-3, porch stand | 3 walls, 12 % | 112 | 2h 6m 30s |
 | 10 | `FINAL_10_tail_side_l_etc.3mf` | `station_bracket`, `tail_side_l` | station 1, tail | 3 walls, 12 % | 59 | 1h 35m 50s |
 | 11 | `FINAL_11_crank_arm_etc.3mf` | `stake_cap`, `crank_arm` | station 1, chute line | 4 walls, 30 % | 52 | 1h 42m 56s |
-| 12 | `FINAL_12_skid_l_etc.3mf` | `skid_l`, `skid_r` | tail | 3 walls, 12 % | 64 | 1h 37m 30s |
-| 13 | `FINAL_13_gs_wrench_etc.3mf` | `gs_wrench`, 4 x `ground_screw` | anchors | 4 walls, 30 %, 5 mm brim | 143 | 6h 7m 36s |
+| 12 | `FINAL_12_skid_l_etc.3mf` | `skid_l`, `skid_r` | tail | 3 walls, 12 % | 64 | 1h 37m 28s |
+| 13 | `FINAL_13_gs_wrench_etc.3mf` | `gs_wrench`, 4 x `ground_screw` | anchors | 3 walls, 15 %, 5 mm brim | 116 | 4h 48m 44s |
 | 14 | `FINAL_14_post_upper_etc.3mf` | `stake_3`, `post_upper` | stations 2-3, porch stand | 3 walls, 12 % | 64 | 1h 24m 16s |
 | 15 | `FINAL_15_chute_segment_etc.3mf` | `trap`, 3 x `chute_segment` | chute line | 2 walls, 10 %, 5 mm brim | 306 | 9h 58m 48s |
 | 16 | `FINAL_16_chute_segment.3mf` | 2 x `chute_segment` | chute line | 2 walls, 10 %, 5 mm brim | 182 | 6h 7m 40s |
 | 17 | `FINAL_17_crank_head.3mf` | `crank_head` | chute line | 3 walls, 10 %, 5 mm brim | 116 | 3h 11m 21s |
 | 18 | `FINAL_18_stand_tray.3mf` | `stand_tray` | porch stand | 3 walls, 12 % | 29 | 45m 34s |
 
-All plates: **2.12 kg** of filament (test coupon plate included).
+All plates: **2.03 kg** of filament (test coupon plate included).
 <!-- /plate-table -->
 
 Times are PrusaSlicer's estimate with Bambu-like speeds and accelerations. Bambu Studio's
@@ -169,7 +169,7 @@ the slicer's figures are in the plate table and in `cad/slice-report.md`.
 | Part (STL) | Qty | Size on the bed, mm | Walls | Infill | Layer | Brim | ~g each (mesh estimate) | What it is |
 |---|---|---|---|---|---|---|---|---|
 | `test_coupon` | 1 | 150 x 93 x 20 | 3 | 15 % | 0.20 | no | 60 | PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut) |
-| `wheel_unit` | 6 | 30 x 30 x 115 | 3 | 10 % | 0.20 | 5 mm | 28 | station wheel, print-in-place (2 per station) |
+| `wheel_unit` | 6 | 30 x 30 x 115 | 2 | 10 % | 0.20 | 5 mm | 21 | station wheel, print-in-place (2 per station) |
 | `station_bracket` | 3 | 28 x 109 x 16 | 3 | 12 % | 0.20 | no | 17 | station bracket (holds 2 wheels on the stake) |
 | `stake_1` | 1 | 214 x 200 x 22 (diagonal) | 3 | 12 % | 0.20 | no | 37 | station 1 stake (nearest the sidewalk) |
 | `stake_2` | 1 | 199 x 186 x 22 (diagonal) | 3 | 12 % | 0.20 | no | 35 | station 2 stake |
@@ -200,10 +200,10 @@ the slicer's figures are in the plate table and in `cad/slice-report.md`.
 | `post_lower` | 1 | 229 x 233 x 22 (diagonal) | 3 | 12 % | 0.20 | no | 51 | porch stand post, lower |
 | `post_upper` | 1 | 226 x 226 x 20 (diagonal) | 3 | 12 % | 0.20 | no | 40 | porch stand post, upper |
 | `stand_tray` | 1 | 190 x 236 x 32 | 3 | 12 % | 0.20 | no | 34 | porch stand foot (put the candy bowl on it) |
-| `ground_screw` | 4 | 26 x 26 x 150 | 4 | 30 % | 0.20 | 5 mm | 32 | ground screw (head front foot, tail skid rear anchors) |
+| `ground_screw` | 4 | 26 x 26 x 150 | 3 | 15 % | 0.20 | 5 mm | 24 | ground screw (head front foot, tail skid rear anchors) |
 | `spike` | 4 | 134 x 30 x 30 | 3 | 12 % | 0.20 | no | 18 | L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot |
 | `stake_cap` | 1 | 22 x 22 x 28 | 4 | 30 % | 0.20 | no | 8 | push the stakes in through this cap |
-| `gs_wrench` | 1 | 160 x 33 x 24 | 4 | 30 % | 0.20 | 5 mm | 31 | T-wrench for the ground screws |
+| `gs_wrench` | 1 | 160 x 33 x 24 | 3 | 15 % | 0.20 | 5 mm | 23 | T-wrench for the ground screws |
 | `bolt8_28` | 17 | 13 x 15 x 33 | 3 | 100 % | 0.20 | 5 mm | 2 | printed M8 bolt (13 frame joints + 4 ground screws) |
 | `nut8` | 13 | 13 x 15 x 7 | 3 | 100 % | 0.20 | no | 1 | printed M8 nut |
 | `washer50` | 4 | 50 x 50 x 3 | 3 | 100 % | 0.20 | no | 7 | 50 mm washer over a ground screw |

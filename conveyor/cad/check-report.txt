@@ -1,7 +1,7 @@
 
 PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed fit, filament)
   [ok] test_coupon x1: 150x93x20 mm, body gap 0.35, overhangs ok (widest 1.5 mm), ~60 g each
-  [ok] wheel_unit x6: 30x30x115 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~28 g each
+  [ok] wheel_unit x6: 30x30x115 mm, body gap 0.45, overhangs ok (widest 2.2 mm), ~21 g each
   [ok] station_bracket x3: 28x109x16 mm, overhangs ok (widest 0.0 mm), ~17 g each
   [ok] stake_1 x1: 214x200x22 mm, turned 45, overhangs ok (widest 10.4 mm), ~37 g each
   [ok] stake_2 x1: 199x186x22 mm, turned 45, overhangs ok (widest 10.4 mm), ~35 g each
@@ -32,15 +32,15 @@ PARTS (render, watertight, bodies, print-in-place gap, islands, overhangs, bed f
   [ok] post_lower x1: 229x233x22 mm, turned 45, overhangs ok (widest 0.0 mm), flat bridges up to 16 mm span, ~51 g each
   [ok] post_upper x1: 226x226x20 mm, turned 45, overhangs ok (widest 0.0 mm), ~40 g each
   [ok] stand_tray x1: 190x236x32 mm, overhangs ok (widest 1.4 mm), ~34 g each
-  [ok] ground_screw x4: 26x26x150 mm, overhangs ok (widest 3.9 mm), ~32 g each
+  [ok] ground_screw x4: 26x26x150 mm, overhangs ok (widest 3.9 mm), ~24 g each
   [ok] spike x4: 134x30x30 mm, overhangs ok (widest 0.0 mm), ~18 g each
   [ok] stake_cap x1: 22x22x28 mm, overhangs ok (widest 0.0 mm), ~8 g each
-  [ok] gs_wrench x1: 160x33x24 mm, overhangs ok (widest 0.0 mm), ~31 g each
+  [ok] gs_wrench x1: 160x33x24 mm, overhangs ok (widest 0.0 mm), ~23 g each
   [ok] bolt8_28 x17: 13x15x33 mm, overhangs ok (widest 0.0 mm), ~2 g each
   [ok] nut8 x13: 13x15x7 mm, overhangs ok (widest 0.0 mm), ~1 g each
   [ok] washer50 x4: 50x50x3 mm, overhangs ok (widest 0.0 mm), ~7 g each
 
-FILAMENT ESTIMATE: about 2.29 kg for one machine with the listed walls/infill (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)
+FILAMENT ESTIMATE: about 2.20 kg for one machine with the listed walls/infill (an estimate; the slicer gives the real figure; add 10-15 % for test prints and waste)
 
 HEAD MODULE (drive roller, frames, gearbox, trap, first chute segment), assembled
   [ok] drive roller journal in frame B slot: slip fit gap 0.29 mm (designed 0.30), overlap 0.00 mm3
@@ -186,7 +186,5 @@ SITE: 2 risers x 7 in (ASSUMED), 20 in run to the porch; drive axle 10 in before
   [ok] head module vs the first riser: clearance 40.00 mm (need >= 20)
   [ok] porch stand tray bottom -0 mm from the porch floor (set stand_h = 552 to correct)
   [ok] porch stand tray starts 1.7 in behind the porch edge (need >= 0.8 in)
-
-NOTE: the STLs changed since the plates in ../plates were made: run python3 make_plates.py
 
 RESULT: ALL CHECKS PASSED
