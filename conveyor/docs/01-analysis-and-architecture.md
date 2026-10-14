@@ -53,8 +53,8 @@ and the stand grows to match. Two lower posts stack for stands taller than about
 | Belt drag | 10.5 N | 6.9 N | tail roller V-bearing (μ 0.35 dry / 0.2 waxed, V-groove factor 1/sin45°), 8 station wheels, belt bending |
 | Crank effort | **1.27 N·m = 12 N (2.6 lbf)** | 0.97 N·m = 9 N | drag x roller radius x 2 + journal friction, 85 % gear and 90 % shaft-line efficiency |
 | Grip needed on the drive roller | μ ≥ 0.17 | μ ≥ 0.11 | capstan equation, 180° wrap, 20 N pretension per run; ribbed PLA on webbing is roughly 0.3 dry, 0.2 wet |
-| Belt sag between stations | 14 mm light candy, 27 mm dense | | w·L²/8T over 1.23 m; the two runs are 44.6 mm apart at a station, so they never touch |
-| Tension test | 100 g laid across the belt midway between stations: extra dip 11-12 mm at 25 N, 13-14 mm at 20 N, 15-18 mm at 15 N per run | | includes belt stretch (EA 10-55 kN, guessed) against the screw take-up |
+| Belt sag between stations | 22 mm light candy, 41 mm dense | | w·L²/8T over 1.54 m (3 stations, about 5 ft apart); the two runs are 44.6 mm apart at a station, so with dense candy they still clear by about 12 mm |
+| Tension test | 100 g laid across the belt midway between stations: extra dip 13-15 mm at 25 N, 15-18 mm at 20 N, 17-22 mm at 15 N per run | | includes belt stretch (EA 10-55 kN, guessed) against the screw take-up |
 | Speed | crank 45 rpm → belt 0.30 m/s; about 21 s from chute to basket | | |
 | Candy speed at the bottom of the chute | 2.6-3.1 m/s | | sliding friction 0.3-0.45; the drop trap stops it |
 | Tail tipping | 48 N uplift on the two rear skid ground screws (24 N each) | | 40 N belt pull acting 207 mm above the ground, 172 mm tipping arm |
@@ -71,7 +71,8 @@ handle; PLA across layers is roughly 20-30 MPa). Only the printed walls count: 3
 | Line shaft tube Ø18/10 (2 walls) | 2.7 / 5.5 / 7.1 |
 | Hex coupler, 11 mm across flats (solid) | 5.1 / 10.2 / 13.2 |
 | Square drive, 12.4 mm (3 walls) | 4.1 / 8.1 / 10.6 |
-| Gear teeth (Lewis, 2x) | 6.1 |
+| Gear teeth (Lewis, 2x; 8 mm wide) | 7.6 |
+| Crank arm, 14 x 7 mm at the hub, 30 N on the grip (along the layers, PLA ~50) | 12.7 |
 | Tail axle Ø12 (bending, 3-wall shell only) | 8.7 |
 
 The weakest link is the hex coupler: about 4-6 times its strength at normal cranking, about 2
@@ -105,7 +106,8 @@ wheel units**: the belt rides over the top one and comes back over the bottom on
 - **Mounting**: the wheel's square peg goes through a 15 mm-long hole (bracket plus boss), and
   a pin pulls its collar tight against the bracket so it can't droop.
 - **Stake lengths**: each station has its own, so the belt runs in a straight line. Stake 1 is
-  284 mm long, stake 4 is 236 mm.
+  280 mm long, stake 3 is 240 mm. There are 3 stations, about 5 ft (60 in) apart; the stakes
+  are a 22 x 2.4 mm L-section (about 200 N before one buckles while you push it in).
 
 ### 4.3 Head: drive roller and crown-gear gearbox
 
@@ -149,7 +151,7 @@ The bottom of the line is a **drop trap**:
 ### 4.5 Crank head and porch stand
 
 The crank head has the funnel (with a back wall leaning 50° so it prints), the top bearing pair,
-and a 12.4 mm square drive for the crank arm. The arm (110 mm) has a print-in-place spinning
+and a 12.4 mm square drive for the crank arm. The arm (110 mm, a slim 13-23 mm wide and 7 mm thick, printed with 4 walls and 30 % infill) has a print-in-place spinning Ø23 mm
 grip.
 
 The porch stand:
@@ -254,7 +256,7 @@ every module is placed with the checker's transforms on the lawn, sidewalk and s
 | Risk | How likely | Early warning / fix |
 |---|---|---|
 | Print-in-place parts fused | medium (depends on the printer) | **test coupon**: if the 0.45 mm spinner is stuck but 0.55 mm turns, set `pip_gap = 0.55` and re-export |
-| Belt slips on the drive roller (wet) | medium | rub candle wax on the bearings (not on the roller); tighten 1/8 turn (stay within the 11-18 mm dip) |
+| Belt slips on the drive roller (wet) | medium | rub candle wax on the bearings (not on the roller); tighten 1/8 turn (stay within the 13-22 mm dip) |
 | Belt walks off to one side | medium | crowned rollers centre it; steer with the two tail knobs (build guide) |
 | Stand tips while cranking | high if left free | tie it to a railing, 8 kg on the tray, or hold the funnel |
 | Stakes lean in soft lawn | medium | pre-soak, push straight; the belt load on each stake is under 10 N |

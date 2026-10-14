@@ -50,7 +50,7 @@ gear_m        = 2.5;
 pinion_z      = 17;
 crown_z       = 34;      // ratio 2:1 step-up (crank 1 turn -> roller 2 turns)
 gear_pa       = 20;
-gear_face     = 10;
+gear_face     = 8;       // tooth width (Lewis stress at 2x torque about 8 MPa)
 backlash      = 0.15;    // per flank
 
 // ---------------------------------------------------------------- frames
@@ -74,8 +74,8 @@ trough_n      = 100;     // chute floor offset from the shaft axis (perpendicula
 crank_r       = 110;     // crank arm radius
 
 // ---------------------------------------------------------------- stakes
-spike_leg     = 24;      // L-profile stake
-spike_t       = 2.8;
+spike_leg     = 22;      // L-profile stake (22 x 2.4: about 200 N before it buckles when pushed in)
+spike_t       = 2.4;
 spike_head    = 36;      // porch post head block
 spike_sock    = 16.0;    // square socket for the station bracket spigot
 spike_embed   = 150;     // depth pushed into the lawn
@@ -92,12 +92,12 @@ gb_top_s      = 110;     // top face of the gearbox (rotor end with a hex socket
 crank_head_len = 150;    // crank head unit above the last segment
 head_h        = 6 * IN;  // belt top above the lawn at the drive roller
 tail_h        = 9 * IN;  // belt top above the sidewalk at the tail roller (basket rim must be <= tail_h - 3 in)
-stations      = 4;       // stake stations between head and tail
+stations      = 3;       // stake stations between head and tail
 T0            = 20;      // belt pretension per run, N (set with the 100 g dip test, build guide)
 belt_deg      = 4.25;    // belt slope to level (calc: lawn 250 in at 5 deg, head 6 in, tail 9 in); sets the porch stand angle
 seg_count     = 5;       // chute segments (calc picks the count; 5 for 2 risers of 7 in)
 stand_h       = 552;     // porch floor to the crank head's stand socket mouth (calc prints this)
-stake_len     = [252, 236, 220, 204];   // station stake leg lengths (calc: stakes-2-risers.txt), stake 1 nearest the sidewalk
+stake_len     = [248, 228, 208];        // station stake leg lengths (calc: stakes-2-risers.txt), stake 1 nearest the sidewalk
 // site (used by the calculator defaults and the checker's step model)
 site_head_gap = 10;      // in: drive axle to the first riser, horizontally
 site_rise     = 7;       // in: riser height, ASSUMED until measured

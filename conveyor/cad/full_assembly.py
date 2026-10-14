@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The whole machine, assembled on the site: head, 4 stations, tail, chute line, crank, porch stand and
+"""The whole machine, assembled on the site: head, 3 stations, tail, chute line, crank, porch stand and
 the belt, placed with the same transforms check_parts.py verifies module by module, on the same
 step model as its SITE check (lawn at 5 deg, sidewalk, steps, porch).
 
@@ -115,7 +115,7 @@ def main():
     r_tt = V["tail_r"] + V["roll_crown"] + V["belt_t"]                # tail axle -> belt top
     x_tail_w = (-2.0 - (250 - V["site_head_gap"])) * IN               # tail axle 2 in out over the sidewalk (calc default)
     d_t = -(x_tail_w + sb * (zt - r_tt)) / cb                         # head-frame distance to the tail axle
-    n_st = 4
+    n_st = int(V["stations"])
     span = d_t / (n_st + 1)
     stations = {}
     st_x = []

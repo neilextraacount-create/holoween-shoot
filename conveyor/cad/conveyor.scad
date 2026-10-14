@@ -632,12 +632,12 @@ module crank_head_shaft() {
 module crank_head() { intersection() { translate([-500, -500, 0]) cube(1000); crank_head_static(); } crank_head_shaft(); }
 
 // ---------------------------------------------------------------- crank arm with a print-in-place spinning grip
-ca_hub   = 22; ca_t = 8; ca_w = 16;
-gr_r     = 6.5; gr_peak = 8.5; gr_out = 14; gr_len = 70;
+ca_hub   = 22; ca_t = 7; ca_w = 13;
+gr_r     = 6.5; gr_peak = 8.5; gr_out = 11.5; gr_len = 70;
 module crank_arm() {
     difference() {
         union() {
-            cylinder(r = 14, h = ca_hub);
+            cylinder(r = 13, h = ca_hub);
             hull() { cylinder(r = ca_w / 2, h = ca_t); translate([crank_r, 0, 0]) cylinder(r = gr_out, h = ca_t); }
             translate([crank_r, 0, 0]) vaxle(gr_r, gr_peak, [ca_t + 10, ca_t + gr_len - 10], 0, ca_t + gr_len);
         }
@@ -858,5 +858,4 @@ if (part == "test_coupon") test_coupon();
 if (part == "stake_1") station_stake(1);
 if (part == "stake_2") station_stake(2);
 if (part == "stake_3") station_stake(3);
-if (part == "stake_4") station_stake(4);
 if (part == "stake_cap")     stake_cap();

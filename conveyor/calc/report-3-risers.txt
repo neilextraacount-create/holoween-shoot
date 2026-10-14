@@ -6,13 +6,12 @@ Belt: drive roller at x=240 in (10 in before the first riser), belt top 6.0 in a
       tail roller at x=-2 in (over the sidewalk), belt top 9.0 in -> basket rim <= 6.0 in
       slope 4.25 deg; axle to axle 6164 mm (20.22 ft)
 
-STAKE STATIONS (4, every 48.4 in)
+STAKE STATIONS (3, every 60.5 in)
    #    x in  ground  belt top  stake head  stake length  stake_len (leg)
-   1    46.4     4.1       8.5       5.3 in       284 mm          252 mm  (STL: stake_1)
-   2    94.8     8.3       7.9       4.6 in       268 mm          236 mm  (STL: stake_2)
-   3   143.2    12.5       7.3       4.0 in       252 mm          220 mm  (STL: stake_3)
-   4   191.6    16.8       6.6       3.4 in       236 mm          204 mm  (STL: stake_4)
-  -> stake_len = [252, 236, 220, 204] in params.scad (leg lengths; each stake is 32 mm longer overall)
+   1    58.5     5.1       8.4       5.1 in       280 mm          248 mm  (STL: stake_1)
+   2   119.0    10.4       7.6       4.3 in       260 mm          228 mm  (STL: stake_2)
+   3   179.5    15.7       6.8       3.5 in       240 mm          208 mm  (STL: stake_3)
+  -> stake_len = [248, 228, 208] in params.scad (leg lengths; each stake is 32 mm longer overall)
 
 DRIVE LINE (chute + shaft) at 40.3 deg to level, from the drive axle up to the porch
   4 segments: crank 11.2 in above the porch floor, +3.6 in behind the edge; stand post -2.7 in behind the edge
@@ -31,13 +30,13 @@ BELT (3 in heavy polypropylene webbing, Country Brook 50 yd)
   Loop about 12493 mm = 41.0 ft; cut 43 ft and sew in place with a 75 mm lap
 
 LOADS (estimates; PLA-on-PLA plain bearings)
-  dry PLA  : tail bearing  6.6 N + 8 wheels 2.0 N + bending 2 N = 10.5 N belt drag; slack side 14.7 N; drive needs mu >= 0.17; crank 1.27 N.m = 12 N (2.6 lbf)
-  waxed PLA: tail bearing  3.7 N + 8 wheels 1.1 N + bending 2 N =  6.9 N belt drag; slack side 16.6 N; drive needs mu >= 0.11; crank 0.97 N.m = 9 N (2.0 lbf)
+  dry PLA  : tail bearing  6.6 N + 6 wheels 1.8 N + bending 2 N = 10.4 N belt drag; slack side 14.8 N; drive needs mu >= 0.17; crank 1.26 N.m = 11 N (2.6 lbf)
+  waxed PLA: tail bearing  3.7 N + 6 wheels 1.0 N + bending 2 N =  6.8 N belt drag; slack side 16.6 N; drive needs mu >= 0.11; crank 0.96 N.m = 9 N (2.0 lbf)
   Ribbed PLA on dry webbing is roughly mu 0.3, wet roughly 0.2: grip is adequate; wax the bearings.
-  Carrying-run sag between stations (1.23 m, 15 N): light candy 14 mm
-  Carrying-run sag between stations (1.23 m, 15 N): dense candy 27 mm
-  Tension test, 100 g laid across the belt midway between stations: extra dip 11-12 mm at 25 N, 13-14 mm at 20 N, 15-18 mm at 15 N per run -> target 11-18 mm
-  Gap between the top and return runs at a station: 44.6 mm; with dense candy at mid-span about 24 mm
+  Carrying-run sag between stations (1.54 m, 15 N): light candy 22 mm
+  Carrying-run sag between stations (1.54 m, 15 N): dense candy 41 mm
+  Tension test, 100 g laid across the belt midway between stations: extra dip 13-15 mm at 25 N, 15-18 mm at 20 N, 17-22 mm at 15 N per run -> target 13-22 mm
+  Gap between the top and return runs at a station: 44.6 mm; with dense candy at mid-span about 12 mm
   Crank 45 rpm x 2 -> belt 0.30 m/s; candy rides the belt in 21 s (15 turns)
   Candy leaves a 1.58 m chute at 3.6 m/s (wrapper friction 0.3); the drop trap at the bottom stops it
   Candy leaves a 1.58 m chute at 3.1 m/s (wrapper friction 0.45); the drop trap at the bottom stops it
@@ -51,11 +50,12 @@ PLA STRESS CHECKS (parts printed with layers across the load are the weak case; 
   count: 3 walls = a 1.26 mm solid shell on rollers and the gearbox, 2 walls = 0.84 mm on the chute's shaft;
   the 10 % sparse infill inside is ignored)
   tail axle Ø12 (layers across, shell only): 8.7 MPa bending  (PLA interlayer ~20-30 MPa)
-  torque path, shear in MPa at the dry crank torque 1.27 / 2x 2.54 / a 30 N yank 3.30 N.m (PLA across layers ~20-30):
-    line shaft tube Ø18/10             2.7 /   5.5 /   7.1
-    hex coupler 11 mm across flats     5.1 /  10.2 /  13.2
-    square drive 12.4 mm               4.1 /   8.1 /  10.6
-  gear teeth at 2x dry torque: 46 N tooth force -> 6.1 MPa (Lewis); crown teeth are printed with layers across
+  torque path, shear in MPa at the dry crank torque 1.26 / 2x 2.52 / a 30 N yank 3.30 N.m (PLA across layers ~20-30):
+    line shaft tube Ø18/10             2.7 /   5.4 /   7.1
+    hex coupler 11 mm across flats     5.0 /  10.1 /  13.2
+    square drive 12.4 mm               4.0 /   8.1 /  10.6
+  gear teeth at 2x dry torque: 45 N tooth force -> 7.6 MPa (Lewis); crown teeth are printed with layers across
   porch stand: about 7 N.m tips the stand sideways when cranking hard -> tie the post to a railing, or about 8 kg on the tray (two 1-gallon water jugs), or hold the funnel rim
   station wheel axles: < 3 MPa
   crank grip axle Ø13 with a 30 N hand load at mid-grip: 4.9 MPa bending across layers
+  crank arm 14 x 7 mm at the hub, 30 N on the grip: 12.7 MPa bending along the layers (PLA ~50)

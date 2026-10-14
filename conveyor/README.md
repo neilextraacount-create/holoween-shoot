@@ -43,7 +43,7 @@ print the chute, the stakes and the stand (Quick start, step 3).
 | **Chute + drive shaft** (over the steps) | 5 printed segments. Each one is a candy chute with a print-in-place shaft running beside it. The segments stack together and hex couplers join the shafts. |
 | **Drop trap** | Candy reaches about 3 m/s in the chute. It hits a wall under a lid and drops through a slot onto the belt. |
 | **Head** (foot of the steps) | A 34-tooth crown gear (print-in-place in its housing) turns a 17-tooth pinion on the ribbed drive roller. |
-| **4 stilt stations** (lawn) | Each one is a stake pushed into the grass with a bracket and two print-in-place wheels: the belt rides **over** the top wheel and comes back **underneath**, resting on the bottom wheel, as you asked. |
+| **3 stilt stations** (lawn, about 5 ft apart) | Each one is a stake pushed into the grass with a bracket and two print-in-place wheels: the belt rides **over** the top wheel and comes back **underneath**, resting on the bottom wheel, as you asked. |
 | **Tail** (over the sidewalk) | Print-in-place roller. Two screw take-ups set the belt tension and steer the belt straight. Candy drops off into the basket (rim at most 6 in high). |
 | **Anchors** | Belt tension (about 40 N) has to go into the ground at both ends. Printed ground screws and L-spikes hold the head and tail feet. |
 

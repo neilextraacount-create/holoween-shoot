@@ -52,12 +52,11 @@ BRIM = {"chute_segment", "crank_head", "trap", "wheel_unit", "ground_screw", "gs
 
 PARTS = [
     ("test_coupon",     1, 3, 15, 7, False, "PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut)"),
-    ("wheel_unit",      8, 3, 10, 2, False, "station wheel, print-in-place (2 per station)"),
-    ("station_bracket", 4, 3, 12, 1, False, "station bracket (holds 2 wheels on the stake)"),
+    ("wheel_unit",      6, 3, 10, 2, False, "station wheel, print-in-place (2 per station)"),
+    ("station_bracket", 3, 3, 12, 1, False, "station bracket (holds 2 wheels on the stake)"),
     ("stake_1",         1, 3, 12, 1, True,  "station 1 stake (nearest the sidewalk)"),
     ("stake_2",         1, 3, 12, 1, True,  "station 2 stake"),
     ("stake_3",         1, 3, 12, 1, True,  "station 3 stake"),
-    ("stake_4",         1, 3, 12, 1, True,  "station 4 stake (nearest the steps)"),
     ("drive_roller",    1, 3, 10, 1, False, "drive roller with 17T pinion"),
     ("drive_pin",       1, 3, 100, 1, False, "drive roller A-side journal pin (press in)"),
     ("head_side_a",     1, 3, 12, 1, False, "head side frame A (round journal hole)"),
@@ -76,7 +75,7 @@ PARTS = [
     ("chute_segment",   5, 2, 10, 2, False, "chute segment with print-in-place drive shaft"),
     ("crank_head",      1, 3, 10, 2, False, "crank head: funnel + crank shaft, print-in-place"),
     ("crank_arm",       1, 4, 30, 2, False, "crank arm with spinning grip, print-in-place"),
-    ("pin3",           14, 3, 100, 1, False, "3 mm pin: wheel pegs (8), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2)"),
+    ("pin3",           12, 3, 100, 1, False, "3 mm pin: wheel pegs (6), crank arm, crank-head socket, stand height, tray, joint between 2 lower posts if any, spares (2)"),
     ("splice_template", 1, 3, 100, 1, False, "belt sewing template (box-and-X hole pattern)"),
     ("stand_shim",      4, 3, 100, 1, False, "shims to level the porch stand foot"),
     ("hex_coupler",     6, 3, 100, 1, False, "hex coupler between shafts"),
@@ -351,8 +350,9 @@ def fill_doc(tag, body, doc=HERE.parent / "docs" / "03-printing.md"):
 def part_qty(V):
     """quantities that follow the parameters"""
     n = int(V["seg_count"])
+    st = int(V["stations"])
     return {"chute_segment": n, "hex_coupler": n + 2, "ring_sleeve": n + 1, "post_lower": int(V["post_n"]),
-            "pin3": 13 + int(V["post_n"])}
+            "wheel_unit": 2 * st, "station_bracket": st, "pin3": 2 * st + 5 + int(V["post_n"])}
 
 
 BRIDGE_OK = {"trap": 70.0}      # documented exception (docs/03): the 66 mm bridge over the top of the drop slot

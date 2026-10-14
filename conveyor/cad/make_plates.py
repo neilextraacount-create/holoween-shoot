@@ -67,11 +67,11 @@ MODULE = {"test_coupon": 0,
           "tail_side_l": 3, "tail_side_r": 3, "tail_roller": 3, "takeup_block": 3, "takeup_nut": 3,
           "takeup_screw": 3, "skid_l": 3, "skid_r": 3, "spike": 3,
           "ground_screw": 4, "gs_wrench": 4, "washer50": 4,
-          "stake_2": 5, "stake_3": 5, "stake_4": 5,
+          "stake_2": 5, "stake_3": 5,
           "trap": 6, "chute_segment": 6, "crank_head": 6, "crank_arm": 6,
           "post_lower": 7, "post_upper": 7, "stand_tray": 7, "stand_shim": 7, "splice_template": 8}
 TEST_PIECES = ["hex_coupler", "ring_sleeve", "bolt8_28", "stake_cap"]   # extra copies to try in the coupon
-MODULE_NAME = ["test", "head", "station 1", "tail", "anchors", "stations 2-4", "chute line", "porch stand", "belt joint"]
+MODULE_NAME = ["test", "head", "station 1", "tail", "anchors", "stations 2-3", "chute line", "porch stand", "belt joint"]
 
 
 def silhouette(mesh):

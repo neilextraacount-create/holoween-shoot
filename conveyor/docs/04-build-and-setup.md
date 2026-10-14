@@ -48,7 +48,7 @@ printing in all.
   the steps from the same line. Put the line **along one side of the steps** so people can
   still use them, and keep the crank, stand and funnel out of the walking path.
 - Stretch a string from the sidewalk edge to the foot of the steps where the head goes, 10 in
-  in front of the first riser. Mark the spots for the tail, the 4 stations (every 48.4 in from
+  in front of the first riser. Mark the spots for the tail, the 3 stations (every 60.5 in from
   the tail, see the calculator) and the head. The string is the **belt centreline**.
 - The station stakes stand **beside** the belt, not under it: each one goes **2 1/4 in (56 mm)
   to one side of the string**, all on the same side (away from where people walk). The wheels
@@ -248,7 +248,7 @@ the other way.
 3. Lay the bag **across the middle of the belt**, midway between the two stations. Don't hang
    it off one edge: that twists the belt and the reading comes out far too big.
 4. Measure from the string down to the belt's centreline, right beside the bag, with and
-   without the bag. The difference is the dip. **Target: 11-18 mm.** It is about 13-14 mm at
+   without the bag. The difference is the dip. **Target: 13-22 mm.** It is about 15-18 mm at
    the design tension of 20 N per run.
 5. Tighten both knobs **1/8 turn at a time**, the same on each side, until the dip is in range.
    - Polypropylene hardly stretches, so 1/8 turn (0.4 mm) is already a noticeable change.
@@ -272,7 +272,7 @@ roller:
   bars bridge the trap's drop slot). Break up anything bigger.
 - Watch the first 20 pieces:
   - Candy bouncing out of the trap: drop it more gently.
-  - Candy tumbling off the belt edge between stations: the belt is too slack (more than 18 mm in
+  - Candy tumbling off the belt edge between stations: the belt is too slack (more than 22 mm in
     the 100 g test).
   - Candy stuck in the trap: it's over the size limits.
 
@@ -281,7 +281,7 @@ roller:
 - **Trip hazards**: the chute over the steps, the stand and the anchors. Mark them with tape
   or battery lights.
 - Rain: PLA and the belt don't mind. Wet belts grip a little less; if it slips, tighten 1/8
-  turn each side (stay inside the 11-18 mm range).
+  turn each side (stay inside the 13-22 mm range).
 - Keep small hands away from the head roller and the gears: the guard panels cover the belt
   sides, not the gearbox.
 
@@ -315,7 +315,7 @@ Store everything out of direct sun: PLA softens around 55 °C, for example in a 
 | Symptom | Likely cause | Fix |
 |---|---|---|
 | Crank stiff even without the belt | a print-in-place part not fully freed, or elephant's foot on the first layer | turn it back and forth by hand; if needed, warm it in 45-50 °C water, let it cool, then twist again (printing guide, "Freeing print-in-place parts"); check the test coupon results |
-| Belt slips on the drive roller | tension too low, or the belt is wet | tighten 1/8 turn each side (100 g dip 11-18 mm); rub wax on the **bearings**, never on the roller |
+| Belt slips on the drive roller | tension too low, or the belt is wet | tighten 1/8 turn each side (100 g dip 13-22 mm); rub wax on the **bearings**, never on the roller |
 | Clicking once per turn of the belt | the splice is lumpy | re-sew it flatter |
 | Wheel droops or wobbles | its pin is missing or loose | push the collar against the bracket and fit the pin |
 | Chute segments separate | the line isn't sitting on the stand | check the stand pin height and the shims |

@@ -279,6 +279,9 @@ def main():
     p("  station wheel axles: < 3 MPa")
     Mg = 30 * 0.035
     p(f"  crank grip axle Ø13 with a 30 N hand load at mid-grip: {32*Mg/(math.pi*0.013**3)/1e6:.1f} MPa bending across layers")
+    w_arm, t_arm = 14.0, 7.0                                        # crank arm section just outside the hub (13 -> 23 mm taper)
+    M_arm = 30 * (g("crank_r") - 13) / 1000
+    p(f"  crank arm {w_arm:.0f} x {t_arm:.0f} mm at the hub, 30 N on the grip: {M_arm*1000*6/(t_arm*w_arm**2):.1f} MPa bending along the layers (PLA ~50)")
 
     text = "\n".join(out)
     print(text)
