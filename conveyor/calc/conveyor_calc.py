@@ -276,7 +276,13 @@ def main():
     p(f"  gear teeth at 2x dry torque: {Ft:.0f} N tooth force -> {sl:.1f} MPa (Lewis); crown teeth are printed with layers across")
     p(f"  porch stand: about {11.6 * 0.6:.0f} N.m tips the stand sideways when cranking hard -> tie the post to a railing,"
       f" or about 8 kg on the tray (two 1-gallon water jugs), or hold the funnel rim")
-    p("  station wheel axles: < 3 MPa")
+    # station wheel axle: cantilever from the bracket, carry-wheel load = belt + dense candy over one span
+    #   (plus its own share of the belt pull's bend over the wheel, small on a straight lawn), at mid-wheel
+    ra, sh2 = g("wu_axle_r"), 2 * 0.42                              # wheels print with 2 walls
+    Fw = (w_belt + w_dense) * span_m * 2                            # x2 for bumps and a hand resting on the belt
+    Mw_ = Fw * (g("face") / 2 + g("flange_t") + 3) / 1000
+    Iw = math.pi / 4 * (ra ** 4 - (ra - sh2) ** 4)
+    p(f"  station wheel axle Ø{2*ra:.0f} (2-wall shell only), {Fw:.0f} N at mid-wheel: {Mw_*1000*ra/Iw:.1f} MPa bending across layers")
     Mg = 30 * 0.035
     p(f"  crank grip axle Ø13 with a 30 N hand load at mid-grip: {32*Mg/(math.pi*0.013**3)/1e6:.1f} MPa bending across layers")
     w_arm, t_arm = 14.0, 7.0                                        # crank arm section just outside the hub (13 -> 23 mm taper)

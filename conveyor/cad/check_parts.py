@@ -52,7 +52,7 @@ BRIM = {"chute_segment", "crank_head", "trap", "wheel_unit", "ground_screw", "gs
 
 PARTS = [
     ("test_coupon",     1, 3, 15, 7, False, "PRINT FIRST: fit ladder (spinners 0.35/0.45/0.55, sockets, M8 nut)"),
-    ("wheel_unit",      6, 3, 10, 2, False, "station wheel, print-in-place (2 per station)"),
+    ("wheel_unit",      6, 2, 10, 2, False, "station wheel, print-in-place (2 per station)"),
     ("station_bracket", 3, 3, 12, 1, False, "station bracket (holds 2 wheels on the stake)"),
     ("stake_1",         1, 3, 12, 1, True,  "station 1 stake (nearest the sidewalk)"),
     ("stake_2",         1, 3, 12, 1, True,  "station 2 stake"),
@@ -83,10 +83,10 @@ PARTS = [
     ("post_lower",      1, 3, 12, 1, True,  "porch stand post, lower"),
     ("post_upper",      1, 3, 12, 1, True,  "porch stand post, upper"),
     ("stand_tray",      1, 3, 12, 1, False, "porch stand foot (put the candy bowl on it)"),
-    ("ground_screw",    4, 4, 30, 1, False, "ground screw (head front foot, tail skid rear anchors)"),
+    ("ground_screw",    4, 3, 15, 1, False, "ground screw (head front foot, tail skid rear anchors)"),
     ("spike",           4, 3, 12, 1, False, "L spike with nail head: 2 for the tail skid far pads, 2 optional for the head rear foot"),
     ("stake_cap",       1, 4, 30, 1, False, "push the stakes in through this cap"),
-    ("gs_wrench",       1, 4, 30, 1, False, "T-wrench for the ground screws"),
+    ("gs_wrench",       1, 3, 15, 1, False, "T-wrench for the ground screws"),
     ("bolt8_28",       17, 3, 100, 1, False, "printed M8 bolt (13 frame joints + 4 ground screws)"),
     ("nut8",           13, 3, 100, 1, False, "printed M8 nut"),
     ("washer50",        4, 3, 100, 1, False, "50 mm washer over a ground screw"),

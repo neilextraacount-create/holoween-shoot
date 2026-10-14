@@ -47,10 +47,10 @@ GROUPS = {
     "fine": ("Rollers and gearbox", 3, 10, 0.16, False),
     "frames": ("Frames, stakes, posts", 3, 12, 0.20, False),
     "sturdy": ("Crank arm and stake cap", 4, 30, 0.20, False),
-    "frames_brim": ("Ground screws and wrench", 4, 30, 0.20, True),
+    "frames_brim": ("Ground screws and wrench", 3, 15, 0.20, True),
     "line": ("Crank head", 3, 10, 0.20, True),
     "chute": ("Chute segments and trap", 2, 10, 0.20, True),
-    "wheels": ("Station wheels", 3, 10, 0.20, True),
+    "wheels": ("Station wheels", 2, 10, 0.20, True),
 }
 PREFIX = "FINAL_"                     # file names: FINAL_NN_part.3mf
 GROUP_OF = {"test_coupon": "coupon", "bolt8_28": "solid_brim", "takeup_screw": "solid_brim",

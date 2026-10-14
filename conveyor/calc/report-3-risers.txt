@@ -56,6 +56,6 @@ PLA STRESS CHECKS (parts printed with layers across the load are the weak case; 
     square drive 12.4 mm               4.0 /   8.1 /  10.6
   gear teeth at 2x dry torque: 45 N tooth force -> 7.6 MPa (Lewis); crown teeth are printed with layers across
   porch stand: about 7 N.m tips the stand sideways when cranking hard -> tie the post to a railing, or about 8 kg on the tray (two 1-gallon water jugs), or hold the funnel rim
-  station wheel axles: < 3 MPa
+  station wheel axle Ø11 (2-wall shell only), 6 N at mid-wheel: 4.8 MPa bending across layers
   crank grip axle Ø13 with a 30 N hand load at mid-grip: 4.9 MPa bending across layers
   crank arm 14 x 7 mm at the hub, 30 N on the grip: 12.7 MPa bending along the layers (PLA ~50)

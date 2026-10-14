@@ -322,7 +322,8 @@ Then every part was put through a real slicer (section 5). That found:
   the thinnest (the chute's shaft) stays at 7 MPa under a hard 30 N yank, well under PLA's
   20-30 MPa, and the hex coupler (solid) is still the weakest link.
 - **Less filament (final version)**: walls and infill were cut on every lightly loaded part
-  (3 walls / 10-12 %, 2 walls on the chute) after checking each one against the loads above;
-  the crank arm, stake cap, ground screws, bolts, pins and couplers keep their full strength.
+  (3 walls / 10-12 %; 2 walls on the chute and the station wheels; 3 walls / 15 % on the ground
+  screws and their wrench) after checking each one against the loads above; the crank arm,
+  stake cap, bolts, pins and couplers keep their full strength.
   The head guards got jack-o'-lantern faces and the stand tray says TRICK OR TREAT (both are
   cut out, so they save plastic too).
