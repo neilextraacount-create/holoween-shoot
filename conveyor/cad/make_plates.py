@@ -50,6 +50,13 @@ GROUPS = {
     "line": ("Chute, crank head, trap", 4, 15, 0.20, True),
     "wheels": ("Station wheels", 4, 15, 0.20, True),
 }
+# lighter settings: gears, rollers, bolts, pins, couplers and ground screws keep their strength
+LITE = {
+    "frames": ("Frames, stakes, posts", 3, 12, 0.20, False),
+    "line": ("Chute, crank head, trap", 3, 10, 0.20, True),
+    "wheels": ("Station wheels", 3, 10, 0.20, True),
+}
+PREFIX = ""
 GROUP_OF = {"test_coupon": "coupon", "bolt8_28": "solid_brim", "takeup_screw": "solid_brim",
             "pin3": "solid_brim", "hex_coupler": "solid_brim",
             "drive_roller": "fine", "gearbox": "fine", "tail_roller": "fine",
@@ -194,7 +201,12 @@ def slice_plate(exe, path, group, gcode):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-slice", action="store_true", help="lay the plates out without the PrusaSlicer check")
+    ap.add_argument("--lite", action="store_true", help="less filament: fewer walls / less infill on lightly loaded parts -> plates-lite/")
     a = ap.parse_args()
+    global OUT, PREFIX
+    if a.lite:
+        GROUPS.update(LITE)
+        OUT, PREFIX = HERE.parent / "plates-lite", "LITE_"
     exe = None if a.no_slice else find_slicer()
     if not a.no_slice and not exe:
         print("PrusaSlicer not found (set PRUSA_SLICER or put prusa-slicer on the PATH): "
@@ -247,7 +259,7 @@ def main():
         for n, *_ in p.items:
             counts[n] = counts.get(n, 0) + 1
         main_part = max(counts, key=lambda n: outlines[n].area * counts[n])
-        fname = f"{i:02d}_{main_part}{'_etc' if len(counts) > 1 else ''}.3mf"
+        fname = f"{PREFIX}{i:02d}_{main_part}{'_etc' if len(counts) > 1 else ''}.3mf"
         write_3mf(new / fname, p, meshes)
         title, walls, infill, layer, brim = GROUPS[p.group]
         info = {}
@@ -286,7 +298,8 @@ def main():
     for f in new.iterdir():
         shutil.move(str(f), str(OUT / f.name))
     new.rmdir()
-    fill_doc("plate-table", "\n".join(md[md.index("| # | File | Parts | For | Settings | g | Time |"):]))
+    if not a.lite:
+        fill_doc("plate-table", "\n".join(md[md.index("| # | File | Parts | For | Settings | g | Time |"):]))
 
 
 if __name__ == "__main__":
