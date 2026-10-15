@@ -91,12 +91,12 @@ class Plate:
         self.free = box(MARGIN, MARGIN, BED - MARGIN, BED - MARGIN)
         self.used = None
 
-    def try_place(self, name, outline, pad):
+    def try_place(self, name, outline, pad, rots=(0, 90, 180, 270)):
         """bottom-left placement of the outline (grown by pad) in 90 deg steps; True if placed"""
         bed = prep(self.free)
         used = prep(self.used) if self.used is not None else None
         best = None
-        for rot in (0, 90, 180, 270):
+        for rot in rots:
             shp = affinity.rotate(outline, rot, origin=(0, 0))
             grown = shp.buffer(pad, join_style=2)
             minx, miny, maxx, maxy = grown.bounds

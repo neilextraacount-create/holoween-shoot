@@ -1,0 +1,148 @@
+PARTS (watertight, bodies, bed fit, overhangs, nothing starting in mid-air, print-in-place gaps)
+  [ok] head_frame: watertight
+  [ok] head_frame: 1 bodies (expected 1)
+  [ok] head_frame: 123 x 115 x 182 mm fits the bed (246 x 246 x 250)
+  [ok] head_frame: no unsupported overhang wider than 12 mm
+  [ok] head_frame: nothing starts in mid-air
+  [ok] drive_roller: watertight
+  [ok] drive_roller: 1 bodies (expected 1)
+  [ok] drive_roller: 67 x 67 x 116 mm fits the bed (246 x 246 x 250)
+  [ok] drive_roller: no unsupported overhang wider than 12 mm
+  [ok] drive_roller: nothing starts in mid-air
+  [ok] journal_pin: watertight
+  [ok] journal_pin: 1 bodies (expected 1)
+  [ok] journal_pin: 20 x 20 x 35 mm fits the bed (246 x 246 x 250)
+  [ok] journal_pin: no unsupported overhang wider than 12 mm
+  [ok] journal_pin: nothing starts in mid-air
+  [ok] crank_gear: watertight
+  [ok] crank_gear: 1 bodies (expected 1)
+  [ok] crank_gear: 84 x 84 x 14 mm fits the bed (246 x 246 x 250)
+  [ok] crank_gear: no unsupported overhang wider than 12 mm
+  [ok] crank_gear: nothing starts in mid-air
+  [ok] crank_arm: watertight
+  [ok] crank_arm: 2 bodies (expected 2)
+  [ok] crank_arm: 128 x 34 x 77 mm fits the bed (246 x 246 x 250)
+  [ok] crank_arm: no unsupported overhang wider than 12 mm
+  [ok] crank_arm: nothing starts in mid-air
+  [ok] crank_arm: print-in-place gap 0.45 mm (>= 0.40)
+  [ok] crank_pin: watertight
+  [ok] crank_pin: 1 bodies (expected 1)
+  [ok] crank_pin: 39 x 20 x 16 mm fits the bed (246 x 246 x 250)
+  [ok] crank_pin: no unsupported overhang wider than 12 mm
+  [ok] crank_pin: nothing starts in mid-air
+  [ok] tail_frame: watertight
+  [ok] tail_frame: 1 bodies (expected 1)
+  [ok] tail_frame: 200 x 104 x 224 mm fits the bed (246 x 246 x 250)
+  [ok] tail_frame: no unsupported overhang wider than 12 mm
+  [ok] tail_frame: nothing starts in mid-air
+  [ok] tail_roller: watertight
+  [ok] tail_roller: 1 bodies (expected 1)
+  [ok] tail_roller: 45 x 45 x 98 mm fits the bed (246 x 246 x 250)
+  [ok] tail_roller: no unsupported overhang wider than 12 mm (widest 12.0 mm, bridged half-span 12.0 mm)
+  [ok] tail_roller: nothing starts in mid-air
+  [ok] wedge: watertight
+  [ok] wedge: 1 bodies (expected 1)
+  [ok] wedge: 38 x 175 x 6 mm fits the bed (246 x 246 x 250)
+  [ok] wedge: no unsupported overhang wider than 12 mm
+  [ok] wedge: nothing starts in mid-air
+  [ok] cassette: watertight
+  [ok] cassette: 3 bodies (expected 3)
+  [ok] cassette: 109 x 30 x 103 mm fits the bed (246 x 246 x 250)
+  [ok] cassette: no unsupported overhang wider than 12 mm (widest 8.5 mm, bridged half-span 14.1 mm)
+  [ok] cassette: nothing starts in mid-air
+  [ok] cassette: print-in-place gap 0.45 mm (>= 0.40)
+  [ok] station_stake_1: watertight
+  [ok] station_stake_1: 1 bodies (expected 1)
+  [ok] station_stake_1: 214 x 200 x 22 mm fits the bed (246 x 246 x 250)
+  [ok] station_stake_1: no unsupported overhang wider than 12 mm
+  [ok] station_stake_1: nothing starts in mid-air
+  [ok] station_stake_2: watertight
+  [ok] station_stake_2: 1 bodies (expected 1)
+  [ok] station_stake_2: 200 x 186 x 22 mm fits the bed (246 x 246 x 250)
+  [ok] station_stake_2: no unsupported overhang wider than 12 mm
+  [ok] station_stake_2: nothing starts in mid-air
+  [ok] station_stake_3: watertight
+  [ok] station_stake_3: 1 bodies (expected 1)
+  [ok] station_stake_3: 186 x 172 x 22 mm fits the bed (246 x 246 x 250)
+  [ok] station_stake_3: no unsupported overhang wider than 12 mm
+  [ok] station_stake_3: nothing starts in mid-air
+  [ok] anchor_stake: watertight
+  [ok] anchor_stake: 1 bodies (expected 1)
+  [ok] anchor_stake: 208 x 32 x 32 mm fits the bed (246 x 246 x 250)
+  [ok] anchor_stake: no unsupported overhang wider than 12 mm
+  [ok] anchor_stake: nothing starts in mid-air
+
+GEAR MESH (16T pinion on the drive roller, 40T crank gear; 2D sweep over a full tooth)
+  [ok] teeth never overlap over a full tooth (worst 0.000 mm2)
+  [ok] running clearance 0.28-0.28 mm between the tooth flanks
+  [ok] centre distance 56.0 mm = module x (16 + 40) / 2
+
+HEAD (frame, drive roller + pin, crank gear + arm + pin, belt)
+  [ok] drive roller vs frame (journals in the slots, flanges by the walls): clear by 0.30 mm (need 0.25)
+  [ok] journal pin vs frame: clear by 0.30 mm (need 0.25)
+  [ok] crank gear vs frame (pin boss face): clear by 0.50 mm (need 0.3)
+  [ok] crank gear vs drive roller (meshing): clear by 0.28 mm (need 0.03)
+  [ok] crank pin vs frame (through the hole, catch face inside wall B): clear by 0.20 mm (need 0.15)
+  [ok] crank pin vs gear (the gear turns on it): clear by 0.24 mm (need 0.2)
+  [ok] belt vs drive roller: in contact, overlap 0.00 mm3 (limit 60.0)
+  [ok] belt vs frame: clear by 8.00 mm (need 3.0)
+  [ok] belt vs gear: clear by 20.00 mm (need 3.0)
+  [ok] belt vs cpin: clear by 11.92 mm (need 3.0)
+  [ok] belt vs pinA: clear by 20.00 mm (need 3.0)
+  [ok] crank arm at 0 deg: clear of the pinion by 20.00 mm, of the frame by 8.5 mm, of the belt
+  [ok] crank arm vs gear (on the hex hub): in contact, overlap 0.00 mm3 (limit 1.0)
+  [ok] crank arm vs crank pin (head on the arm): in contact, overlap 0.00 mm3 (limit 1.0)
+  [ok] crank handle's lowest point 57 mm above the lawn (>= 40)
+  [ok] crank axis 168 mm above the lawn, 28 mm toward the tail from the roller
+
+TAIL (frame, roller + pin, 2 wedges, belt) at the take-up's two ends
+  [ok] tightest: journal at x -29.3 inside the slot (rear end -20)
+  [ok] tightest: tail roller vs frame: clear by 0.30 mm (need 0.25)
+  [ok] tightest: journal pin vs frame: clear by 0.30 mm (need 0.25)
+  [ok] tightest: wedge B vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
+  [ok] tightest: wedge B vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] tightest: wedge A vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
+  [ok] tightest: wedge A vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] tightest: belt vs frame: clear by 8.00 mm (need 3.0)
+  [ok] tightest: belt vs wedges: clear by 8.20 mm (need 3.0)
+  [ok] tightest: wedge tip 67 mm up, 22.7 mm thick at the journal
+  [ok] loosest: journal at x -45.4 inside the slot (rear end -20)
+  [ok] loosest: tail roller vs frame: clear by 1.00 mm (need 0.25)
+  [ok] loosest: journal pin vs frame: clear by 4.26 mm (need 0.25)
+  [ok] loosest: wedge B vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
+  [ok] loosest: wedge B vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] loosest: wedge A vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
+  [ok] loosest: wedge A vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] loosest: belt vs frame: clear by 8.00 mm (need 3.0)
+  [ok] loosest: belt vs wedges: clear by 8.20 mm (need 3.0)
+  [ok] loosest: wedge tip 182 mm up, 6.5 mm thick at the journal
+  [ok] take-up travel 16.2 mm (belt loop 32 mm); taper 8 deg self-locks (PLA friction angle about 17 deg)
+
+STATION (stake, wheel cassette, belt runs)
+  [ok] stake spigot in the cassette socket (shoulder under the block): in contact, overlap 0.00 mm3 (limit 1.0)
+  [ok] stake vs wheels: clear by 13.70 mm (need 1.0)
+  [ok] top run rests on the top wheel: in contact, overlap 0.00 mm3 (limit 40.0)
+  [ok] return run rests on the bottom wheel: in contact, overlap 0.00 mm3 (limit 40.0)
+  [ok] top run vs cassette frame: clear by 5.30 mm (need 3.0)
+  [ok] return run vs cassette frame: clear by 5.30 mm (need 3.0)
+  [ok] top run vs bottom wheel: clear by 20.00 mm (need 3.0)
+  [ok] return run vs top wheel (the runs pass between the wheels): clear by 17.53 mm (need 3.0)
+
+SITE (250 in of lawn at 5 deg, head at the foot of the steps, tail at the sidewalk)
+  [ok] belt top: 229 mm over the sidewalk end, 153 mm over the lawn at the head; 4.29 deg (lawn 5.00 deg); stations every 60.5 in (1.54 m)
+  [ok] station 1 at  61.2 in from the sidewalk: belt top 210 mm, block 102 mm above the lawn, stake 255 mm -> 153 mm in the ground (120-175)
+  [ok] station 2 at 121.7 in from the sidewalk: belt top 191 mm, block 83 mm above the lawn, stake 235 mm -> 152 mm in the ground (120-175)
+  [ok] station 3 at 182.2 in from the sidewalk: belt top 172 mm, block 64 mm above the lawn, stake 215 mm -> 151 mm in the ground (120-175)
+  [ok] lowest point of the return run / station block: 64 mm above the lawn (>= 40)
+  [ok] belt loop about 12.49 m (41.0 ft) at mid take-up, plus 75 mm to sew the joint
+  [ok] sag between stations: 41 mm with dense candy, return run 9 mm -> runs stay 13 mm apart at mid-span
+  [ok] cranking: belt drag 8.2 N -> 1.17 N.m at the crank = 12 N on the handle; one turn a second moves the belt 0.51 m/s (12 s porch to sidewalk)
+  [ok] drive grip: needs friction >= 0.13 on the ribbed roller (PLA on polypropylene about 0.25-0.3)
+  [ok] tail roller stays in its slots: belt lift 3.0 N, held down by the wedge faces and its weight 6.0 N
+  [ok] gear teeth at twice that torque: 58 N -> 12 MPa (40T), 14 MPa (16T) along the layers (PLA ~50)
+  [ok] crank arm 32 x 7 mm at the hub, 30 N on the grip: 2.1 MPa; crank pin Ø12 with 59 N: 5.2 MPa
+  [ok] head: 40 N belt pull 120 mm up tips the frame with 4.8 N.m -> 48 N pull on the anchor stake farthest from the pull (or 4.9 kg on that end of the base)
+  [ok] tail: 40 N belt pull 207 mm up tips the frame with 8.3 N.m -> 50 N pull on the anchor stake farthest from the pull (or 5.1 kg on that end of the base)
+  [ok] 21 printed parts (14 different), plus the belt
+
+RESULT: ALL CHECKS PASSED

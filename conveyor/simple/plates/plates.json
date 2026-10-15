@@ -1,0 +1,76 @@
+[
+ {
+  "plate": 1,
+  "file": "SIMPLE_01_wedge_etc.3mf",
+  "group": "solid",
+  "parts": {
+   "wedge": 2,
+   "crank_pin": 1,
+   "journal_pin": 2
+  },
+  "grams": 56.61,
+  "time": "1h 16m 56s",
+  "alerts": null
+ },
+ {
+  "plate": 2,
+  "file": "SIMPLE_02_tail_frame.3mf",
+  "group": "frames",
+  "parts": {
+   "tail_frame": 1
+  },
+  "grams": 276.62,
+  "time": "8h 3m 35s",
+  "alerts": "SIMPLE_02_tail_frame Collapsing overhang"
+ },
+ {
+  "plate": 3,
+  "file": "SIMPLE_03_head_frame.3mf",
+  "group": "frames",
+  "parts": {
+   "head_frame": 1
+  },
+  "grams": 181.92,
+  "time": "5h 12m 4s",
+  "alerts": null
+ },
+ {
+  "plate": 4,
+  "file": "SIMPLE_04_cassette_etc.3mf",
+  "group": "moving",
+  "parts": {
+   "crank_gear": 1,
+   "drive_roller": 1,
+   "cassette": 3,
+   "tail_roller": 1
+  },
+  "grams": 431.69,
+  "time": "14h 10m 5s",
+  "alerts": "Long bridging extrusions cassette, tail_roller, cassette, cassette | Low bed adhesion cassette, cassette, cassette"
+ },
+ {
+  "plate": 5,
+  "file": "SIMPLE_05_station_stake_1_etc.3mf",
+  "group": "sturdy",
+  "parts": {
+   "station_stake_1": 1,
+   "station_stake_2": 1,
+   "station_stake_3": 1,
+   "crank_arm": 1
+  },
+  "grams": 136.37,
+  "time": "3h 21m 20s",
+  "alerts": "crank_arm Floating object part, Collapsing overhang"
+ },
+ {
+  "plate": 6,
+  "file": "SIMPLE_06_anchor_stake.3mf",
+  "group": "sturdy",
+  "parts": {
+   "anchor_stake": 4
+  },
+  "grams": 108.83,
+  "time": "2h 24m 45s",
+  "alerts": null
+ }
+]

@@ -1,3 +1,8 @@
+> **Build the SIMPLE version instead: [`simple/`](simple/README.md).** 21 printed pieces and no
+> bolts. The crank is at the foot of the steps, and it uses about 1.2 kg of PLA. Its print files
+> are `simple/plates/SIMPLE_*.3mf`. The v4 design below (120+ pieces, crank on the porch) is kept
+> for reference only.
+
 # Hand-cranked Halloween candy conveyor (v4: everything printed except the belt)
 
 You drop candy into a funnel on the porch and turn a crank. The candy slides down a printed
