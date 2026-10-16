@@ -27,9 +27,9 @@ OUT = HERE / "plates"
 # plate groups: title, walls, infill %, layer mm, brim
 GROUPS = {
     "solid":  ("Pins and wedges (solid)", 3, 100, 0.20, True),
-    "frames": ("Head and tail frames", 3, 12, 0.20, True),
-    "moving": ("Rollers, crank gear, station wheels", 3, 12, 0.20, True),
-    "sturdy": ("Crank arm and stakes (extra strong)", 4, 30, 0.20, False),
+    "frames": ("Head and tail frames", 2, 10, 0.20, True),
+    "moving": ("Rollers, crank gear, station wheels", 2, 10, 0.20, True),
+    "sturdy": ("Crank arm and stakes", 3, 15, 0.20, False),
 }
 GROUP_OF = {"journal_pin": "solid", "crank_pin": "solid", "wedge": "solid",
             "head_frame": "frames", "tail_frame": "frames",

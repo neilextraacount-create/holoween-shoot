@@ -18,7 +18,7 @@ about 12 seconds. The only thing you buy is the belt.
 | `crank_gear` | 1 | Big gear (40 teeth): 2.5 turns of the roller per turn of the crank. |
 | `crank_arm` | 1 | The handle. Its grip spins (printed in place). |
 | `crank_pin` | 1 | Snaps through the arm and the gear into the frame and holds them on. |
-| `tail_frame` | 1 | Holds the tail roller over the sidewalk edge. Pumpkin faces on both sides. |
+| `tail_frame` | 1 | Holds the tail roller over the sidewalk edge. |
 | `tail_roller` | 1 | Turns the belt round at the sidewalk; candy drops off here. |
 | `wedge` | 2 | Push them down to tighten the belt. |
 | `journal_pin` | 2 | One pushes into the plain end of each roller. |
@@ -36,16 +36,16 @@ brim type **Outer brim only**. Infill pattern Gyroid (Rectilinear on the 100 % p
 <!-- plates -->
 | # | File | Parts | For | Settings | g | Time |
 |---|---|---|---|---|---|---|
-| 1 | `SIMPLE_01_wedge_etc.3mf` | 2 x `wedge`, `crank_pin`, 2 x `journal_pin` | crank, head, tail, tail | 3 walls, 100 %, 5 mm brim | 57 | 1h 16m 56s |
-| 2 | `SIMPLE_02_tail_frame.3mf` | `tail_frame` | tail | 3 walls, 12 %, 5 mm brim | 277 | 8h 3m 35s |
-| 3 | `SIMPLE_03_head_frame.3mf` | `head_frame` | head | 3 walls, 12 %, 5 mm brim | 182 | 5h 12m 4s |
-| 4 | `SIMPLE_04_cassette_etc.3mf` | `crank_gear`, `drive_roller`, 3 x `cassette`, `tail_roller` | crank, head, stations, tail | 3 walls, 12 %, 5 mm brim | 432 | 14h 10m 5s |
-| 5 | `SIMPLE_05_station_stake_1_etc.3mf` | `station_stake_1`, `station_stake_2`, `station_stake_3`, `crank_arm` | crank, stations | 4 walls, 30 % | 136 | 3h 21m 20s |
-| 6 | `SIMPLE_06_anchor_stake.3mf` | 4 x `anchor_stake` | head, tail | 4 walls, 30 % | 109 | 2h 24m 45s |
+| 1 | `SIMPLE_01_wedge_etc.3mf` | 2 x `wedge`, `crank_pin`, 2 x `journal_pin` | crank, head, tail, tail | 3 walls, 100 %, 5 mm brim | 43 | 1h 3m 16s |
+| 2 | `SIMPLE_02_tail_frame.3mf` | `tail_frame` | tail | 2 walls, 10 %, 5 mm brim | 178 | 5h 14m 21s |
+| 3 | `SIMPLE_03_head_frame.3mf` | `head_frame` | head | 2 walls, 10 %, 5 mm brim | 125 | 3h 41m 9s |
+| 4 | `SIMPLE_04_cassette_etc.3mf` | `crank_gear`, `drive_roller`, 3 x `cassette`, `tail_roller` | crank, head, stations, tail | 2 walls, 10 %, 5 mm brim | 311 | 10h 45m 20s |
+| 5 | `SIMPLE_05_station_stake_1_etc.3mf` | `station_stake_1`, `station_stake_2`, `station_stake_3`, `crank_arm` | crank, stations | 3 walls, 15 % | 121 | 2h 43m 29s |
+| 6 | `SIMPLE_06_anchor_stake.3mf` | 4 x `anchor_stake` | head, tail | 3 walls, 15 % | 101 | 2h 5m 7s |
 
-All plates: **1.19 kg** of PLA.
+All plates: **0.88 kg** of PLA.
 
-About **34 hours** of printing in all.
+About **25 hours** of printing in all (the slicer's estimate).
 <!-- /plates -->
 
 Print plate 1 first (about an hour): it has the pins and wedges, so you can check the fits on
@@ -57,7 +57,7 @@ the bigger parts as soon as they come off.
 |---|---|---|
 | `crank_arm` | floating object, overhang | The spinning grip starts 0.45 mm above the arm on purpose. That gap is what lets it spin. |
 | `cassette` | low bed adhesion, long bridges | The wheel axles stand on small feet (the brim holds them). The top plate bridges 23 mm between the axle collars. |
-| `tail_frame` | collapsing overhang | A few 3-4 mm edges on the X braces. They print fine. |
+| `tail_frame` | collapsing overhang, thin fragile part | A few 3-4 mm edges on the X braces, and the tall slim posts; every post is braced, they print fine. |
 | `tail_roller` | long bridges | Inside the roller, over its own infill. |
 
 **After printing:** twist each cassette wheel and the crank grip firmly both ways to free them.

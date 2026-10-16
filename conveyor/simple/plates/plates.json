@@ -8,8 +8,8 @@
    "crank_pin": 1,
    "journal_pin": 2
   },
-  "grams": 56.61,
-  "time": "1h 16m 56s",
+  "grams": 42.53,
+  "time": "1h 3m 16s",
   "alerts": null
  },
  {
@@ -19,9 +19,9 @@
   "parts": {
    "tail_frame": 1
   },
-  "grams": 276.62,
-  "time": "8h 3m 35s",
-  "alerts": "SIMPLE_02_tail_frame Collapsing overhang"
+  "grams": 177.86,
+  "time": "5h 14m 21s",
+  "alerts": "SIMPLE_02_tail_frame Collapsing overhang, Thin fragile part"
  },
  {
   "plate": 3,
@@ -30,8 +30,8 @@
   "parts": {
    "head_frame": 1
   },
-  "grams": 181.92,
-  "time": "5h 12m 4s",
+  "grams": 124.83,
+  "time": "3h 41m 9s",
   "alerts": null
  },
  {
@@ -44,8 +44,8 @@
    "cassette": 3,
    "tail_roller": 1
   },
-  "grams": 431.69,
-  "time": "14h 10m 5s",
+  "grams": 311.46,
+  "time": "10h 45m 20s",
   "alerts": "Long bridging extrusions cassette, tail_roller, cassette, cassette | Low bed adhesion cassette, cassette, cassette"
  },
  {
@@ -58,9 +58,9 @@
    "station_stake_3": 1,
    "crank_arm": 1
   },
-  "grams": 136.37,
-  "time": "3h 21m 20s",
-  "alerts": "crank_arm Floating object part, Collapsing overhang"
+  "grams": 120.78,
+  "time": "2h 43m 29s",
+  "alerts": "crank_arm Floating object part, Floating bridge anchors"
  },
  {
   "plate": 6,
@@ -69,8 +69,8 @@
   "parts": {
    "anchor_stake": 4
   },
-  "grams": 108.83,
-  "time": "2h 24m 45s",
+  "grams": 100.84,
+  "time": "2h 5m 7s",
   "alerts": null
  }
 ]

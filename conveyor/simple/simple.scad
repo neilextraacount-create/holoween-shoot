@@ -23,10 +23,10 @@ fit_gap = 0.2;                            // slip fit
 j_gap = 0.3;                              // journal in its slot (radial)
 
 // ---------------------------------------------------------------- frames
-wall_t = 6;
+wall_t = 4;
 w_in = L_w / 2 + 1; w_out = w_in + wall_t;   // side wall faces |Y| = 46 .. 52
-base_t = 6;
-web = 10;                                 // frame strut width
+base_t = 4;
+web = 8;                                  // frame strut width
 hole_sq = 24.6;                           // anchor-stake holes in the frame bases
 
 // ---------------------------------------------------------------- rollers
@@ -262,8 +262,8 @@ module tail_wall2d() {
             strut([t_x[0] + 6, 70], [x_f - 6, 15]);
             strut([t_x[0] + 6, 75], [x_f - 6, 150]);
             // rear tower: two posts and X braces; it carries the slot floor and the end stop
-            strut([x_f + win_w + 5, 5], [x_f + win_w + 5, fl - 5]);
-            strut([slot_end + 5, 5], [slot_end + 5, tz]);
+            strut([x_f + win_w + 6, 6], [x_f + win_w + 6, fl - 6], 12);
+            strut([slot_end + 6, 6], [slot_end + 6, tz], 12);
             for (z = [5, 65, 125]) { strut([x_f + win_w + 5, z], [slot_end + 5, z + 60]); strut([x_f + win_w + 5, z + 60], [slot_end + 5, z]); }
             translate([x_f + win_w, fl - 10]) square([slot_end - x_f - win_w + 10, 10]);   // slot floor
             strut([x_f - 6, 12], [x_f + win_w + 5, 58]); strut([x_f - 6, 58], [x_f + win_w + 5, 12]);   // X-brace under the window
@@ -286,16 +286,11 @@ module tail_frame() {
     tail_base();
     for (s = [-1, 1]) {
         xz(s > 0 ? w_in : -w_out, s > 0 ? w_out : -w_in) tail_wall2d();
-        // jack-o'-lantern panel, 2 mm skin on the outer face between the front post and the wedge post
-        xz(s > 0 ? w_out - 2 : -w_out, s > 0 ? w_out : -w_out + 2) difference() {
-            translate([-172, 0]) square([96, 148]);                                // stands on the bottom chord
-            translate([-124, 92]) pumpkin2d(0.95);
-        }
     }
     // front tie wall (below the return run)
     yz(t_x[0], t_x[0] + 6) { strut([-w_out + 5, 5], [w_out - 5, 110]); strut([w_out - 5, 5], [-w_out + 5, 110]); }
 }
-// wedge: lies flat (print), 5.6 thick; in use it hangs in the wall's window, tip down, sloped face toward the journal
+// wedge: lies flat (print), wall_t - 0.4 thick; in use it hangs in the wall's window, tip down, sloped face toward the journal
 module wedge() {
     t = wall_t - 0.4;
     linear_extrude(t) polygon([[0, 0], [wd_t0, 0], [wd_t0 + (wd_len - 12) * tan(wd_ang), wd_len - 12],
@@ -349,7 +344,12 @@ module cassette() {
             translate([0, 0, cs_plate[0]]) linear_extrude(cs_plate[1] - cs_plate[0]) hull() {
                 circle(r = 11.5); translate([cs_blk_x[1] - 10, -10]) square([10, 20]);
             }
-            translate([cs_blk_x[0], -10, cs_blk_z]) cube([cs_blk_x[1] - cs_blk_x[0], 20, cs_plate[1] - cs_blk_z]);   // socket block
+            translate([cs_blk_x[0], -10, cs_blk_z]) cube([cs_blk_x[1] - cs_blk_x[0], 20, 31]);                     // socket block
+            translate([cs_blk_x[0], -4, cs_blk_z + 30]) cube([cs_blk_x[1] - cs_blk_x[0], 8, cs_plate[0] - cs_blk_z - 30]);   // web up to the plate
+            hull() {
+                translate([cs_blk_x[0], -4, cs_plate[0] - 6]) cube([cs_blk_x[1] - cs_blk_x[0], 8, 0.01]);
+                translate([cs_blk_x[0], -10, cs_plate[0]]) cube([cs_blk_x[1] - cs_blk_x[0], 20, cs_plate[1] - cs_plate[0]]);
+            }
             hull() {                                                                                                   // fin to the bed + 45 deg
                 translate([cs_blk_x[0], -2, 0]) cube([cs_blk_x[1] - cs_blk_x[0], 4, cs_blk_z - 8]);
                 translate([cs_blk_x[0], -10, cs_blk_z]) cube([cs_blk_x[1] - cs_blk_x[0], 20, 0.01]);

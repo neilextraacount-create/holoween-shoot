@@ -1,7 +1,7 @@
 PARTS (watertight, bodies, bed fit, overhangs, nothing starting in mid-air, print-in-place gaps)
   [ok] head_frame: watertight
   [ok] head_frame: 1 bodies (expected 1)
-  [ok] head_frame: 123 x 115 x 182 mm fits the bed (246 x 246 x 250)
+  [ok] head_frame: 121 x 113 x 182 mm fits the bed (246 x 246 x 250)
   [ok] head_frame: no unsupported overhang wider than 12 mm
   [ok] head_frame: nothing starts in mid-air
   [ok] drive_roller: watertight
@@ -32,7 +32,7 @@ PARTS (watertight, bodies, bed fit, overhangs, nothing starting in mid-air, prin
   [ok] crank_pin: nothing starts in mid-air
   [ok] tail_frame: watertight
   [ok] tail_frame: 1 bodies (expected 1)
-  [ok] tail_frame: 200 x 104 x 224 mm fits the bed (246 x 246 x 250)
+  [ok] tail_frame: 200 x 100 x 224 mm fits the bed (246 x 246 x 250)
   [ok] tail_frame: no unsupported overhang wider than 12 mm
   [ok] tail_frame: nothing starts in mid-air
   [ok] tail_roller: watertight
@@ -42,7 +42,7 @@ PARTS (watertight, bodies, bed fit, overhangs, nothing starting in mid-air, prin
   [ok] tail_roller: nothing starts in mid-air
   [ok] wedge: watertight
   [ok] wedge: 1 bodies (expected 1)
-  [ok] wedge: 38 x 175 x 6 mm fits the bed (246 x 246 x 250)
+  [ok] wedge: 38 x 175 x 4 mm fits the bed (246 x 246 x 250)
   [ok] wedge: no unsupported overhang wider than 12 mm
   [ok] wedge: nothing starts in mid-air
   [ok] cassette: watertight
@@ -100,21 +100,21 @@ TAIL (frame, roller + pin, 2 wedges, belt) at the take-up's two ends
   [ok] tightest: tail roller vs frame: clear by 0.30 mm (need 0.25)
   [ok] tightest: journal pin vs frame: clear by 0.30 mm (need 0.25)
   [ok] tightest: wedge B vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
-  [ok] tightest: wedge B vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] tightest: wedge B vs roller journal (pushes it back): in contact, overlap 0.07 mm3 (limit 3.0)
   [ok] tightest: wedge A vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
-  [ok] tightest: wedge A vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] tightest: wedge A vs roller journal (pushes it back): in contact, overlap 0.05 mm3 (limit 3.0)
   [ok] tightest: belt vs frame: clear by 8.00 mm (need 3.0)
-  [ok] tightest: belt vs wedges: clear by 8.20 mm (need 3.0)
+  [ok] tightest: belt vs wedges: clear by 6.20 mm (need 3.0)
   [ok] tightest: wedge tip 67 mm up, 22.7 mm thick at the journal
   [ok] loosest: journal at x -45.4 inside the slot (rear end -20)
   [ok] loosest: tail roller vs frame: clear by 1.00 mm (need 0.25)
-  [ok] loosest: journal pin vs frame: clear by 4.26 mm (need 0.25)
+  [ok] loosest: journal pin vs frame: clear by 5.11 mm (need 0.25)
   [ok] loosest: wedge B vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
-  [ok] loosest: wedge B vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] loosest: wedge B vs roller journal (pushes it back): in contact, overlap 0.07 mm3 (limit 3.0)
   [ok] loosest: wedge A vs frame (front face on the window's face): in contact, overlap 0.00 mm3 (limit 1.0)
-  [ok] loosest: wedge A vs roller journal (pushes it back): in contact, overlap 0.10 mm3 (limit 3.0)
+  [ok] loosest: wedge A vs roller journal (pushes it back): in contact, overlap 0.05 mm3 (limit 3.0)
   [ok] loosest: belt vs frame: clear by 8.00 mm (need 3.0)
-  [ok] loosest: belt vs wedges: clear by 8.20 mm (need 3.0)
+  [ok] loosest: belt vs wedges: clear by 6.20 mm (need 3.0)
   [ok] loosest: wedge tip 182 mm up, 6.5 mm thick at the journal
   [ok] take-up travel 16.2 mm (belt loop 32 mm); taper 8 deg self-locks (PLA friction angle about 17 deg)
 
